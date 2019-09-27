@@ -467,29 +467,9 @@ class MySceneGraph {
                 if (matChildren[j].nodeName == "emission"){
                     var emissionIndex = nodeNames.indexOf("emission");
                     if (emissionIndex == -1)
-                    return "Emission value indefined for material with ID = " + materialID;
+                        return "Emission value indefined for material with ID = " + materialID;
                     
-                    var emissionRGBA = [];
-
-                    
-                    //R
-                    var emissionR = this.reader.getFloat(children[emissionIndex], 'r');
-                    if (emissionR == null || emissionR < 0 || emissionR > 1 || isNaN(emissionR))
-                        return "Emission value is incorrect";
-                    //G
-                    var emissionG = this.reader.getFloat(children[emissionIndex], 'g');
-                    if (emissionG == null || emissionG < 0 || emissionG > 1 || isNaN(emissionG))
-                        return "Emission value is incorrect";
-                    //B
-                    var emissionB = this.reader.getFloat(children[emissionIndex], 'b');
-                    if (emissionB == null || emissionB < 0 || emissionB > 1 || isNaN(emissionB))
-                        return "Emission value is incorrect";
-                    //A
-                    var emissionA = this.reader.getFloat(children[emissionIndex], 'a');
-                    if (emissionA == null || emissionA < 0 || emissionA > 1 || isNaN(emissionA))
-                        return "Emission value is incorrect";
-
-                    emissionRGBA.push(emissionR, emissionG, emissionB, emissionA);
+                    var emissionRGBA = this.parseColor(children[emissionIndex], "emission");
                 }
                 //Ambient
                 else if (matChildren[j].nodeName == "ambient"){
@@ -497,51 +477,15 @@ class MySceneGraph {
                     if (ambientIndex == -1)
                         return "Ambient value indefined for material with ID = " + materialID;
                                       
-                    //R
-                    var ambientR = this.reader.getFloat(children[emissionIndex], 'r');
-                    if (ambientR == null || ambientR < 0 || ambientR > 1 || isNaN(ambientR))
-                        return "Ambient value is incorrect";
-                    //G
-                    var ambientG = this.reader.getFloat(children[emissionIndex], 'g');
-                    if (ambientG == null || ambientG < 0 || ambientG > 1 || isNaN(ambientG))
-                        return "Ambient value is incorrect";
-                    //B
-                    var ambientB = this.reader.getFloat(children[emissionIndex], 'b');
-                    if (ambientB == null || ambientB < 0 || ambientB > 1 || isNaN(ambientB))
-                        return "Ambient value is incorrect";
-                    //A
-                    var ambientA = this.reader.getFloat(children[emissionIndex], 'a');
-                    if (ambientA == null || ambientA < 0 || ambientA > 1 || isNaN(ambientA))
-                        return "Ambient value is incorrect";
-
-                    ambientRGBA.push(ambientR, ambientG, ambientB, ambientA);
+                    var ambientRGBA = this.parseColor(children[ambientIndex], "ambient");
                 }
                 //Difuse
                 else if (matChildren[j].nodeName == "difuse"){
-                    var difuseIndex = nodeNames.indexOf("difuse");
-                    if (difuseIndex == -1)
+                    var diffuseIndex = nodeNames.indexOf("difuse");
+                    if (diffuseIndex == -1)
                         return "Difuse value indefined for material with ID = " + materialID;
                     
-                    var difuseRGBA = [];
-                    
-                    //R
-                    var difuseR = this.reader.getFloat(children[emissionIndex], 'r');
-                    if (difuseR == null || difuseR < 0 || difuseR > 1 || isNaN(difuseR))
-                        return "Difuse value is incorrect";
-                    //G
-                    var difuseG = this.reader.getFloat(children[emissionIndex], 'g');
-                    if (difuseG == null || difuseG < 0 || difuseG > 1 || isNaN(difuseG))
-                        return "Difuse value is incorrect";
-                    //B
-                    var difuseB = this.reader.getFloat(children[emissionIndex], 'b');
-                    if (difuseB == null || difuseB < 0 || difuseB > 1 || isNaN(difuseB))
-                        return "Difuse value is incorrect";
-                    //A
-                    var difuseA = this.reader.getFloat(children[emissionIndex], 'a');
-                    if (difuseA == null || difuseA < 0 || difuseA > 1 || isNaN(difuseA))
-                        return "Difuse value is incorrect";
-
-                    difuseRGBA.push(difuseR, difuseG, difuseB, difuseA);
+                    var diffuseRGBA = this.parseColor(children[diffuseIndex], "difuse");
                 }
                 //Specular
                 else if (matChildren[j].nodeName == "specular"){
@@ -549,26 +493,7 @@ class MySceneGraph {
                     if (specularIndex == -1)
                         return "Specular value indefined for material with ID = " + materialID;
                     
-                    var specularRGBA = [];
-                    
-                    //R
-                    var specularR = this.reader.getFloat(children[specularIndex], 'r');
-                    if (specularR == null || specularR < 0 || specularR > 1 || isNaN(specularR))
-                        return "Specular value is incorrect";
-                    //G
-                    var specularG = this.reader.getFloat(children[specularIndex], 'g');
-                    if (specularG == null || specularG < 0 || specularG > 1 || isNaN(specularG))
-                        return "Specular value is incorrect";
-                    //B
-                    var specularB = this.reader.getFloat(children[specularIndex], 'b');
-                    if (specularB == null || specularB < 0 || specularB > 1 || isNaN(specularB))
-                        return "Specular value is incorrect";
-                    //A
-                    var specularA = this.reader.getFloat(children[specularIndex], 'a');
-                    if (specularA == null || specularA < 0 || specularA > 1 || isNaN(specularA))
-                        return "Specular value is incorrect";
-
-                    specularRGBA.push(specularR, specularG, specularB, specularA);
+                    var specularRGBA = this.parseColor(children[specularIndex], "specular");
                 }
                 else {
                     this.onXMLMinorError("unknown tag <" + matChildren[j].nodeName + ">");
@@ -593,12 +518,12 @@ class MySceneGraph {
      * Parses the <transformations> block.
      * @param {transformations block element} transformationsNode
      */
+    //BASED ON: http://glmatrix.net/docs/module-mat4.html
     parseTransformations(transformationsNode) {
         var children = transformationsNode.children;
+        var grandChildren = [];
 
         this.transformations = [];
-
-        var grandChildren = [];
 
         // Any number of transformations.
         for (var i = 0; i < children.length; i++) {
@@ -631,12 +556,21 @@ class MySceneGraph {
 
                         transfMatrix = mat4.translate(transfMatrix, transfMatrix, coordinates);
                         break;
+
                     case 'scale':                        
-                        this.onXMLMinorError("To do: Parse scale transformations.");
+                        var coordinates = this.parseCoordinates3D(grandChildren[j], "scale transformation for ID " + transformationID);
+                        if (!Array.isArray(coordinates))
+                            return coordinates;
+
+                        transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinates);
                         break;
+                        
                     case 'rotate':
-                        // angle
-                        this.onXMLMinorError("To do: Parse rotate transformations.");
+                        var coordinates = this.parseCoordinates3D(grandChildren[j], "rotation transformation for ID " + transformationID);
+                        if (!Array.isArray(coordinates))
+                            return coordinates;
+    
+                        transfMatrix = mat4.rotate(transfMatrix, transfMatrix, coordinates[0]*Math.PI/180, coordinates[1]); //rotate(out, a, rad, axis)
                         break;
                 }
             }
@@ -904,8 +838,27 @@ class MySceneGraph {
      * @param {block element} node
      * @param {message to be displayed in case of error} messageError
      */
+    //BASED ON: http://glmatrix.net/docs/module-mat4.html
     parseCoordinates3D(node, messageError) {
         var position = [];
+
+        if(node.nodeName == "rotate") {
+            // axis
+            var axisVec = vec3.create()
+            var axis = this.reader.getFloat(node, 'axis');
+            if(axis == 'x') axisVec.set(axisVec, 1, 0, 0)
+            else if(axis == 'y') axisVec.set(axisVec, 0, 1, 0)
+            else if(axis == 'z') axisVec.set(axisVec, 0, 0, 1)
+            else return "unable to parse axis of the " + messageError;
+            
+            // degrees
+            var degrees = this.reader.getFloat(node, 'angle');
+            if (degrees == null || isNaN(degrees))
+                return "unable to parse degress of the " + messageError;
+            
+            position.push(...[degrees, axisVec]);
+            return position;
+        }
 
         // x
         var x = this.reader.getFloat(node, 'x');
@@ -923,7 +876,6 @@ class MySceneGraph {
             return "unable to parse z-coordinate of the " + messageError;
 
         position.push(...[x, y, z]);
-
         return position;
     }
 
