@@ -392,7 +392,6 @@ class MySceneGraph {
      */
     parseTextures(texturesNode) {
         var children = texturesNode.children;
-
         this.textures = [];
 
         for (var i = 0; i < children.length; i++) {
@@ -406,11 +405,11 @@ class MySceneGraph {
             var textureID = this.reader.getString(children[i], 'id');
             if (textureID == null)
                 return "no ID defined for texture";
-
             // Checks for repeated IDs.
             if (this.textures[textureID] != null)
                 return "ID must be unique for each light (conflict: ID = " + textureID + ")";
 
+            //Get file_name of texture
             var textureFile = this.reader.getString(children[i], 'file');
             if (textureFile == null)
                 return "no file defined for texture";
@@ -423,12 +422,8 @@ class MySceneGraph {
                 return "texture file not found";
             
             this.textures[textureID] = texture;
-
-            //Continue here
-            this.onXMLMinorError("To do: Parse textures.");
         }
-
-        return null;
+        this.log("Parsed textures");
     }
 
     /**
@@ -437,7 +432,6 @@ class MySceneGraph {
      */
     parseMaterials(materialsNode) {
         var children = materialsNode.children;
-
         this.materials = [];
 
         var grandChildren = [];
@@ -455,42 +449,144 @@ class MySceneGraph {
             var materialID = this.reader.getString(children[i], 'id');
             if (materialID == null)
                 return "no ID defined for material";
-
             // Checks for repeated IDs.
             if (this.materials[materialID] != null)
                 return "ID must be unique for each light (conflict: ID = " + materialID + ")";
 
-            var materialShininess = this.reader.getFloat(children[i], 'shininess');
-            if (!(materialShininess != null && materialShininess < 0))
-                return "Shininess must be higher than 0";
+            // Shininess
+            var shininessIndex = nodeNames.indexOf("shininess");
+            if (shininessIndex == -1)
+                return "Shininess value indefined for material with ID = " + materialID;
+            var materialShininess = this.reader.getFloat(children[shininessIndex], 'shininess');
+            if (materialShininess == null || materialShininess <= 0 || isNaN(shininess))
+                return "Shininess valuie is incorrect";
 
             var matChildren = children[i].children;
             for(var j = 0; j < matChildren.length; j++){
-                //types: emission, ambient, difuse, specular
+                //Emission
                 if (matChildren[j].nodeName == "emission"){
+                    var emissionIndex = nodeNames.indexOf("emission");
+                    if (emissionIndex == -1)
+                    return "Emission value indefined for material with ID = " + materialID;
                     
+                    var emissionRGBA = [];
+
+                    
+                    //R
+                    var emissionR = this.reader.getFloat(children[emissionIndex], 'r');
+                    if (emissionR == null || emissionR < 0 || emissionR > 1 || isNaN(emissionR))
+                        return "Emission value is incorrect";
+                    //G
+                    var emissionG = this.reader.getFloat(children[emissionIndex], 'g');
+                    if (emissionG == null || emissionG < 0 || emissionG > 1 || isNaN(emissionG))
+                        return "Emission value is incorrect";
+                    //B
+                    var emissionB = this.reader.getFloat(children[emissionIndex], 'b');
+                    if (emissionB == null || emissionB < 0 || emissionB > 1 || isNaN(emissionB))
+                        return "Emission value is incorrect";
+                    //A
+                    var emissionA = this.reader.getFloat(children[emissionIndex], 'a');
+                    if (emissionA == null || emissionA < 0 || emissionA > 1 || isNaN(emissionA))
+                        return "Emission value is incorrect";
+
+                    emissionRGBA.push(emissionR, emissionG, emissionB, emissionA);
                 }
+                //Ambient
                 else if (matChildren[j].nodeName == "ambient"){
-                    
+                    var ambientIndex = nodeNames.indexOf("ambient");
+                    if (ambientIndex == -1)
+                        return "Ambient value indefined for material with ID = " + materialID;
+                                      
+                    //R
+                    var ambientR = this.reader.getFloat(children[emissionIndex], 'r');
+                    if (ambientR == null || ambientR < 0 || ambientR > 1 || isNaN(ambientR))
+                        return "Ambient value is incorrect";
+                    //G
+                    var ambientG = this.reader.getFloat(children[emissionIndex], 'g');
+                    if (ambientG == null || ambientG < 0 || ambientG > 1 || isNaN(ambientG))
+                        return "Ambient value is incorrect";
+                    //B
+                    var ambientB = this.reader.getFloat(children[emissionIndex], 'b');
+                    if (ambientB == null || ambientB < 0 || ambientB > 1 || isNaN(ambientB))
+                        return "Ambient value is incorrect";
+                    //A
+                    var ambientA = this.reader.getFloat(children[emissionIndex], 'a');
+                    if (ambientA == null || ambientA < 0 || ambientA > 1 || isNaN(ambientA))
+                        return "Ambient value is incorrect";
+
+                    ambientRGBA.push(ambientR, ambientG, ambientB, ambientA);
                 }
+                //Difuse
                 else if (matChildren[j].nodeName == "difuse"){
+                    var difuseIndex = nodeNames.indexOf("difuse");
+                    if (difuseIndex == -1)
+                        return "Difuse value indefined for material with ID = " + materialID;
                     
+                    var difuseRGBA = [];
+                    
+                    //R
+                    var difuseR = this.reader.getFloat(children[emissionIndex], 'r');
+                    if (difuseR == null || difuseR < 0 || difuseR > 1 || isNaN(difuseR))
+                        return "Difuse value is incorrect";
+                    //G
+                    var difuseG = this.reader.getFloat(children[emissionIndex], 'g');
+                    if (difuseG == null || difuseG < 0 || difuseG > 1 || isNaN(difuseG))
+                        return "Difuse value is incorrect";
+                    //B
+                    var difuseB = this.reader.getFloat(children[emissionIndex], 'b');
+                    if (difuseB == null || difuseB < 0 || difuseB > 1 || isNaN(difuseB))
+                        return "Difuse value is incorrect";
+                    //A
+                    var difuseA = this.reader.getFloat(children[emissionIndex], 'a');
+                    if (difuseA == null || difuseA < 0 || difuseA > 1 || isNaN(difuseA))
+                        return "Difuse value is incorrect";
+
+                    difuseRGBA.push(difuseR, difuseG, difuseB, difuseA);
                 }
+                //Specular
                 else if (matChildren[j].nodeName == "specular"){
+                    var specularIndex = nodeNames.indexOf("specular");
+                    if (specularIndex == -1)
+                        return "Specular value indefined for material with ID = " + materialID;
                     
+                    var specularRGBA = [];
+                    
+                    //R
+                    var specularR = this.reader.getFloat(children[specularIndex], 'r');
+                    if (specularR == null || specularR < 0 || specularR > 1 || isNaN(specularR))
+                        return "Specular value is incorrect";
+                    //G
+                    var specularG = this.reader.getFloat(children[specularIndex], 'g');
+                    if (specularG == null || specularG < 0 || specularG > 1 || isNaN(specularG))
+                        return "Specular value is incorrect";
+                    //B
+                    var specularB = this.reader.getFloat(children[specularIndex], 'b');
+                    if (specularB == null || specularB < 0 || specularB > 1 || isNaN(specularB))
+                        return "Specular value is incorrect";
+                    //A
+                    var specularA = this.reader.getFloat(children[specularIndex], 'a');
+                    if (specularA == null || specularA < 0 || specularA > 1 || isNaN(specularA))
+                        return "Specular value is incorrect";
+
+                    specularRGBA.push(specularR, specularG, specularB, specularA);
                 }
                 else {
                     this.onXMLMinorError("unknown tag <" + matChildren[j].nodeName + ">");
                     continue;
-                }    
+                }
+                
+                // Creates material with the lxs specifics
+                var readMaterial = new CGFappearance(this.scene);
+                readMaterial.setShininess(materialShininess);
+                readMaterial.setAmbient(ambientRGBA[0], ambientRGBA[1], ambientRGBA[2], ambientRGBA[3]);
+                readMaterial.setDiffuse(diffuseRGBA[0], diffuseRGBA[1], diffuseRGBA[2], diffuseRGBA[3]);
+                readMaterial.setSpecular(specularRGBA[0], specularRGBA[1], specularRGBA[2], specularRGBA[3]);
+                readMaterial.setEmission(emissionRGBA[0], emissionRGBA[1], emissionRGBA[2], emissionRGBA[3]);
+                this.material[materialID] = readMaterial;
             }
-
-            var materialEmission = []; 
             this.onXMLMinorError("To do: Parse materials.");
         }
-
-        //this.log("Parsed materials");
-        return null;
+        this.log("Parsed materials");
     }
 
     /**
@@ -574,23 +670,22 @@ class MySceneGraph {
             var primitiveId = this.reader.getString(children[i], 'id');
             if (primitiveId == null)
                 return "no ID defined for texture";
-
             // Checks for repeated IDs.
             if (this.primitives[primitiveId] != null)
                 return "ID must be unique for each primitive (conflict: ID = " + primitiveId + ")";
 
             grandChildren = children[i].children;
+            
+            // Specifications for the current primitive.
+            var primitiveType = grandChildren[0].nodeName;
 
             // Validate the primitive type
             if (grandChildren.length != 1 ||
-                (grandChildren[0].nodeName != 'rectangle' && grandChildren[0].nodeName != 'triangle' &&
-                    grandChildren[0].nodeName != 'cylinder' && grandChildren[0].nodeName != 'sphere' &&
-                    grandChildren[0].nodeName != 'torus')) {
+                (primitiveType != 'rectangle' && primitiveType != 'triangle' &&
+                    primitiveType != 'cylinder' && primitiveType != 'sphere' &&
+                    primitiveType != 'torus')) {
                 return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere or torus)"
             }
-
-            // Specifications for the current primitive.
-            var primitiveType = grandChildren[0].nodeName;
 
             // Retrieves the primitive coordinates.
             if (primitiveType == 'rectangle') {
@@ -618,7 +713,7 @@ class MySceneGraph {
 
                 this.primitives[primitiveId] = rect;
             }
-            if (primitiveType == 'triangle') {
+            else if (primitiveType == 'triangle') {
                 // x1
                 var x1 = this.reader.getFloat(grandChildren[0], 'x1');
                 if (!(x1 != null && !isNaN(x1)))
@@ -668,7 +763,7 @@ class MySceneGraph {
 
                 this.primitives[primitiveId] = tri;
             }
-            if (primitiveType == 'sphere') {
+            else if (primitiveType == 'sphere') {
                 // x1
                 var x1 = this.reader.getFloat(grandChildren[0], 'x1');
                 if (!(x1 != null && !isNaN(x1)))
@@ -693,7 +788,7 @@ class MySceneGraph {
 
                 this.primitives[primitiveId] = rect;
             }
-            if (primitiveType == 'cylinder') {
+            else if (primitiveType == 'cylinder') {
                 // x1
                 var x1 = this.reader.getFloat(grandChildren[0], 'x1');
                 if (!(x1 != null && !isNaN(x1)))
@@ -718,7 +813,7 @@ class MySceneGraph {
 
                 this.primitives[primitiveId] = rect;
             }
-            if (primitiveType == 'torus') {
+            else if (primitiveType == 'torus') {
                 // x1
                 var x1 = this.reader.getFloat(grandChildren[0], 'x1');
                 if (!(x1 != null && !isNaN(x1)))
@@ -743,10 +838,7 @@ class MySceneGraph {
 
                 this.primitives[primitiveId] = rect;
             }
-
-            else {
-                console.warn("To do: Parse other primitives.");
-            }
+            
         }
 
         this.log("Parsed primitives");
