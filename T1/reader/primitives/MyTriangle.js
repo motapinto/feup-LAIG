@@ -8,19 +8,20 @@
 //bibliography: https://tpzf.github.io/GlobWeb/api/symbols/vec3.html
 
 class MyTriangle extends CGFobject {
-	constructor(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3, u = 1, v = 1) { 
+	constructor(scene, id, x1, x2, x3, y1, y2, y3, z1, z2, z3, u = 1, v = 1) { 
         super(scene);
+        this.id = id;
         this.initBuffers(x1, y1, z1, x2, y2, z2, x3, y3, z3, u, v);
 	}
 
 	initBuffers(x1, y1, z1, x2, y2, z2, x3, y3, z3, u, v) {
         //Because the triangule is in 1 plane we can only compute 1 of the normals (and the other will be the same)
-        var vec21 = vec3.create(x2-x1, y2-y1, z2-z1);
-        var vec32 = vec3.create(x3-x2, y3-y2, z3-z2);
+        var vec21 = vec3.fromValues(x2-x1, y2-y1, z2-z1);
+        var vec32 = vec3.fromValues(x3-x2, y3-y2, z3-z2);
         
         //vector that defines plane of the triangle (normal ao plano)
         var vec_cross = vec3.create();
-        vec_cross = vec3.cross(vec21, vec32);
+        vec3.cross(vec_cross, vec21, vec32);
         vec3.normalize(vec_cross, vec_cross);
         
 		this.vertices = [
@@ -41,12 +42,12 @@ class MyTriangle extends CGFobject {
         ];
         
         this.normals = [];
-        this.normals.push(vec_cross);
-        this.normals.push(vec_cross);
-        this.normals.push(vec_cross);
-        this.normals.push(-vec_cross);
-        this.normals.push(-vec_cross);
-        this.normals.push(-vec_cross);
+        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
+        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
+        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
+        this.normals.push(-vec_cross[0], -vec_cross[1], -vec_cross[2]);
+        this.normals.push(-vec_cross[0], -vec_cross[1], -vec_cross[2]);
+        this.normals.push(-vec_cross[0], -vec_cross[1], -vec_cross[2]);
 
         //Presented in T1 lab pdf
         var a = Math.sqrt(Math.pow(x1 - x3, 2) + Math.pow(y1 - y3, 2) + Math.pow(z1 - z3, 2));
@@ -66,5 +67,5 @@ class MyTriangle extends CGFobject {
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
-	}
+    }
 }

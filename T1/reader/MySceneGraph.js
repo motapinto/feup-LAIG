@@ -391,9 +391,43 @@ class MySceneGraph {
      * @param {textures block element} texturesNode
      */
     parseTextures(texturesNode) {
+        var children = texturesNode.children;
 
-        //For each texture in textures block, check ID and file URL
-        this.onXMLMinorError("To do: Parse textures.");
+        this.textures = [];
+
+        for (var i = 0; i < children.length; i++) {
+
+            if (children[i].nodeName != "texture") {
+                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                continue;
+            }
+
+            // Get id of the current texture.
+            var textureID = this.reader.getString(children[i], 'id');
+            if (textureID == null)
+                return "no ID defined for texture";
+
+            // Checks for repeated IDs.
+            if (this.textures[textureID] != null)
+                return "ID must be unique for each light (conflict: ID = " + textureID + ")";
+
+            var textureFile = this.reader.getString(children[i], 'file');
+            if (textureFile == null)
+                return "no file defined for texture";
+
+            //var texture = new CGFtexture(this.scene, textureFile);
+            var texture = new CGFappearance(this.scene);
+            texture.loadTexture(textureFile);
+
+            if (texture == null)
+                return "texture file not found";
+            
+            this.textures[textureID] = texture;
+
+            //Continue here
+            this.onXMLMinorError("To do: Parse textures.");
+        }
+
         return null;
     }
 
@@ -426,7 +460,32 @@ class MySceneGraph {
             if (this.materials[materialID] != null)
                 return "ID must be unique for each light (conflict: ID = " + materialID + ")";
 
-            //Continue here
+            var materialShininess = this.reader.getFloat(children[i], 'shininess');
+            if (!(materialShininess != null && materialShininess < 0))
+                return "Shininess must be higher than 0";
+
+            var matChildren = children[i].children;
+            for(var j = 0; j < matChildren.length; j++){
+                //types: emission, ambient, difuse, specular
+                if (matChildren[j].nodeName == "emission"){
+                    
+                }
+                else if (matChildren[j].nodeName == "ambient"){
+                    
+                }
+                else if (matChildren[j].nodeName == "difuse"){
+                    
+                }
+                else if (matChildren[j].nodeName == "specular"){
+                    
+                }
+                else {
+                    this.onXMLMinorError("unknown tag <" + matChildren[j].nodeName + ">");
+                    continue;
+                }    
+            }
+
+            var materialEmission = []; 
             this.onXMLMinorError("To do: Parse materials.");
         }
 
@@ -559,6 +618,132 @@ class MySceneGraph {
 
                 this.primitives[primitiveId] = rect;
             }
+            if (primitiveType == 'triangle') {
+                // x1
+                var x1 = this.reader.getFloat(grandChildren[0], 'x1');
+                if (!(x1 != null && !isNaN(x1)))
+                    return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
+
+                // y1
+                var y1 = this.reader.getFloat(grandChildren[0], 'y1');
+                if (!(y1 != null && !isNaN(y1)))
+                    return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
+
+                // z1
+                var z1 = this.reader.getFloat(grandChildren[0], 'z1');
+                if (!(z1 != null && !isNaN(z1)))
+                    return "unable to parse z1 of the primitive coordinates for ID = " + primitiveId;
+
+                // x2
+                var x2 = this.reader.getFloat(grandChildren[0], 'x2');
+                if (!(x2 != null && !isNaN(x2)))
+                    return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
+                    
+                // y2
+                var y2 = this.reader.getFloat(grandChildren[0], 'y2');
+                if (!(y2 != null && !isNaN(y2)))
+                    return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
+
+                // z2
+                var z2 = this.reader.getFloat(grandChildren[0], 'z2');
+                if (!(z2 != null && !isNaN(z2)))
+                    return "unable to parse z2 of the primitive coordinates for ID = " + primitiveId;
+
+                // x3
+                var x3 = this.reader.getFloat(grandChildren[0], 'x3');
+                if (!(x3 != null && !isNaN(x3)))
+                    return "unable to parse x3 of the primitive coordinates for ID = " + primitiveId;
+
+                // y3
+                var y3 = this.reader.getFloat(grandChildren[0], 'y3');
+                if (!(y3 != null && !isNaN(y3)))
+                    return "unable to parse y3 of the primitive coordinates for ID = " + primitiveId;
+
+                // z3
+                var z3 = this.reader.getFloat(grandChildren[0], 'z3');
+                if (!(z3 != null && !isNaN(z3)))
+                    return "unable to parse z3 of the primitive coordinates for ID = " + primitiveId;
+
+                var tri = new MyTriangle(this.scene, primitiveId, x1, x2, x3, y1, y2, y3, z1, z2, z3);
+
+                this.primitives[primitiveId] = tri;
+            }
+            if (primitiveType == 'sphere') {
+                // x1
+                var x1 = this.reader.getFloat(grandChildren[0], 'x1');
+                if (!(x1 != null && !isNaN(x1)))
+                    return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
+
+                // y1
+                var y1 = this.reader.getFloat(grandChildren[0], 'y1');
+                if (!(y1 != null && !isNaN(y1)))
+                    return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
+
+                // x2
+                var x2 = this.reader.getFloat(grandChildren[0], 'x2');
+                if (!(x2 != null && !isNaN(x2) && x2 > x1))
+                    return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
+
+                // y2
+                var y2 = this.reader.getFloat(grandChildren[0], 'y2');
+                if (!(y2 != null && !isNaN(y2) && y2 > y1))
+                    return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
+
+                var rect = new MyRectangle(this.scene, primitiveId, x1, x2, y1, y2);
+
+                this.primitives[primitiveId] = rect;
+            }
+            if (primitiveType == 'cylinder') {
+                // x1
+                var x1 = this.reader.getFloat(grandChildren[0], 'x1');
+                if (!(x1 != null && !isNaN(x1)))
+                    return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
+
+                // y1
+                var y1 = this.reader.getFloat(grandChildren[0], 'y1');
+                if (!(y1 != null && !isNaN(y1)))
+                    return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
+
+                // x2
+                var x2 = this.reader.getFloat(grandChildren[0], 'x2');
+                if (!(x2 != null && !isNaN(x2) && x2 > x1))
+                    return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
+
+                // y2
+                var y2 = this.reader.getFloat(grandChildren[0], 'y2');
+                if (!(y2 != null && !isNaN(y2) && y2 > y1))
+                    return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
+
+                var rect = new MyRectangle(this.scene, primitiveId, x1, x2, y1, y2);
+
+                this.primitives[primitiveId] = rect;
+            }
+            if (primitiveType == 'torus') {
+                // x1
+                var x1 = this.reader.getFloat(grandChildren[0], 'x1');
+                if (!(x1 != null && !isNaN(x1)))
+                    return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
+
+                // y1
+                var y1 = this.reader.getFloat(grandChildren[0], 'y1');
+                if (!(y1 != null && !isNaN(y1)))
+                    return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
+
+                // x2
+                var x2 = this.reader.getFloat(grandChildren[0], 'x2');
+                if (!(x2 != null && !isNaN(x2) && x2 > x1))
+                    return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
+
+                // y2
+                var y2 = this.reader.getFloat(grandChildren[0], 'y2');
+                if (!(y2 != null && !isNaN(y2) && y2 > y1))
+                    return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
+
+                var rect = new MyRectangle(this.scene, primitiveId, x1, x2, y1, y2);
+
+                this.primitives[primitiveId] = rect;
+            }
+
             else {
                 console.warn("To do: Parse other primitives.");
             }
@@ -740,6 +925,8 @@ class MySceneGraph {
         //To do: Create display loop for transversing the scene graph
 
         //To test the parsing/creation of the primitives, call the display function directly
-        this.primitives['demoRectangle'].display();
+        this.textures['demoTexture'].apply();
+        this.primitives['demoTriangle'].display();
+        // this.primitives['demoTriangle'].enableNormalViz();
     }
 }

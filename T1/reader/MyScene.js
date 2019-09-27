@@ -11,15 +11,26 @@ class MyScene extends CGFscene {
         this.initCameras();
         this.initLights();
 
-        this.gl.clearColor(0.5, 0.5, 0.5, 1);
+        this.gl.clearColor(1, 1, 1, 1);
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        //this.cilindro = new MyCylinder(this, 20, 5, 5, 2, 3);
-        this.circle = new MyCircle(this, 10, 1)
+        // this.cilindro = new MyCylinder(this, 1, 5, 5, 20, 5);
+        // this.circle = new MyCircle(this, 10, 1)
+        this.cone = new MyCone(this, 5, false, 2, 2);
+        this.tri = new MyTriangle(this, -2, 2, 0, 0, 0, 0, 6, 6, 0);
+        this.Ambient_Light = 0.3;
+
+        this.branchTxt = new CGFappearance(this);
+        this.branchTxt.setAmbient(0.5, 0.5, 0.5, 1.0);
+        this.branchTxt.setDiffuse(.8, .8, .8, 1.0);
+        this.branchTxt.setSpecular(0, 0, 0, 1.0);
+        this.branchTxt.setShininess(10.0);
+        this.branchTxt.loadTexture('scenes/images/bank.jpg');
+        this.branchTxt.setTextureWrap('REPEAT', 'REPEAT'); 
     }
 
     updateAmbientLight() {
@@ -29,23 +40,23 @@ class MyScene extends CGFscene {
     initLights() {
         this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
 
-        this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
+        this.lights[0].setPosition(5.0, 5.0, 5.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].disable();
+        this.lights[0].enable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
-
-        this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
-        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
-        this.lights[1].disable();
-        this.lights[1].setVisible(true);
-        this.lights[1].update();
     }
 
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
+    }
+
+    setDefaultAppearance() {
+        this.setAmbient(0.2, 0.4, 0.8, 1.0);
+        this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+        this.setSpecular(0.2, 0.4, 0.8, 1.0);
+        this.setShininess(10.0);
     }
 
     hexToRgbA(hex)
@@ -82,11 +93,15 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix(); 
 
-
+        this.setDefaultAppearance();
  
         this.axis.display();
-        this.circle.display();
-        //this.cilindro.display();
-        //this.cilindro.enableNormalViz();
+        // this.circle.display();
+        // this.cilindro.display();
+        // this.cilindro.enableNormalViz();
+        this.branchTxt.apply();
+        this.cone.display();
+        // this.tri.display();
+        // this.tri.enableNormalViz();
     }
 }
