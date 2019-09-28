@@ -418,12 +418,15 @@ class MySceneGraph {
             var texture = new CGFappearance(this.scene);
             texture.loadTexture(textureFile);
 
+            
             if (texture == null)
                 return "texture file not found";
             
             this.textures[textureID] = texture;
         }
         this.log("Parsed textures");
+        return null;
+
     }
 
     /**
@@ -454,64 +457,83 @@ class MySceneGraph {
                 return "ID must be unique for each light (conflict: ID = " + materialID + ")";
 
             // Shininess
-            var shininessIndex = nodeNames.indexOf("shininess");
-            if (shininessIndex == -1)
-                return "Shininess value indefined for material with ID = " + materialID;
-            var materialShininess = this.reader.getFloat(children[shininessIndex], 'shininess');
-            if (materialShininess == null || materialShininess <= 0 || isNaN(shininess))
-                return "Shininess valuie is incorrect";
+            var materialShininess = this.reader.getFloat(children[i], 'shininess');
+            if (materialShininess == null || materialShininess <= 0 || isNaN(materialShininess))
+                return "Shininess value is incorrect";
 
-            var matChildren = children[i].children;
-            for(var j = 0; j < matChildren.length; j++){
+            var grandChildren = children[i].children;
+
+            //initialize all variables to be able to check them after cycle
+            var emissionRGBA = null;
+            var ambientRGBA = null;
+            var diffuseRGBA = null;
+            var specularRGBA = null;
+
+            //check all children for incorrect tags
+            for(var j = 0; j < grandChildren.length; j++){
+
                 //Emission
-                if (matChildren[j].nodeName == "emission"){
-                    var emissionIndex = nodeNames.indexOf("emission");
-                    if (emissionIndex == -1)
-                        return "Emission value indefined for material with ID = " + materialID;
-                    
-                    var emissionRGBA = this.parseColor(children[emissionIndex], "emission");
+                if (grandChildren[j].nodeName == "emission"){                   
+                    emissionRGBA = this.parseColor(grandChildren[j], "emission");
+                    //check parseColor return value, 4 values if correct
+                    if(emissionRGBA.length != 4)
+                        return emissionRGBA;
                 }
                 //Ambient
-                else if (matChildren[j].nodeName == "ambient"){
-                    var ambientIndex = nodeNames.indexOf("ambient");
-                    if (ambientIndex == -1)
-                        return "Ambient value indefined for material with ID = " + materialID;
-                                      
-                    var ambientRGBA = this.parseColor(children[ambientIndex], "ambient");
+                else if (grandChildren[j].nodeName == "ambient"){
+                    // var ambientIndex = nodeNames.indexOf("ambient");
+                    // if (ambientIndex == -1)
+                    
+                    ambientRGBA = this.parseColor(grandChildren[j], "ambient");
+                    if(ambientRGBA.length != 4)
+                        return ambientRGBA;    
                 }
                 //Difuse
-                else if (matChildren[j].nodeName == "difuse"){
-                    var diffuseIndex = nodeNames.indexOf("difuse");
-                    if (diffuseIndex == -1)
-                        return "Difuse value indefined for material with ID = " + materialID;
+                else if (grandChildren[j].nodeName == "diffuse"){
+                    // var diffuseIndex = nodeNames.indexOf("difuse");
+                    // if (diffuseIndex == -1)
                     
-                    var diffuseRGBA = this.parseColor(children[diffuseIndex], "difuse");
+                    diffuseRGBA = this.parseColor(grandChildren[j], "diffuse");
+                    if(diffuseRGBA.length != 4)
+                        return diffuseRGBA;    
                 }
                 //Specular
-                else if (matChildren[j].nodeName == "specular"){
-                    var specularIndex = nodeNames.indexOf("specular");
-                    if (specularIndex == -1)
-                        return "Specular value indefined for material with ID = " + materialID;
+                else if (grandChildren[j].nodeName == "specular"){
+                    // var specularIndex = nodeNames.indexOf("specular");
+                    // if (specularIndex == -1)
                     
-                    var specularRGBA = this.parseColor(children[specularIndex], "specular");
+                    specularRGBA = this.parseColor(grandChildren[j], "specular");
+                    if(specularRGBA.length != 4)
+                        return specularRGBA;    
                 }
+                //Unknown tags
                 else {
-                    this.onXMLMinorError("unknown tag <" + matChildren[j].nodeName + ">");
+                    this.onXMLMinorError("unknown tag <" + grandChildren[j].nodeName + ">");
                     continue;
                 }
                 
-                // Creates material with the lxs specifics
-                var readMaterial = new CGFappearance(this.scene);
-                readMaterial.setShininess(materialShininess);
-                readMaterial.setAmbient(ambientRGBA[0], ambientRGBA[1], ambientRGBA[2], ambientRGBA[3]);
-                readMaterial.setDiffuse(diffuseRGBA[0], diffuseRGBA[1], diffuseRGBA[2], diffuseRGBA[3]);
-                readMaterial.setSpecular(specularRGBA[0], specularRGBA[1], specularRGBA[2], specularRGBA[3]);
-                readMaterial.setEmission(emissionRGBA[0], emissionRGBA[1], emissionRGBA[2], emissionRGBA[3]);
-                this.material[materialID] = readMaterial;
             }
-            this.onXMLMinorError("To do: Parse materials.");
+            //Check Variables
+            if(emissionRGBA == null)
+                return "Emission value indefined for material with ID = " + materialID;
+            if(ambientRGBA == null)
+                return "Ambient value indefined for material with ID = " + materialID;
+            if(diffuseRGBA == null)
+                return "Diffuse value indefined for material with ID = " + materialID;
+            if(specularRGBA == null)
+                return "Specular value indefined for material with ID = " + materialID;
+
+            // Creates material with the lxs specifics
+            var readMaterial = new CGFappearance(this.scene);
+            readMaterial.setShininess(materialShininess);
+            readMaterial.setAmbient(ambientRGBA[0], ambientRGBA[1], ambientRGBA[2], ambientRGBA[3]);
+            readMaterial.setDiffuse(diffuseRGBA[0], diffuseRGBA[1], diffuseRGBA[2], diffuseRGBA[3]);
+            readMaterial.setSpecular(specularRGBA[0], specularRGBA[1], specularRGBA[2], specularRGBA[3]);
+            readMaterial.setEmission(emissionRGBA[0], emissionRGBA[1], emissionRGBA[2], emissionRGBA[3]);
+            this.materials[materialID] = readMaterial;
         }
         this.log("Parsed materials");
+        return null;
     }
 
     /**
@@ -566,12 +588,27 @@ class MySceneGraph {
                         break;
                         
                     case 'rotate':
-                        var coordinates = this.parseCoordinates3D(grandChildren[j], "rotation transformation for ID " + transformationID);
-                        if (!Array.isArray(coordinates))
-                            return coordinates;
-    
-                        transfMatrix = mat4.rotate(transfMatrix, transfMatrix, coordinates[0]*Math.PI/180, coordinates[1]); //rotate(out, a, rad, axis)
+                        var angle = this.reader.getFloat(grandChildren[j], "angle");
+                        if (angle == null || isNaN(angle))
+                            return "unable to parse angle of rotation of " + transformationID;
+                        var axis = this.reader.getString(grandChildren[j], "axis");
+                        switch (axis) {
+                            case 'x':
+                                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle*Math.PI/180, vec3.fromValues(1, 0, 0)); //rotate(out, a, rad, axis)                                
+                                break;
+                            case 'y':
+                                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle*Math.PI/180, vec3.fromValues(0, 1, 0)); //rotate(out, a, rad, axis)                                
+                                break;
+                            case 'z':
+                                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle*Math.PI/180, vec3.fromValues(0, 0, 1)); //rotate(out, a, rad, axis)                                
+                                break;
+                            default:
+                                return "unable to parse axis of rotation of " + transformationID;
+                        }    
                         break;
+
+                    default:
+                        return "unknown tag <" + grandChildren[j].nodeName + ">";
                 }
             }
             this.transformations[transformationID] = transfMatrix;
@@ -644,6 +681,7 @@ class MySceneGraph {
                     return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
 
                 var rect = new MyRectangle(this.scene, primitiveId, x1, x2, y1, y2);
+
                 this.primitives[primitiveId] = rect;
             }
             else if (primitiveType == 'triangle') {
@@ -693,81 +731,85 @@ class MySceneGraph {
                     return "unable to parse z3 of the primitive coordinates for ID = " + primitiveId;
 
                 var tri = new MyTriangle(this.scene, primitiveId, x1, x2, x3, y1, y2, y3, z1, z2, z3);
+
                 this.primitives[primitiveId] = tri;
             }
-            else if (primitiveType == 'cylinder') {
-                // base
-                var base = this.reader.getFloat(grandChildren[0], 'base');
-                if (!(base != null && !isNaN(base) && base>0))
-                    return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
-
-                // top
-                var top = this.reader.getFloat(grandChildren[0], 'top');
-                if (!(top != null && !isNaN(top)  && top>0))
-                    return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
-
-                // height
-                var height = this.reader.getFloat(grandChildren[0], 'height');
-                if (!(height != null && !isNaN(height) && height>0))
-                    return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
-
-                // slices
-                var slices = this.reader.getInt(grandChildren[0], 'slices');
-                if (!(slices != null && !isNaN(slices) && slices>0))
-                    return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
-                
-                // 
-                var stacks = this.reader.getInt(grandChildren[0], 'stacks');
-                if (!(stacks != null && !isNaN(stacks) && stacks>0))
-                    return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
-
-                var cyl = new MyCylinder(this.scene, base, top, height, slices, stacks);
-                this.primitives[primitiveId] = cyl;
-            }
             else if (primitiveType == 'sphere') {
-                // radius
-                var radius = this.reader.getFloat(grandChildren[0], 'radius');
-                if (radius == null || isNaN(radius) || radius < 0)
+                // x1
+                var x1 = this.reader.getFloat(grandChildren[0], 'x1');
+                if (!(x1 != null && !isNaN(x1)))
                     return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
 
-                // slices
-                var slices = this.reader.getInt(grandChildren[0], 'slices');
-                if (slices == null || isNaN(slices) || slices <=0)
+                // y1
+                var y1 = this.reader.getFloat(grandChildren[0], 'y1');
+                if (!(y1 != null && !isNaN(y1)))
                     return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
 
-                // stacks
-                var stacks = this.reader.getInt(grandChildren[0], 'stacks');
-                if (stacks == null || isNaN(stacks) || stacks <=0)
+                // x2
+                var x2 = this.reader.getFloat(grandChildren[0], 'x2');
+                if (!(x2 != null && !isNaN(x2) && x2 > x1))
                     return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
 
-                var sphere = new MySphere(this.scene, radius, slices, stacks);
-                this.primitives[primitiveId] = sphere;
-            }
-            // <torus inner="ff" outer="ff" slices="ii" loops="ii" />
-            else if (primitiveType == 'torus') {
-                // inner
-                var inner = this.reader.getFloat(grandChildren[0], 'inner');
-                if (!(inner != null && !isNaN(inner) && inner>0))
-                    return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
-
-                // outer
-                var outer = this.reader.getFloat(grandChildren[0], 'outer');
-                if (!(outer != null && !isNaN(outer) && outer>0))
-                    return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
-
-                // slices
-                var slices = this.reader.getInt(grandChildren[0], 'slices');
-                if (!(slices != null && !isNaN(slices) && slices>0))
-                    return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
-
-                // loops
-                var loops = this.reader.getInt(grandChildren[0], 'loops');
-                if (!(loops != null && !isNaN(loops) && loops > 0))
+                // y2
+                var y2 = this.reader.getFloat(grandChildren[0], 'y2');
+                if (!(y2 != null && !isNaN(y2) && y2 > y1))
                     return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
 
-                var torus = new MyTorus(this.scene, inner, outer, slices, loops);
-                this.primitives[primitiveId] = torus;
+                var rect = new MyRectangle(this.scene, primitiveId, x1, x2, y1, y2);
+
+                this.primitives[primitiveId] = rect;
             }
+            else if (primitiveType == 'cylinder') {
+                // x1
+                var x1 = this.reader.getFloat(grandChildren[0], 'x1');
+                if (!(x1 != null && !isNaN(x1)))
+                    return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
+
+                // y1
+                var y1 = this.reader.getFloat(grandChildren[0], 'y1');
+                if (!(y1 != null && !isNaN(y1)))
+                    return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
+
+                // x2
+                var x2 = this.reader.getFloat(grandChildren[0], 'x2');
+                if (!(x2 != null && !isNaN(x2) && x2 > x1))
+                    return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
+
+                // y2
+                var y2 = this.reader.getFloat(grandChildren[0], 'y2');
+                if (!(y2 != null && !isNaN(y2) && y2 > y1))
+                    return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
+
+                var rect = new MyRectangle(this.scene, primitiveId, x1, x2, y1, y2);
+
+                this.primitives[primitiveId] = rect;
+            }
+            else if (primitiveType == 'torus') {
+                // x1
+                var x1 = this.reader.getFloat(grandChildren[0], 'x1');
+                if (!(x1 != null && !isNaN(x1)))
+                    return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
+
+                // y1
+                var y1 = this.reader.getFloat(grandChildren[0], 'y1');
+                if (!(y1 != null && !isNaN(y1)))
+                    return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
+
+                // x2
+                var x2 = this.reader.getFloat(grandChildren[0], 'x2');
+                if (!(x2 != null && !isNaN(x2) && x2 > x1))
+                    return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
+
+                // y2
+                var y2 = this.reader.getFloat(grandChildren[0], 'y2');
+                if (!(y2 != null && !isNaN(y2) && y2 > y1))
+                    return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
+
+                var rect = new MyRectangle(this.scene, primitiveId, x1, x2, y1, y2);
+
+                this.primitives[primitiveId] = rect;
+            }
+            
         }
 
         this.log("Parsed primitives");
@@ -818,9 +860,67 @@ class MySceneGraph {
 
             this.onXMLMinorError("To do: Parse components.");
             // Transformations
+            var transfMatrix;
+            if(grandChildren[transformationIndex].length == 1 && grandChildren[transformationIndex][0] == 'transformationref'){
+                transfMatrix = this.reader.getString(grandChildren[transformationIndex][j], "id");
+                if(transfMatrix == null || this.transformations[transfMatrix] != null)
+                    return "unable to parse transformation id of " + componentID;
+            }
+            else {
+                transfMatrix = mat4.create();
+                for (var j = 0; j < grandChildren[transformationIndex].length; j++) {
+                    switch (grandChildren[j].nodeName) {
+                        case 'translate':
+                            var coordinates = this.parseCoordinates3D(grandChildren[transformationIndex][j], "translate transformation for ID " + transformationID);
+                            if (!Array.isArray(coordinates))
+                                return coordinates;
 
+                            transfMatrix = mat4.translate(transfMatrix, transfMatrix, coordinates);
+                            break;
+
+                        case 'scale':                        
+                            var coordinates = this.parseCoordinates3D(grandChildren[transformationIndex][j], "scale transformation for ID " + transformationID);
+                            if (!Array.isArray(coordinates))
+                                return coordinates;
+
+                            transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinates);
+                            break;
+                            
+                        case 'rotate':
+                            var angle = this.reader.getFloat(grandChildren[transformationIndex][j], "angle");
+                            if (angle == null || isNaN(angle))
+                                return "unable to parse angle of rotation of " + transformationID;
+                            var axis = this.reader.getString(grandChildren[transformationIndex][j], "axis");
+                            switch (axis) {
+                                case 'x':
+                                    transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle*Math.PI/180, vec3.fromValues(1, 0, 0)); //rotate(out, a, rad, axis)                                
+                                    break;
+                                case 'y':
+                                    transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle*Math.PI/180, vec3.fromValues(0, 1, 0)); //rotate(out, a, rad, axis)                                
+                                    break;
+                                case 'z':
+                                    transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle*Math.PI/180, vec3.fromValues(0, 0, 1)); //rotate(out, a, rad, axis)                                
+                                    break;
+                                default:
+                                    return "unable to parse axis of rotation of " + transformationID;
+                            }    
+                            break;
+
+                        default:
+                            return "incorrect tag <" + grandChildren[j].nodeName + ">";
+                    }
+                }
+            }
             // Materials
-
+            var materials = [];
+            for (var j = 0; j < grandChildren[materialsIndex].length; j++) {
+                var materialID = this.reader.getString(grandChildren[materialsIndex][j], "id");
+                if (materialID == null)
+                    return "no ID defined for material";
+                
+                materials.push(materialID);
+            }
+            
             // Texture
 
             // Children
