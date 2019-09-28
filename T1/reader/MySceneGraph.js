@@ -745,9 +745,15 @@ class MySceneGraph {
                 if (!(y1 != null && !isNaN(y1)))
                     return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
 
+<<<<<<< HEAD
+                // height
+                var height = this.reader.getFloat(grandChildren[0], 'height');
+                if (!(height != null && !isNaN(height) && height>=0))
+=======
                 // x2
                 var x2 = this.reader.getFloat(grandChildren[0], 'x2');
                 if (!(x2 != null && !isNaN(x2) && x2 > x1))
+>>>>>>> 206bd8b56b0f6def71e031246ba04933cf834160
                     return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
 
                 // y2
@@ -811,7 +817,6 @@ class MySceneGraph {
             }
             
         }
-
         this.log("Parsed primitives");
         return null;
     }
@@ -936,24 +941,6 @@ class MySceneGraph {
     //BASED ON: http://glmatrix.net/docs/module-mat4.html
     parseCoordinates3D(node, messageError) {
         var position = [];
-
-        if(node.nodeName == "rotate") {
-            // axis
-            var axisVec = vec3.create()
-            var axis = this.reader.getFloat(node, 'axis');
-            if(axis == 'x') axisVec.set(axisVec, 1, 0, 0)
-            else if(axis == 'y') axisVec.set(axisVec, 0, 1, 0)
-            else if(axis == 'z') axisVec.set(axisVec, 0, 0, 1)
-            else return "unable to parse axis of the " + messageError;
-            
-            // degrees
-            var degrees = this.reader.getFloat(node, 'angle');
-            if (degrees == null || isNaN(degrees))
-                return "unable to parse degress of the " + messageError;
-            
-            position.push(...[degrees, axisVec]);
-            return position;
-        }
 
         // x
         var x = this.reader.getFloat(node, 'x');
