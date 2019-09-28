@@ -61,10 +61,10 @@ class MyCylinder extends CGFobject {
             this.normals.push(x1_top, y1_top, 0);     
             this.normals.push(x2_top, y2_top, 0);
   
-            this.texCoords.push(0+i*(1.0/this.slices),1-i*(1.0/this.stacks));
-            this.texCoords.push((1.0/this.slices)+i*(1.0/this.slices),1-i*(1.0/this.stacks));
-            this.texCoords.push(0+i*(1.0/this.slices),1-(1.0/this.stacks)-i*(1.0/this.stacks));
-            this.texCoords.push((1.0/this.slices)+i*(1.0/this.slices),1-(1.0/this.stacks)-i*(1.0/this.stacks));
+            this.texCoords.push(0+i*(1.0/this.slices),1-j*(1.0/this.stacks));
+            this.texCoords.push((1.0/this.slices)+i*(1.0/this.slices),1-j*(1.0/this.stacks));
+            this.texCoords.push(0+i*(1.0/this.slices),1-(1.0/this.stacks)-j*(1.0/this.stacks));
+            this.texCoords.push((1.0/this.slices)+i*(1.0/this.slices),1-(1.0/this.stacks)-j*(1.0/this.stacks));
 
             x1_bottom = x1_top;
             x2_bottom = x2_top;
