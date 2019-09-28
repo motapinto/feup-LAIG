@@ -1,7 +1,7 @@
 # LAIG
 Laboratório de Aplicações com Interface Gráfica
 
-TO DO LIST
+
 tampo para parte de tras da mesa
 
 Check de todas as normais das primitivas e texturas
