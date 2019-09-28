@@ -4,7 +4,7 @@
 */
 
 class MyCylinder extends CGFobject {
-    constructor(scene, radiusBottom, radiusTop, height, slices, stacks, coverTop=0, coverBottom=0) {
+    constructor(scene, radiusBottom, radiusTop, height, slices, stacks) {
         super(scene);
         this.scene = scene;
 
@@ -13,8 +13,6 @@ class MyCylinder extends CGFobject {
         this.height = height;
         this.radiusTop = radiusTop;
         this.radiusBottom = radiusBottom;
-
-        //this.cover = new MyCircle(scene); //covers for cylinder bases
 
         this.initBuffers();
     }
@@ -42,10 +40,10 @@ class MyCylinder extends CGFobject {
           for(var j = 0; j < this.stacks; j++){
             var radius =  this.radiusBottom + (j + 1) * delta_radius;
             
+            var x1_top=radius*Math.cos(ang);
             var y1_top=radius*Math.sin(ang); 
             var x2_top=radius*Math.cos(ang+alphaAng);
             var y2_top=radius*Math.sin(ang+alphaAng);
-            var x1_top=radius*Math.cos(ang);
             
             this.vertices.push(x1_bottom, y1_bottom, delta_z*j);
             this.vertices.push(x2_bottom, y2_bottom, delta_z*j);
@@ -63,10 +61,10 @@ class MyCylinder extends CGFobject {
             this.normals.push(x1_top, y1_top, 0);     
             this.normals.push(x2_top, y2_top, 0);
   
-            this.texCoords.push(0+i*(1.0/this.slices),1);
-            this.texCoords.push((1.0/this.slices)+i*(1.0/this.slices),1);
-            this.texCoords.push(0+i*(1.0/this.slices),0);
-            this.texCoords.push((1.0/this.slices)+i*(1.0/this.slices),0);
+            this.texCoords.push(0+i*(1.0/this.slices),1-i*(1.0/this.stacks));
+            this.texCoords.push((1.0/this.slices)+i*(1.0/this.slices),1-i*(1.0/this.stacks));
+            this.texCoords.push(0+i*(1.0/this.slices),1-(1.0/this.stacks)-i*(1.0/this.stacks));
+            this.texCoords.push((1.0/this.slices)+i*(1.0/this.slices),1-(1.0/this.stacks)-i*(1.0/this.stacks));
 
             x1_bottom = x1_top;
             x2_bottom = x2_top;
@@ -79,24 +77,5 @@ class MyCylinder extends CGFobject {
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
-
-    /*MyCylinder.prototype.display = function() {
-        CGFobject.prototype.display.call(this);
-      
-        if (this.coverTop > 0) {
-          this.scene.pushMatrix();
-            this.scene.scale(this.coverTop, this.coverTop, 1);
-            this.scene.translate(0, 0, this.height);
-            this.cover.display();
-          this.scene.popMatrix();
-        }
-      
-        if (this.coverBottom > 0) {
-          this.scene.pushMatrix();
-            this.scene.scale(this.coverBottom, this.coverBottom, 1);
-            this.cover.display();
-          this.scene.popMatrix();
-        }
-      };*/
 }
 
