@@ -13,3 +13,5 @@ Fazer xml scene - restaurante usando torus como donout
 Acabar components and primitives parsing - antes tp2
 
 melhorar a cadeira
+
+Substituir rectangle com versao do MyQuad por causa das normais (terrenos)
