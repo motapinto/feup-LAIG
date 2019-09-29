@@ -852,20 +852,20 @@ class MySceneGraph {
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children");
 
-            this.onXMLMinorError("To do: Parse components.");
             // Transformations
             var transfMatrix;
-            if(grandChildren[transformationIndex].length == 1 && grandChildren[transformationIndex][0] == 'transformationref'){
-                transfMatrix = this.reader.getString(grandChildren[transformationIndex][j], "id");
+            grandgrandChildren = grandChildren[transformationIndex];
+            if(grandgrandChildren.length == 1 && grandgrandChildren[0] == 'transformationref'){
+                transfMatrix = this.reader.getString(grandgrandChildren[j], "id");
                 if(transfMatrix == null || this.transformations[transfMatrix] != null)
                     return "unable to parse transformation id of " + componentID;
             }
             else {
                 transfMatrix = mat4.create();
-                for (var j = 0; j < grandChildren[transformationIndex].length; j++) {
-                    switch (grandChildren[j].nodeName) {
+                for (var j = 0; j < grandgrandChildren.length; j++) {
+                    switch (grandgrandChildren[j].nodeName) {
                         case 'translate':
-                            var coordinates = this.parseCoordinates3D(grandChildren[transformationIndex][j], "translate transformation for ID " + transformationID);
+                            var coordinates = this.parseCoordinates3D(grandgrandChildren[j], "translate transformation for ID " + transformationID);
                             if (!Array.isArray(coordinates))
                                 return coordinates;
 
@@ -873,7 +873,7 @@ class MySceneGraph {
                             break;
 
                         case 'scale':                        
-                            var coordinates = this.parseCoordinates3D(grandChildren[transformationIndex][j], "scale transformation for ID " + transformationID);
+                            var coordinates = this.parseCoordinates3D(grandgrandChildren[j], "scale transformation for ID " + transformationID);
                             if (!Array.isArray(coordinates))
                                 return coordinates;
 
@@ -881,10 +881,10 @@ class MySceneGraph {
                             break;
                             
                         case 'rotate':
-                            var angle = this.reader.getFloat(grandChildren[transformationIndex][j], "angle");
+                            var angle = this.reader.getFloat(grandgrandChildren[j], "angle");
                             if (angle == null || isNaN(angle))
                                 return "unable to parse angle of rotation of " + transformationID;
-                            var axis = this.reader.getString(grandChildren[transformationIndex][j], "axis");
+                            var axis = this.reader.getString(grandgrandChildren[j], "axis");
                             switch (axis) {
                                 case 'x':
                                     transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle*Math.PI/180, vec3.fromValues(1, 0, 0)); //rotate(out, a, rad, axis)                                
@@ -901,24 +901,74 @@ class MySceneGraph {
                             break;
 
                         default:
-                            return "incorrect tag <" + grandChildren[j].nodeName + ">";
+                            return "incorrect tag <" + grandgrandChildren[j].nodeName + ">";
                     }
                 }
             }
             // Materials
             var materials = [];
-            for (var j = 0; j < grandChildren[materialsIndex].length; j++) {
-                var materialID = this.reader.getString(grandChildren[materialsIndex][j], "id");
+            grandgrandChildren = grandChildren[materialsIndex];
+            for (var j = 0; j < grandgrandChildren.length; j++) {
+                var materialID = this.reader.getString(grandgrandChildren[j], "id");
                 if (materialID == null)
-                    return "no ID defined for material";
-                
+                    return "no ID defined for material in component " + componentID;
+                if (this.materials[materialID] == null && materialID != 'inherit')
+                    return "material with ID " + materialID + " must be defined in materials"
                 materials.push(materialID);
             }
             
             // Texture
+            var texture = [];
+            grandgrandChildren = grandChildren[textureIndex];
+            texture.push(this.reader.getString(grandgrandChildren, "id"));
+            if (texture[0] == null)
+                return "no ID defined for texture in component " + componentID;
+            if (this.textures[texture[0]] == null && texture[0] != 'none' && texture[0] != 'inherit')
+                return "texture with ID " + texture[0] + " must be defined in textures";
+
+            texture.push(this.reader.getFloat(grandgrandChildren, "length_s"));
+            if (isNaN(texture[1]) || texture[1] == null)
+                return "no length_s defined for texture " + texture[0] + " in component " + componentID;
+            texture.push(this.reader.getFloat(grandgrandChildren, "length_t"));
+            if (isNaN(texture[2]) || texture[2] == null)
+                return "no length_t defined for texture " + texture[0] + " in component " + componentID;
 
             // Children
+            var components = [];
+            var primitives = [];
+            grandgrandChildren = grandChildren[childrenIndex];
+            for (var j = 0; j < grandgrandChildren.length; j++){
+                if(grandgrandChildren[j].nodeName == "componentref"){
+                    var compID;
+                    compID = this.reader.getString(grandgrandChildren[j], "id");
+                    if (compID == null)
+                        return "no ID defined for component children in component " + componentID;
+                    if (this.components[compID] == null)
+                        return "component with ID " + compID + " must be defined in components";
+                    components.push(compID);
+                }
+                else if(grandgrandChildren[j].nodeName == "primitiveid"){
+                    var primitiveID;
+                    primitiveID = this.reader.getString(grandgrandChildren[j], "id");
+                    if (primitiveID == null)
+                        return "no ID defined for primitive children in component " + componentID;
+                    if (this.primitives[primitiveID] == null)
+                        return "primitive with ID " + primitiveID + " must be defined in components";
+                    primitives.push(primitiveID);
+                }
+                else
+                    this.onXMLMinorError("unknown tag <" + grandgrandChildren[j].nodeName + ">");
+            }
+            
+            if ( (components.length + primitives.length) <= 0)
+                return "component " + componentID + " must have at least 1 child";
+                
+            var component = [componentID, transfMatrix, materials, texture, components, primitives];
+            this.components.push(component);
         }
+
+        this.log("Parsed components");
+        return null;
     }
 
 
