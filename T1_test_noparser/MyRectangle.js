@@ -7,6 +7,7 @@
  */
 class MyRectangle extends CGFobject {
 	constructor(scene, x1, x2, y1, y2) {
+		//point 1 must have higher y and lower x than point 2
 		super(scene);
 		this.x1 = x1;
 		this.x2 = x2;
@@ -17,33 +18,37 @@ class MyRectangle extends CGFobject {
 	}
 	
 	initBuffers() {
-		this.vertices = [
-			this.x1, this.y1, 0,	//0
-			this.x2, this.y1, 0,	//1
-			this.x1, this.y2, 0,	//2
-			this.x2, this.y2, 0		//3
-		];
+		this.vertices = [];
+		this.indices = [];
+		this.normals = [];
+		this.texCoord = [];
 
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 1, 2,
-			1, 3, 2
-		];
+		var num_rect = 0;
 
-		//Facing Z positive
-		this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1
-		];
+		for(let x=this.x1; x<this.x2; x++) {
+			for(let y=this.y1; y>this.y2; y--) {
+				
+				for(let i = 0; i < 2; i++) {
+					for(let j=0; j < 2; j++) {
+						this.vertices.push(x+i, y-j, 0);
+						this.normals.push(0, 0, 1);
+					}
+				}
 
-		this.texCoords = [
-			0, 1,
-			1, 1,
-			0, 0,
-			1, 0
-		]
+				this.indices.push(4*num_rect, 1+4*num_rect, 3+4*num_rect);
+				this.indices.push(3+4*num_rect, 2+4*num_rect, 4*num_rect);
+				this.indices.push(4*num_rect, 2+4*num_rect, 3+4*num_rect);
+				this.indices.push(3+4*num_rect, 1+4*num_rect, 4*num_rect);
+
+				this.texCoord.push(0, 0);
+				this.texCoord.push(0, 1);
+				this.texCoord.push(1, 0);
+				this.texCoord.push(1, 1);
+
+				num_rect++;
+			}
+		}
+		
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}

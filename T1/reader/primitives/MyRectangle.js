@@ -6,9 +6,9 @@
  * @param y - Scale of rectangle in Y
  */
 class MyRectangle extends CGFobject {
-	constructor(scene, id, x1, x2, y1, y2) {
+	constructor(scene, x1, x2, y1, y2) {
+		//point 1 must have higher y and lower x than point 2
 		super(scene);
-		this.id = id;
 		this.x1 = x1;
 		this.x2 = x2;
 		this.y1 = y1;
@@ -18,55 +18,39 @@ class MyRectangle extends CGFobject {
 	}
 	
 	initBuffers() {
-		this.vertices = [
-			this.x1, this.y1, 0,	//0
-			this.x2, this.y1, 0,	//1
-			this.x1, this.y2, 0,	//2
-			this.x2, this.y2, 0		//3
-		];
+		this.vertices = [];
+		this.indices = [];
+		this.normals = [];
+		this.texCoords = [];
 
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 1, 2,
-			1, 3, 2
-		];
+		var num_rect = 0;
 
-		//Facing Z positive
-		this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1
-		];
+		for(let x=this.x1; x<this.x2; x++) {
+			for(let y=this.y1; y>this.y2; y--) {
+				
+				for(let i = 0; i < 2; i++) {
+					for(let j=0; j < 2; j++) {
+						this.vertices.push(x+i, y-j, 0);
+						this.normals.push(0, 0, 1);
+					}
+				}
+
+				this.indices.push(4*num_rect, 1+4*num_rect, 3+4*num_rect);
+				this.indices.push(3+4*num_rect, 2+4*num_rect, 4*num_rect);
+				this.indices.push(4*num_rect, 2+4*num_rect, 3+4*num_rect);
+				this.indices.push(3+4*num_rect, 1+4*num_rect, 4*num_rect);
+
+				this.texCoords.push(0, 0);
+				this.texCoords.push(0, 1);
+				this.texCoords.push(1, 0);
+				this.texCoords.push(1, 1);
+
+				num_rect++;
+			}
+		}
 		
-		/*
-		Texture coords (s,t)
-		+----------> s
-        |
-        |
-		|
-		v
-        t
-        */
-
-		this.texCoords = [
-			0, 1,
-			1, 1,
-			0, 0,
-			1, 0
-		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
-	}
-
-	/**
-	 * @method updateTexCoords
-	 * Updates the list of texture coordinates of the rectangle
-	 * @param {Array} coords - Array of texture coordinates
-	 */
-	updateTexCoords(coords) {
-		this.texCoords = [...coords];
-		this.updateTexCoordsGLBuffers();
 	}
 }
 
