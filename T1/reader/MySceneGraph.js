@@ -918,25 +918,30 @@ class MySceneGraph {
             }
             
             // Texture
-            var texture = [];
-            grandgrandChildren = grandChildren[textureIndex];
-            texture.push(this.reader.getString(grandgrandChildren, "id"));
-            if (texture[0] == null)
+            var texture = {
+                id: "none",
+                length_s: 0,
+                length_t: 0
+            };
+            texture.id = this.reader.getString(grandChildren[textureIndex], "id");
+            if (texture.id == null)
                 return "no ID defined for texture in component " + componentID;
-            if (this.textures[texture[0]] == null && texture[0] != 'none' && texture[0] != 'inherit')
-                return "texture with ID " + texture[0] + " must be defined in textures";
+            if (this.textures[texture.id] == null && texture.id != 'none' && texture.id != 'inherit')
+                return "texture with ID " + texture.id + " must be defined in textures";
+            
+            texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s");
+            if (isNaN(texture.length_s))
+                return "no length_s defined for texture " + texture.id + " in component " + componentID;
 
-            texture.push(this.reader.getFloat(grandgrandChildren, "length_s"));
-            if (isNaN(texture[1]) || texture[1] == null)
-                return "no length_s defined for texture " + texture[0] + " in component " + componentID;
-            texture.push(this.reader.getFloat(grandgrandChildren, "length_t"));
-            if (isNaN(texture[2]) || texture[2] == null)
-                return "no length_t defined for texture " + texture[0] + " in component " + componentID;
+            texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t");
+            if (isNaN(texture.length_t))
+                return "no length_t defined for texture " + texture.id + " in component " + componentID;
 
             // Children
             var components = [];
             var primitives = [];
             grandgrandChildren = grandChildren[childrenIndex];
+
             for (var j = 0; j < grandgrandChildren.length; j++){
                 if(grandgrandChildren[j].nodeName == "componentref"){
                     var compID;
@@ -947,7 +952,7 @@ class MySceneGraph {
                         return "component with ID " + compID + " must be defined in components";
                     components.push(compID);
                 }
-                else if(grandgrandChildren[j].nodeName == "primitiveid"){
+                else if(grandgrandChildren[j].nodeName == "primitiveref"){
                     var primitiveID;
                     primitiveID = this.reader.getString(grandgrandChildren[j], "id");
                     if (primitiveID == null)
@@ -963,7 +968,13 @@ class MySceneGraph {
             if ( (components.length + primitives.length) <= 0)
                 return "component " + componentID + " must have at least 1 child";
                 
-            var component = [componentID, transfMatrix, materials, texture, components, primitives];
+            var component = {
+                id: componentID, 
+                transfMatrix: transfMatrix, 
+                materials: materials, 
+                texture: texture, 
+                components: components, 
+                primitives: primitives};
             this.components.push(component);
         }
 
