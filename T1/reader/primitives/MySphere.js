@@ -1,5 +1,5 @@
 /**
- * MySemiSphere
+ * MySphere
  * @constructor
  */
 class MySphere extends CGFobject
