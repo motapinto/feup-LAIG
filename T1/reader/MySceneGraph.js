@@ -854,7 +854,7 @@ class MySceneGraph {
 
             // Transformations
             var transfMatrix;
-            grandgrandChildren = grandChildren[transformationIndex];
+            grandgrandChildren = grandChildren[transformationIndex].children;
             if(grandgrandChildren.length == 1 && grandgrandChildren[0] == 'transformationref'){
                 transfMatrix = this.reader.getString(grandgrandChildren[j], "id");
                 if(transfMatrix == null || this.transformations[transfMatrix] != null)
@@ -907,7 +907,7 @@ class MySceneGraph {
             }
             // Materials
             var materials = [];
-            grandgrandChildren = grandChildren[materialsIndex];
+            grandgrandChildren = grandChildren[materialsIndex].children;
             for (var j = 0; j < grandgrandChildren.length; j++) {
                 var materialID = this.reader.getString(grandgrandChildren[j], "id");
                 if (materialID == null)
@@ -923,24 +923,24 @@ class MySceneGraph {
                 length_s: 0,
                 length_t: 0
             };
-            texture.id = this.reader.getString(grandChildren[textureIndex], "id");
+            texture.id = this.reader.getString(grandChildren[textureIndex].children, "id");
             if (texture.id == null)
                 return "no ID defined for texture in component " + componentID;
             if (this.textures[texture.id] == null && texture.id != 'none' && texture.id != 'inherit')
                 return "texture with ID " + texture.id + " must be defined in textures";
             
-            texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s");
+            texture.length_s = this.reader.getFloat(grandChildren[textureIndex].children, "length_s");
             if (isNaN(texture.length_s))
                 return "no length_s defined for texture " + texture.id + " in component " + componentID;
 
-            texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t");
+            texture.length_t = this.reader.getFloat(grandChildren[textureIndex].children, "length_t");
             if (isNaN(texture.length_t))
                 return "no length_t defined for texture " + texture.id + " in component " + componentID;
 
             // Children
             var components = [];
             var primitives = [];
-            grandgrandChildren = grandChildren[childrenIndex];
+            grandgrandChildren = grandChildren[childrenIndex].children;
 
             for (var j = 0; j < grandgrandChildren.length; j++){
                 if(grandgrandChildren[j].nodeName == "componentref"){
