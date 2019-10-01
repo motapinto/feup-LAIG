@@ -31,7 +31,7 @@ class MyScene extends CGFscene {
         this.chairLeg2 = new MyCylinderTops(this, 0.05, 0.05, 0.85, 4, 4, 3);
         this.chairSupport = new MyCylinderTops(this, 0.45, 0.45, 0.07, 4, 4, 4);
 
-        this.cyl = new MyCylinder(this, 0.1, 0.1, 1, 20, 5); //constructor(scene, x1, x2, y1, y2)
+        this.cyl = new MySphere(this, 1, 40, 40);
 
         this.material = new CGFappearance(this);
         this.material.setAmbient(0.9, 0.2, 0.6, 1.0);
@@ -445,9 +445,9 @@ class MyScene extends CGFscene {
 
         //this.displayChairs();
         //this.displayTables();
-        this.material.apply();
+        //this.material.apply();
         this.cyl.display();
-        this.cyl.enableNormalViz();
+        //this.cyl.enableNormalViz();
 
 
         
