@@ -29,9 +29,9 @@ class MyTorus extends CGFobject {
         for(let i = 0; i <= this.slices; i++) {
 			for(let j = 0; j <= this.loops; j++) {
                 
-                var x = (this.outerRadius + this.innerRadius*Math.cos(theta_angle*j))*Math.cos(phi_angle*i);
-                var y = (this.outerRadius + this.innerRadius*Math.cos(theta_angle*j))*Math.sin(phi_angle*i);
-                var z =  this.innerRadius*Math.sin(theta_angle*j);
+                let x = (this.outerRadius + this.innerRadius*Math.cos(theta_angle*j))*Math.cos(phi_angle*i);
+                let y = (this.outerRadius + this.innerRadius*Math.cos(theta_angle*j))*Math.sin(phi_angle*i);
+                let z =  this.innerRadius*Math.sin(theta_angle*j);
 
                 this.vertices.push(x, y, z);
                 this.normals.push(x, y, z);
