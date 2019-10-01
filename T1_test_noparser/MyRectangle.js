@@ -21,16 +21,17 @@ class MyRectangle extends CGFobject {
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
-		this.texCoord = [];
+		this.texCoords = [];
 
-		var num_rect = 0;
+		let num_rect = 0;
 
-		for(let x=this.x1; x<this.x2; x++) {
-			for(let y=this.y1; y>this.y2; y--) {
+		for(let x = this.x1; x < this.x2; x++) {
+			for(let y = this.y1; y > this.y2; y--) {
 				
 				for(let i = 0; i < 2; i++) {
 					for(let j=0; j < 2; j++) {
 						this.vertices.push(x+i, y-j, 0);
+						this.texCoords.push(x+i, y+j);
 						this.normals.push(0, 0, 1);
 					}
 				}
@@ -39,11 +40,6 @@ class MyRectangle extends CGFobject {
 				this.indices.push(3+4*num_rect, 2+4*num_rect, 4*num_rect);
 				this.indices.push(4*num_rect, 2+4*num_rect, 3+4*num_rect);
 				this.indices.push(3+4*num_rect, 1+4*num_rect, 4*num_rect);
-
-				this.texCoord.push(0, 0);
-				this.texCoord.push(0, 1);
-				this.texCoord.push(1, 0);
-				this.texCoord.push(1, 1);
 
 				num_rect++;
 			}
