@@ -445,7 +445,7 @@ class MyScene extends CGFscene {
 
         //this.displayChairs();
         //this.displayTables();
-        //this.material.apply();
+        this.material.apply();
         this.cyl.display();
         //this.cyl.enableNormalViz();
 

@@ -23,7 +23,7 @@ class MySphere extends CGFobject
 		this.texCoords = [];
 
 		let theta_angle = 2*Math.PI/this.stacks;
-		let omega_angle = 2*Math.PI/this.slices;
+		let omega_angle = Math.PI/this.slices;
 
 		for(let i = 0; i <= this.slices; i++) {
 			for(let j = 0; j <= this.stacks; j++) {
