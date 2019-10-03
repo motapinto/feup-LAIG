@@ -865,7 +865,7 @@ class MySceneGraph {
                 for (var j = 0; j < grandgrandChildren.length; j++) {
                     switch (grandgrandChildren[j].nodeName) {
                         case 'translate':
-                            var coordinates = this.parseCoordinates3D(grandgrandChildren[j], "translate transformation for ID " + transformationID);
+                            var coordinates = this.parseCoordinates3D(grandgrandChildren[j], "translate transformation for ID " + componentID);
                             if (!Array.isArray(coordinates))
                                 return coordinates;
 
@@ -873,7 +873,7 @@ class MySceneGraph {
                             break;
 
                         case 'scale':                        
-                            var coordinates = this.parseCoordinates3D(grandgrandChildren[j], "scale transformation for ID " + transformationID);
+                            var coordinates = this.parseCoordinates3D(grandgrandChildren[j], "scale transformation for ID " + componentID);
                             if (!Array.isArray(coordinates))
                                 return coordinates;
 
@@ -883,7 +883,7 @@ class MySceneGraph {
                         case 'rotate':
                             var angle = this.reader.getFloat(grandgrandChildren[j], "angle");
                             if (angle == null || isNaN(angle))
-                                return "unable to parse angle of rotation of " + transformationID;
+                                return "unable to parse angle of rotation of " + componentID;
                             var axis = this.reader.getString(grandgrandChildren[j], "axis");
                             switch (axis) {
                                 case 'x':
@@ -923,17 +923,17 @@ class MySceneGraph {
                 length_s: 0,
                 length_t: 0
             };
-            texture.id = this.reader.getString(grandChildren[textureIndex].children, "id");
+            texture.id = this.reader.getString(grandChildren[textureIndex], "id");
             if (texture.id == null)
                 return "no ID defined for texture in component " + componentID;
             if (this.textures[texture.id] == null && texture.id != 'none' && texture.id != 'inherit')
                 return "texture with ID " + texture.id + " must be defined in textures";
             
-            texture.length_s = this.reader.getFloat(grandChildren[textureIndex].children, "length_s");
+            texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s");
             if (isNaN(texture.length_s))
                 return "no length_s defined for texture " + texture.id + " in component " + componentID;
 
-            texture.length_t = this.reader.getFloat(grandChildren[textureIndex].children, "length_t");
+            texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t");
             if (isNaN(texture.length_t))
                 return "no length_t defined for texture " + texture.id + " in component " + componentID;
 

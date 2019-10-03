@@ -23,7 +23,7 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/vidral.jpg" />
+        <texture id="demoTexture" file="scenes/images/leaves.jpg" />
     </textures>
 
     <materials>

@@ -72,7 +72,6 @@
         <primitive id="chairSupportCover">
             <rectangle x1="0" y1="0.64" x2="0" y2="0.64" />
         </primitive>
-        </primitive>
         <primitive id="chairBaseCover">
             <rectangle x1="0" y1="0.57" x2="0" y2="0.57" />
         </primitive>
