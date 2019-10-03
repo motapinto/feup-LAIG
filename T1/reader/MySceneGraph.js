@@ -680,7 +680,7 @@ class MySceneGraph {
                 if (!(y2 != null && !isNaN(y2) && y2 > y1))
                     return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
 
-                var rect = new MyRectangle(this.scene, primitiveId, x1, x2, y1, y2);
+                var rect = new MyRectangle(this.scene, x1, x2, y1, y2);
                 this.primitives[primitiveId] = rect;
             }
             else if (primitiveType == 'triangle') {
@@ -749,12 +749,12 @@ class MySceneGraph {
                     return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
 
                 // slices
-                var slices = this.reader.getInt(grandChildren[0], 'slices');
+                var slices = this.reader.getInteger(grandChildren[0], 'slices');
                 if (!(slices != null && !isNaN(slices) && slices>0))
                     return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
                 
                 // stacks
-                var stacks = this.reader.getInt(grandChildren[0], 'stacks');
+                var stacks = this.reader.getInteger(grandChildren[0], 'stacks');
                 if (!(stacks != null && !isNaN(stacks) && stacks>0))
                     return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
 
@@ -768,12 +768,12 @@ class MySceneGraph {
                     return "unable to parse x1 of the primitive coordinates for ID = " + primitiveId;
 
                 // slices
-                var slices = this.reader.getInt(grandChildren[0], 'slices');
+                var slices = this.reader.getInteger(grandChildren[0], 'slices');
                 if (slices == null || isNaN(slices) || slices <=0)
                     return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
 
                 // stacks
-                var stacks = this.reader.getInt(grandChildren[0], 'stacks');
+                var stacks = this.reader.getInteger(grandChildren[0], 'stacks');
                 if (stacks == null || isNaN(stacks) || stacks <=0)
                     return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
 
@@ -792,12 +792,12 @@ class MySceneGraph {
                     return "unable to parse y1 of the primitive coordinates for ID = " + primitiveId;
 
                 // slices
-                var slices = this.reader.getInt(grandChildren[0], 'slices');
+                var slices = this.reader.getInteger(grandChildren[0], 'slices');
                 if (!(slices != null && !isNaN(slices) && slices>0))
                     return "unable to parse x2 of the primitive coordinates for ID = " + primitiveId;
 
                 // loops
-                var loops = this.reader.getInt(grandChildren[0], 'loops');
+                var loops = this.reader.getInteger(grandChildren[0], 'loops');
                 if (!(loops != null && !isNaN(loops) && loops > 0))
                     return "unable to parse y2 of the primitive coordinates for ID = " + primitiveId;
 
@@ -855,8 +855,9 @@ class MySceneGraph {
             // Transformations
             var transfMatrix;
             grandgrandChildren = grandChildren[transformationIndex].children;
-            if(grandgrandChildren.length == 1 && grandgrandChildren[0] == 'transformationref'){
-                transfMatrix = this.reader.getString(grandgrandChildren[j], "id");
+
+            if(grandgrandChildren.length == 1 && grandgrandChildren[0].nodeName == 'transformationref'){
+                transfMatrix = this.reader.getString(grandgrandChildren[0], "id");
                 if(transfMatrix == null || this.transformations[transfMatrix] != null)
                     return "unable to parse transformation id of " + componentID;
             }
@@ -907,6 +908,10 @@ class MySceneGraph {
             }
             // Materials
             var materials = [];
+
+            if(grandChildren[materialsIndex] == null)
+                return "component " + componentID + " must have materials defined";
+            
             grandgrandChildren = grandChildren[materialsIndex].children;
             for (var j = 0; j < grandgrandChildren.length; j++) {
                 var materialID = this.reader.getString(grandgrandChildren[j], "id");
@@ -941,7 +946,7 @@ class MySceneGraph {
             var components = [];
             var primitives = [];
             grandgrandChildren = grandChildren[childrenIndex].children;
-
+            
             for (var j = 0; j < grandgrandChildren.length; j++){
                 if(grandgrandChildren[j].nodeName == "componentref"){
                     var compID;
@@ -969,13 +974,12 @@ class MySceneGraph {
                 return "component " + componentID + " must have at least 1 child";
                 
             var component = {
-                id: componentID, 
                 transfMatrix: transfMatrix, 
                 materials: materials, 
                 texture: texture, 
                 components: components, 
                 primitives: primitives};
-            this.components.push(component);
+            this.components[componentID] = component;
         }
 
         this.log("Parsed components");
@@ -1101,8 +1105,8 @@ class MySceneGraph {
         //To do: Create display loop for transversing the scene graph
 
         //To test the parsing/creation of the primitives, call the display function directly
-        this.textures['demoTexture'].apply();
-        this.primitives['demoTriangle'].display();
+        // this.textures['demoTexture'].apply();
+        // this.primitives['demoTriangle'].display();
         // this.primitives['demoTriangle'].enableNormalViz();
     }
 }
