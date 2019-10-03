@@ -449,11 +449,11 @@ class MyScene extends CGFscene {
 
         //this.displayChairs();
         //this.displayTables();
-        this.material.apply();
+        //this.material.apply();
         
-        this.ret.display();
+        //this.ret.display();
         //this.cyl.display();
-        //this.tor.display();
+        this.tor.display();
         //this.sfe.display();
         
         //this.ret.enableNormalViz();
