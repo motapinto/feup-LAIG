@@ -8,10 +8,10 @@
         </perspective>
     </views>
 
-    <global>
+    <globals>
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <background r="0.0" g="0.0" b="0.0" a="1.0" />
-    </global>
+    </globals>
 
     <lights>
         <omni id="demoLight" enabled="1">
@@ -27,7 +27,7 @@
         <texture id="marble" file="scenes/images/marble.jpg" />
         <texture id="grass" file="scenes/images/grass.jpg" />
         <texture id="aluminium" file="scenes/images/aluminium.jpg" />
-        <texture id="demoTexture" file="scenes/images/vidral.jpg" />
+        <texture id="restaurantTiles" file="scenes/images/restaurantTiles.jpg" />
     </textures>
 
     <materials>
@@ -40,72 +40,90 @@
     </materials>
 
     <transformations>
-        <transformation id="tableXY">
+        <!-- Table transformations -->
+        <transformation id="TableXY">
             <scale x="0.5" y="0.5" z="0" />
+        </transformation>
+        <transformation id="TableCover">
+                <translate x="0" y="-0.8" z="1" />
+                <rotate axis="z" angle="45" />
+            </transformation>
+
+        <!-- CHAIR transformations -->
+        <transformation id="ChairBackSupport">
+            <translate x="-0.248" y="-0.248" z="0.66" />
+            <rotate axis="z" angle="45" />
+            <rotate axis="x" angle="45" />
+            <rotate axis="y" angle="90" />
+        </transformation>
+        <transformation id="ChairBackSupportCover">
+            <translate x="0" y="-1" z="0.07" />
+            <rotate axis="z" angle="45" />
         </transformation>
 
         <!-- BAR transformations -->
         <transformation id="BarCounterTopCover">
             <translate x="0" y="0" z="1.5" />
             <translate x="0" y="-1" z="0.3" />
-            <scale x="0.7" y="1" z="1">
+            <scale x="0.7" y="1" z="1" />
             <rotate axis="z" angle="45" />
         </transformation>
-
         <transformation id="BarTransf">
             <translate x="0.98" y="0" z="0" />
         </transformation>
-
         <transformation id="BarChairBackSupport">
-            <translate x="0" y="0" z="1.2" />
             <translate x="-0.2" y="-0.2" z="0.38" />
             <rotate axis="z" angle="45" />
             <rotate axis="x" angle="45" />
             <rotate axis="y" angle="90" />
         </transformation>
+
     </transformations>
 
     <primitives>
-        <!-- TABLE -->
-         <primitive id="tableLeg">
+        <!-- TERRAINS -->
+        <primitive id="RestaurantTiles">
+            <rectangle x1="-1" y1="-1" x2="12" y2="12" />
+        </primitive>
+        <primitive id="Terrain">
+            <rectangle x1="-20" y1="-20" x2="20" y2="20" />
+        </primitive>
+
+        <!-- Table -->
+         <primitive id="TableLeg">
             <cylinder base="0.1" top="0.1" height="1" slices="20" stacks="5" />
         </primitive>
-
-        <primitive id="tableSupport">
+        <primitive id="TableSupport">
             <cylinder base="0.5" top="0.1" height="0.2" slices="4" stacks="4" />
         </primitive>
-
-        <primitive id="tableTop">
+        <primitive id="TableTop">
             <cylinder base="0.8" top="0.8" height="0.1" slices="4" stacks="4" />
         </primitive>
-
-        <primitive id="tableCover">
+        <primitive id="TableCover">
             <rectangle x1="0" y1="0" x2="1.13" y2="1.13" />
         </primitive>
 
-
-        <!-- CHAIR -->
-        <primitive id="chairLeg1">
+        <!-- Chair -->
+        <primitive id="ChairLeg1">
             <cylinder base="0.05" top="0.05" height="0.5" slices="4" stacks="4" />
         </primitive>
-
-        <primitive id="chairLeg2">
+        <primitive id="ChairLeg2">
             <cylinder base="0.05" top="0.05" height="0.8" slices="4" stacks="4" />
         </primitive>
-
-        <primitive id="chairSupport">
+        <primitive id="ChairBackSupport">
             <cylinder base="0.45" top="0.45" height="0.07" slices="4" stacks="4" />
         </primitive>
-
-        <primitive id="chairBase">
-            <cylinder base="0.4" top="0.4" height="0.2" slices="4" stacks="4" />
-        </primitive>
-
-        <primitive id="chairSupportCover">
+        <primitive id="ChairBackSupportCover">
             <rectangle x1="0" y1="0" x2="0.64" y2="0.64" />
         </primitive>
+        <primitive id="ChairBase">
+            <cylinder base="0.4" top="0.4" height="0.2" slices="4" stacks="4" />
+        </primitive>
+        <primitive id="ChairBaseCover">
+            <rectangle x1="0" y1="0" x2="0.57" y2="0.57" />
+        </primitive>
 
-        <!-- BAR COUNTER and BAR CHAIRS-->
+        <!-- BAR -->
         <primitive id="BarCounterTop">
             <cylinder base="1" top="1" height="0.3" slices="4" stacks="4" />
         </primitive>
@@ -118,15 +136,83 @@
         <primitive id="BarChairLeg">
             <cylinder base="0.1" top="0.1" height="1.2" slices="20" stacks="5" />
         </primitive>
-        <primitive id="BarChairBase"> <!--calls chairSupportCover for the covers-->
-            <cylinder base="0.45" top="0.45" height="0.07" slices="4" stacks="4" />
-        </primitive>
 
     </primitives>
 
     <components>
+        <!-- TERRAINS -->
+        <component id="RestaurantTiles">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="grass" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="RestaurantTiles" />
+            </children>
+        </component>
+        <component id="Terrain">
+            <transformation>
+                <translate  x="0" y="0" z="-0.1">
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="grass" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="Terrain" />
+            </children>
+        </component>
+
         <!-- TABLE -->
-        <component id="tableLeg">
+        <component id="TableLeg">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="TableLeg" />
+            </children>
+        </component>
+        <component id="TableSupport">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="TableSupport" />
+            </children>
+        </component>
+        <component id="TableTop">
+            <transformation>
+                <translate x="0" y="0" z="1" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="TableTop" />
+            </children>
+        </component>
+        <component id="TableCover">
+            <transformation>
+                <transformationref = "TableCover"/>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="TableCover" />
+            </children>
+        </component>
+        <component id="Table">
             <transformation>
                 <transformationref id="TableXY" />
             </transformation>
@@ -135,86 +221,13 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <primitiveref id="tableLeg" />
+                <componentref id="TableLeg" />
+                <componentref id="TableSupport" />
+                <componentref id="TableTop" />
+                <componentref id="TableCover" />
             </children>
         </component>
-        <component id="TableSupport">
-            <transformation>
-                <scale x="0.5" y="0.5" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <primitiveref id="tableSupport" />
-            </children>
-        </component>
-        <component id="tableTop">
-            <transformation>
-                <scale x="0.5" y="0.5" z="0" />
-                <translate x="0" y="0" z="1" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <primitiveref id="tableTop" />
-            </children>
-        </component>
-        <component id="tableCover">
-            <transformation>
-                <translate x="0" y="-0.8" z="1" />
-                <rotate axis="z" angle="45" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <primitiveref id="tableCover" />
-            </children>
-        </component>
-        <component id="table">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="tableLeg" />
-                <componentref id="tableSupport" />
-                <componentref id="tableTop" />
-                <componentref id="tableCover" />
-            </children>
-        </component>
-        <component id="table1">
-            <transformation>
-                <translate x="0" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="table" />
-            </children>
-        </component>
-        <component id="table2">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="table" />
-            </children>
-        </component>
-        <component id="table3">
+        <component id="Table1">
             <transformation>
                 <translate x="0" y="3" z="0" />
             </transformation>
@@ -223,32 +236,551 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="table" />
+                <componentref id="Table" />
             </children>
         </component>
-        <component id="table4">
+        <component id="Table2">
             <transformation>
-                <translate x="3" y="3" z="0" />
+                <translate x="0" y="3" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="table" />
+                <componentref id="Table1" />
             </children>
         </component>
-
-        <!-- BAR -->
-        <component id="BarCounterTop">
+        <component id="Table3">
             <transformation>
-                <translate x="0" y="0" z="1.5" />
-                <scale x="0.7" y="1" z="1">
+                <translate x="3" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table" />
+            </children>
+        </component>
+        <component id="Table4">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table3" />
+            </children>
+        </component>
+        <component id="Table5">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table4" />
+            </children>
+        </component>
+        <component id="Table6">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table3" />
+            </children>
+        </component>
+        <component id="Table7">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table6" />
+            </children>
+        </component>
+        <component id="Table8">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table7" />
+            </children>
+        </component>
+        <component id="Table9">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table6" />
+            </children>
+        </component>
+        <component id="Table10">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table9" />
+            </children>
+        </component>
+        <component id="Table11">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Table11" />
+            </children>
+        </component>
+        
+
+        <!-- CHAIR -->
+        <component id="ChairLeg1.1">
+            <transformation>
+                <translate x="0.3" y="0" z="-0.5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ChairLeg1" />
+            </children>
+        </component>
+        <component id="ChairLeg1.2">
+            <transformation>
+                <translate x="0" y="0.3" z="-0.5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ChairLeg1" />
+            </children>
+        </component>
+        <component id="ChairLeg2.1">
+            <transformation>
+                <translate x="-0.4" y="-0.05" z="-0.5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ChairLeg2" />
+            </children>
+        </component>
+        <component id="ChairLeg2.2">
+            <transformation>
+                <translate x="-0.05" y="-0.4" z="-0.5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ChairLeg2" />
+            </children>
+        </component>
+        <component id="ChairBackSupport">
+            <transformation>
+                <transformationref = "ChairBackSupport" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ChairBackSupport" />
+            </children>
+        </component>
+        <component id="ChairBackSupportCover">
+            <transformation>
+                <transformationref = "ChairBackSupportCover"/>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                    <primitiveref = "ChairBackSupport Cover" />
+            </children>
+        </component>
+        <component id="ChairBackSupportCover2">
+            <transformation>
+                <translate x="0" y="0" z="-0.07"/>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="BarCounterTop" />
+                <componentref id="BarCounterTopCover" />
+                <componentref id="BarCounterCenter" />
+            </children>
+        </component>
+        <component id="ChairBase">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="BarCounterTop" />
+                <componentref id="BarCounterTopCover" />
+                <componentref id="BarCounterCenter" />
+            </children>
+        </component>
+        <component id="ChairBaseCover">
+            <transformation>
+                <transformationref = "ChairBackSupportCover"/>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ChairBaseCover" />
+            </children>
+        </component>
+        <component id="Chair1">
+            <transformation>
+                <translate x="0" y="0" z="0.5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="ChairLeg1.1" />
+                <componentref id="ChairLeg1.2" />
+                <componentref id="ChairLeg2.1" />´
+                <componentref id="ChairLeg2.2" />
+                <componentref id="ChairBackSupport" />
+                <componentref id="ChairBackSupportCover" />
+                <componentref id="ChairBackSupportCover2" />
+                <componentref id="ChairBase" />
+                <componentref id="ChairBaseCover" />
+            </children>
+        </component>
+        <component id="Chair2">
+            <transformation>
+                <translate x="1" y="1" z="0" />
+                <rotate axis="z" angle="180" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1" />
+            </children>
+        </component>
+        <component id="Chair1.1">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1" />
+            </children>
+        </component>
+        <component id="Chair1.2">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.1" />
+            </children>
+        </component>
+        <component id="Chair1.3">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1" />
+            </children>
+        </component>
+        <component id="Chair1.4">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.3" />
+            </children>
+        </component>
+        <component id="Chair1.5">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.4" />
+            </children>
+        </component>
+        <component id="Chair1.6">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.3" />
+            </children>
+        </component>
+        <component id="Chair1.7">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.6" />
+            </children>
+        </component>
+        <component id="Chair1.8">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.7" />
+            </children>
+        </component>
+        <component id="Chair1.9">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.6" />
+            </children>
+        </component>
+        <component id="Chair1.10">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.9" />
+            </children>
+        </component>
+        <component id="Chair1.11">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair1.10" />
+            </children>
+        </component>
+        <component id="Chair2.1">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2" />
+            </children>
+        </component>
+        <component id="Chair2.2">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.1" />
+            </children>
+        </component>
+        <component id="Chair2.3">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2" />
+            </children>
+        </component>
+        <component id="Chair2.4">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.3" />
+            </children>
+        </component>
+        <component id="Chair2.5">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.4" />
+            </children>
+        </component>
+        <component id="Chair2.6">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.3" />
+            </children>
+        </component>
+        <component id="Chair2.7">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.6" />
+            </children>
+        </component>
+        <component id="Chair2.8">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.7" />
+            </children>
+        </component>
+        <component id="Chair2.9">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.6" />
+            </children>
+        </component>
+        <component id="Chair2.10">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.9" />
+            </children>
+        </component>
+        <component id="Chair2.11">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Chair2.10" />
+            </children>
+        </component>
+        
+        <!-- BAR COUNTER-->
+        <component id="BarCounterTop">
+            <transformation>
+                <translate x="0" y="0" z="1.5" />
+                <scale x="0.7" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="BarCounterTop" />
             </children>
@@ -260,7 +792,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="BarCounterTopCover" />
             </children>
@@ -271,7 +803,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="wood" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="BarCounterCenter" />
             </children>
@@ -284,7 +816,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounterTop" />
                 <componentref id="BarCounterTopCover" />
@@ -298,7 +830,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounter" />
             </children>
@@ -310,7 +842,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounter1" />
             </children>
@@ -322,7 +854,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounter2" />
             </children>
@@ -334,9 +866,9 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
-                <componentref id="BarCounter5" />
+                <componentref id="BarCounter3" />
             </children>
         </component>
         <component id="BarCounter5">
@@ -346,7 +878,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounter4" />
             </children>
@@ -358,7 +890,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounter5" />
             </children>
@@ -370,7 +902,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounter6" />
             </children>
@@ -382,14 +914,14 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="marble" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounter7" />
             </children>
         </component>
 
-        <!-- BAR CHAIR-->
-        <component id="BarChairSupport">
+        <!-- BAR Chair-->
+        <component id="BarChairBackSupport">
             <transformation>
             </transformation>
             <materials>
@@ -420,7 +952,19 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <primitiveref id="BarChairBase" />
+                <primitiveref id="ChairBackSupport" />
+            </children>
+        </component>
+        <component id="BarChairBaseCover">
+            <transformation>
+                <transformationref = "ChairBackSupportCover">
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ChairBackSupportCover" />
             </children>
         </component>
         <component id="BarChairBackSupport">
@@ -432,7 +976,19 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <primitiveref id="BarChairBase" />
+                <componentref id="BarChairBase" />
+            </children>
+        </component>
+        <component id="BarChairBackSupportCover">
+            <transformation>
+                <translate x="0" y="0" z="-0.07" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="BarChairBaseCover" />
             </children>
         </component>
         <component id="BarChair">
@@ -445,7 +1001,7 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="BarChairSupport" />
+                <componentref id="BarChairBackSupport" />
                 <componentref id="BarChairLeg" />
                 <componentref id="BarChairBase" />
                 <componentref id="BarChairBackSupport" />
