@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="Table" axis_length="5"/>
+    <scene root="RestaurantTiles" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
@@ -23,11 +23,11 @@
     </lights>
 
     <textures>
-        <texture id="wood" file="scenes/images/woodLight.jpg" />
-        <texture id="marble" file="scenes/images/marble.jpg" />
-        <texture id="grass" file="scenes/images/grass.jpg" />
-        <texture id="aluminium" file="scenes/images/aluminium.jpg" />
-        <texture id="restaurantTiles" file="scenes/images/restaurantTiles.jpg" />
+        <texture id="wood" file="scenes/images/vidral.jpg" />
+        <texture id="marble" file="scenes/images/vidral.jpg" />
+        <texture id="grass" file="scenes/images/vidral.jpg" />
+        <texture id="aluminium" file="scenes/images/vidral.jpg" />
+        <texture id="restaurantTiles" file="scenes/images/vidral.jpg" />
     </textures>
 
     <materials>
@@ -47,7 +47,7 @@
         <transformation id="TableCover">
                 <translate x="0" y="-0.8" z="1" />
                 <rotate axis="z" angle="45" />
-            </transformation>
+        </transformation>
 
         <!-- CHAIR transformations -->
         <transformation id="ChairBackSupport">
@@ -143,6 +143,7 @@
         <!-- TERRAINS -->
         <component id="RestaurantTiles">
             <transformation>
+                <translate x="0" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -154,7 +155,7 @@
         </component>
         <component id="Terrain">
             <transformation>
-                <translate  x="0" y="0" z="-0.1">
+                <translate  x="0" y="0" z="-0.1" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -168,6 +169,7 @@
         <!-- TABLE -->
         <component id="TableLeg">
             <transformation>
+                <translate x="0" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -179,6 +181,7 @@
         </component>
         <component id="TableSupport">
             <transformation>
+                <translate x="0" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -957,7 +960,7 @@
         </component>
         <component id="BarChairBaseCover">
             <transformation>
-                <transformationref = "ChairBackSupportCover">
+                <transformationref = "ChairBackSupportCover" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
