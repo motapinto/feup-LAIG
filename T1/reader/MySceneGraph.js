@@ -29,6 +29,8 @@ class MySceneGraph {
 
         this.idRoot = null;                    // The id of the root element.
 
+        this.materialRotate = 0;
+
         this.axisCoords = [];
         this.axisCoords['x'] = [1, 0, 0];
         this.axisCoords['y'] = [0, 1, 0];
@@ -416,10 +418,7 @@ class MySceneGraph {
             if (textureFile == null)
                 return "no file defined for texture";
 
-            //var texture = new CGFtexture(this.scene, textureFile);
-            var texture = new CGFappearance(this.scene);
-            texture.loadTexture(textureFile);
-
+            var texture = new CGFtexture(this.scene, textureFile);
             
             if (texture == null)
                 return "texture file not found";
@@ -856,12 +855,16 @@ class MySceneGraph {
 
             // Transformations
             var transfMatrix;
+            var transf;
             grandgrandChildren = grandChildren[transformationIndex].children;
 
             if(grandgrandChildren.length == 1 && grandgrandChildren[0].nodeName == 'transformationref'){
-                transfMatrix = this.reader.getString(grandgrandChildren[0], "id");
-                if(transfMatrix == null || this.transformations[transfMatrix] != null)
+                let matrixID = this.reader.getString(grandgrandChildren[0], "id");
+                if(matrixID == null || this.transformations[matrixID] == null)
                     return "unable to parse transformation id of " + componentID;
+
+                transfMatrix = this.transformations[matrixID];
+                transf = transfMatrix;
             }
             else {
                 transfMatrix = mat4.create();
@@ -979,8 +982,8 @@ class MySceneGraph {
                 transfMatrix: transfMatrix, 
                 materials: materials, 
                 texture: texture, 
-                components: components, 
-                primitives: primitives};
+                childComponents: components, 
+                childPrimitives: primitives};
             this.components[componentID] = component;
         }
 
@@ -1101,34 +1104,62 @@ class MySceneGraph {
     }
 
     /**
-     * Displays the scene, processing each node, starting in the root node.
+     * Processes Nodes Recursively
      */
-    displayScene() {
-        //To do: Create display loop for transversing the scene graph
+    processComponentNode(id, matrix, material, texture, length_s, length_t){
+        if(this.components[id] == null){
+            this.onXMLError(id + " not found in components");
+            return;
+        }
 
-        // processNode(this.graph.idRoot, matrix, material, texture, ls, lt);
+        let node = this.components[id]; 
 
-        //To test the parsing/creation of the primitives, call the display function directly
-        // this.primitives['demoTriangle'].updateTexCoords(6, 3);
-        this.textures['demoTexture'].apply();
-        this.primitives['demoTriangle'].display();
-        this.primitives['demoTriangle'].enableNormalViz();
+        //get material
+        if(node.materials[this.materialRotate % node.materials.length] != "inherit")
+            material = node.materials[this.materialRotate % node.materials.length];
 
+        //get texture
+        if(node.texture.id != "inherit"){
+            texture = node.texture.id;
+            length_s = node.texture.length_s;
+            length_t = node.texture.length_t;
+        }
 
+        //Compute transformation matrix
+        mat4.mul(matrix, matrix, node.transfMatrix);
+
+        //process all children components
+        for(let i = 0; i < node.childComponents.length; i++){
+            this.processComponentNode(node.childComponents[i], matrix, material, texture, length_s, length_t);
+        }
+
+        //process all children primitives
+        for(let i = 0; i < node.childPrimitives.length; i++){
+            this.scene.pushMatrix();
+
+            //change texture
+            if(texture != "none"){
+                this.materials[material].setTexture(this.textures[texture]);
+                this.primitives[node.childPrimitives[i]].updateTexCoords(length_s, length_t);
+            }
+
+            //apply material
+            this.materials[material].apply();
+
+            //apply transformation matrix
+            this.scene.multMatrix(matrix);
+
+            //draw primitive
+            this.primitives[node.childPrimitives[i]].display();
+
+            this.scene.popMatrix();
+        }
     }
 
     /**
-     * Processes Nodes Recursively
+     * Displays the scene, processing each node, starting in the root node.
      */
-    processNode(id, matrix, material, texture, length_s, length_t){
-        if(this.materials[id] == null){
-            this.onXMLError(id + " not found");
-            return;
-        }
-        //get material
-        //get texture
-        //get matrix
-        //process all children components
-        //process all children primitives
+    displayScene() {
+        this.processComponentNode(this.idRoot, mat4.create(), "", "none", 1, 1);
     }
 }
