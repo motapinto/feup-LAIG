@@ -3,7 +3,7 @@ var DEGREE_TO_RAD = Math.PI / 180;
 // Order of the groups in the XML document.
 var SCENE_INDEX = 0;
 var VIEWS_INDEX = 1;
-var AMBIENT_INDEX = 2;
+var GLOBALS_INDEX = 2;
 var LIGHTS_INDEX = 3;
 var TEXTURES_INDEX = 4;
 var MATERIALS_INDEX = 5;
@@ -33,6 +33,8 @@ class MySceneGraph {
         this.axisCoords['x'] = [1, 0, 0];
         this.axisCoords['y'] = [0, 1, 0];
         this.axisCoords['z'] = [0, 0, 1];
+
+        this.stack = [];
 
         // File reading 
         this.reader = new CGFXMLreader();
@@ -113,14 +115,14 @@ class MySceneGraph {
         }
 
         // <ambient>
-        if ((index = nodeNames.indexOf("ambient")) == -1)
-            return "tag <ambient> missing";
+        if ((index = nodeNames.indexOf("globals")) == -1)
+            return "tag <globals> missing";
         else {
-            if (index != AMBIENT_INDEX)
-                this.onXMLMinorError("tag <ambient> out of order");
+            if (index != GLOBALS_INDEX)
+                this.onXMLMinorError("tag <globals> out of order");
 
             //Parse ambient block
-            if ((error = this.parseAmbient(nodes[index])) != null)
+            if ((error = this.parseGlobals(nodes[index])) != null)
                 return error;
         }
 
@@ -236,9 +238,9 @@ class MySceneGraph {
      * Parses the <ambient> node.
      * @param {ambient block element} ambientsNode
      */
-    parseAmbient(ambientsNode) {
+    parseGlobals(globalsNode) {
 
-        var children = ambientsNode.children;
+        var children = globalsNode.children;
 
         this.ambient = [];
         this.background = [];
@@ -263,7 +265,7 @@ class MySceneGraph {
         else
             this.background = color;
 
-        this.log("Parsed ambient");
+        this.log("Parsed globals");
 
         return null;
     }
@@ -1104,9 +1106,29 @@ class MySceneGraph {
     displayScene() {
         //To do: Create display loop for transversing the scene graph
 
+        // processNode(this.graph.idRoot, matrix, material, texture, ls, lt);
+
         //To test the parsing/creation of the primitives, call the display function directly
-        // this.textures['demoTexture'].apply();
-        // this.primitives['demoTriangle'].display();
-        // this.primitives['demoTriangle'].enableNormalViz();
+        // this.primitives['demoTriangle'].updateTexCoords(6, 3);
+        this.textures['demoTexture'].apply();
+        this.primitives['demoTriangle'].display();
+        this.primitives['demoTriangle'].enableNormalViz();
+
+
+    }
+
+    /**
+     * Processes Nodes Recursively
+     */
+    processNode(id, matrix, material, texture, length_s, length_t){
+        if(this.materials[id] == null){
+            this.onXMLError(id + " not found");
+            return;
+        }
+        //get material
+        //get texture
+        //get matrix
+        //process all children components
+        //process all children primitives
     }
 }
