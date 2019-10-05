@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="Root" axis_length="5"/>
+    <scene root="Restaurant" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
@@ -23,29 +23,40 @@
     </lights>
 
     <textures>
-        <texture id="wood" file="scenes/images/woodLight.jpg" />
-        <texture id="marble" file="scenes/images/marble.jpg" />
-        <texture id="grass" file="scenes/images/grass.jpg" />
+        <!-- TERRAINS -->
+        <texture id="woodTile" file="scenes/images/wood-tile.jpg" />
+        
+        <!-- TABLE -->
+        <texture id="darkCement" file="scenes/images/dark-cement.jpg" />
         <texture id="aluminium" file="scenes/images/aluminium.jpg" />
-        <texture id="restaurantTiles" file="scenes/images/restaurantTiles.jpg" />
+        
+        <!-- CHAIR -->
+        <texture id="woodChair" file="scenes/images/wood-chair.jpg" />
+        <texture id="greyFabric" file="scenes/images/grey-fabric.jpg" />
+
+        <!-- BAR COUNTER -->
+        <texture id="marble" file="scenes/images/marble.jpg" />
+        
+        <texture id="wood" file="scenes/images/woodLight.jpg" />
+        <texture id="grass" file="scenes/images/grass.jpg" />
     </textures>
 
     <materials>
         <material id="defaultMaterial" shininess="10">
             <emission r="1.0" g="1.0" b="1.0" a="1.0" />
-            <ambient r="0.5" g="0.5" b="0.5" a="1.0" />
-            <diffuse r="0.7" g="0.7" b="0.7" a="1.0" />
-            <specular r="0.7" g="0.7" b="0.7" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="0.0" b="0.0" a="1.0" />
         </material>
     </materials>
 
     <transformations>
         <!-- Table transformations -->
         <transformation id="TableXY">
-            <translate x="0.5" y="0.5" z="1" />
+            <translate x="0.5" y="0.5" z="0" />
         </transformation>
         <transformation id="TableCover">
-                <translate x="0" y="-0.8" z="1" />
+                <translate x="0" y="-0.8" z="1.1" />
                 <rotate axis="z" angle="45" />
         </transformation>
 
@@ -82,13 +93,13 @@
     <primitives>
         <!-- TERRAINS -->
         <primitive id="RestaurantTiles">
-            <rectangle x1="-1" y1="-1" x2="12" y2="12" />
+            <rectangle x1="-1" y1="-1" x2="12" y2="20" />
         </primitive>
         <primitive id="Terrain">
             <rectangle x1="-20" y1="-20" x2="20" y2="20" />
         </primitive>
 
-        <!-- Table -->
+        <!-- TABLE -->
          <primitive id="TableLeg">
             <cylinder base="0.1" top="0.1" height="1" slices="20" stacks="5" />
         </primitive>
@@ -102,7 +113,7 @@
             <rectangle x1="0" y1="0" x2="1.13" y2="1.13" />
         </primitive>
 
-        <!-- Chair -->
+        <!-- CHAIR -->
         <primitive id="ChairLeg1">
             <cylinder base="0.05" top="0.05" height="0.5" slices="4" stacks="4" />
         </primitive>
@@ -146,7 +157,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="grass" length_s="1" length_t="1"/>
+            <texture id="woodTile" length_s="20" length_t="20"/>
             <children>
                 <primitiveref id="RestaurantTiles" />
             </children>
@@ -158,7 +169,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="grass" length_s="1" length_t="1"/>
+            <texture id="grass" length_s="40" length_t="40"/>
             <children>
                 <primitiveref id="Terrain" />
             </children>
@@ -171,7 +182,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="wood" length_s="0" length_t="0"/>
+            <texture id="aluminium" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="TableLeg" />
             </children>
@@ -182,7 +193,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="aluminium" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="TableSupport" />
             </children>
@@ -194,7 +205,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="TableTop" />
             </children>
@@ -206,7 +217,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="darkCement" length_s="1.13" length_t="1.13"/>
             <children>
                 <primitiveref id="TableCover" />
             </children>
@@ -427,7 +438,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="woodChair" length_s="0" length_t="0"/>
             <children>
                     <primitiveref id = "ChairBackSupportCover" />
             </children>
@@ -439,7 +450,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="woodChair" length_s="0" length_t="0"/>
             <children>
                 <componentref id="ChairBackSupportCover" />
             </children>
@@ -477,7 +488,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="woodChair" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="ChairBaseCover" />
             </children>
@@ -489,7 +500,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="wood" length_s="0" length_t="0"/>
+            <texture id="woodChair" length_s="0" length_t="0"/>
             <children>
                 <componentref id="ChairLeg1.1" />
                 <componentref id="ChairLeg1.2" />
@@ -508,7 +519,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="wood" length_s="0" length_t="0"/>
+            <texture id="woodChair" length_s="0" length_t="0"/>
             <children>
                 <componentref id="Chair1" />
             </children>
@@ -1107,7 +1118,7 @@
         </component>
 
         <!-- ROOT -->
-        <component id="Root">
+        <component id="Restaurant">
             <transformation>
             </transformation>
             <materials>
@@ -1115,9 +1126,7 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="BarCounter8" />
-                <componentref id="BarChair8" />
-                
+
                 <!-- TERRAINS -->
                 <componentref id="RestaurantTiles" />
                 <componentref id="Terrain" />
@@ -1160,7 +1169,11 @@
                 <componentref id="Chair2.3" />
                 <componentref id="Chair2.2" />
                 <componentref id="Chair2.1" />
-                 <componentref id="Chair2" />
+                <componentref id="Chair2" />
+
+                <!-- BAR -->
+                <componentref id="BarCounter8" />
+                <componentref id="BarChair8" />
             </children>
         </component>    
     </components>
