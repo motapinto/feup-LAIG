@@ -61,6 +61,9 @@ class MyRectangle extends CGFobject {
 
     //updates Texture Coords
 	updateTexCoords(length_s, length_t) {
+		if(length_s == 0 || length_t == 0) {
+			return;
+		}
 		this.texCoords = [];
 
 		let s_var = (this.length / this.stacks) / length_s;
