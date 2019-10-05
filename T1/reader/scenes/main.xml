@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="RestaurantTiles" axis_length="5"/>
+    <scene root="Root" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
@@ -23,19 +23,19 @@
     </lights>
 
     <textures>
-        <texture id="wood" file="scenes/images/vidral.jpg" />
-        <texture id="marble" file="scenes/images/vidral.jpg" />
-        <texture id="grass" file="scenes/images/vidral.jpg" />
-        <texture id="aluminium" file="scenes/images/vidral.jpg" />
-        <texture id="restaurantTiles" file="scenes/images/vidral.jpg" />
+        <texture id="wood" file="scenes/images/woodLight.jpg" />
+        <texture id="marble" file="scenes/images/marble.jpg" />
+        <texture id="grass" file="scenes/images/grass.jpg" />
+        <texture id="aluminium" file="scenes/images/aluminium.jpg" />
+        <texture id="restaurantTiles" file="scenes/images/restaurantTiles.jpg" />
     </textures>
 
     <materials>
         <material id="defaultMaterial" shininess="10">
-            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
-            <specular r="0.6" g="0.0" b="0.0" a="1.0" />
+            <emission r="1.0" g="1.0" b="1.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="0.0" b="0.0" a="1.0" />
         </material>
     </materials>
 
@@ -1092,6 +1092,25 @@
             </children>
         </component>
 
-        
+        <!-- ROOT -->
+        <component id="Root">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="BarCounter8" />
+                <componentref id="BarChair8" />
+                
+                <componentref id="Table11" />
+                <componentref id="Chair2.11" />
+                <componentref id="Chair1.11" />
+
+                <componentref id="RestaurantTiles" />
+                <componentref id="Terrain" />
+            </children>
+        </component>    
     </components>
 </lxs>
