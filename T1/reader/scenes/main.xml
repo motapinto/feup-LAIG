@@ -205,7 +205,7 @@
         </component>
         <component id="TableCover">
             <transformation>
-                <transformationref = "TableCover"/>
+                <transformationref id= "TableCover"/>
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -359,7 +359,7 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Table11" />
+                <componentref id="Table10" />
             </children>
         </component>
         
@@ -415,7 +415,7 @@
         </component>
         <component id="ChairBackSupport">
             <transformation>
-                <transformationref = "ChairBackSupport" />
+                <transformationref id= "ChairBackSupport" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -427,14 +427,14 @@
         </component>
         <component id="ChairBackSupportCover">
             <transformation>
-                <transformationref = "ChairBackSupportCover"/>
+                <transformationref id= "ChairBackSupportCover"/>
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                    <primitiveref = "ChairBackSupport Cover" />
+                    <primitiveref id = "ChairBackSupportCover" />
             </children>
         </component>
         <component id="ChairBackSupportCover2">
@@ -446,9 +446,7 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="BarCounterTop" />
-                <componentref id="BarCounterTopCover" />
-                <componentref id="BarCounterCenter" />
+                <primitiveref id="ChairBackSupportCover" />
             </children>
         </component>
         <component id="ChairBase">
@@ -459,14 +457,12 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="BarCounterTop" />
-                <componentref id="BarCounterTopCover" />
-                <componentref id="BarCounterCenter" />
+                <primitiveref id="ChairBase" />
             </children>
         </component>
         <component id="ChairBaseCover">
             <transformation>
-                <transformationref = "ChairBackSupportCover"/>
+                <transformationref id= "ChairBackSupportCover"/>
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -924,17 +920,6 @@
         </component>
 
         <!-- BAR Chair-->
-        <component id="BarChairBackSupport">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <primitiveref id="TableSupport" />
-            </children>
-        </component>
         <component id="BarChairLeg">
             <transformation>
             </transformation>
@@ -960,7 +945,7 @@
         </component>
         <component id="BarChairBaseCover">
             <transformation>
-                <transformationref = "ChairBackSupportCover" />
+                <transformationref id= "ChairBackSupportCover" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
