@@ -50,15 +50,16 @@
         </transformation>
 
         <!-- CHAIR transformations -->
-        <transformation id="ChairBackSupport">
+        <transformation id="ChairBack">
             <translate x="-0.248" y="-0.248" z="0.66" />
             <rotate axis="z" angle="45" />
             <rotate axis="x" angle="45" />
             <rotate axis="y" angle="90" />
         </transformation>
         <transformation id="ChairBackSupportCover">
-            <translate x="0" y="-1" z="0.07" />
+            <translate x="0" y="-0.45" z="0.07" />
             <rotate axis="z" angle="45" />
+
         </transformation>
 
         <!-- BAR transformations -->
@@ -108,7 +109,7 @@
             <cylinder base="0.05" top="0.05" height="0.5" slices="4" stacks="4" />
         </primitive>
         <primitive id="ChairLeg2">
-            <cylinder base="0.05" top="0.05" height="0.8" slices="4" stacks="4" />
+            <cylinder base="0.05" top="0.05" height="0.85" slices="4" stacks="4" />
         </primitive>
         <primitive id="ChairBackSupport">
             <cylinder base="0.45" top="0.45" height="0.07" slices="4" stacks="4" />
@@ -415,7 +416,6 @@
         </component>
         <component id="ChairBackSupport">
             <transformation>
-                <transformationref id= "ChairBackSupport" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -446,7 +446,21 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <primitiveref id="ChairBackSupportCover" />
+                <componentref id="ChairBackSupportCover" />
+            </children>
+        </component>
+        <component id="ChairBack">
+            <transformation>
+                <transformationref id="ChairBack"/>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="ChairBackSupport" />
+                <componentref id="ChairBackSupportCover" />
+                <componentref id="ChairBackSupportCover2" />
             </children>
         </component>
         <component id="ChairBase">
@@ -462,7 +476,8 @@
         </component>
         <component id="ChairBaseCover">
             <transformation>
-                <transformationref id= "ChairBackSupportCover"/>
+                <translate x="0" y="-0.4" z="0.2" />
+                <rotate axis="z" angle="45" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -485,9 +500,7 @@
                 <componentref id="ChairLeg1.2" />
                 <componentref id="ChairLeg2.1" />´
                 <componentref id="ChairLeg2.2" />
-                <componentref id="ChairBackSupport" />
-                <componentref id="ChairBackSupportCover" />
-                <componentref id="ChairBackSupportCover2" />
+                <componentref id="ChairBack" />
                 <componentref id="ChairBase" />
                 <componentref id="ChairBaseCover" />
             </children>
@@ -1101,14 +1114,14 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="BarCounter8" />
-                <componentref id="BarChair8" />
+                <!--<componentref id="BarCounter8" />-->
+                <!--<componentref id="BarChair8" />-->
                 
-                <componentref id="Table11" />
+                <!--<componentref id="Table11" />-->
                 <componentref id="Chair2.11" />
                 <componentref id="Chair1.11" />
 
-                <componentref id="RestaurantTiles" />
+                <!--<componentref id="RestaurantTiles" />-->
                 <componentref id="Terrain" />
             </children>
         </component>    
