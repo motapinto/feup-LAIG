@@ -1112,7 +1112,7 @@ class MySceneGraph {
             return;
         }
 
-        let node = this.components[id]; 
+        let node = this.components[id];
 
         //get material
         if(node.materials[this.materialRotate % node.materials.length] != "inherit")
@@ -1126,11 +1126,11 @@ class MySceneGraph {
         }
 
         //Compute transformation matrix
-        mat4.mul(matrix, matrix, node.transfMatrix);
+        mat4.mul(matrix, matrix, node.transfMatrix);        
 
         //process all children components
         for(let i = 0; i < node.childComponents.length; i++){
-            this.processComponentNode(node.childComponents[i], matrix, material, texture, length_s, length_t);
+            this.processComponentNode(node.childComponents[i], mat4.clone(matrix), material, texture, length_s, length_t);
         }
 
         //process all children primitives
