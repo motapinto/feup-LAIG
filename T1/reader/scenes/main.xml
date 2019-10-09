@@ -205,7 +205,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="darkCement" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="TableTop" />
             </children>
@@ -217,7 +217,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="darkCement" length_s="1.13" length_t="1.13"/>
+            <texture id="inherit" length_s="1.13" length_t="1.13"/>
             <children>
                 <primitiveref id="TableCover" />
             </children>
@@ -229,7 +229,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
                 <componentref id="TableLeg" />
                 <componentref id="TableSupport" />
@@ -237,140 +237,7 @@
                 <componentref id="TableCover" />
             </children>
         </component>
-        <component id="Table1">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table" />
-            </children>
-        </component>
-        <component id="Table2">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table1" />
-            </children>
-        </component>
-        <component id="Table3">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table" />
-            </children>
-        </component>
-        <component id="Table4">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table3" />
-            </children>
-        </component>
-        <component id="Table5">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table4" />
-            </children>
-        </component>
-        <component id="Table6">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table3" />
-            </children>
-        </component>
-        <component id="Table7">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table6" />
-            </children>
-        </component>
-        <component id="Table8">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table7" />
-            </children>
-        </component>
-        <component id="Table9">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table6" />
-            </children>
-        </component>
-        <component id="Table10">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table9" />
-            </children>
-        </component>
-        <component id="Table11">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Table10" />
-            </children>
-        </component>
         
-
         <!-- CHAIR -->
         <component id="ChairLeg1.1">
             <transformation>
@@ -379,7 +246,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="ChairLeg1" />
             </children>
@@ -391,7 +258,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="ChairLeg1" />
             </children>
@@ -403,7 +270,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="ChairLeg2" />
             </children>
@@ -415,7 +282,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="ChairLeg2" />
             </children>
@@ -438,7 +305,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodChair" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                     <primitiveref id = "ChairBackSupportCover" />
             </children>
@@ -450,7 +317,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodChair" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <componentref id="ChairBackSupportCover" />
             </children>
@@ -488,7 +355,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodChair" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="ChairBaseCover" />
             </children>
@@ -524,268 +391,119 @@
                 <componentref id="Chair1" />
             </children>
         </component>
-        <component id="Chair1.1">
+
+        <!-- TABLE SET-->
+        <component id="TableSet">
             <transformation>
-                <translate x="0" y="3" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
+                <componentref id="Table" />
                 <componentref id="Chair1" />
-            </children>
-        </component>
-        <component id="Chair1.2">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.1" />
-            </children>
-        </component>
-        <component id="Chair1.3">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1" />
-            </children>
-        </component>
-        <component id="Chair1.4">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.3" />
-            </children>
-        </component>
-        <component id="Chair1.5">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.4" />
-            </children>
-        </component>
-        <component id="Chair1.6">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.3" />
-            </children>
-        </component>
-        <component id="Chair1.7">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.6" />
-            </children>
-        </component>
-        <component id="Chair1.8">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.7" />
-            </children>
-        </component>
-        <component id="Chair1.9">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.6" />
-            </children>
-        </component>
-        <component id="Chair1.10">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.9" />
-            </children>
-        </component>
-        <component id="Chair1.11">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair1.10" />
-            </children>
-        </component>
-        <component id="Chair2.1">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
                 <componentref id="Chair2" />
             </children>
         </component>
-        <component id="Chair2.2">
+        <component id="TableSet2">
             <transformation>
                 <translate x="0" y="3" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Chair2.1" />
+                <componentref id="TableSet" />
             </children>
         </component>
-        <component id="Chair2.3">
+        <component id="TableSet1">
+            <transformation>
+                <translate x="0" y="3" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSet2" />
+                <componentref id="TableSet" />
+            </children>
+        </component>
+        <component id="TableSet0">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSet1" />
+                <componentref id="TableSet" />
+            </children>
+        </component>
+
+        <!-- TABLE SET ROW-->
+        <component id="TableSetRow">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSet0" />
+            </children>
+        </component>
+        <component id="TableSetRow3">
             <transformation>
                 <translate x="3" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Chair2" />
+                <componentref id="TableSetRow" />
             </children>
         </component>
-        <component id="Chair2.4">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair2.3" />
-            </children>
-        </component>
-        <component id="Chair2.5">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair2.4" />
-            </children>
-        </component>
-        <component id="Chair2.6">
+        <component id="TableSetRow2">
             <transformation>
                 <translate x="3" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Chair2.3" />
+                <componentref id="TableSetRow3" />
+                <componentref id="TableSetRow" />
             </children>
         </component>
-        <component id="Chair2.7">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair2.6" />
-            </children>
-        </component>
-        <component id="Chair2.8">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair2.7" />
-            </children>
-        </component>
-        <component id="Chair2.9">
+        <component id="TableSetRow1">
             <transformation>
                 <translate x="3" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Chair2.6" />
+                <componentref id="TableSetRow2" />
+                <componentref id="TableSetRow" />
             </children>
         </component>
-        <component id="Chair2.10">
+        <component id="TableSetRow0">
             <transformation>
-                <translate x="0" y="3" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Chair2.9" />
-            </children>
-        </component>
-        <component id="Chair2.11">
-            <transformation>
-                <translate x="0" y="3" z="0" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Chair2.10" />
+                <componentref id="TableSetRow1" />
+                <componentref id="TableSetRow" />
             </children>
         </component>
         
@@ -939,7 +657,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="marble" length_s="0" length_t="0"/>
+            <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarCounter7" />
                 <componentref id="BarCounter" />
@@ -953,7 +671,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="aluminium" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="BarChairLeg" />
             </children>
@@ -966,9 +684,21 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="marble" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="ChairBaseCover" />
+            </children>
+        </component>
+        <component id="BarChairBaseCover2">
+            <transformation>
+                <translate x="0" y="0" z="-0.2" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="marble" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="BarChairBaseCover" />
             </children>
         </component>
         <component id="BarChairBase">
@@ -979,8 +709,9 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="marble" length_s="0" length_t="0"/>
             <children>
+                <componentref id="BarChairBaseCover2" />
                 <componentref id="BarChairBaseCover" />
                 <primitiveref id="ChairBase" />
             </children>
@@ -992,7 +723,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="marble" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarChairBase" />
             </children>
@@ -1005,7 +736,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="marble" length_s="0" length_t="0"/>
             <children>
                 <componentref id="BarChairBackSupport" />
                 <componentref id="BarChairLeg" />
@@ -1131,45 +862,8 @@
                 <componentref id="RestaurantTiles" />
                 <componentref id="Terrain" />
 
-                <!-- TABLE -->
-                <componentref id="Table11" />
-                <componentref id="Table10" />
-                <componentref id="Table9" />
-                <componentref id="Table8" />
-                <componentref id="Table7" />
-                <componentref id="Table6" />
-                <componentref id="Table5" />
-                <componentref id="Table4" />
-                <componentref id="Table3" />
-                <componentref id="Table2" />
-                <componentref id="Table1" />
-                <componentref id="Table" />
-                
-                <!-- CHAIR -->
-                <componentref id="Chair1.11" />
-                <componentref id="Chair1.10" />
-                <componentref id="Chair1.9" />
-                <componentref id="Chair1.8" />
-                <componentref id="Chair1.7" />
-                <componentref id="Chair1.6" />
-                <componentref id="Chair1.5" />
-                <componentref id="Chair1.4" />
-                <componentref id="Chair1.3" />
-                <componentref id="Chair1.2" />
-                <componentref id="Chair1.1" />
-                <componentref id="Chair1" />
-                <componentref id="Chair2.11" />
-                <componentref id="Chair2.10" />
-                <componentref id="Chair2.9" />
-                <componentref id="Chair2.8" />
-                <componentref id="Chair2.7" />
-                <componentref id="Chair2.6" />
-                <componentref id="Chair2.5" />
-                <componentref id="Chair2.4" />
-                <componentref id="Chair2.3" />
-                <componentref id="Chair2.2" />
-                <componentref id="Chair2.1" />
-                <componentref id="Chair2" />
+                <!-- TABLE SET ROW-->
+                <componentref id="TableSetRow0" />
 
                 <!-- BAR -->
                 <componentref id="BarCounter8" />
