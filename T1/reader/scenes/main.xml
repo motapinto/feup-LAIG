@@ -42,10 +42,12 @@
 
         <!-- BUILDING TEXTURES-->
         <texture id="grey" file="scenes/images/grey.jpg" />
+        <texture id="donut" file="scenes/images/donut-texture.png" />
 
         <!-- EXTERIOR TEXTURES -->
         <texture id="road" file="scenes/images/highway-road.jpg" />
-        <texture id="donut" file="scenes/images/donut-texture.png" />
+        <texture id="parkingLot" file="scenes/images/parking-lot.jpg" />
+        <texture id="stonePath" file="scenes/images/stone-path2.jpg" />
 
         <texture id="wood" file="scenes/images/woodLight.jpg" />
         <texture id="grass" file="scenes/images/grass.jpg" />
@@ -110,6 +112,15 @@
         </primitive>
         <primitive id="Road">
             <rectangle x1="0" y1="0" x2="40" y2="3" />
+        </primitive>
+        <primitive id="ParkingLot">
+            <rectangle x1="0" y1="0" x2="22" y2="17" />
+        </primitive>
+        <primitive id="Stone-Path">
+            <rectangle x1="0" y1="0" x2="16" y2="2" />
+        </primitive>
+        <primitive id="Stone-Path3">
+            <rectangle x1="0" y1="0" x2="1" y2="1" />
         </primitive>
 
         <!-- TABLE -->
@@ -492,6 +503,44 @@
                 <componentref id="TableSet0" />
             </children>
         </component>
+        <component id="TableSetRow6">
+            <transformation>
+                <translate x="-3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSetRow" />
+            </children>
+        </component>
+        <component id="TableSetRow5">
+            <transformation>
+                <translate x="0" y="12" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSetRow6" />
+                <componentref id="TableSetRow" />
+            </children>
+        </component>
+        <component id="TableSetRow4">
+            <transformation>
+                <translate x="8" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSetRow5" />
+                <componentref id="TableSetRow" />
+            </children>
+        </component>
         <component id="TableSetRow3">
             <transformation>
                 <translate x="3" y="0" z="0" />
@@ -501,6 +550,7 @@
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
+                <componentref id="TableSetRow4" />
                 <componentref id="TableSetRow" />
             </children>
         </component>
@@ -542,6 +592,7 @@
                 <componentref id="TableSetRow" />
             </children>
         </component>
+        
         
         <!-- BAR COUNTER-->
         <component id="BarCounterTopCover">
@@ -1300,6 +1351,57 @@
                 <primitiveref id="Road" /> 
             </children>
         </component>
+        <component id="ParkingLot">
+            <transformation>
+                <translate x="-3" y="-5" z="0" />
+                <rotate axis="z" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="parkingLot" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ParkingLot" /> 
+            </children>
+        </component>
+        <component id="Stone-Path1">
+            <transformation>
+                <translate x="-3" y="-5" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="stonePath" length_s="1" length_t="3"/>
+            <children>
+                <primitiveref id="Stone-Path" /> 
+            </children>
+        </component>
+        <component id="Stone-Path2">
+            <transformation>
+                <translate x="15" y="-5" z="0" />
+                <rotate axis="z" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="stonePath" length_s="1" length_t="3"/>
+            <children>
+                <primitiveref id="Stone-Path" /> 
+            </children>
+        </component>
+        <component id="Stone-Path3">
+            <transformation>
+                <translate x="13" y="10" z="0" />
+                <rotate axis="z" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="stonePath" length_s="1" length_t="3"/>
+            <children>
+                <primitiveref id="Stone-Path3" /> 
+            </children>
+        </component>
 
         <!-- EXTERIOR -->
         <component id="Exterior">
@@ -1311,6 +1413,10 @@
             <texture id="none" length_s="0" length_t="0"/>
             <children>
                 <componentref id="Road" /> 
+                <componentref id="ParkingLot" /> 
+                <componentref id="Stone-Path1" /> 
+                <componentref id="Stone-Path2" /> 
+                <componentref id="Stone-Path3" /> 
             </children>
         </component>
 
