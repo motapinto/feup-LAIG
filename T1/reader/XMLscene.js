@@ -10,7 +10,6 @@ class XMLscene extends CGFscene {
      */
     constructor(myinterface) {
         super();
-
         this.interface = myinterface;
     }
 
@@ -33,6 +32,9 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
+        this.displayAxis = false;
+        this.scaleFactor = 0.1;
+
         this.setUpdatePeriod(100);
     }
 
@@ -106,34 +108,35 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
-        // ---- BEGIN Background, camera and axis setup
 
-        // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-
-        // Initialize Model-View matrix as identity (no transformation
         this.updateProjectionMatrix();
         this.loadIdentity();
-
-        // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
+
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
 
         this.pushMatrix();
-        this.axis.display();
 
-        for (var i = 0; i < this.lights.length; i++) {
-            this.lights[i].setVisible(true);
-            this.lights[i].enable();
-        }
+            for (var i = 0; i < this.lights.length; i++) {
+                this.lights[i].setVisible(true);
+                this.lights[i].enable();
+            }
 
-        if (this.sceneInited) {
-            // Draw axis
-            this.setDefaultAppearance();
+            if (this.sceneInited) {
+                // Draw axis
+                this.setDefaultAppearance();
+                // Displays the scene (MySceneGraph function).
+                this.graph.displayScene();
+            }
 
-            // Displays the scene (MySceneGraph function).
-            this.graph.displayScene();
-        }
+            if(this.displayAxis) {
+                this.axis.display();
+            }
+
 
         this.popMatrix();
         // ---- END Background, camera and axis setup

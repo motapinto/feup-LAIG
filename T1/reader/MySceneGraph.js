@@ -802,7 +802,7 @@ class MySceneGraph {
                 if (!(loops != null && !isNaN(loops) && loops > 0))
                     return "unable to parse loops of the primitive coordinates for ID = " + primitiveId;
 
-                var torus = new MyTorus(this.scene, inner, outer, slices, loops);
+                var torus = new MyTorus(this.scene, slices, inner, outer, loops);
                 this.primitives[primitiveId] = torus;
             }
         }
