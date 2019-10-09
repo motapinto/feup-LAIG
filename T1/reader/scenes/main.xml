@@ -47,7 +47,7 @@
         <!-- EXTERIOR TEXTURES -->
         <texture id="road" file="scenes/images/highway-road.jpg" />
         <texture id="parkingLot" file="scenes/images/parking-lot.jpg" />
-        <texture id="stonePath" file="scenes/images/stone-path2.jpg" />
+        <texture id="stonePath" file="scenes/images/stone-path3.png" />
 
         <texture id="wood" file="scenes/images/woodLight.jpg" />
         <texture id="grass" file="scenes/images/grass.jpg" />
@@ -206,7 +206,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodTile" length_s="20" length_t="20"/>
+            <texture id="woodTile" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="RestaurantFloor" />
             </children>
@@ -218,7 +218,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="grass" length_s="40" length_t="40"/>
+            <texture id="grass" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="Terrain" />
             </children>
@@ -1341,7 +1341,7 @@
         <!-- EXTERIOR COMPONENTS-->
         <component id="Road">
             <transformation>
-                <translate x="-20" y="-10" z="0" />
+                <translate x="-20" y="-10" z="0.01" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -1353,7 +1353,7 @@
         </component>
         <component id="ParkingLot">
             <transformation>
-                <translate x="-3" y="-5" z="0" />
+                <translate x="-3" y="-5" z="0.01" />
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
@@ -1366,38 +1366,38 @@
         </component>
         <component id="Stone-Path1">
             <transformation>
-                <translate x="-3" y="-5" z="0" />
+                <translate x="-3" y="-5" z="0.01" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="stonePath" length_s="1" length_t="3"/>
+            <texture id="stonePath" length_s="2" length_t="2"/>
             <children>
                 <primitiveref id="Stone-Path" /> 
             </children>
         </component>
         <component id="Stone-Path2">
             <transformation>
-                <translate x="15" y="-5" z="0" />
+                <translate x="15" y="-5" z="0.01" />
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="stonePath" length_s="1" length_t="3"/>
+            <texture id="stonePath" length_s="2" length_t="2"/>
             <children>
                 <primitiveref id="Stone-Path" /> 
             </children>
         </component>
         <component id="Stone-Path3">
             <transformation>
-                <translate x="13" y="10" z="0" />
+                <translate x="13" y="10" z="0.01" />
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="stonePath" length_s="1" length_t="3"/>
+            <texture id="stonePath" length_s="2" length_t="2"/>
             <children>
                 <primitiveref id="Stone-Path3" /> 
             </children>
