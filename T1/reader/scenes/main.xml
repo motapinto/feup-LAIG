@@ -175,8 +175,11 @@
         <primitive id="Wall">
             <rectangle x1="0" y1="0" x2="13" y2="5" />
         </primitive>
-        <primitive id="Window">
+        <primitive id="Window1">
             <cylinder base="1.838" top="1.838" height="4" slices="4" stacks="1" />
+        </primitive>
+        <primitive id="Window2">
+            <cylinder base="1.13" top="1.13" height="4" slices="4" stacks="1" />
         </primitive>
         <primitive id="LogoDonut">
             <torus inner="2" outer="4" slices="40" loops="40" />
@@ -1052,7 +1055,7 @@
                 <primitiveref id="Wall" />           
             </children>
         </component>
-        <component id="Window">
+        <component id="Window1">
             <transformation>
                 <translate x="0.3" y="-0.64" z="2.5" />
                 <scale x="1" y="0.1" z="1.9" />
@@ -1064,10 +1067,23 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <primitiveref id="Window" />           
+                <primitiveref id="Window1" />           
             </children>
         </component>
-        <component id="Window4">
+        <component id="Window1.4">
+            <transformation>
+                <translate x="2.45" y="0" z="0" />
+                <scale x="0.85" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>   
+                <componentref id="Window1" />           
+            </children>
+        </component>
+        <component id="Window1.3">
             <transformation>
                 <translate x="2.6" y="0" z="0" />
             </transformation>
@@ -1076,10 +1092,11 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>   
-                <componentref id="Window" />           
+                <componentref id="Window1" />           
+                <componentref id="Window1.4" />           
             </children>
         </component>
-        <component id="Window3">
+        <component id="Window1.2">
             <transformation>
                 <translate x="2.6" y="0" z="0" />
             </transformation>
@@ -1087,38 +1104,106 @@
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
-            <children>   
-                <componentref id="Window" />           
-                <componentref id="Window4" />           
+            <children>
+                <componentref id="Window1.3" />     
+                <componentref id="Window1" />           
             </children>
         </component>
+        <component id="Window1.1">
+            <transformation>
+                <translate x="2.6" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window1.2" />     
+                <componentref id="Window1" />           
+            </children>
+        </component>
+        <component id="Window1.0">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window1.1" />     
+                <componentref id="Window1" />           
+            </children>
+        </component>
+
         <component id="Window2">
             <transformation>
-                <translate x="2.6" y="0" z="0" />
+                <translate x="11.6" y="-0.25" z="2.5" />
+                <scale x="0.1" y="1" z="3.1" />
+                <rotate axis="z" angle="90" />
+                <rotate axis="x" angle="90" />
+                <rotate axis="z" angle="45" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Window3" />     
-                <componentref id="Window" />           
+                <primitiveref id="Window2" />           
             </children>
         </component>
-        <component id="Window1">
+        <component id="Window2.4">
             <transformation>
-                <translate x="2.6" y="0" z="0" />
+                <translate x="0" y="1.65" z="0" />
+                <scale x="1" y="1.05" z="1" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Window2" />     
-                <componentref id="Window" />           
+            <children>   
+                <componentref id="Window2" />           
             </children>
         </component>
-        <component id="Window0">
+        <component id="Window2.3">
+            <transformation>
+                <translate x="0" y="1.6" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>   
+                <componentref id="Window2" />           
+                <componentref id="Window2.4" />           
+            </children>
+        </component>
+        <component id="Window2.2">
+            <transformation>
+                <translate x="0" y="1.6" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.3" />     
+                <componentref id="Window2" />           
+            </children>
+        </component>
+        <component id="Window2.1">
+            <transformation>
+                <translate x="0" y="1.6" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.2" />     
+                <componentref id="Window2" />           
+            </children>
+        </component>
+        <component id="Window2.0">
             <transformation>
             </transformation>
             <materials>
@@ -1126,8 +1211,31 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Window1" />     
-                <componentref id="Window" />           
+                <componentref id="Window2.1" />     
+                <componentref id="Window2" />           
+            </children>
+        </component>
+        <component id="Window2.1Set">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.0" />            
+            </children>
+        </component>
+        <component id="Window2.2Set">
+            <transformation>
+                <translate x="-12.6" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.1Set" />            
             </children>
         </component>
 
@@ -1171,7 +1279,9 @@
                 <componentref id="Wall1" /> 
                 <componentref id="Wall2" />         
                 <componentref id="Wall3" />
-                <componentref id="Window0" /> 
+                <componentref id="Window1.0" /> 
+                <componentref id="Window2.1Set" /> 
+                <componentref id="Window2.2Set" /> 
                 <componentref id="Roof" /> 
                 <componentref id="Logo" /> 
             </children>
