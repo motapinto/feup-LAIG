@@ -1067,6 +1067,18 @@
                 <primitiveref id="Window" />           
             </children>
         </component>
+        <component id="Window4">
+            <transformation>
+                <translate x="2.6" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>   
+                <componentref id="Window" />           
+            </children>
+        </component>
         <component id="Window3">
             <transformation>
                 <translate x="2.6" y="0" z="0" />
@@ -1077,6 +1089,7 @@
             <texture id="none" length_s="0" length_t="0"/>
             <children>   
                 <componentref id="Window" />           
+                <componentref id="Window4" />           
             </children>
         </component>
         <component id="Window2">
