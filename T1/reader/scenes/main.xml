@@ -196,6 +196,20 @@
             <torus inner="2" outer="4" slices="40" loops="40" />
         </primitive>
 
+        <!-- EXTERIOR -->
+        <primitive id="LightPost">
+            <cylinder base="0.2" top="0.2" height="4" slices="4" stacks="1" />
+        </primitive>
+        <primitive id="LightBase">
+            <rectangle x1="0" y1="0" x2="0.22" y2="0.22" />
+        </primitive>
+        <primitive id="LightShield">
+            <cylinder base="0.02" top="0.02" height="0.6" slices="4" stacks="1" />
+        </primitive>
+        <primitive id="LightCone">
+            <cylinder base="0.4" top="0" height="0.2" slices="4" stacks="1" />
+        </primitive>
+
     </primitives>
 
     <components>
@@ -1346,7 +1360,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="road" length_s="1" length_t="3"/>
+            <texture id="road" length_s="5" length_t="3"/>
             <children>
                 <primitiveref id="Road" /> 
             </children>
@@ -1403,6 +1417,85 @@
             </children>
         </component>
 
+        <component id="LightCone">
+            <transformation>
+                <translate x="0" y="0" z="4.6" />
+                <rotate axis="z" angle="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightCone" /> 
+            </children>
+        </component>
+        <component id="LightShield">
+            <transformation>
+                <translate x="0.42" y="0.42" z="4" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightShield" /> 
+            </children>
+        </component>
+        <component id="LightShield2">
+            <transformation>
+                <translate x="-0.42" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightShield" /> 
+            </children>
+        </component>
+        <component id="LightShield1">
+            <transformation>
+                <translate x="0" y="-0.42" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightShield2" /> 
+            </children>
+        </component>
+        <component id="LightPost">
+            <transformation>
+                <translate x="0" y="0" z="0" />
+                <rotate axis="z" angle="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightPost" /> 
+            </children>
+        </component>
+
+        <component id="LightPostSet">
+            <transformation>
+                <translate x="0" y="-10" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightCone" /> 
+                <primitiveref id="LightBase" />
+                <componentref id="LightShield2" /> 
+                <componentref id="LightPost" /> 
+            </children>
+        </component>
+
         <!-- EXTERIOR -->
         <component id="Exterior">
             <transformation>
@@ -1417,6 +1510,7 @@
                 <componentref id="Stone-Path1" /> 
                 <componentref id="Stone-Path2" /> 
                 <componentref id="Stone-Path3" /> 
+                <componentref id="LightPostSet" /> 
             </children>
         </component>
 
@@ -1430,6 +1524,7 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
+                
                 <!-- TERRAINS -->
                 <componentref id="RestaurantTiles" />
                 <componentref id="Terrain" />
