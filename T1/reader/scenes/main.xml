@@ -201,13 +201,16 @@
             <cylinder base="0.2" top="0.2" height="4" slices="4" stacks="1" />
         </primitive>
         <primitive id="LightBase">
-            <rectangle x1="0" y1="0" x2="0.22" y2="0.22" />
+            <rectangle x1="0" y1="0" x2="0.5" y2="0.5" />
         </primitive>
         <primitive id="LightShield">
             <cylinder base="0.02" top="0.02" height="0.6" slices="4" stacks="1" />
         </primitive>
         <primitive id="LightCone">
             <cylinder base="0.4" top="0" height="0.2" slices="4" stacks="1" />
+        </primitive>
+        <primitive id="LightBulb">
+            <sphere radius="0.3" slices="20" stacks="10" />
         </primitive>
 
     </primitives>
@@ -1305,7 +1308,8 @@
         </component>
 
 
-        <component id="Roof">
+        <component id="Roof" >
+            <floor number="1" />
             <transformation>
                 <translate x="0" y="0" z="5" />
             </transformation>
@@ -1317,7 +1321,8 @@
                 <primitiveref id="RestaurantFloor" />           
             </children>
         </component>
-        <component id="Logo">
+        <component id="Logo" >
+            <floor number="2" />
             <transformation>
                 <translate x="6" y="10.5" z="11" />
                 <rotate axis="z" angle="90" />
@@ -1432,19 +1437,7 @@
         </component>
         <component id="LightShield">
             <transformation>
-                <translate x="0.42" y="0.42" z="4" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <primitiveref id="LightShield" /> 
-            </children>
-        </component>
-        <component id="LightShield2">
-            <transformation>
-                <translate x="-0.42" y="0" z="0" />
+                <translate x="0.01" y="0.01" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -1456,20 +1449,46 @@
         </component>
         <component id="LightShield1">
             <transformation>
-                <translate x="0" y="-0.42" z="0" />
+                <translate x="0.42" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="LightShield2" /> 
+                <componentref id="LightShield" /> 
+            </children>
+        </component>
+        <component id="LightShield0">
+            <transformation>
+                <translate x="0" y="0.42" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightShield1" /> 
+                <componentref id="LightShield" />
+            </children>
+        </component>
+        <component id="LightShieldSet">
+            <transformation>
+                <rotate axis="z" angle="45" />
+                <translate x="-0.22" y="-0.22" z="4" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightShield0" /> 
+                <componentref id="LightShield1" /> 
+                <componentref id="LightShield" />
             </children>
         </component>
         <component id="LightPost">
             <transformation>
-                <translate x="0" y="0" z="0" />
-                <rotate axis="z" angle="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -1479,10 +1498,35 @@
                 <primitiveref id="LightPost" /> 
             </children>
         </component>
+        <component id="LightBase">
+            <transformation>
+                <rotate axis="z" angle="45" />
+                <translate x="-0.25" y="-0.25" z="4" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightBase" /> 
+            </children>
+        </component>
+        <component id="LightBulb">
+            <transformation>
+                <translate x="0" y="0" z="4.2" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="road" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightBulb" /> 
+            </children>
+        </component>
 
         <component id="LightPostSet">
             <transformation>
-                <translate x="0" y="-10" z="0" />
+                <translate x="-2" y="-6" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -1490,9 +1534,73 @@
             <texture id="none" length_s="0" length_t="0"/>
             <children>
                 <componentref id="LightCone" /> 
-                <primitiveref id="LightBase" />
-                <componentref id="LightShield2" /> 
+                <componentref id="LightBase" />
+                <componentref id="LightShieldSet" /> 
                 <componentref id="LightPost" /> 
+                <componentref id="LightBulb" />
+            </children>
+        </component>
+        <component id="LightPostSet4">
+            <transformation>
+                <translate x="4" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+            </children>
+        </component>
+        <component id="LightPostSet3">
+            <transformation>
+                <translate x="4" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet4" /> 
+            </children>
+        </component>
+        <component id="LightPostSet2">
+            <transformation>
+                <translate x="4" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet3" /> 
+            </children>
+        </component>
+        <component id="LightPostSet1">
+            <transformation>
+                <translate x="4" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet2" /> 
+            </children>
+        </component>
+        <component id="LightPostSet0">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet1" /> 
             </children>
         </component>
 
@@ -1510,7 +1618,7 @@
                 <componentref id="Stone-Path1" /> 
                 <componentref id="Stone-Path2" /> 
                 <componentref id="Stone-Path3" /> 
-                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet0" /> 
             </children>
         </component>
 
