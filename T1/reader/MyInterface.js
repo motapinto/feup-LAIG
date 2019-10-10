@@ -27,6 +27,7 @@ class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
 		this.gui.add(this.scene, 'displayAxis').name("Display axis"); //checkbox
+		this.gui.add(this.scene, 'floor').name("Floor Number").min(0).step(1); //number
 
         return true;
     }
