@@ -29,8 +29,8 @@ class MySemiSphere extends CGFobject
 
 			for(var j = 0; j <= this.stacks; j++) {
                 
-                var x = this.radius*Math.cos(alpha_angle*j)*this.radius*Math.cos(omega_angle*i);
-                var y = this.radius*Math.cos(alpha_angle*j)*this.radius*Math.sin(omega_angle*i);
+                var x = this.radius*Math.cos(alpha_angle*j)*Math.cos(omega_angle*i);
+                var y = this.radius*Math.cos(alpha_angle*j)*Math.sin(omega_angle*i);
                 var z =  this.radius*Math.sin(alpha_angle*j);
 				this.vertices.push(x, y, z);
                 
