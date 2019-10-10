@@ -36,7 +36,6 @@ class MySceneGraph {
         this.axisCoords['y'] = [0, 1, 0];
         this.axisCoords['z'] = [0, 0, 1];
 
-        this.stack = [];
 
         // File reading 
         this.reader = new CGFXMLreader();
@@ -802,7 +801,7 @@ class MySceneGraph {
                 if (!(loops != null && !isNaN(loops) && loops > 0))
                     return "unable to parse loops of the primitive coordinates for ID = " + primitiveId;
 
-                var torus = new MyTorus(this.scene, inner, outer, slices, loops);
+                var torus = new MyTorus(this.scene, slices, inner, outer, loops);
                 this.primitives[primitiveId] = torus;
             }
         }
@@ -848,14 +847,28 @@ class MySceneGraph {
                 nodeNames.push(grandChildren[j].nodeName);
             }
 
+            var floorIndex = nodeNames.indexOf("floor");
             var transformationIndex = nodeNames.indexOf("transformation");
             var materialsIndex = nodeNames.indexOf("materials");
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children");
 
+            // Floor Number
+
+            // Get floor number of the current component.
+            var componentFloor = 0;
+            if(!isNaN(floorIndex)){
+                componentFloor = this.reader.getInteger(grandChildren[floorIndex], 'number');
+                if (componentFloor == null)
+                    componentFloor = 0;
+                if (componentFloor < 0)
+                    this.onXMLMinorError("floor number of component " + componentID + " must be 0 or higher");
+            }
+            
+            
+
             // Transformations
             var transfMatrix;
-            var transf;
             grandgrandChildren = grandChildren[transformationIndex].children;
 
             if(grandgrandChildren.length == 1 && grandgrandChildren[0].nodeName == 'transformationref'){
@@ -864,7 +877,6 @@ class MySceneGraph {
                     return "unable to parse transformation id of " + componentID;
 
                 transfMatrix = this.transformations[matrixID];
-                transf = transfMatrix;
             }
             else {
                 transfMatrix = mat4.create();
@@ -978,7 +990,11 @@ class MySceneGraph {
             if ( (components.length + primitives.length) <= 0)
                 return "component " + componentID + " must have at least 1 child";
                 
+            if(componentFloor > this.scene.floorMax)
+                this.scene.floorMax = componentFloor;
+
             var component = {
+                floor: componentFloor,
                 transfMatrix: transfMatrix, 
                 materials: materials, 
                 texture: texture, 
@@ -1114,6 +1130,9 @@ class MySceneGraph {
 
         let node = this.components[id];
 
+        if(node.floor > this.scene.floor)
+            return;
+
         //get material
         if(node.materials[this.materialRotate % node.materials.length] != "inherit")
             material = node.materials[this.materialRotate % node.materials.length];
@@ -1142,7 +1161,10 @@ class MySceneGraph {
                 this.materials[material].setTexture(this.textures[texture]);
                 this.primitives[node.childPrimitives[i]].updateTexCoords(length_s, length_t);
             }
-
+            else{
+                this.materials[material].setTexture(null);
+            }
+            
             //apply material
             this.materials[material].apply();
 

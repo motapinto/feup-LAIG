@@ -42,10 +42,12 @@
 
         <!-- BUILDING TEXTURES-->
         <texture id="grey" file="scenes/images/grey.jpg" />
+        <texture id="donut" file="scenes/images/donut-texture.png" />
 
         <!-- EXTERIOR TEXTURES -->
         <texture id="road" file="scenes/images/highway-road.jpg" />
-        <texture id="donut" file="scenes/images/donut-texture.png" />
+        <texture id="parkingLot" file="scenes/images/parking-lot.jpg" />
+        <texture id="stonePath" file="scenes/images/stone-path3.png" />
 
         <texture id="wood" file="scenes/images/woodLight.jpg" />
         <texture id="grass" file="scenes/images/grass.jpg" />
@@ -111,6 +113,15 @@
         <primitive id="Road">
             <rectangle x1="0" y1="0" x2="40" y2="3" />
         </primitive>
+        <primitive id="ParkingLot">
+            <rectangle x1="0" y1="0" x2="22" y2="17" />
+        </primitive>
+        <primitive id="Stone-Path">
+            <rectangle x1="0" y1="0" x2="16" y2="2" />
+        </primitive>
+        <primitive id="Stone-Path3">
+            <rectangle x1="0" y1="0" x2="1" y2="1" />
+        </primitive>
 
         <!-- TABLE -->
          <primitive id="TableLeg">
@@ -175,11 +186,31 @@
         <primitive id="Wall">
             <rectangle x1="0" y1="0" x2="13" y2="5" />
         </primitive>
-        <primitive id="Window">
+        <primitive id="Window1">
             <cylinder base="1.838" top="1.838" height="4" slices="4" stacks="1" />
+        </primitive>
+        <primitive id="Window2">
+            <cylinder base="1.13" top="1.13" height="4" slices="4" stacks="1" />
         </primitive>
         <primitive id="LogoDonut">
             <torus inner="2" outer="4" slices="40" loops="40" />
+        </primitive>
+
+        <!-- EXTERIOR -->
+        <primitive id="LightPost">
+            <cylinder base="0.2" top="0.2" height="4" slices="4" stacks="1" />
+        </primitive>
+        <primitive id="LightBase">
+            <rectangle x1="0" y1="0" x2="0.5" y2="0.5" />
+        </primitive>
+        <primitive id="LightShield">
+            <cylinder base="0.02" top="0.02" height="0.6" slices="4" stacks="1" />
+        </primitive>
+        <primitive id="LightCone">
+            <cylinder base="0.4" top="0" height="0.2" slices="4" stacks="1" />
+        </primitive>
+        <primitive id="LightBulb">
+            <sphere radius="0.3" slices="20" stacks="10" />
         </primitive>
 
     </primitives>
@@ -192,7 +223,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodTile" length_s="20" length_t="20"/>
+            <texture id="woodTile" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="RestaurantFloor" />
             </children>
@@ -204,7 +235,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="grass" length_s="40" length_t="40"/>
+            <texture id="grass" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="Terrain" />
             </children>
@@ -489,6 +520,44 @@
                 <componentref id="TableSet0" />
             </children>
         </component>
+        <component id="TableSetRow6">
+            <transformation>
+                <translate x="-3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSetRow" />
+            </children>
+        </component>
+        <component id="TableSetRow5">
+            <transformation>
+                <translate x="0" y="12" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSetRow6" />
+                <componentref id="TableSetRow" />
+            </children>
+        </component>
+        <component id="TableSetRow4">
+            <transformation>
+                <translate x="8" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="TableSetRow5" />
+                <componentref id="TableSetRow" />
+            </children>
+        </component>
         <component id="TableSetRow3">
             <transformation>
                 <translate x="3" y="0" z="0" />
@@ -498,6 +567,7 @@
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
+                <componentref id="TableSetRow4" />
                 <componentref id="TableSetRow" />
             </children>
         </component>
@@ -539,6 +609,7 @@
                 <componentref id="TableSetRow" />
             </children>
         </component>
+        
         
         <!-- BAR COUNTER-->
         <component id="BarCounterTopCover">
@@ -1052,7 +1123,7 @@
                 <primitiveref id="Wall" />           
             </children>
         </component>
-        <component id="Window">
+        <component id="Window1">
             <transformation>
                 <translate x="0.3" y="-0.64" z="2.5" />
                 <scale x="1" y="0.1" z="1.9" />
@@ -1064,10 +1135,23 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <primitiveref id="Window" />           
+                <primitiveref id="Window1" />           
             </children>
         </component>
-        <component id="Window4">
+        <component id="Window1.4">
+            <transformation>
+                <translate x="2.45" y="0" z="0" />
+                <scale x="0.85" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>   
+                <componentref id="Window1" />           
+            </children>
+        </component>
+        <component id="Window1.3">
             <transformation>
                 <translate x="2.6" y="0" z="0" />
             </transformation>
@@ -1076,10 +1160,11 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>   
-                <componentref id="Window" />           
+                <componentref id="Window1" />           
+                <componentref id="Window1.4" />           
             </children>
         </component>
-        <component id="Window3">
+        <component id="Window1.2">
             <transformation>
                 <translate x="2.6" y="0" z="0" />
             </transformation>
@@ -1087,38 +1172,106 @@
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
-            <children>   
-                <componentref id="Window" />           
-                <componentref id="Window4" />           
+            <children>
+                <componentref id="Window1.3" />     
+                <componentref id="Window1" />           
             </children>
         </component>
+        <component id="Window1.1">
+            <transformation>
+                <translate x="2.6" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window1.2" />     
+                <componentref id="Window1" />           
+            </children>
+        </component>
+        <component id="Window1.0">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window1.1" />     
+                <componentref id="Window1" />           
+            </children>
+        </component>
+
         <component id="Window2">
             <transformation>
-                <translate x="2.6" y="0" z="0" />
+                <translate x="11.6" y="-0.25" z="2.5" />
+                <scale x="0.1" y="1" z="3.1" />
+                <rotate axis="z" angle="90" />
+                <rotate axis="x" angle="90" />
+                <rotate axis="z" angle="45" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Window3" />     
-                <componentref id="Window" />           
+                <primitiveref id="Window2" />           
             </children>
         </component>
-        <component id="Window1">
+        <component id="Window2.4">
             <transformation>
-                <translate x="2.6" y="0" z="0" />
+                <translate x="0" y="1.65" z="0" />
+                <scale x="1" y="1.05" z="1" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Window2" />     
-                <componentref id="Window" />           
+            <children>   
+                <componentref id="Window2" />           
             </children>
         </component>
-        <component id="Window0">
+        <component id="Window2.3">
+            <transformation>
+                <translate x="0" y="1.6" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>   
+                <componentref id="Window2" />           
+                <componentref id="Window2.4" />           
+            </children>
+        </component>
+        <component id="Window2.2">
+            <transformation>
+                <translate x="0" y="1.6" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.3" />     
+                <componentref id="Window2" />           
+            </children>
+        </component>
+        <component id="Window2.1">
+            <transformation>
+                <translate x="0" y="1.6" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.2" />     
+                <componentref id="Window2" />           
+            </children>
+        </component>
+        <component id="Window2.0">
             <transformation>
             </transformation>
             <materials>
@@ -1126,13 +1279,37 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
-                <componentref id="Window1" />     
-                <componentref id="Window" />           
+                <componentref id="Window2.1" />     
+                <componentref id="Window2" />           
+            </children>
+        </component>
+        <component id="Window2.1Set">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.0" />            
+            </children>
+        </component>
+        <component id="Window2.2Set">
+            <transformation>
+                <translate x="-12.6" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.1Set" />            
             </children>
         </component>
 
 
-        <component id="Roof">
+        <component id="Roof" >
+            <floor number="1" />
             <transformation>
                 <translate x="0" y="0" z="5" />
             </transformation>
@@ -1144,7 +1321,8 @@
                 <primitiveref id="RestaurantFloor" />           
             </children>
         </component>
-        <component id="Logo">
+        <component id="Logo" >
+            <floor number="2" />
             <transformation>
                 <translate x="6" y="10.5" z="11" />
                 <rotate axis="z" angle="90" />
@@ -1171,7 +1349,9 @@
                 <componentref id="Wall1" /> 
                 <componentref id="Wall2" />         
                 <componentref id="Wall3" />
-                <componentref id="Window0" /> 
+                <componentref id="Window1.0" /> 
+                <componentref id="Window2.1Set" /> 
+                <componentref id="Window2.2Set" /> 
                 <componentref id="Roof" /> 
                 <componentref id="Logo" /> 
             </children>
@@ -1180,14 +1360,247 @@
         <!-- EXTERIOR COMPONENTS-->
         <component id="Road">
             <transformation>
-                <translate x="-20" y="-10" z="0" />
+                <translate x="-20" y="-10" z="0.01" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="road" length_s="1" length_t="3"/>
+            <texture id="road" length_s="5" length_t="3"/>
             <children>
                 <primitiveref id="Road" /> 
+            </children>
+        </component>
+        <component id="ParkingLot">
+            <transformation>
+                <translate x="-3" y="-5" z="0.01" />
+                <rotate axis="z" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="parkingLot" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="ParkingLot" /> 
+            </children>
+        </component>
+        <component id="Stone-Path1">
+            <transformation>
+                <translate x="-3" y="-5" z="0.01" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="stonePath" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="Stone-Path" /> 
+            </children>
+        </component>
+        <component id="Stone-Path2">
+            <transformation>
+                <translate x="15" y="-5" z="0.01" />
+                <rotate axis="z" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="stonePath" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="Stone-Path" /> 
+            </children>
+        </component>
+        <component id="Stone-Path3">
+            <transformation>
+                <translate x="13" y="10" z="0.01" />
+                <rotate axis="z" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="stonePath" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="Stone-Path3" /> 
+            </children>
+        </component>
+
+        <component id="LightCone">
+            <transformation>
+                <translate x="0" y="0" z="4.6" />
+                <rotate axis="z" angle="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightCone" /> 
+            </children>
+        </component>
+        <component id="LightShield">
+            <transformation>
+                <translate x="0.01" y="0.01" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightShield" /> 
+            </children>
+        </component>
+        <component id="LightShield1">
+            <transformation>
+                <translate x="0.42" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightShield" /> 
+            </children>
+        </component>
+        <component id="LightShield0">
+            <transformation>
+                <translate x="0" y="0.42" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightShield1" /> 
+                <componentref id="LightShield" />
+            </children>
+        </component>
+        <component id="LightShieldSet">
+            <transformation>
+                <rotate axis="z" angle="45" />
+                <translate x="-0.22" y="-0.22" z="4" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightShield0" /> 
+                <componentref id="LightShield1" /> 
+                <componentref id="LightShield" />
+            </children>
+        </component>
+        <component id="LightPost">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightPost" /> 
+            </children>
+        </component>
+        <component id="LightBase">
+            <transformation>
+                <rotate axis="z" angle="45" />
+                <translate x="-0.25" y="-0.25" z="4" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightBase" /> 
+            </children>
+        </component>
+        <component id="LightBulb">
+            <transformation>
+                <translate x="0" y="0" z="4.2" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="road" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="LightBulb" /> 
+            </children>
+        </component>
+
+        <component id="LightPostSet">
+            <transformation>
+                <translate x="-2" y="-6" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightCone" /> 
+                <componentref id="LightBase" />
+                <componentref id="LightShieldSet" /> 
+                <componentref id="LightPost" /> 
+                <componentref id="LightBulb" />
+            </children>
+        </component>
+        <component id="LightPostSet4">
+            <transformation>
+                <translate x="4" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+            </children>
+        </component>
+        <component id="LightPostSet3">
+            <transformation>
+                <translate x="4" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet4" /> 
+            </children>
+        </component>
+        <component id="LightPostSet2">
+            <transformation>
+                <translate x="4" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet3" /> 
+            </children>
+        </component>
+        <component id="LightPostSet1">
+            <transformation>
+                <translate x="4" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet2" /> 
+            </children>
+        </component>
+        <component id="LightPostSet0">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="none" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightPostSet" /> 
+                <componentref id="LightPostSet1" /> 
             </children>
         </component>
 
@@ -1201,6 +1614,11 @@
             <texture id="none" length_s="0" length_t="0"/>
             <children>
                 <componentref id="Road" /> 
+                <componentref id="ParkingLot" /> 
+                <componentref id="Stone-Path1" /> 
+                <componentref id="Stone-Path2" /> 
+                <componentref id="Stone-Path3" /> 
+                <componentref id="LightPostSet0" /> 
             </children>
         </component>
 
@@ -1214,6 +1632,7 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
+                
                 <!-- TERRAINS -->
                 <componentref id="RestaurantTiles" />
                 <componentref id="Terrain" />
