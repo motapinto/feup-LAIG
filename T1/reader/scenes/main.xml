@@ -16,12 +16,12 @@
     <lights>
 
         
-        <spot id="Lamp0" enabled="1" angle="180.0" exponent="0.0">
-            <location x="5.0" y="2.0" z="3.5" w="00" />
+        <spot id="Lamp0" enabled="1" angle="90.0" exponent="1.0">
+            <location x="5.0" y="2.0" z="3.5" w="1" />
             <target x="5.0" y="2.0" z="0.0" />
-            <ambient r="0.5" g="0.5" b="0.5" a="0.5" />
-            <diffuse r="0.5" g="0.5" b="0.5" a="0.5" />
-            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <ambient r="1" g="1" b="1" a="1" />
+            <diffuse r="1" g="1" b="1" a="1" />
+            <specular r="1" g="1" b="1" a="1.0" />
             <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
         </spot>
  
@@ -527,7 +527,6 @@
             </children>
         </component>
         <component id="TableSetRow7">
-            <floor number="1" />
             <transformation>
                 <translate x="-3" y="0" z="0" />
             </transformation>
@@ -540,7 +539,6 @@
             </children>
         </component>
         <component id="TableSetRow6">
-            <floor number="1" />
             <transformation>
                 <translate x="-3" y="0" z="0" />
             </transformation>
@@ -554,7 +552,6 @@
             </children>
         </component>
         <component id="TableSetRow5">
-            <floor number="1" />
             <transformation>
                 <translate x="-3" y="0" z="0" />
             </transformation>
@@ -567,8 +564,7 @@
                 <componentref id="TableSetRow" />
             </children>
         </component>
-        <component id="TableSetRow4">
-            <floor number="1" />
+        <component id="TableSetRow4" floor="1">
             <transformation>
                 <translate x="0" y="8" z="5" />
             </transformation>
@@ -974,8 +970,7 @@
         </component>
 
         <!-- RESTAURANT ACCESSORIES -->
-        <component id="SwimmingPool">
-            <floor number="1" />
+        <component id="SwimmingPool" floor="1">
             <transformation>
                 <translate x="-0.5" y="-0.5" z="5.01" />
             </transformation>
@@ -1409,8 +1404,7 @@
                 <primitiveref id="RestaurantFloor" />
             </children>
         </component>
-        <component id="Wall1">
-            <floor number="1" />
+        <component id="Wall1" floor="1">
             <transformation>
                 <translate x="-1" y="20" z="0" />
                 <scale x="1" y="1" z="1" />
@@ -1424,8 +1418,7 @@
                 <primitiveref id="Wall" />
             </children>
         </component>
-        <component id="Wall2">
-            <floor number="1" />
+        <component id="Wall2" floor="1">
             <transformation>
                 <translate x="-1" y="7" z="0" />
                 <rotate axis="z" angle="90" />
@@ -1439,8 +1432,7 @@
                 <primitiveref id="Wall" />           
             </children>
         </component>
-        <component id="Wall3">
-            <floor number="1" />
+        <component id="Wall3" floor="1">
             <transformation>
                 <translate x="12" y="7" z="0" />
                 <rotate axis="z" angle="90" />
@@ -1521,8 +1513,7 @@
                 <componentref id="Window1" />           
             </children>
         </component>
-        <component id="Window1.0">
-            <floor number="1" />
+        <component id="Window1.0" floor="1">
             <transformation>
             </transformation>
             <materials>
@@ -1602,8 +1593,7 @@
                 <componentref id="Window2" />           
             </children>
         </component>
-        <component id="Window2.0">
-            <floor number="1" />
+        <component id="Window2.0" floor="1">
             <transformation>
             </transformation>
             <materials>
@@ -1638,8 +1628,7 @@
                 <componentref id="Window2.1Set" />            
             </children>
         </component>
-        <component id="Roof">
-            <floor number="1" />
+        <component id="Roof" floor="1">
             <transformation>
                 <translate x="0" y="0" z="5" />
             </transformation>
@@ -1652,8 +1641,7 @@
                 <primitiveref id="Roof2" />            
             </children>
         </component>
-        <component id="Logo">
-            <floor number="2" />
+        <component id="Logo" floor="2">
             <transformation>
                 <translate x="6" y="10.5" z="15" />
                 <rotate axis="z" angle="90" />

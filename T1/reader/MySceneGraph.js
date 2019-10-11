@@ -235,6 +235,7 @@ class MySceneGraph {
         var grandChildren = [];
 
         this.views = [];
+        this.viewsList = [];
 
         // Get id of the current view.
         this.idView = this.reader.getString(viewsNode, 'default');
@@ -296,7 +297,7 @@ class MySceneGraph {
                         break;
                 }
             }
-
+            this.viewsList.push(viewID);
             this.views[viewID] = new CGFcamera(angle, near, far, from, to);
         }
 
@@ -452,17 +453,17 @@ class MySceneGraph {
                 var attenuation = [];
                 if (attenuationIndex != -1) {
                     var constant = this.reader.getFloat(grandChildren[attenuationIndex], 'constant');
-                    if(constant != 0 || constant != 1)
+                    if(constant != 0 && constant != 1)
                         return "light attenuation constant must be defined and equal to 0 or 1 for light " + lightId;
                     var linear = this.reader.getFloat(grandChildren[attenuationIndex], 'linear');
-                    if(linear != 0 || linear != 1)
+                    if(linear != 0 && linear != 1)
                         return "light attenuation linear must be defined and equal to 0 or 1 for light " + lightId;
                     var quadratic = this.reader.getFloat(grandChildren[attenuationIndex], 'quadratic');
-                    if(quadratic != 0 || quadratic != 1)
+                    if(quadratic != 0 && quadratic != 1)
                         return "light attenuation quadratic must be defined and equal to 0 or 1 for light " + lightId;
 
-                    if((quadratic + linear + constant) > 1)
-                        return "only one value for light attenuation attributes must be 1 for light " + lightId;
+                    if((quadratic + linear + constant) != 1)
+                        return "light attenuation attributes must be 1 for light " + lightId;
                     
                     attenuation = [constant, linear, quadratic];
                 }
@@ -936,6 +937,14 @@ class MySceneGraph {
             if (this.components[componentID] != null)
                 return "ID must be unique for each component (conflict: ID = " + componentID + ")";
 
+            // Floor Number
+            var componentFloor = 0;
+            componentFloor = this.reader.getInteger(children[i], 'floor', false);
+            if (componentFloor == null)
+                componentFloor = 0;
+            if (componentFloor < 0)
+                this.onXMLMinorError("floor number of component " + componentID + " must be 0 or higher, set to 0");
+    
             grandChildren = children[i].children;
 
             nodeNames = [];
@@ -943,25 +952,11 @@ class MySceneGraph {
                 nodeNames.push(grandChildren[j].nodeName);
             }
 
-            var floorIndex = nodeNames.indexOf("floor");
+            
             var transformationIndex = nodeNames.indexOf("transformation");
             var materialsIndex = nodeNames.indexOf("materials");
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children");
-
-            // Floor Number
-
-            // Get floor number of the current component.
-            var componentFloor = 0;
-            if(!isNaN(floorIndex)){
-                componentFloor = this.reader.getInteger(grandChildren[floorIndex], 'number');
-                if (componentFloor == null)
-                    componentFloor = 0;
-                if (componentFloor < 0)
-                    this.onXMLMinorError("floor number of component " + componentID + " must be 0 or higher");
-            }
-            
-            
 
             // Transformations
             var transfMatrix;
