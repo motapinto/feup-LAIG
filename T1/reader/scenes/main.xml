@@ -14,12 +14,17 @@
     </globals>
 
     <lights>
-        <omni id="demoLight" enabled="1">
-            <location x="9.8" y="11.9" z="10" w="1.0" />
-            <ambient r="0" g="0" b="0" a="1.0" />
-            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
-            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
-        </omni>
+
+        
+        <spot id="Lamp0" enabled="1" angle="180.0" exponent="0.0">
+            <location x="5.0" y="2.0" z="3.5" w="00" />
+            <target x="5.0" y="2.0" z="0.0" />
+            <ambient r="0.5" g="0.5" b="0.5" a="0.5" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="0.5" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
+        </spot>
+ 
     </lights>
 
     <textures>
@@ -36,7 +41,6 @@
         <texture id="greyFabric" file="scenes/images/grey-fabric.jpg" />
 
         <!-- BAR COUNTER -->
-        <texture id="marble" file="scenes/images/marble.jpg" />
         <texture id="woodDark" file="scenes/images/woodDark.jpg" />
 
         <!-- RESTAURANT ACCESSORIES-->
@@ -60,10 +64,10 @@
 
     <materials>
         <material id="defaultMaterial" shininess="10">
-            <emission r="1.0" g="1.0" b="1.0" a="1.0" />
+            <emission r="0.0" g="0.0" b="0.0" a="0.0" />
             <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
-            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
-            <specular r="1.0" g="0.0" b="0.0" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
     </materials>
 
@@ -158,6 +162,12 @@
         <!-- RESTAURANT ACCESSORIES-->
         <primitive id="SwimmingPool">
             <rectangle x1="0" y1="0" x2="12" y2="6" />
+        </primitive>
+        <primitive id="Door">
+            <rectangle x1="0" y1="0" x2="3" y2="1.5" />
+        </primitive>
+        <primitive id="DoorHandle">
+            <cylinder base="0.01" top="0.01" height="1" slices="20" stacks="1" />
         </primitive>
         <primitive id="LampLight">
             <cylinder base="0.5" top="0.2" height="0.5" slices="4" stacks="1" />
@@ -976,6 +986,56 @@
             <children> 
                 <primitiveref id="SwimmingPool" />              
             </children>
+        </component>
+        <component id="DoorBase">
+            <transformation>
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="woodDark" length_s="0" length_t="0"/>
+            <children> 
+                <primitiveref id="Door" />              
+            </children>
+        </component> 
+        <component id="DoorHandle1">
+            <transformation>
+                <translate x="0.1" y="0.2" z="0.8" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="aluminium" length_s="0" length_t="0"/>
+            <children> 
+                <primitiveref id="DoorHandle" />              
+            </children>
+        </component> 
+        <component id="DoorHandle2">
+            <transformation>
+                <translate x="-0.2" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="aluminium" length_s="0" length_t="0"/>
+            <children> 
+                <componentref id="DoorHandle1" />              
+            </children>
+        </component>
+        <component id="Door">
+            <transformation>
+                <translate x="12.01" y="10" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="woodChair" length_s="0" length_t="0"/>
+            <children> 
+                <componentref id="DoorBase" />     
+                <componentref id="DoorHandle1" />
+                <componentref id="DoorHandle2" />              
+            </children>
         </component> 
         <component id="LampLight">
             <transformation>
@@ -1344,7 +1404,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodTile" length_s="9" length_t="5"/>
+            <texture id="woodTile" length_s="4.5" length_t="4.5"/>
             <children>
                 <primitiveref id="RestaurantFloor" />
             </children>
@@ -1923,7 +1983,8 @@
                 <!-- RESTAURANT ACCESSORIES-->
                 <componentref id="SwimmingPool" />
                 <componentref id="Lamp0" /> 
-                <componentref id="Stair" /> 
+                <componentref id="Stair" />
+                <componentref id="Door" /> 
                 <!-- BUILDING -->
                 <componentref id="Building" />
                 <!-- EXTERIOR -->
