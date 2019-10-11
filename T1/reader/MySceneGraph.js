@@ -28,6 +28,7 @@ class MySceneGraph {
         this.nodes = [];
 
         this.idRoot = null;                    // The id of the root element.
+        this.idView = null;                    // The id of the default view.
 
         this.materialRotate = 0;
 
@@ -230,14 +231,84 @@ class MySceneGraph {
      * @param {view block element} viewsNode
      */
     parseView(viewsNode) {
-        this.onXMLMinorError("To do: Parse views and create cameras.");
+        var children = viewsNode.children;
+        var grandChildren = [];
+
+        this.views = [];
+
+        // Get id of the current view.
+        this.idView = this.reader.getString(viewsNode, 'default');
+        if (this.idView == null)
+            return "no default ID defined for views";        
+
+        for(var i = 0; i < children.length; i++){
+            if (children[i].nodeName != "perspective") {
+                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                continue;
+            }
+
+            
+            // Get id of the current view.
+            var viewID = this.reader.getString(children[i], 'id');
+            if (viewID == null)
+                return "no ID defined for perspective";
+
+            // Checks for repeated IDs.
+            if (this.views[viewID] != null)
+                return "ID must be unique for each perspective (conflict: ID = " + viewID + ")";
+            
+            // Get near value of the current view.
+            var near = this.reader.getFloat(children[i], 'near');
+            if (near == null || isNaN(near) || near < 0)
+                return "near value must be defined and higher then 0 for perspective with ID " + viewID;
+
+            // Get far value of the current view.
+            var far = this.reader.getFloat(children[i], 'far');
+            if (far == null || isNaN(far) || far < 0)
+                return "far value must be defined and higher then 0 for perspective with ID " + viewID;
+
+            // Get angle value of the current view.
+            var angle = this.reader.getInteger(children[i], 'angle');
+            if (angle == null || isNaN(angle))
+                return "angle value must be defined for perspective with ID " + viewID;
+
+            grandChildren = children[i].children;
+
+            var from;
+            var to;
+
+            for(var j = 0; j < grandChildren.length; j++){
+                switch (grandChildren[j].nodeName) {
+                    case 'from':
+                        from = this.parseCoordinates3D(grandChildren[j], "from view for ID " + viewID);
+                        if (!Array.isArray(from))
+                            return from;    
+                        break;
+
+                    case 'to':
+                        to = this.parseCoordinates3D(grandChildren[j], "to view for ID " + viewID);
+                        if (!Array.isArray(to))
+                            return to;    
+                        break;
+                    
+                    default:
+                        this.onXMLMinorError("unknown tag <" + grandchildren[j].nodeName + ">");
+                        break;
+                }
+            }
+
+            this.views[viewID] = new CGFcamera(angle, near, far, from, to);
+        }
+
+        if(this.views[this.idView] == null)
+            return "default view " + this.idView + " not found in views";
 
         return null;
     }
 
     /**
-     * Parses the <ambient> node.
-     * @param {ambient block element} ambientsNode
+     * Parses the <globals> node.
+     * @param {globals block element} globalsNode
      */
     parseGlobals(globalsNode) {
 
@@ -314,10 +385,12 @@ class MySceneGraph {
             // Light enable/disable
             var enableLight = true;
             var aux = this.reader.getBoolean(children[i], 'enabled');
-            if (!(aux != null && !isNaN(aux) && (aux == true || aux == false)))
+            if (!(aux != null && !isNaN(aux) && (aux == true || aux == false))){
                 this.onXMLMinorError("unable to parse value component of the 'enable light' field for ID = " + lightId + "; assuming 'value = 1'");
+                enableLight = 1;
+            }
 
-            enableLight = aux || 1;
+            enableLight = aux;
 
             //Add enabled boolean and type name to light info
             global.push(enableLight);
@@ -372,8 +445,31 @@ class MySceneGraph {
                 }
                 else
                     return "light target undefined for ID = " + lightId;
+                
 
-                global.push(...[angle, exponent, targetLight])
+                var attenuationIndex = nodeNames.indexOf("attenuation");
+                // Retrieves the light attenuation.
+                var attenuation = [];
+                if (attenuationIndex != -1) {
+                    var constant = this.reader.getFloat(grandChildren[attenuationIndex], 'constant');
+                    if(constant != 0 || constant != 1)
+                        return "light attenuation constant must be defined and equal to 0 or 1 for light " + lightId;
+                    var linear = this.reader.getFloat(grandChildren[attenuationIndex], 'linear');
+                    if(linear != 0 || linear != 1)
+                        return "light attenuation linear must be defined and equal to 0 or 1 for light " + lightId;
+                    var quadratic = this.reader.getFloat(grandChildren[attenuationIndex], 'quadratic');
+                    if(quadratic != 0 || quadratic != 1)
+                        return "light attenuation quadratic must be defined and equal to 0 or 1 for light " + lightId;
+
+                    if((quadratic + linear + constant) > 1)
+                        return "only one value for light attenuation attributes must be 1 for light " + lightId;
+                    
+                    attenuation = [constant, linear, quadratic];
+                }
+                else
+                    return "light attenuation undefined for ID = " + lightId;
+
+                global.push(...[angle, exponent, targetLight, attenuation])
             }
 
             this.lights[lightId] = global;
@@ -1002,6 +1098,9 @@ class MySceneGraph {
                 childPrimitives: primitives};
             this.components[componentID] = component;
         }
+
+        if(this.components[this.idRoot] == null)
+            return "component root " + this.idRoot + " not found in components";
 
         this.log("Parsed components");
         return null;
