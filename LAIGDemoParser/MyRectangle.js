@@ -6,65 +6,77 @@
  * @param y - Scale of rectangle in Y
  */
 class MyRectangle extends CGFobject {
-	constructor(scene, id, x1, x2, y1, y2) {
+	constructor(scene, x1, x2, y1, y2, stacks = 5, slices = 5) {
+		//point 1 must have lower y and lower x than point 2
 		super(scene);
-		this.x1 = x1;
-		this.x2 = x2;
-		this.y1 = y1;
-		this.y2 = y2;
 
-		this.initBuffers();
+		this.stacks = stacks;
+		this.slices = slices;
+		
+		this.initBuffers(x1, x2, y1, y2);
 	}
 	
-	initBuffers() {
-		this.vertices = [
-			this.x1, this.y1, 0,	//0
-			this.x2, this.y1, 0,	//1
-			this.x1, this.y2, 0,	//2
-			this.x2, this.y2, 0		//3
-		];
+	initBuffers(x1, x2, y1, y2) {
+		this.vertices = [];
+		this.indices = [];
+		this.normals = [];
+		this.texCoords = [];
 
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 1, 2,
-			1, 3, 2
-		];
+		this.length = x2-x1;
+		this.height = y2-y1;
+		let x_iter = this.length/this.stacks;
+		let y_iter = this.height/this.slices;
 
-		//Facing Z positive
-		this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1
-		];
+		//vertice and normal generation
+		for(let x = x1; x <= x2; x += x_iter) {
+			for(let y = y1; y <= y2; y += y_iter) {
+				this.vertices.push(x, y, 0);
+				this.texCoords.push((x-x1)/this.length, (y2-y)/this.height);
+
+				this.vertices.push(x, y, 0);
+				this.texCoords.push((x-x1)/this.length, (y2-y)/this.height);
+
+				this.normals.push(0, 0, 1);
+				this.normals.push(0, 0, -1);
+			}
+		}
+
+		//indices generation
+		var n_y = this.slices+1;
+
+		for(let i = 0; i < this.stacks; i++){
+			for(let j = 0; j < this.slices; j++){
+				this.indices.push((j + 1 + i*n_y)*2, 	(j + i * n_y)*2, 	(j + 1 + (i + 1)*n_y)*2);
+				this.indices.push((j + i * n_y)*2, 		(j + (i + 1)*n_y)*2, (j + 1 + (i + 1)*n_y)*2);
+				
+				//Both sides visible
+				this.indices.push((j + 1 + (i + 1)*n_y)*2 + 1, 	(j + i * n_y)*2 + 1, 	(j + 1 + i*n_y)*2 + 1);
+				this.indices.push((j + 1 + (i + 1)*n_y)*2 + 1, 		(j + (i + 1)*n_y)*2 + 1, (j + i * n_y)*2 + 1);
+			}
+		}
+
 		
-		/*
-		Texture coords (s,t)
-		+----------> s
-        |
-        |
-		|
-		v
-        t
-        */
-
-		this.texCoords = [
-			0, 1,
-			1, 1,
-			0, 0,
-			1, 0
-		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
 
-	/**
-	 * @method updateTexCoords
-	 * Updates the list of texture coordinates of the rectangle
-	 * @param {Array} coords - Array of texture coordinates
-	 */
-	updateTexCoords(coords) {
-		this.texCoords = [...coords];
+    //updates Texture Coords
+	updateTexCoords(length_s, length_t) {
+		if(length_s == 0 || length_t == 0) {
+			return;
+		}
+		this.texCoords = [];
+
+		let s_var = (this.length / this.stacks) / length_s;
+		let t_var = (this.height / this.slices) / length_t;
+
+		for(let i = 0; i < (this.stacks + 1); i++){
+			for(let j = 0; j < (this.slices + 1); j++){
+				this.texCoords.push(s_var * i, t_var * j);
+				this.texCoords.push(s_var * i, t_var * j);
+			}
+		}
+
 		this.updateTexCoordsGLBuffers();
 	}
 }

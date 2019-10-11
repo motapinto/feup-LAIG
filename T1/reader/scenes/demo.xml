@@ -23,15 +23,15 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/leaves.jpg" />
+        <texture id="demoTexture" file="scenes/images/highway-road.jpg" />
     </textures>
 
     <materials>
         <material id="demoMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
-            <specular r="0.6" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </material>
     </materials>
 
@@ -40,7 +40,7 @@
 
     <primitives>
         <primitive id="demoRectangle">
-            <rectangle x1="-0.5" y1="-1" x2="0.5" y2="1" />
+            <rectangle x1="0" y1="0" x2="40" y2="3" />
         </primitive>
         <primitive id="demoTriangle">
             <triangle   x1="0" y1="3" z1="0"
@@ -59,9 +59,9 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="none"/>
+            <texture id="demoTexture" length_s="5" length_t="3"/>
             <children>
-                <primitiveref id="demoSphere" />
+                <primitiveref id="demoRectangle" />
             </children>
         </component>
     </components>
