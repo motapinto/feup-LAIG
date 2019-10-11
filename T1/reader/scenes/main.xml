@@ -14,10 +14,39 @@
     </globals>
 
     <lights>
-
-        
-        <spot id="Lamp0" enabled="1" angle="90.0" exponent="1.0">
-            <location x="5.0" y="2.0" z="3.5" w="1" />
+        <omni id="Moon" enabled="1" >
+            <location x="3.5" y="3.5" z="10.0" w="1" />
+            <ambient r="0.0" g="0.0" b="0.0" a="0.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="0.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="0.0" />
+            <attenuation constant="0.0" linear="0.0" quadratic="0.0" />  
+        </omni>
+        <spot id="Lamp0" enabled="1" angle="1.0" exponent="10.0">
+            <location x="3.5" y="3.5" z="3.5" w="1" />
+            <target x="5.0" y="2.0" z="0.0" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
+        </spot>
+        <spot id="Lamp1" enabled="1" angle="90.0" exponent="1.0">
+            <location x="6.5" y="3.5" z="3.5" w="1" />
+            <target x="5.0" y="2.0" z="0.0" />
+            <ambient r="1" g="1" b="1" a="1" />
+            <diffuse r="1" g="1" b="1" a="1" />
+            <specular r="1" g="1" b="1" a="1.0" />
+            <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
+        </spot>
+        <spot id="Lamp2" enabled="1" angle="90.0" exponent="1.0">
+            <location x="5" y="18" z="3.5" w="1" />
+            <target x="5.0" y="2.0" z="0.0" />
+            <ambient r="1" g="1" b="1" a="1" />
+            <diffuse r="1" g="1" b="1" a="1" />
+            <specular r="1" g="1" b="1" a="1.0" />
+            <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
+        </spot>
+        <spot id="LightsPost" enabled="1" angle="90.0" exponent="1.0">
+            <location x="6" y="-6" z="8" w="1" />
             <target x="5.0" y="2.0" z="0.0" />
             <ambient r="1" g="1" b="1" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
@@ -52,7 +81,8 @@
         <texture id="grey" file="scenes/images/grey.jpg" />
         <texture id="donut" file="scenes/images/donut-texture.png" />
 
-        <!-- EXTERIOR TEXTURES -->
+        <!-- EXTERIOR TEXTURES -->´
+        <texture id="moon" file="scenes/images/moon.jpg" />
         <texture id="road" file="scenes/images/highway-road.jpg" />
         <texture id="parkingLot" file="scenes/images/parking-lot.jpg" />
         <texture id="stonePath" file="scenes/images/stone-path3.png" />
@@ -212,6 +242,9 @@
         </primitive>
 
         <!-- EXTERIOR -->
+        <primitive id="Moon">
+            <sphere radius="2" slices="40" stacks="40" />
+        </primitive>
         <primitive id="Terrain">
             <rectangle x1="-20" y1="-20" x2="20" y2="20" />
         </primitive>
@@ -1082,6 +1115,44 @@
                 <componentref id="LampCover" />               
             </children>
         </component>  
+        <component id="Lamp8">
+            <transformation>
+                <translate x="-6" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Lamp" />              
+            </children>
+        </component>
+        <component id="Lamp7">
+            <transformation>
+                <translate x="3" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Lamp8" /> 
+                <componentref id="Lamp" />              
+            </children>
+        </component>
+        <component id="Lamp6">
+            <transformation>
+                <translate x="0" y="16" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Lamp7" /> 
+                <componentref id="Lamp" />              
+            </children>
+        </component>
         <component id="Lamp5">
             <transformation>
                 <translate x="-3" y="0" z="0" />
@@ -1091,6 +1162,7 @@
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
+                <componentref id="Lamp6" /> 
                 <componentref id="Lamp" />              
             </children>
         </component>
@@ -1678,6 +1750,18 @@
         </component>
         
         <!-- EXTERIOR COMPONENTS-->
+        <component id="Moon">
+            <transformation>
+                <translate  x="0" y="0" z="100" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="moon" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="Moon" />
+            </children>
+        </component>
         <component id="Terrain">
             <transformation>
                 <translate  x="0" y="0" z="-0.01" />
@@ -1943,6 +2027,7 @@
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
+                <componentref id="Moon" /> 
                 <componentref id="Terrain" /> 
                 <componentref id="Road" /> 
                 <componentref id="ParkingLot" /> 
