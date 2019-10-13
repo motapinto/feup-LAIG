@@ -145,6 +145,10 @@ class XMLscene extends CGFscene {
             this.lights[3].enable();
             this.lights[3].setVisible(true);
             this.lights[3].update();
+
+            this.lights[4].enable();
+            this.lights[4].setVisible(true);
+            this.lights[4].update();
             
 
             if (this.sceneInited) {
