@@ -36,6 +36,8 @@ class XMLscene extends CGFscene {
         this.scaleFactor = 0.1;
         this.floor = 0;
         this.floorMax = 0;
+        this.viewsList = ['Default'];
+        this.selectedView = 'Default';
 
         this.setUpdatePeriod(100);
     }
@@ -107,6 +109,21 @@ class XMLscene extends CGFscene {
         this.initLights();
 
         this.sceneInited = true;
+    }
+
+    checkKeys(t) {
+        if (this.gui.isKeyPressed("KeyM")) {
+            this.graph.materialRotate++;
+        }
+    }
+
+    update(t){
+        this.checkKeys(t);
+    }
+
+    updateCamera(){
+        if(this.selectedView == 'Default')
+        this.setActiveCamera(this.viewsList[this.selectedView]);
     }
 
     /**

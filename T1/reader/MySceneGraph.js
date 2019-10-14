@@ -235,7 +235,6 @@ class MySceneGraph {
         var grandChildren = [];
 
         this.views = [];
-        this.viewsList = [];
 
         // Get id of the current view.
         this.idView = this.reader.getString(viewsNode, 'default');
@@ -297,7 +296,7 @@ class MySceneGraph {
                         break;
                 }
             }
-            this.viewsList.push(viewID);
+            this.scene.viewsList.push(viewID);
             this.views[viewID] = new CGFcamera(angle, near, far, from, to);
         }
 
