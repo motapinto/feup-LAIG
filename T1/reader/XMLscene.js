@@ -36,8 +36,18 @@ class XMLscene extends CGFscene {
         this.scaleFactor = 0.1;
         this.floor = 0;
         this.floorMax = 0;
-        this.viewsList = ['Default'];
-        this.selectedCamera = 'Default';
+        this.viewsList = [];
+        this.selectedCamera = null;
+
+        this.floorUp = function(){
+            if(this.floor < this.floorMax)
+                this.floor++;
+        }
+
+        this.floorDown = function(){
+            if(this.floor > 0)
+                this.floor--;
+        }
 
         this.setUpdatePeriod(100);
     }
@@ -48,6 +58,7 @@ class XMLscene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 350, vec3.fromValues(5, 5, 5), vec3.fromValues(0, 0, 0));
     }
+
     /**
      * Initializes the scene lights with the values read from the XML file.
      */
@@ -109,6 +120,9 @@ class XMLscene extends CGFscene {
         this.initLights();
 
         this.sceneInited = true;
+
+        this.selectedCamera = this.graph.idView;
+        this.interface.addCamerasList(this.graph.views);
     }
 
     checkKeys(t) {

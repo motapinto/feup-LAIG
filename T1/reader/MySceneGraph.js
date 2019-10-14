@@ -303,6 +303,9 @@ class MySceneGraph {
         if(this.views[this.idView] == null)
             return "default view " + this.idView + " not found in views";
 
+        this.scene.selectedCamera = this.idView;
+        
+
         return null;
     }
 
@@ -550,7 +553,7 @@ class MySceneGraph {
                 return "no ID defined for material";
             // Checks for repeated IDs.
             if (this.materials[materialID] != null)
-                return "ID must be unique for each light (conflict: ID = " + materialID + ")";
+                return "ID must be unique for each material (conflict: ID = " + materialID + ")";
 
             // Shininess
             var materialShininess = this.reader.getFloat(children[i], 'shininess');
@@ -1031,23 +1034,27 @@ class MySceneGraph {
             
             // Texture
             var texture = {
-                id: "none",
+                id: 'none',
                 length_s: 0,
                 length_t: 0
             };
             texture.id = this.reader.getString(grandChildren[textureIndex], "id");
-            if (texture.id == null)
-                return "no ID defined for texture in component " + componentID;
-            if (this.textures[texture.id] == null && texture.id != 'none' && texture.id != 'inherit')
+            if (texture.id == null){
+                this.onXMLMinorError("no ID defined for texture in component " + componentID + " assuming no texture");
+                texture.id = 'none';
+            }
+            else if (this.textures[texture.id] == null && texture.id != 'none' && texture.id != 'inherit')
                 return "texture with ID " + texture.id + " must be defined in textures";
             
-            texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s");
-            if (isNaN(texture.length_s))
-                return "no length_s defined for texture " + texture.id + " in component " + componentID;
-
-            texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t");
-            if (isNaN(texture.length_t))
-                return "no length_t defined for texture " + texture.id + " in component " + componentID;
+            if(texture.id != 'none' && texture.id != 'inherit'){
+                texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s");
+                if (isNaN(texture.length_s))
+                    return "no length_s defined for texture " + texture.id + " in component " + componentID;
+    
+                texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t");
+                if (isNaN(texture.length_t))
+                    return "no length_t defined for texture " + texture.id + " in component " + componentID;
+            }
 
             // Children
             var components = [];
