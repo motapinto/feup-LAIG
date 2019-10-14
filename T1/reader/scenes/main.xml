@@ -18,30 +18,23 @@
     </globals>
 
     <lights>
-        <spot id="Lamp0" enabled="1" angle="1.0" exponent="10.0">
+        <spot id="Lamp0" enabled="1" angle="180.0" exponent="1.0">
             <location x="3.5" y="3.5" z="3.5" w="1" />
             <target x="3.5" y="3.5" z="0.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1" />
-            <diffuse r="0.1" g="0.1" b="0.1" a="1" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
-            <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
+            <ambient r="0.2" g="0.1" b="0.05" a="1" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="1" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="Lamp1" enabled="1" angle="90.0" exponent="1.0">
+        <spot id="Lamp1" enabled="1" angle="180.0" exponent="1.0">
             <location x="6.5" y="3.5" z="3.5" w="1" />
             <target x="6.5" y="3.5" z="0.0" />
-            <ambient r="1" g="1" b="1" a="1" />
-            <diffuse r="1" g="1" b="1" a="1" />
-            <specular r="1" g="1" b="1" a="1.0" />
-            <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
+            <ambient r="0.2" g="0.1" b="0.05" a="1" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="1" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+            <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="Lamp2" enabled="1" angle="90.0" exponent="1.0">
-            <location x="5" y="18" z="3.5" w="1" />
-            <target x="5.0" y="18" z="0" />
-            <ambient r="1" g="1" b="1" a="1" />
-            <diffuse r="1" g="1" b="1" a="1" />
-            <specular r="1" g="1" b="1" a="1.0" />
-            <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
-        </spot>
+        
         <spot id="LightsPost" enabled="1" angle="90.0" exponent="1.0">
             <location x="6" y="-6" z="8" w="1" />
             <target x="6" y="-6" z="0.0" />
@@ -98,17 +91,53 @@
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
+        <!-- TABLE -->
+
         <material id="plate" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
             <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
+
         <material id="plate1" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
             <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+        <material id="tableTop" shininess="5">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.7" g="0.7" b="0.7" a="1.0" />
+            <diffuse r="0.2" g="0.2" b="0.2" a="1.0" />
+            <specular r="0.2" g="0.2" b="0.2" a="1.0" />
+        </material>
+
+        <!-- CHAIR -->
+
+        <material id="chairLeg" shininess="2">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
+
+        <material id="chair" shininess="2">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.2" g="0.1" b="0.1" a="1.0" />
+        </material>
+
+
+
+
+        <material id="floor" shininess="2">
+            <emission r="0.0" g="0" b="0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.2" g="0.2" b="0.2" a="1.0" />
         </material>
     </materials>
 
@@ -349,7 +378,7 @@
                 <translate x="0" y="0" z="1" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="tableTop" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -392,7 +421,7 @@
                 <translate x="0.3" y="0" z="-0.5" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="chairLeg" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -404,7 +433,7 @@
                 <translate x="0" y="0.3" z="-0.5" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="chairLeg" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -416,7 +445,7 @@
                 <translate x="-0.4" y="-0.05" z="-0.5" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="chairLeg" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -428,7 +457,7 @@
                 <translate x="-0.05" y="-0.4" z="-0.5" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="chairLeg" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -439,7 +468,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -451,7 +480,7 @@
                 <transformationref id= "ChairBackSupportCover"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -463,7 +492,7 @@
                 <translate x="0" y="0" z="-0.07"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -475,7 +504,7 @@
                 <transformationref id="ChairBack"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodChair" length_s="0" length_t="0"/>
             <children>
@@ -488,7 +517,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodChair" length_s="0" length_t="0"/>
             <children>
@@ -501,7 +530,7 @@
                 <rotate axis="z" angle="45" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodChair" length_s="0" length_t="0"/>
             <children>
@@ -513,7 +542,7 @@
                 <translate x="0" y="0" z="0.5" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="chair" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -532,7 +561,7 @@
                 <rotate axis="z" angle="180" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="chair" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1512,7 +1541,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="floor" />
             </materials>
             <texture id="woodTile" length_s="4.5" length_t="4.5"/>
             <children>
