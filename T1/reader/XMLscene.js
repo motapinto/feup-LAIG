@@ -37,7 +37,7 @@ class XMLscene extends CGFscene {
         this.floor = 0;
         this.floorMax = 0;
         this.viewsList = ['Default'];
-        this.selectedView = 'Default';
+        this.selectedCamera = 'Default';
 
         this.setUpdatePeriod(100);
     }
@@ -122,8 +122,10 @@ class XMLscene extends CGFscene {
     }
 
     updateCamera(){
-        if(this.selectedView == 'Default')
-        this.setActiveCamera(this.viewsList[this.selectedView]);
+        if(this.selectedCamera == 'Default')
+            this.setActiveCamera(this.camera);
+        else
+            this.setActiveCamera(this.graph.views[this.selectedCamera]);
     }
 
     /**
@@ -144,29 +146,10 @@ class XMLscene extends CGFscene {
         this.pushMatrix();
 
             for (var i = 0; i < this.lights.length; i++) {
-                this.lights[i].disable();
+                this.lights[i].update();
                 
             }
-            this.lights[0].enable();
-            this.lights[0].setVisible(true);
-            this.lights[0].update();
 
-            this.lights[1].enable();
-            this.lights[1].setVisible(true);
-            this.lights[1].update();
-
-            this.lights[2].enable();
-            this.lights[2].setVisible(true);
-            this.lights[2].update();
-
-            this.lights[3].enable();
-            this.lights[3].setVisible(true);
-            this.lights[3].update();
-
-            this.lights[4].enable();
-            this.lights[4].setVisible(true);
-            this.lights[4].update();
-            
 
             if (this.sceneInited) {
                 // Draw axis
