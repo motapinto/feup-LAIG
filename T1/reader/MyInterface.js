@@ -55,12 +55,4 @@ class MyInterface extends CGFinterface {
     isKeyPressed(keyCode) {
         return this.activeKeys[keyCode] || false;
     }
-    
-    addCamerasList(){
-        this.setActiveCamera(this.scene.graph.views[this.scene.selectedCamera]);
-
-        //Dropdown for cameras
-        this.gui.add(this.scene, 'selectedCamera', this.scene.viewsList).name('Selected Camera').onChange(this.setActiveCamera(this.scene.graph.views[this.scene.selectedCamera]));
-        
-    }
 }
