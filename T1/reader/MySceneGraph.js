@@ -1054,7 +1054,15 @@ class MySceneGraph {
                 texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t");
                 if (isNaN(texture.length_t))
                     return "no length_t defined for texture " + texture.id + " in component " + componentID;
+                if ( (texture.length_s == 0 && texture.length_t != 0) || (texture.length_s == 0 && texture.length_t != 0) ) 
+                    return "length_s and length_t must be both higher or equal to 0 in component " + componentID;
             }
+            else{
+                texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s", false);
+                texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t", false);
+                if(texture.length_t != null || texture.length_s != null) 
+                    this.onXMLMinorError("length_s and length_t must not be defined in texture in component " + componentID);
+            } 
 
             // Children
             var components = [];

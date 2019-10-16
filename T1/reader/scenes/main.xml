@@ -36,27 +36,22 @@
         </spot>
         <spot id="Lamp2" enabled="1" angle="90.0" exponent="1.0">
             <location x="6" y="18" z="3.5" w="1" />
-            <target x="6.5" y="3.5" z="0.0" />
+            <target x="6" y="18" z="0.0" />
             <ambient r="0.4" g="0.25" b="0.1" a="1" />
             <diffuse r="0.5" g="0.5" b="0.5" a="1" />
             <specular r="0.4" g="0.4" b="0.4" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="StairLight" enabled="1" angle="180.0" exponent="1.0">
+        <spot id="StairLight" enabled="1" angle="90.0" exponent="1.0">
             <location x="-0.5" y="19.5" z="4" w="1" />
             <target x="-0.5" y="19.5" z="0" />
             <ambient r="0.4" g="0.25" b="0.1" a="1" />
-            <diffuse r="0.1" g="0.1" b="0.1" a="1" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="1" />
+            <specular r="0.4" g="0.4" b="0.4" a="1.0" />
             <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
         </spot>
-        <omni id="sun" enabled="1" >
-            <location x="-5" y="25" z="8" w="1" />
-            <ambient r="0.4" g="0.25" b="0.1" a="1" />
-            <diffuse r="0.8" g="0.8" b="0.8" a="1" />
-            <specular r="0.4" g="0.4" b="0.4" a="1" />
-            <attenuation constant="0" linear="1" quadratic="0" />  
-        </omni>
+        
+        
     </lights>
 
     <textures>
@@ -170,6 +165,20 @@
             <ambient r="0.15" g="0.15" b="0.15" a="1.0" />
             <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
             <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+        </material>
+
+        <!-- RESTAURANT ACCESSORIES -->
+        <material id="stair" shininess="1">
+            <emission r="0.0" g="0" b="0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.3" g="0.3" b="0.3" a="1.0" />
+        </material>
+        <material id="stairSupport" shininess="2">
+            <emission r="0.0" g="0" b="0" a="1.0" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
 
 
@@ -1355,7 +1364,7 @@
                 <rotate axis="y" angle="45" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="stairSupport" />
             </materials>
             <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
@@ -1368,7 +1377,7 @@
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1380,7 +1389,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1392,7 +1401,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1405,7 +1414,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1418,7 +1427,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1431,7 +1440,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1444,7 +1453,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1457,7 +1466,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1470,7 +1479,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1483,7 +1492,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1496,7 +1505,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1509,7 +1518,7 @@
                 <translate x="0.2" y="0" z="0.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1521,7 +1530,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1535,7 +1544,7 @@
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1549,7 +1558,7 @@
                 <rotate axis="z" angle="-90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1561,7 +1570,7 @@
                 <translate x="0" y="-0.5" z="2.3" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit" length_s="0" length_t="0"/>
             <children>
@@ -1573,7 +1582,7 @@
                 <translate x="-1" y="19.5" z="0.3" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="stair" />
             </materials>
             <texture id="woodOak" length_s="0" length_t="0"/>
             <children>
