@@ -8,6 +8,14 @@
 > Luís Ramos ([luispvramos](https://github.com/LuisPRamos))\
 > Martim Silva ([motapinto](https://github.com/motapinto))
 
+### To do
+
+- [ ] Parsing camaras
+- [ ] Folder das camaras com checkboxes das varias cameras - fazer 6(nivel 0 dentro, nivel 1 dentro, 2 de fora, 2 de cima)
+- [ ] Perceber o que esta mal nas luzes e materiais de todos os objetos - tirar todos os defaultMaterial
+- [ ] Textura esfera e torus
+- [ ] Torus otimizado
+
 
  
 
