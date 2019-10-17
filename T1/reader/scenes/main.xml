@@ -387,7 +387,7 @@
             <cylinder base="0.4" top="0" height="0.2" slices="4" stacks="1" />
         </primitive>
         <primitive id="LightBulb">
-            <sphere radius="0.3" slices="20" stacks="10" />
+            <sphere radius="0.15" slices="20" stacks="10" />
         </primitive>
 
     </primitives>
