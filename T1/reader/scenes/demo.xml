@@ -59,6 +59,10 @@
         <primitive id="demoTorus">
             <torus inner="2" outer="4" slices="50" loops="20" />
         </primitive>
+        <primitive id="Torus">
+            <torus inner="1" outer="2" slices="40" loops="22" />
+        </primitive>
+
     </primitives>
 
     <components>
