@@ -247,7 +247,6 @@ class MySceneGraph {
                 continue;
             }
 
-            
             // Get id of the current view.
             var viewID = this.reader.getString(children[i], 'id');
             if (viewID == null)

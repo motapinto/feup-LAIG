@@ -135,13 +135,31 @@ class XMLscene extends CGFscene {
         }
     }
 
-    update(t){
+    update(t) {
         this.checkKeys(t);
     }
 
-    updateCamera(){
+    updateCamera() {
         this.camera = this.graph.views[this.selectedCamera];
         this.interface.setActiveCamera(this.camera);
+    }
+
+    updateLights() {
+        //Updates lights in the display
+        let i = 0;
+        for (let key in this.lightsInterface) {
+            if (this.lightsInterface.hasOwnProperty(key)) {
+                if (this.lightsInterface[key]) {
+                    this.lights[i].setVisible(true);
+                    this.lights[i].enable();
+                }
+                else {
+                    this.lights[i].setVisible(false);
+                    this.lights[i].disable();
+                }
+                this.lights[i++].update();
+            }
+        }
     }
 
     /**
@@ -159,37 +177,8 @@ class XMLscene extends CGFscene {
         
         this.pushMatrix();
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+            this.updateLights();
             
-            //Updates lights in the display
-            let i = 0;
-            for (let key in this.lightsInterface) {
-                if (this.lightsInterface.hasOwnProperty(key)) {
-                    if (this.lightsInterface[key]) {
-                        this.lights[i].setVisible(true);
-                        this.lights[i].enable();
-                    }
-                    else {
-                        this.lights[i].setVisible(false);
-                        this.lights[i].disable();
-                    }
-                    this.lights[i++].update();
-                }
-            }
-
-            //Updates cameras in the display
-            for (let key in this.camerasInterface) {
-                if (this.camerasInterface.hasOwnProperty(key)) {
-                    if (this.camerasInterface[key]) {
-                        //this.selectedCamera = key;
-                        //console.log(this.graph.views);
-                        //this.camera = this.camerasInterface[key];
-                        //this.interface.setActiveCamera(this.camerasInterface[key]);
-                    }
-                }
-            }
-
-
-
 
             if (this.sceneInited) {
                 // Draw axis
