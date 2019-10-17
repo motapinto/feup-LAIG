@@ -19,12 +19,14 @@ class XMLscene extends CGFscene {
      */
     init(application) {
         super.init(application);
-
         this.sceneInited = false;
-
         this.initCameras();
-
         this.enableTextures(true);
+
+        // Interface lights to be changed in display
+        this.lightsInterface = {};
+        // Interface lights to be changed in display
+        this.camerasInterface = {};
 
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
@@ -107,22 +109,23 @@ class XMLscene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
     /** Handler called when the graph is finally loaded. 
      * As loading is asynchronous, this may be called already after the application has started the run loop
      */
-    onGraphLoaded() {
+    onGraphLoaded() { 
         this.axis = new CGFaxis(this, this.graph.referenceLength);
-
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
-
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
-
+        
+        
         this.initLights();
-
         this.sceneInited = true;
-
         this.selectedCamera = this.graph.idView;
-        this.interface.addCamerasList(this.graph.views);
+        
+        // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
+        this.interface.LightsFolder(this.graph.lights);
+        this.interface.CamerasFolder(this.graph.views);
     }
 
     checkKeys(t) {
@@ -154,15 +157,26 @@ class XMLscene extends CGFscene {
         this.applyViewMatrix();
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
-
-        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-
+        
         this.pushMatrix();
-
-            for (var i = 0; i < this.lights.length; i++) {
-                this.lights[i].update();
-                
+            this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+            //Updates lights in the display
+            var i = 0;
+            for (var key in this.lightsInterface) {
+                if (this.lightsInterface.hasOwnProperty(key)) {
+                    if (this.lightsInterface[key]) {
+                        this.lights[i].setVisible(true);
+                        this.lights[i].enable();
+                    }
+                    else {
+                        this.lights[i].setVisible(false);
+                        this.lights[i].disable();
+                    }
+                    this.lights[i++].update();
+                }
             }
+
+            //Updates cameras in the display
 
 
             if (this.sceneInited) {

@@ -19,10 +19,6 @@ class MyInterface extends CGFinterface {
         //  http://workshop.chromeexperiments.com/examples/gui
 
         this.gui = new dat.GUI();
-
-        // add a group of controls (and open/expand by defult)
-
-
         this.initKeys();
 
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
@@ -31,8 +27,35 @@ class MyInterface extends CGFinterface {
         //Sims still floor
         this.gui.add(this.scene, 'floorUp').name("Floor Up"); 
         this.gui.add(this.scene, 'floorDown').name("Floor Down"); 
+
+        //LightsFolder called in onGraphLoaded() function
+        //CamerasFolder called in onGraphLoaded() function
         
         return true;
+    }
+
+    LightsFolder(lights) {
+        var lightsFolder = this.gui.addFolder("Lights");
+        lightsFolder.open();
+
+        for (var key in lights) {
+            if (lights.hasOwnProperty(key)) {
+                    this.scene.lightsInterface[key] = lights[key][0]; //light name 
+                    lightsFolder.add(this.scene.lightsInterface, key);
+            }
+        }
+    }
+
+    CamerasFolder(views) {
+        var camerasFolder = this.gui.addFolder("Cameras");
+        camerasFolder.open();
+
+        for (var key in views) {
+            if (views.hasOwnProperty(key)) {
+                    this.scene.camerasInterface[key] = views[key][0]; //camera name 
+                    camerasFolder.add(this.scene.camerasInterface, key);
+            }
+        }
     }
     
     /**

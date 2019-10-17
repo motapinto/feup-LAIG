@@ -18,7 +18,7 @@
     </globals>
 
     <lights>
-        <spot id="Lamp0" enabled="1" angle="90.0" exponent="1.0">
+        <spot id="Lamp0" enabled="0" angle="90.0" exponent="1.0">
             <location x="3.5" y="3.5" z="3.5" w="1" />
             <target x="3.5" y="3.5" z="0.0" />
             <ambient r="0.4" g="0.25" b="0.1" a="1" />
@@ -26,7 +26,7 @@
             <specular r="0.4" g="0.4" b="0.4" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="Lamp1" enabled="1" angle="90.0" exponent="1.0">
+        <spot id="Lamp1" enabled="0" angle="90.0" exponent="1.0">
             <location x="6.5" y="3.5" z="3.5" w="1" />
             <target x="6.5" y="3.5" z="0.0" />
             <ambient r="0.4" g="0.25" b="0.1" a="1" />
@@ -34,7 +34,7 @@
             <specular r="0.4" g="0.4" b="0.4" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="Lamp2" enabled="1" angle="90.0" exponent="1.0">
+        <spot id="Lamp2" enabled="0" angle="90.0" exponent="1.0">
             <location x="6" y="18" z="3.5" w="1" />
             <target x="6" y="18" z="0.0" />
             <ambient r="0.4" g="0.25" b="0.1" a="1" />
@@ -42,7 +42,7 @@
             <specular r="0.4" g="0.4" b="0.4" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="StairLight" enabled="1" angle="90.0" exponent="1.0">
+        <spot id="StairLight" enabled="0" angle="90.0" exponent="1.0">
             <location x="-0.5" y="19.5" z="4" w="1" />
             <target x="-0.5" y="19.5" z="0" />
             <ambient r="0.4" g="0.25" b="0.1" a="1" />
@@ -50,6 +50,21 @@
             <specular r="0.4" g="0.4" b="0.4" a="1.0" />
             <attenuation constant="0.0" linear="0.0" quadratic="1.0" />
         </spot>
+        <spot id="LightsPost" enabled="0" angle="90.0" exponent="1.0">
+            <location x="6" y="-6" z="8" w="1" />
+            <target x="6" y="-6" z="0.0" />
+            <ambient r="1" g="1" b="1" a="1" />
+            <diffuse r="1" g="1" b="1" a="1" />
+            <specular r="1" g="1" b="1" a="1.0" />
+            <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
+        </spot>
+        <omni id="sun" enabled="0" >
+            <location x="-5" y="25" z="8" w="1" />
+            <ambient r="1" g="1" b="1" a="1" />
+            <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+            <specular r="0.4" g="0.4" b="0.4" a="1" />
+            <attenuation constant="1" linear="0" quadratic="0" />  
+        </omni>
         
         
     </lights>
@@ -102,11 +117,11 @@
         <!-- TABLE -->
         <material id="plate" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
-            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
-            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="0.2" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.7" g="0.7" b="0.7" a="1.0" />
         </material>
-        <material id="plate1" shininess="10">
+        <material id="plateM" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
             <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -251,7 +266,7 @@
             <rectangle x1="0" y1="0" x2="1.13" y2="1.13" />
         </primitive>
         <primitive id="Plate">
-            <torus inner="0.1" outer="0.1" slices="40" loops="2" />
+            <sphere radius="0.2" slices="40" stacks="40" />
         </primitive>
 
         <!-- CHAIR -->
@@ -383,11 +398,11 @@
         <component id="Plate1">
             <transformation>
                 <translate x="-0.2" y="-0.2" z="1.101" />
-                <scale x="1" y="1" z="1" />
+                <scale x="1" y="1" z="0.1" />
             </transformation>
             <materials>
                 <material id="plate" />
-                <material id="plate1" />
+                <material id="plateM" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
@@ -400,7 +415,7 @@
             </transformation>
             <materials>
                 <material id="plate" />
-                <material id="plate1" />
+                <material id="plateM" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
