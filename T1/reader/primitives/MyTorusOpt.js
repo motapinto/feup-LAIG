@@ -29,9 +29,10 @@ class MyTorus extends CGFobject {
 
         if(this.loops % 2){
             var j_max = ((this.loops + 1) >> 1) + 1; //round this.loops/4 and add 1
-    
+            var max_slices = (this.slices + 1) >> 1;
+
             // Vertices and normals generation
-            for(let i = 0; i <= this.slices; i++) {
+            for(let i = 0; i <= max_slices; i++) {
                 for(let j = 0; j < j_max; j++) {                
                     let nx = Math.cos(delta_theta*i)*Math.cos(delta_phi*j);
                     let ny = Math.cos(delta_theta*i)*Math.sin(delta_phi*j);
@@ -70,7 +71,7 @@ class MyTorus extends CGFobject {
             var quadrant_delta = 4;
             var vertices_slice = j_max * 4; //Number of vertices per stack
     
-            for(let i = 0; i < this.slices; i++) {
+            for(let i = 0; i < max_slices; i++) {
                 for(let j = 0; j < (j_max - 1); j++) {
                     
                     let a = (j+1)*quadrant_delta + i * vertices_slice;
@@ -110,9 +111,10 @@ class MyTorus extends CGFobject {
         }
         else{
             var j_max = (((this.loops >> 1) + 1) >> 1) + 1; //round this.loops/4 and add 1
-    
+            var max_slices = (this.slices + 1) >> 1;
+
             // Vertices and normals generation
-            for(let i = 0; i <= this.slices; i++) {
+            for(let i = 0; i <= max_slices; i++) {
                 for(let j = 0; j < j_max; j++) {                
                     let nx = Math.cos(delta_theta*i)*Math.cos(delta_phi*j);
                     let ny = Math.cos(delta_theta*i)*Math.sin(delta_phi*j);
@@ -163,7 +165,7 @@ class MyTorus extends CGFobject {
             var quadrant_delta = 8;
             var vertices_slice = j_max * 8; //Number of vertices per slice
     
-            for(let i = 0; i < this.slices; i++) {
+            for(let i = 0; i < max_slices; i++) {
                 for(let j = 0; j < (j_max - 1); j++) {
                     
                     let a = (j+1)*quadrant_delta + i * vertices_slice;
@@ -177,23 +179,27 @@ class MyTorus extends CGFobject {
                     //Top right triangle
                     this.indices.push(a, d, b);
     
-                    // 2nd Quadrant
-                    //Bottom left triangle
-                    this.indices.push(a + 1, c + 1, b + 1);
-                    //Top right triangle
-                    this.indices.push(a + 1, b + 1, d + 1);
-    
+                    if(j != (j_max-2)){
+                        // 2nd Quadrant
+                        //Bottom left triangle
+                        this.indices.push(a + 1, c + 1, b + 1);
+                        //Top right triangle
+                        this.indices.push(a + 1, b + 1, d + 1);
+                    }
+
                     // 3rd Quadrant
                     //Bottom left triangle
                     this.indices.push(c + 2, a + 2, b + 2);
                     //Top right triangle
                     this.indices.push(a + 2, d + 2, b + 2);
     
-                    // 4th Quadrant
-                    //Bottom left triangle
-                    this.indices.push(a + 3, c + 3, b + 3);
-                    //Top right triangle
-                    this.indices.push(a + 3, b + 3, d + 3);
+                    if(j != (j_max-2)){
+                        // 4th Quadrant
+                        //Bottom left triangle
+                        this.indices.push(a + 3, c + 3, b + 3);
+                        //Top right triangle
+                        this.indices.push(a + 3, b + 3, d + 3);
+                    }
     
                     // 5th Quadrant
                     //Bottom left triangle
@@ -201,23 +207,27 @@ class MyTorus extends CGFobject {
                     //Top right triangle
                     this.indices.push(a + 4, b + 4, d + 4);
     
-                    // 6th Quadrant
-                    //Bottom left triangle
-                    this.indices.push(c + 5, a + 5, b + 5);
-                    //Top right triangle
-                    this.indices.push(a + 5, d + 5, b + 5);
-    
+                    if(j != (j_max-2)){
+                        // 6th Quadrant
+                        //Bottom left triangle
+                        this.indices.push(c + 5, a + 5, b + 5);
+                        //Top right triangle
+                        this.indices.push(a + 5, d + 5, b + 5);
+                    }
+
                     // 7th Quadrant
                     //Bottom left triangle
                     this.indices.push(a + 6, c + 6, b + 6);
                     //Top right triangle
                     this.indices.push(a + 6, b + 6, d + 6);
     
-                    // 8th Quadrant
-                    //Bottom left triangle
-                    this.indices.push(c + 7, a + 7, b + 7);
-                    //Top right triangle
-                    this.indices.push(a + 7, d + 7, b + 7);
+                    if(j != (j_max-2)){
+                        // 8th Quadrant
+                        //Bottom left triangle
+                        this.indices.push(c + 7, a + 7, b + 7);
+                        //Top right triangle
+                        this.indices.push(a + 7, d + 7, b + 7);
+                    }
                 }
             }
         }    
