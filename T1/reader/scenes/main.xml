@@ -432,7 +432,7 @@
                 <material id="plate" />
                 <material id="plateM" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id="Plate" />
             </children>
@@ -445,7 +445,7 @@
                 <material id="plate" />
                 <material id="plateM" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Plate1" />
             </children>
@@ -479,7 +479,7 @@
             <materials>
                 <material id="tableTop" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="TableTop" />
             </children>
@@ -503,7 +503,7 @@
             <materials>
                 <material id="tableBottom" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableLeg" />
                 <componentref id="TableSupport" />
@@ -522,7 +522,7 @@
             <materials>
                 <material id="chairLeg" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="ChairLeg1" />
             </children>
@@ -534,7 +534,7 @@
             <materials>
                 <material id="chairLeg" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="ChairLeg1" />
             </children>
@@ -546,7 +546,7 @@
             <materials>
                 <material id="chairLeg" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="ChairLeg2" />
             </children>
@@ -558,7 +558,7 @@
             <materials>
                 <material id="chairLeg" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="ChairLeg2" />
             </children>
@@ -569,7 +569,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="ChairBackSupport" />
             </children>
@@ -581,7 +581,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                     <primitiveref id = "ChairBackSupportCover" />
             </children>
@@ -593,7 +593,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ChairBackSupportCover" />
             </children>
@@ -643,7 +643,7 @@
             <materials>
                 <material id="chair" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ChairLeg1.1" />
                 <componentref id="ChairLeg1.2" />
@@ -662,7 +662,7 @@
             <materials>
                 <material id="chair" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Chair1" />
             </children>
@@ -675,7 +675,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Table" />
                 <componentref id="Chair1" />
@@ -689,7 +689,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSet" />
             </children>
@@ -701,7 +701,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSet2" />
                 <componentref id="TableSet" />
@@ -713,7 +713,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSet1" />
                 <componentref id="TableSet" />
@@ -725,7 +725,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSet0" />
             </children>
@@ -737,7 +737,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSetRow" />
             </children>
@@ -749,7 +749,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSetRow" />
                 <componentref id="TableSetRow7" />
@@ -762,7 +762,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSetRow6" />
                 <componentref id="TableSetRow" />
@@ -775,7 +775,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSetRow5" />
                 <componentref id="TableSetRow" />
@@ -788,7 +788,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSetRow4" />
                 <componentref id="TableSetRow" />
@@ -801,7 +801,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSetRow3" />
                 <componentref id="TableSetRow" />
@@ -814,7 +814,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="TableSetRow2" />
                 <componentref id="TableSetRow" />
@@ -868,7 +868,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="BarCounterCenter" />
             </children>
@@ -880,7 +880,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarCounterTop" />
                 <componentref id="BarCounterCenter" />
@@ -893,7 +893,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarCounter" />
             </children>
@@ -905,7 +905,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarCounter1" />
                 <componentref id="BarCounter" />
@@ -918,7 +918,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarCounter2" />
                 <componentref id="BarCounter" />
@@ -931,7 +931,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarCounter3" />
                 <componentref id="BarCounter" />
@@ -944,7 +944,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarCounter4" />
                 <componentref id="BarCounter" />
@@ -957,7 +957,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarCounter5" />
                 <componentref id="BarCounter" />
@@ -970,7 +970,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarCounter6" />
                 <componentref id="BarCounter" />
@@ -1010,7 +1010,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="ChairBaseCover" />
             </children>
@@ -1022,7 +1022,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChairBaseCover" />
             </children>
@@ -1035,7 +1035,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChairBaseCover2" />
                 <componentref id="BarChairBaseCover" />
@@ -1049,7 +1049,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChairBase" />
             </children>
@@ -1062,7 +1062,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChairBackSupport" />
                 <componentref id="BarChairLeg" />
@@ -1076,7 +1076,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChair" />
             </children>
@@ -1088,7 +1088,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChair" />                
                 <componentref id="BarChair1" />
@@ -1101,7 +1101,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChair" />                
                 <componentref id="BarChair2" />
@@ -1114,7 +1114,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChair" />                
                 <componentref id="BarChair3" />
@@ -1127,7 +1127,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChair4" />
                 <componentref id="BarChair" />                
@@ -1140,7 +1140,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChair5" />
                 <componentref id="BarChair" />                
@@ -1153,7 +1153,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="BarChair6" />
                 <componentref id="BarChair" />                
@@ -1242,7 +1242,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="LampLight" />              
             </children>
@@ -1279,7 +1279,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="LampLight" />
                 <componentref id="LampStick" />  
@@ -1293,7 +1293,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Lamp" />              
             </children>
@@ -1305,7 +1305,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Lamp8" /> 
                 <componentref id="Lamp" />              
@@ -1318,7 +1318,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Lamp7" /> 
                 <componentref id="Lamp" />              
@@ -1331,7 +1331,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Lamp6" /> 
                 <componentref id="Lamp" />              
@@ -1344,7 +1344,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Lamp5" /> 
                 <componentref id="Lamp" />              
@@ -1357,7 +1357,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Lamp4" /> 
                 <componentref id="Lamp" />              
@@ -1370,7 +1370,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Lamp3" /> 
                 <componentref id="Lamp" />              
@@ -1383,7 +1383,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Lamp2" /> 
                 <componentref id="Lamp" />              
@@ -1422,7 +1422,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="StairStep" /> 
             </children>
@@ -1434,7 +1434,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
             </children>
@@ -1446,7 +1446,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep11" /> 
@@ -1459,7 +1459,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep10" /> 
@@ -1472,7 +1472,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep9" /> 
@@ -1485,7 +1485,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep8" /> 
@@ -1498,7 +1498,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep7" /> 
@@ -1511,7 +1511,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep6" /> 
@@ -1524,7 +1524,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep5" /> 
@@ -1537,7 +1537,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep4" /> 
@@ -1550,7 +1550,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep3" /> 
@@ -1563,7 +1563,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" />
                 <componentref id="StairStep2" />  
@@ -1575,7 +1575,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep" /> 
                 <componentref id="StairStep1" /> 
@@ -1589,7 +1589,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep0" /> 
                 <componentref id="StairSupport" />
@@ -1603,7 +1603,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="StairStep1.0" /> 
             </children>
@@ -1615,7 +1615,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="StairPlatform" /> 
             </children>
@@ -1699,7 +1699,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="Window1" />           
             </children>
@@ -1712,7 +1712,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>   
                 <componentref id="Window1" />           
             </children>
@@ -1724,7 +1724,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>   
                 <componentref id="Window1" />           
                 <componentref id="Window1.4" />           
@@ -1737,7 +1737,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Window1.3" />     
                 <componentref id="Window1" />           
@@ -1750,7 +1750,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Window1.2" />     
                 <componentref id="Window1" />           
@@ -1779,7 +1779,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="Window2" />           
             </children>
@@ -1792,7 +1792,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>   
                 <componentref id="Window2" />           
             </children>
@@ -1804,7 +1804,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>   
                 <componentref id="Window2" />           
                 <componentref id="Window2.4" />           
@@ -1817,7 +1817,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Window2.3" />     
                 <componentref id="Window2" />           
@@ -1830,7 +1830,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Window2.2" />     
                 <componentref id="Window2" />           
@@ -1842,7 +1842,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Window2.1" />     
                 <componentref id="Window2" />           
@@ -1906,7 +1906,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="none"/>
             <children>
                 <componentref id="RestaurantTiles" /> 
                 <componentref id="Window1.0" /> 
@@ -2016,7 +2016,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="LightCone" /> 
             </children>
@@ -2028,7 +2028,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="LightShield" /> 
             </children>
@@ -2040,7 +2040,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="LightShield" /> 
             </children>
@@ -2052,7 +2052,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="LightShield1" /> 
                 <componentref id="LightShield" />
@@ -2079,7 +2079,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="LightPost" /> 
             </children>
@@ -2116,7 +2116,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="LightCone" /> 
                 <componentref id="LightBase" />
@@ -2132,7 +2132,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="LightPostSet" /> 
             </children>
@@ -2144,7 +2144,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="LightPostSet" /> 
                 <componentref id="LightPostSet4" /> 
@@ -2157,7 +2157,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="LightPostSet" /> 
                 <componentref id="LightPostSet3" /> 
@@ -2170,7 +2170,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="LightPostSet" /> 
                 <componentref id="LightPostSet2" /> 
@@ -2196,7 +2196,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Sun" /> 
                 <componentref id="Terrain" /> 
@@ -2216,7 +2216,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="none"/>
             <children>
 
                 <!-- TABLE SET -->
