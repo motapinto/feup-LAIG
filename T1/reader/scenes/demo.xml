@@ -20,10 +20,16 @@
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </omni>
+        <omni id="demoLight1" enabled="1">
+            <location x="-9.8" y="-11.9" z="-10" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </omni>
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/highway-road.jpg" />
+        <texture id="demoTexture" file="scenes/images/parking-lot.jpg" />
     </textures>
 
     <materials>
@@ -48,7 +54,10 @@
                         x3="3" y3="0" z3="0" />        
         </primitive>
         <primitive id="demoSphere">
-            <sphere radius="2" slices="6" stacks="2" />        
+            <sphere radius="2" slices="21" stacks="5" />        
+        </primitive>
+        <primitive id="demoTorus">
+            <torus inner="2" outer="4" slices="50" loops="20" />
         </primitive>
     </primitives>
 
@@ -59,7 +68,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="none"/>
+            <texture id="demoTexture"/>
             <children>
                 <primitiveref id="demoSphere" />
             </children>
