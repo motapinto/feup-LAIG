@@ -38,9 +38,9 @@ class MyInterface extends CGFinterface {
         var lightsFolder = this.gui.addFolder("Lights");
         lightsFolder.open();
 
-        for (var key in lights) {
+        for (let key in lights) { //key = light name 
             if (lights.hasOwnProperty(key)) {
-                    this.scene.lightsInterface[key] = lights[key][0]; //light name 
+                    this.scene.lightsInterface[key] = lights[key][0]; 
                     lightsFolder.add(this.scene.lightsInterface, key);
             }
         }
@@ -50,11 +50,19 @@ class MyInterface extends CGFinterface {
         var camerasFolder = this.gui.addFolder("Cameras");
         camerasFolder.open();
 
-        for (var key in views) {
-            if (views.hasOwnProperty(key)) {
-                    this.scene.camerasInterface[key] = views[key][0]; //camera name 
-                    camerasFolder.add(this.scene.camerasInterface, key);
+        console.log(views[0]);
+
+        for (let key in views) {
+            if (views.hasOwnProperty(key) || key != "defaultCamera") {
+                if(key == "defaultCamera") {
+                    this.scene.camerasInterface[key] = true; 
+                }
+                else {
+                    this.scene.camerasInterface[key] = false; 
+                }
+                camerasFolder.add(this.scene.camerasInterface, key);
             }
+
         }
     }
     

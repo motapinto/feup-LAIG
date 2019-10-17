@@ -139,10 +139,7 @@ class XMLscene extends CGFscene {
     }
 
     updateCamera(){
-        if(this.selectedCamera == 'Default')
-            this.setActiveCamera(this.camera);
-        else
-            this.setActiveCamera(this.graph.views[this.selectedCamera]);
+        
     }
 
     /**
@@ -160,9 +157,10 @@ class XMLscene extends CGFscene {
         
         this.pushMatrix();
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+            
             //Updates lights in the display
-            var i = 0;
-            for (var key in this.lightsInterface) {
+            let i = 0;
+            for (let key in this.lightsInterface) {
                 if (this.lightsInterface.hasOwnProperty(key)) {
                     if (this.lightsInterface[key]) {
                         this.lights[i].setVisible(true);
@@ -177,6 +175,18 @@ class XMLscene extends CGFscene {
             }
 
             //Updates cameras in the display
+            for (let key in this.camerasInterface) {
+                if (this.camerasInterface.hasOwnProperty(key)) {
+                    if (this.camerasInterface[key]) {
+                        //this.selectedCamera = key;
+                        //console.log(this.graph.views);
+                        //this.camera = this.camerasInterface[key];
+                        //this.interface.setActiveCamera(this.camerasInterface[key]);
+                    }
+                }
+            }
+
+
 
 
             if (this.sceneInited) {
