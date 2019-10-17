@@ -57,10 +57,7 @@
             <sphere radius="2" slices="21" stacks="5" />        
         </primitive>
         <primitive id="demoTorus">
-            <torus inner="2" outer="4" slices="50" loops="20" />
-        </primitive>
-        <primitive id="Torus">
-            <torus inner="1" outer="2" slices="40" loops="22" />
+            <torus inner="2" outer="4" slices="5" loops="10" />
         </primitive>
 
     </primitives>
@@ -74,7 +71,7 @@
             </materials>
             <texture id="demoTexture"/>
             <children>
-                <primitiveref id="demoSphere" />
+                <primitiveref id="demoTorus" />
             </children>
         </component>
     </components>
