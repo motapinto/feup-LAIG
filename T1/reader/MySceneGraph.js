@@ -1047,15 +1047,21 @@ class MySceneGraph {
                 return "texture with ID " + texture.id + " must be defined in textures";
             
             if(texture.id != 'none' && texture.id != 'inherit'){
-                texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s");
-                if (isNaN(texture.length_s))
-                    return "no length_s defined for texture " + texture.id + " in component " + componentID;
+                texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s", false);
+                if (isNaN(texture.length_s) || texture.length_s == null){
+                    this.onXMLMinorError("no length_s defined for texture " + texture.id + " in component " + componentID + " assuming default value (0)");
+                    texture.length_s = 0;
+                }
     
-                texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t");
-                if (isNaN(texture.length_t))
-                    return "no length_t defined for texture " + texture.id + " in component " + componentID;
+                texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t", false);
+                if (isNaN(texture.length_t) || texture.length_t == null){
+                    this.onXMLMinorError("no length_t defined for texture " + texture.id + " in component " + componentID + " assuming default value (0)");
+                    texture.length_t = 0;
+                }
+
                 if ( (texture.length_s == 0 && texture.length_t != 0) || (texture.length_s == 0 && texture.length_t != 0) ) 
                     return "length_s and length_t must be both higher or equal to 0 in component " + componentID;
+                
             }
             else{
                 texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s", false);
