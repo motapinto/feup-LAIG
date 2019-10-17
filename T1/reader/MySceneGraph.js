@@ -297,7 +297,7 @@ class MySceneGraph {
                 }
             }
             this.scene.viewsList.push(viewID);
-            this.views[viewID] = new CGFcamera(angle, near, far, from, to);
+            this.views[viewID] = new CGFcamera((angle/180) * Math.PI, near, far, from, to);
         }
 
         if(this.views[this.idView] == null)

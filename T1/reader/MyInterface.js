@@ -46,24 +46,9 @@ class MyInterface extends CGFinterface {
         }
     }
 
-    CamerasFolder(views) {
-        var camerasFolder = this.gui.addFolder("Cameras");
-        camerasFolder.open();
-
-        console.log(views[0]);
-
-        for (let key in views) {
-            if (views.hasOwnProperty(key) || key != "defaultCamera") {
-                if(key == "defaultCamera") {
-                    this.scene.camerasInterface[key] = true; 
-                }
-                else {
-                    this.scene.camerasInterface[key] = false; 
-                }
-                camerasFolder.add(this.scene.camerasInterface, key);
-            }
-
-        }
+    CamerasFolder() {
+        //Dropdown for cameras
+        this.gui.add(this.scene, 'selectedCamera', this.scene.viewsList).name('Camera').onChange(this.scene.updateCamera(this.scene));
     }
     
     /**

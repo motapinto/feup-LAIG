@@ -126,6 +126,7 @@ class XMLscene extends CGFscene {
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
         this.interface.CamerasFolder(this.graph.views);
+        this.updateCamera();
     }
 
     checkKeys(t) {
@@ -139,7 +140,8 @@ class XMLscene extends CGFscene {
     }
 
     updateCamera(){
-        
+        this.camera = this.graph.views[this.selectedCamera];
+        this.interface.setActiveCamera(this.camera);
     }
 
     /**
