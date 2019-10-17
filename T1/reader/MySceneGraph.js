@@ -274,8 +274,8 @@ class MySceneGraph {
 
             grandChildren = children[i].children;
 
-            var from;
-            var to;
+            var from = null;
+            var to = null;
 
             for(var j = 0; j < grandChildren.length; j++){
                 switch (grandChildren[j].nodeName) {
@@ -296,6 +296,13 @@ class MySceneGraph {
                         break;
                 }
             }
+
+            if(from == null)
+                return "from value not found in perspective " + viewID;
+                
+            if(to == null)
+                return "to value not found in perspective " + viewID;
+                
             this.scene.viewsList.push(viewID);
             this.views[viewID] = new CGFcamera((angle/180) * Math.PI, near, far, from, to);
         }
@@ -614,13 +621,13 @@ class MySceneGraph {
             }
             //Check Variables
             if(emissionRGBA == null)
-                return "Emission value indefined for material with ID = " + materialID;
+                return "Emission value undefined for material with ID = " + materialID;
             if(ambientRGBA == null)
-                return "Ambient value indefined for material with ID = " + materialID;
+                return "Ambient value undefined for material with ID = " + materialID;
             if(diffuseRGBA == null)
-                return "Diffuse value indefined for material with ID = " + materialID;
+                return "Diffuse value undefined for material with ID = " + materialID;
             if(specularRGBA == null)
-                return "Specular value indefined for material with ID = " + materialID;
+                return "Specular value undefined for material with ID = " + materialID;
 
             // Creates material with the lxs specifics
             var readMaterial = new CGFappearance(this.scene);
@@ -1031,6 +1038,8 @@ class MySceneGraph {
                     return "material with ID " + materialID + " must be defined in materials"
                 materials.push(materialID);
             }
+            if(materials.length == 0)
+                return "component " + componentID + " must have at least one material defined";
             
             // Texture
             var texture = {
@@ -1046,14 +1055,16 @@ class MySceneGraph {
             else if (this.textures[texture.id] == null && texture.id != 'none' && texture.id != 'inherit')
                 return "texture with ID " + texture.id + " must be defined in textures";
             
+            texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s", false);
+            texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t", false);
+            
+            //Check if it is a special case ('none' or 'inherit')
             if(texture.id != 'none' && texture.id != 'inherit'){
-                texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s", false);
                 if (isNaN(texture.length_s) || texture.length_s == null){
                     this.onXMLMinorError("no length_s defined for texture " + texture.id + " in component " + componentID + " assuming default value (0)");
                     texture.length_s = 0;
                 }
     
-                texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t", false);
                 if (isNaN(texture.length_t) || texture.length_t == null){
                     this.onXMLMinorError("no length_t defined for texture " + texture.id + " in component " + componentID + " assuming default value (0)");
                     texture.length_t = 0;
@@ -1064,8 +1075,6 @@ class MySceneGraph {
                 
             }
             else{
-                texture.length_s = this.reader.getFloat(grandChildren[textureIndex], "length_s", false);
-                texture.length_t = this.reader.getFloat(grandChildren[textureIndex], "length_t", false);
                 if(texture.length_t != null || texture.length_s != null) 
                     this.onXMLMinorError("length_s and length_t must not be defined in texture in component " + componentID);
             } 
