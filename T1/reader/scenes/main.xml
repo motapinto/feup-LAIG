@@ -117,11 +117,11 @@
         <!-- TABLE -->
         <material id="plate" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
-            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
-            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="0.2" />
+            <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
+            <specular r="0.7" g="0.7" b="0.7" a="1.0" />
         </material>
-        <material id="plate1" shininess="10">
+        <material id="plateM" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
             <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -266,7 +266,7 @@
             <rectangle x1="0" y1="0" x2="1.13" y2="1.13" />
         </primitive>
         <primitive id="Plate">
-            <torus inner="0.1" outer="0.1" slices="40" loops="2" />
+            <sphere radius="0.2" slices="40" stacks="40" />
         </primitive>
 
         <!-- CHAIR -->
@@ -398,11 +398,11 @@
         <component id="Plate1">
             <transformation>
                 <translate x="-0.2" y="-0.2" z="1.101" />
-                <scale x="1" y="1" z="1" />
+                <scale x="1" y="1" z="0.1" />
             </transformation>
             <materials>
                 <material id="plate" />
-                <material id="plate1" />
+                <material id="plateM" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>
@@ -415,7 +415,7 @@
             </transformation>
             <materials>
                 <material id="plate" />
-                <material id="plate1" />
+                <material id="plateM" />
             </materials>
             <texture id="none" length_s="0" length_t="0"/>
             <children>

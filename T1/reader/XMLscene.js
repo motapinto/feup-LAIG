@@ -19,15 +19,14 @@ class XMLscene extends CGFscene {
      */
     init(application) {
         super.init(application);
-
         this.sceneInited = false;
-
         this.initCameras();
-
         this.enableTextures(true);
 
         // Interface lights to be changed in display
         this.lightsInterface = {};
+        // Interface lights to be changed in display
+        this.camerasInterface = {};
 
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
@@ -126,7 +125,7 @@ class XMLscene extends CGFscene {
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
-        this.interface.addCamerasList(this.graph.views);
+        this.interface.CamerasFolder(this.graph.views);
     }
 
     checkKeys(t) {
@@ -158,10 +157,9 @@ class XMLscene extends CGFscene {
         this.applyViewMatrix();
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
-        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-
+        
         this.pushMatrix();
-
+            this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
             //Updates lights in the display
             var i = 0;
             for (var key in this.lightsInterface) {
