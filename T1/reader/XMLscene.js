@@ -35,7 +35,7 @@ class XMLscene extends CGFscene {
 
         this.axis = new CGFaxis(this);
         this.displayAxis = false;
-        this.scaleFactor = 0.1;
+        this.scaleFactor = 1;
         this.floor = 0;
         this.floorMax = 0;
         this.viewsList = [];
