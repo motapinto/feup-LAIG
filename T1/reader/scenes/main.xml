@@ -2125,7 +2125,7 @@
         </component>
         <component id="Window3.3Set" floor="1">
             <transformation>
-                <translate x="0" y="-8" z="0" />
+                <translate x="0" y="-8.01" z="0" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -2137,7 +2137,7 @@
         </component>
         <component id="Window3.4Set" floor="1">
             <transformation>
-                <translate x="0" y="-8" z="0" />
+                <translate x="0" y="-8.01" z="0" />
             </transformation>
             <materials>
                 <material id="inherit" />
