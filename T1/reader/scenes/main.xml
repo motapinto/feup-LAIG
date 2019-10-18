@@ -6,37 +6,33 @@
     <!-- near - Near clipping plane distance -->
     <!-- -->
     <views default="topFloor">
-        <perspective id="topFloor" near="0.1" far="100" angle="28">
-            <from x="10" y="10" z="50" />
-            <to x="10" y="10" z="0" />
+        <perspective id="topFloor" near="0.1" far="100" angle="40">
+            <from x="5" y="50" z="-9" />
+            <to x="5" y="3" z="-10" />
         </perspective>
-        <perspective id="topFloorInclined" near="0.1" far="100" angle="40">
-            <from x="5" y="-15" z="15" />
-            <to x="5" y="10" z="0" />
+        <perspective id="topFloorInclined" near="0.1" far="100" angle="20">
+            <from x="5" y="32" z="50" />
+            <to x="5" y="8" z="-5" />
         </perspective>
         <perspective id="outsidePrespective" near="0.1" far="100" angle="30 ">
-            <from x="5" y="-17" z="4" />
-            <to x="5" y="15" z="0" />
+            <from x="5" y="3" z="15" />
+            <to x="5" y="3" z="-5" />
         </perspective>
         <perspective id="roadPrespective" near="0.1" far="100" angle="25">
-            <from x="60" y="0" z="5" />
-            <to x="-10" y="0" z="0" />
+            <from x="60" y="2" z="5" />
+            <to x="-10" y="2" z="0" />
         </perspective>
-        <perspective id="insideFloor1" near="0.1" far="100" angle="-80 ">
-            <from x="6" y="20" z="3.5" />
-            <to x="6" y="-1" z="2" />
+        <perspective id="insideFloor1" near="0.1" far="100" angle="80 ">
+            <from x="11" y="4" z="-20" />
+            <to x="-1" y="1" z="5" />
         </perspective>
-        <perspective id="insideFloor2" near="0.1" far="100" angle="-80">
-            <from x="6" y="20" z="6.5" />
-            <to x="6" y="-1" z="2" />
+        <perspective id="insideFloor2" near="0.1" far="100" angle="80">
+            <from x="5" y="9" z="-20" />
+            <to x="5" y="6" z="5" />
         </perspective>
-         <perspective id="insideFloor2.1" near="0.1" far="100" angle="-80">
-            <from x="6" y="16" z="12" />
-            <to x="6" y="-1" z="2" />
-        </perspective>
-        <perspective id="globalPrespective" near="0.1" far="100" angle="30">
-            <from x="5" y="-15" z="15" />
-            <to x="5" y="10" z="0" />
+        <perspective id="globalPrespective" near="0.1" far="100" angle="40">
+            <from x="-5" y="32" z="50" />
+            <to x="5" y="0" z="-20" />
         </perspective>
     </views>
 
@@ -47,47 +43,47 @@
 
     <lights>
         <spot id="Lamp0" enabled="1" angle="90.0" exponent="1.0">
-            <location x="3.3" y="3.5" z="2.5" w="1" />
-            <target x="3.3" y="3.5" z="-10.0" />
+            <location x="3.3" y="3.5" z="-3.5" w="1" />
+            <target x="3.3" y="-10" z="-3.5" />
             <ambient r="1" g="0.6" b="0" a="1" />
             <diffuse r="1" g="0.6" b="0" a="1" />
             <specular r="0.8" g="0.5" b="0" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
         <spot id="Lamp1" enabled="1" angle="90.0" exponent="1.0">
-            <location x="7.7" y="3.5" z="2.5" w="1" />
-            <target x="7.7" y="3.5" z="-10.0" />
+            <location x="7.7" y="3.5" z="-3.5" w="1" />
+            <target x="7.7" y="-10" z="-3.5" />
             <ambient r="1" g="0.6" b="0" a="1" />
             <diffuse r="1" g="0.6" b="0" a="1" />
             <specular r="0.8" g="0.5" b="0" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
         <spot id="Lamp2" enabled="0" angle="90.0" exponent="1.0">
-            <location x="6" y="18" z="2.5" w="1" />
-            <target x="6" y="18" z="-10.0" />
-            <ambient r="0.8" g="0.5" b="0.2" a="1" />
-            <diffuse r="1" g="1" b="1" a="1" />
-            <specular r="0.8" g="0.8" b="0.8" a="1.0" />
+            <location x="6" y="2.5" z="-18" w="1" />
+            <target x="6" y="2.5" z="-18" />
+            <ambient r="1" g="0.6" b="0" a="1" />
+            <diffuse r="1" g="0.6" b="0" a="1" />
+            <specular r="0.8" g="0.5" b="0" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
         <spot id="StairLight" enabled="0" angle="90.0" exponent="1.0">
-            <location x="-0.5" y="19.5" z="4" w="1" />
-            <target x="-0.5" y="19.5" z="-10" />
-            <ambient r="0.4" g="0.25" b="0.1" a="1" />
-            <diffuse r="0.5" g="0.5" b="0.5" a="1" />
-            <specular r="0.4" g="0.4" b="0.4" a="1.0" />
+            <location x="-0.5" y="4" z="-19.5" w="1" />
+            <target x="-0.5" y="-10" z="-19.5" />
+            <ambient r="1" g="0.6" b="0" a="1" />
+            <diffuse r="1" g="0.6" b="0" a="1" />
+            <specular r="0.8" g="0.5" b="0" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
         <spot id="LightsPost" enabled="0" angle="90.0" exponent="1.0">
-            <location x="-6" y="-12" z="5" w="1" />
+            <location x="-6" y="5" z="12" w="1" />
             <target x="6" y="-6" z="-10.0" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
             <specular r="1" g="1" b="1" a="1.0" />
             <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
         </spot>
-        <omni id="Moon" enabled="1" >
-            <location x="-5" y="25" z="8" w="1" />
+        <omni id="CelestialBody" enabled="1" >
+            <location x="-5" y="8" z="-25" w="1" />
             <ambient r="0.3" g="0.3" b="0.3" a="1" />
             <diffuse r="0.8" g="0.8" b="0.8" a="1" />
             <specular r="0.4" g="0.4" b="0.4" a="1" />
@@ -292,6 +288,12 @@
         <primitive id="Plate">
             <sphere radius="0.2" slices="40" stacks="40" />
         </primitive>
+        <primitive id="Napkin">
+            <triangle  x1="0" y1="0" z1="0"
+                        x2="0" y2="0.25" z2="0"
+                        x3="0" y3="0" z3="0.25" 
+            />  
+        </primitive>
 
         <!-- CHAIR -->
         <primitive id="ChairLeg1">
@@ -425,7 +427,7 @@
         <component id="Plate1">
             <transformation>
                 <translate x="-0.2" y="-0.2" z="1.101" />
-                <scale x="1" y="1" z="0.1" />
+                <scale x="1" y="1" z="0.05" />
             </transformation>
             <materials>
                 <material id="plate" />
@@ -447,6 +449,34 @@
             <texture id="none"/>
             <children>
                 <componentref id="Plate1" />
+            </children>
+        </component>
+        <component id="Napkin1">
+            <transformation>
+                <translate x="0.2" y="-0.6" z="1.5" />
+                <rotate axis="z" angle="90" />
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="plate" />
+                <material id="plateM" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="Napkin" />
+            </children>
+        </component>
+        <component id="Napkin2">
+            <transformation>
+                <rotate axis="z" angle="180" />
+            </transformation>
+            <materials>
+                <material id="plate" />
+                <material id="plateM" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="Napkin1" />
             </children>
         </component>
         <component id="TableLeg">
@@ -510,6 +540,8 @@
                 <componentref id="TableCover" />
                 <componentref id="Plate1" />
                 <componentref id="Plate2" />
+                <componentref id="Napkin1" />
+                <componentref id="Napkin2" />
             </children>
         </component>
         
@@ -1918,7 +1950,7 @@
                 <componentref id="Window1.0" />            
             </children>
         </component>
-        <component id="Roof" floor="1">
+        <component id="Roof1" floor="1">
             <transformation>
                 <translate x="0" y="0" z="5" />
             </transformation>
@@ -1928,6 +1960,17 @@
             <texture id="woodTile" length_s="4.5" length_t="4.5"/>
             <children>
                 <primitiveref id="Roof1" /> 
+            </children>
+        </component>
+        <component id="Roof2" floor="1">
+            <transformation>
+                <translate x="0" y="0" z="5" />
+            </transformation>
+            <materials>
+                <material id="roof" />
+            </materials>
+            <texture id="woodTile" length_s="3.3" length_t="4.5"/>
+            <children>
                 <primitiveref id="Roof2" />            
             </children>
         </component>
@@ -1982,7 +2025,8 @@
                 <componentref id="Wall1" /> 
                 <componentref id="Wall2" /> 
                 <componentref id="Wall3" /> 
-                <componentref id="Roof" /> 
+                <componentref id="Roof1" /> 
+                <componentref id="Roof2" /> 
                 <componentref id="Logo" /> 
             </children>
         </component>
@@ -2292,6 +2336,7 @@
         <!-- ROOT -->
         <component id="Restaurant">
             <transformation>
+                <rotate angle="-90" axis="x" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
