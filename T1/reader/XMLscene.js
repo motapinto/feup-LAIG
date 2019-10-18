@@ -44,11 +44,15 @@ class XMLscene extends CGFscene {
         this.floorUp = function(){
             if(this.floor < this.floorMax)
                 this.floor++;
+            if(this.floor < 0)
+                this.floor = 1;
         }
 
         this.floorDown = function(){
             if(this.floor > 0)
                 this.floor--;
+            if(this.floor > this.floorMax)
+                this.floor = this.floorMax - 1;
         }
 
         this.setUpdatePeriod(100);

@@ -221,6 +221,10 @@ class MySceneGraph {
 
         this.referenceLength = axis_length || 1;
 
+        this.scene.floor = this.reader.getString(sceneNode, 'floorStart', false);
+        if (this.scene.floor == null)
+            this.scene.floor = 0;
+
         this.log("Parsed scene");
 
         return null;
