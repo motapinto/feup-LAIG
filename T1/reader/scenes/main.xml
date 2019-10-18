@@ -6,33 +6,33 @@
     <!-- near - Near clipping plane distance -->
     <!-- -->
     <views default="topFloor">
-        <perspective id="topFloor" near="0.1" far="100" angle="40">
-            <from x="5" y="50" z="-9" />
-            <to x="5" y="3" z="-10" />
+        <perspective id="topFloor" near="0.1" far="1000" angle="40">
+            <from x="5" y="50" z="-9" w="1"/>
+            <to x="5" y="3" z="-10" w="1"/>
         </perspective>
-        <perspective id="topFloorInclined" near="0.1" far="100" angle="20">
-            <from x="5" y="32" z="50" />
-            <to x="5" y="8" z="-5" />
+        <perspective id="topFloorInclined" near="0.1" far="1000" angle="20">
+            <from x="5" y="32" z="50" w="1"/>
+            <to x="5" y="8" z="-5" w="1"/>
         </perspective>
-        <perspective id="outsidePrespective" near="0.1" far="100" angle="30 ">
-            <from x="5" y="3" z="15" />
-            <to x="5" y="3" z="-5" />
+        <perspective id="outsidePrespective" near="0.1" far="1000" angle="30 ">
+            <from x="5" y="3" z="15" w="1"/>
+            <to x="5" y="3" z="-5" w="1"/>
         </perspective>
-        <perspective id="roadPrespective" near="0.1" far="100" angle="25">
-            <from x="60" y="2" z="5" />
-            <to x="-10" y="2" z="0" />
+        <perspective id="roadPrespective" near="0.1" far="1000" angle="25">
+            <from x="60" y="2" z="5" w="1"/>
+            <to x="-10" y="2" z="0" w="1"/>
         </perspective>
-        <perspective id="insideFloor1" near="0.1" far="100" angle="80 ">
-            <from x="11" y="4" z="-20" />
-            <to x="-1" y="1" z="5" />
+        <perspective id="insideFloor1" near="0.1" far="1000" angle="80 ">
+            <from x="11" y="4" z="-20" w="1"/>
+            <to x="-1" y="1" z="5" w="1"/>
         </perspective>
-        <perspective id="insideFloor2" near="0.1" far="100" angle="80">
-            <from x="5" y="9" z="-20" />
-            <to x="5" y="6" z="5" />
+        <perspective id="insideFloor2" near="0.1" far="1000" angle="80">
+            <from x="5" y="9" z="-20" w="1"/>
+            <to x="5" y="6" z="5" w="1"/>
         </perspective>
-        <perspective id="globalPrespective" near="0.1" far="100" angle="40">
-            <from x="-5" y="32" z="50" />
-            <to x="5" y="0" z="-20" />
+        <perspective id="globalPrespective" near="0.1" far="1000" angle="40">
+            <from x="-5" y="32" z="50" w="1"/>
+            <to x="5" y="0" z="-20" w="1"/>
         </perspective>
     </views>
 
@@ -58,7 +58,7 @@
             <specular r="0.8" g="0.5" b="0" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="Lamp2" enabled="0" angle="90.0" exponent="1.0">
+        <spot id="Lamp2" enabled="1" angle="90.0" exponent="1.0">
             <location x="6" y="2.5" z="-18" w="1" />
             <target x="6" y="2.5" z="-18" />
             <ambient r="1" g="0.6" b="0" a="1" />
@@ -66,7 +66,7 @@
             <specular r="0.8" g="0.5" b="0" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="StairLight" enabled="0" angle="90.0" exponent="1.0">
+        <spot id="StairLight" enabled="1" angle="90.0" exponent="1.0">
             <location x="-0.5" y="4" z="-19.5" w="1" />
             <target x="-0.5" y="-10" z="-19.5" />
             <ambient r="1" g="0.6" b="0" a="1" />
@@ -74,7 +74,7 @@
             <specular r="0.8" g="0.5" b="0" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
-        <spot id="LightsPost" enabled="0" angle="90.0" exponent="1.0">
+        <spot id="LightsPost" enabled="1" angle="90.0" exponent="1.0">
             <location x="-6" y="5" z="12" w="1" />
             <target x="6" y="-6" z="-10.0" />
             <ambient r="0.1" g="0.1" b="0.1" a="1" />
@@ -118,6 +118,7 @@
         <texture id="donut" file="scenes/images/donut-texture.png" />
 
         <!-- EXTERIOR TEXTURES -->
+        <texture id="sphereMap" file="scenes/images/sphereMap.jpg" />
         <texture id="sun" file="scenes/images/sun.jpg" />
         <texture id="moon" file="scenes/images/moon.jpg" />
         <texture id="road" file="scenes/images/highway-road.jpg" />
@@ -336,6 +337,9 @@
         <primitive id="DoorHandle">
             <cylinder base="0.01" top="0.01" height="1" slices="20" stacks="1" />
         </primitive>
+        <primitive id="BalconyHandle">
+            <cylinder base="0.05" top="0.05" height="1.5" slices="20" stacks="1" />
+        </primitive>
         <primitive id="LampLight">
             <cylinder base="0.5" top="0.2" height="0.5" slices="4" stacks="1" />
         </primitive>
@@ -382,17 +386,20 @@
         </primitive>
 
         <!-- EXTERIOR -->
+        <primitive id="SphereMap">
+            <sphere radius="80" slices="40" stacks="40" />
+        </primitive>
         <primitive id="Sun">
-            <sphere radius="1" slices="40" stacks="40" />
+            <sphere radius="5" slices="40" stacks="40" />
         </primitive>
         <primitive id="Moon">
             <sphere radius="1" slices="40" stacks="40" />
         </primitive>
         <primitive id="Terrain">
-            <rectangle x1="-20" y1="-20" x2="20" y2="20" />
+            <rectangle x1="-100" y1="-100" x2="100" y2="100" />
         </primitive>
         <primitive id="Road">
-            <rectangle x1="0" y1="0" x2="40" y2="3" />
+            <rectangle x1="0" y1="0" x2="200" y2="3" />
         </primitive>
         <primitive id="ParkingLot">
             <rectangle x1="0" y1="0" x2="22" y2="17" />
@@ -401,7 +408,7 @@
             <rectangle x1="0" y1="0" x2="16" y2="2" />
         </primitive>
         <primitive id="Stone-Path3">
-            <rectangle x1="0" y1="0" x2="1" y2="1" />
+            <rectangle x1="0" y1="0" x2="1" y2="3" />
         </primitive>
         <primitive id="LightPost">
             <cylinder base="0.2" top="0.2" height="4" slices="4" stacks="1" />
@@ -453,7 +460,7 @@
         </component>
         <component id="Napkin1">
             <transformation>
-                <translate x="0.2" y="-0.6" z="1.5" />
+                <translate x="0.2" y="-0.6" z="1.101" />
                 <rotate axis="z" angle="90" />
                 <rotate axis="y" angle="90" />
             </transformation>
@@ -1205,7 +1212,7 @@
         </component>
 
         <!-- RESTAURANT ACCESSORIES -->
-        <component id="DoorBase">
+        <component id="DoorBase1">
             <transformation>
                 <rotate axis="y" angle="-90" />
             </transformation>
@@ -1215,6 +1222,18 @@
             <texture id="grey" length_s="0" length_t="0"/>
             <children> 
                 <primitiveref id="Door" />              
+            </children>
+        </component> 
+        <component id="DoorBase2">
+            <transformation>
+                <translate x="-0.02" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="grey" length_s="0" length_t="0"/>
+            <children> 
+                <componentref id="DoorBase1" />              
             </children>
         </component> 
         <component id="DoorHandle1">
@@ -1241,6 +1260,32 @@
                 <componentref id="DoorHandle1" />              
             </children>
         </component>
+        <component id="DoorHandleAux1">
+            <transformation>
+                <translate x="0.25" y="0.0" z="1.5" />
+                <scale x="0.2" y="1" z="1.5" />
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children> 
+                <componentref id="DoorHandle1" />              
+            </children>
+        </component>
+        <component id="DoorHandleAux2">
+            <transformation>
+                <translate x="0" y="0" z="-0.7" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children> 
+                <componentref id="DoorHandleAux1" />              
+            </children>
+        </component>
         <component id="Door">
             <transformation>
                 <translate x="12.01" y="10" z="0" />
@@ -1250,11 +1295,94 @@
             </materials>
             <texture id="aluminium" length_s="0" length_t="0"/>
             <children> 
-                <componentref id="DoorBase" />     
+                <componentref id="DoorBase1" />     
+                <componentref id="DoorBase2" />     
                 <componentref id="DoorHandle1" />
-                <componentref id="DoorHandle2" />              
+                <componentref id="DoorHandle2" />    
+                <componentref id="DoorHandleAux1"/>  
+                <componentref id="DoorHandleAux2"/>           
             </children>
         </component> 
+        <component id="BalconyHandle1">
+            <transformation>
+                <translate x="-0.8" y="3.9" z="6.5" />
+                <scale x="1" y="3.3" z="1" />
+                <rotate axis="x" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children> 
+                <primitiveref id="BalconyHandle" />              
+            </children>
+        </component>
+        <component id="BalconyHandle2">
+            <transformation>
+                <translate x="12.6" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children> 
+                <componentref id="BalconyHandle1" />              
+            </children>
+        </component>
+        <component id="BalconyHandle3">
+            <transformation>
+                <translate x="-0.8" y="-1" z="6.5" />
+                <scale x="8.4" y="1" z="1" />
+                <rotate axis="z" angle="90" />
+                <rotate axis="x" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children> 
+                <primitiveref id="BalconyHandle" />              
+            </children>
+        </component>
+        <component id="BalconySupport1">
+            <transformation>
+                <translate x="-0.8" y="-0.8" z="5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children> 
+                <primitiveref id="BalconyHandle" />              
+            </children>
+        </component>
+        <component id="BalconySupport2">
+            <transformation>
+                <translate x="12.6" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children> 
+                <componentref id="BalconySupport1" />              
+            </children>
+        </component>
+        <component id="Balcony" floor="2">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="inherit" length_s="0" length_t="0"/>
+            <children> 
+                <componentref id="BalconyHandle1" />
+                <componentref id="BalconyHandle2" />
+                <componentref id="BalconyHandle3" />
+                <componentref id="BalconySupport1" />   
+                <componentref id="BalconySupport2" />         
+            </children>
+        </component>
         <component id="LampLight">
             <transformation>
             </transformation>
@@ -1669,7 +1797,6 @@
         <component id="Wall1" floor="1">
             <transformation>
                 <translate x="-1" y="20" z="0" />
-                <scale x="1" y="1" z="1" />
                 <rotate axis="x" angle="90" />
             </transformation>
             <materials>
@@ -1775,7 +1902,7 @@
                 <componentref id="Window1" />           
             </children>
         </component>
-        <component id="Window1.0" floor="1">
+        <component id="Window1.0" floor="2">
             <transformation>
             </transformation>
             <materials>
@@ -1855,7 +1982,7 @@
                 <componentref id="Window2" />           
             </children>
         </component>
-        <component id="Window2.0" floor="1">
+        <component id="Window2.0" floor="2">
             <transformation>
             </transformation>
             <materials>
@@ -1976,8 +2103,8 @@
         </component>
         <component id="RoofGlass" floor="2">
             <transformation>
-                <translate x="5.5" y="13.5" z="10" />
-                <scale x="1" y="1.45" z="1" />
+                <translate x="5.5" y="12.15" z="10" />
+                <scale x="1" y="1.26" z="1" />
                 <rotate axis="z" angle="45" />
             </transformation>
             <materials>
@@ -2032,9 +2159,22 @@
         </component>
         
         <!-- EXTERIOR COMPONENTS-->
+         <component id="SphereMap">
+            <transformation>
+                <translate  x="0" y="0" z="0" />
+                <scale  x="-1" y="1" z="1" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="sphereMap" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="SphereMap" />
+            </children>
+        </component>
         <component id="Sun">
             <transformation>
-                <translate  x="-5" y="25" z="10" />
+                <translate  x="-5" y="60" z="30" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -2070,7 +2210,7 @@
         </component>
         <component id="Road">
             <transformation>
-                <translate x="-20" y="-10" z="0" />
+                <translate x="-100" y="-10" z="0" />
             </transformation>
             <materials>
                 <material id="defaultMaterial" />
@@ -2120,7 +2260,8 @@
         </component>
         <component id="Stone-Path3">
             <transformation>
-                <translate x="13" y="10" z="0" />
+                <translate x="15" y="10" z="0.001" />
+                <scale x="1" y="1.5" z="1" />
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
@@ -2321,6 +2462,7 @@
             </materials>
             <texture id="none"/>
             <children>
+                <componentref id="SphereMap" /> 
                 <componentref id="Sun" /> 
                 <componentref id="Moon" /> 
                 <componentref id="Terrain" /> 
@@ -2353,6 +2495,7 @@
                 <componentref id="Lamp0" /> 
                 <componentref id="Stair" />
                 <componentref id="Door" /> 
+                <componentref id="Balcony" /> 
                 <!-- BUILDING -->
                 <componentref id="Building" />
                 <!-- EXTERIOR -->
