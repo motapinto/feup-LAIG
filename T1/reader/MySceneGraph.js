@@ -1094,8 +1094,6 @@ class MySceneGraph {
                     compID = this.reader.getString(grandgrandChildren[j], "id");
                     if (compID == null)
                         return "no ID defined for component children in component " + componentID;
-                    if (this.components[compID] == null)
-                        return "component with ID " + compID + " must be defined in components";
                     components.push(compID);
                 }
                 else if(grandgrandChildren[j].nodeName == "primitiveref"){
