@@ -181,13 +181,11 @@ class MyTorus extends CGFobject {
                     //Top right triangle
                     this.indices.push(a, d, b);
 
-                    if(j != (j_max-2)){
-                        // 2nd Quadrant
-                        //Bottom left triangle
-                        this.indices.push(a + 1, c + 1, b + 1);
-                        //Top right triangle
-                        this.indices.push(a + 1, b + 1, d + 1);
-                    }
+                    // 2nd Quadrant
+                    //Bottom left triangle
+                    this.indices.push(a + 1, c + 1, b + 1);
+                    //Top right triangle
+                    this.indices.push(a + 1, b + 1, d + 1);
 
                     // 3rd Quadrant
                     //Bottom left triangle
@@ -195,13 +193,11 @@ class MyTorus extends CGFobject {
                     //Top right triangle
                     this.indices.push(a + 2, d + 2, b + 2);
     
-                    if(j != (j_max-2)){
-                        // 4th Quadrant
-                        //Bottom left triangle
-                        this.indices.push(a + 3, c + 3, b + 3);
-                        //Top right triangle
-                        this.indices.push(a + 3, b + 3, d + 3);
-                    }
+                    // 4th Quadrant
+                    //Bottom left triangle
+                    this.indices.push(a + 3, c + 3, b + 3);
+                    //Top right triangle
+                    this.indices.push(a + 3, b + 3, d + 3);
     
                     if(!(this.slices % 2)  || i != (max_slices - 1) ){
                         // 5th Quadrant
@@ -211,7 +207,7 @@ class MyTorus extends CGFobject {
                         this.indices.push(a + 4, b + 4, d + 4);
                     }
 
-                    if(j != (j_max-2) && (!(this.slices % 2)  || i != (max_slices - 1)) ){
+                    if((!(this.slices % 2)  || i != (max_slices - 1)) ){
                         // 6th Quadrant
                         //Bottom left triangle
                         this.indices.push(c + 5, a + 5, b + 5);
@@ -227,7 +223,7 @@ class MyTorus extends CGFobject {
                         this.indices.push(a + 6, b + 6, d + 6);
                     }
 
-                    if( j != (j_max-2) && (!(this.slices % 2)  || i != (max_slices - 1)) ){
+                    if((!(this.slices % 2)  || i != (max_slices - 1)) ){
                         // 8th Quadrant
                         //Bottom left triangle
                         this.indices.push(c + 7, a + 7, b + 7);
