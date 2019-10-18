@@ -116,7 +116,6 @@
         <!-- RESTAURANT ACCESSORIES-->
         <texture id="lampTex" file="scenes/images/lamp-texture.jpg" />
         <texture id="bulbTexture" file="scenes/images/bulb-texture.jpg" />
-        <texture id="SwimmingPool" file="scenes/images/swimming-pool.jpg" />
 
         <!-- BUILDING TEXTURES-->
         <texture id="grey" file="scenes/images/grey.jpg" />
@@ -330,9 +329,6 @@
         </primitive>
         
         <!-- RESTAURANT ACCESSORIES-->
-        <primitive id="SwimmingPool">
-            <rectangle x1="0" y1="0" x2="12" y2="6" />
-        </primitive>
         <primitive id="Door">
             <rectangle x1="0" y1="0" x2="3" y2="1.5" />
         </primitive>
@@ -1178,18 +1174,6 @@
         </component>
 
         <!-- RESTAURANT ACCESSORIES -->
-        <component id="SwimmingPool" floor="1">
-            <transformation>
-                <translate x="-0.5" y="-0.5" z="5.01" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="SwimmingPool" length_s="0" length_t="0"/>
-            <children> 
-                <primitiveref id="SwimmingPool" />              
-            </children>
-        </component>
         <component id="DoorBase">
             <transformation>
                 <rotate axis="y" angle="-90" />
@@ -1875,7 +1859,7 @@
                 <componentref id="Window2.1Set" />            
             </children>
         </component>
-        <component id="Window3.1Set" floor="2">
+        <component id="Window3.1Set" floor="1">
             <transformation>
                 <translate x="0" y="13" z="5" />
             </transformation>
@@ -1887,7 +1871,7 @@
                 <componentref id="Window2.0" />            
             </children>
         </component>
-        <component id="Window3.2Set" floor="2">
+        <component id="Window3.2Set" floor="1">
             <transformation>
                 <translate x="0" y="13" z="5" />
             </transformation>
@@ -1899,7 +1883,7 @@
                 <componentref id="Window2.2Set" />            
             </children>
         </component>
-        <component id="Window3.3Set" floor="2">
+        <component id="Window3.3Set" floor="1">
             <transformation>
                 <translate x="0" y="-8" z="0" />
             </transformation>
@@ -1911,7 +1895,7 @@
                 <componentref id="Window3.1Set" />            
             </children>
         </component>
-        <component id="Window3.4Set" floor="2">
+        <component id="Window3.4Set" floor="1">
             <transformation>
                 <translate x="0" y="-8" z="0" />
             </transformation>
@@ -1923,7 +1907,7 @@
                 <componentref id="Window3.2Set" />            
             </children>
         </component>
-        <component id="Window3.5Set" floor="2">
+        <component id="Window3.5Set" floor="1">
             <transformation>
                 <translate x="0" y="21" z="5" />
             </transformation>
@@ -1951,6 +1935,7 @@
         <component id="RoofGlass" floor="2">
             <transformation>
                 <translate x="5.5" y="13.5" z="10" />
+                <scale x="1" y="1.45" z="1" />
                 <rotate axis="z" angle="45" />
             </transformation>
             <materials>
@@ -2321,7 +2306,6 @@
                 <componentref id="BarCounter8" />
                 <componentref id="BarChair8" />
                 <!-- RESTAURANT ACCESSORIES-->
-                <componentref id="SwimmingPool" />
                 <componentref id="Lamp0" /> 
                 <componentref id="Stair" />
                 <componentref id="Door" /> 
