@@ -14,17 +14,17 @@
             <from x="1" y="-3" z="3.5" />
             <to x="1" y="1" z="0" />
         </perspective>
-        <perspective id="outsidePrespective" near="0.1" far="100" angle="10 ">
-            <from x="1" y="-3" z="1.5" />
-            <to x="1" y="1" z="0" />
+        <perspective id="outsidePrespective" near="0.1" far="100" angle="30 ">
+            <from x="0.5" y="-1.7" z="0.4" />
+            <to x="0.5" y="15" z="0" />
         </perspective>
         <perspective id="roadPrespective" near="0.1" far="100" angle="25">
             <from x="6" y="0" z="0.5" />
             <to x="-1" y="0" z="0.5" />
         </perspective>
-        <perspective id="insideFloor1.1" near="0.1" far="100" angle="10 ">
-            <from x="1" y="-3" z="1.5" />
-            <to x="1" y="1" z="0" />
+        <perspective id="insideFloor1.1" near="0.1" far="100" angle="50 ">
+             <from x="0.5" y="2" z="1" />
+            <to x="0.5" y="-1" z="0.7" />
         </perspective>
         <perspective id="insideFloor1.2" near="0.1" far="100" angle="20 ">
             <from x="2" y="0" z="1" />
@@ -121,17 +121,16 @@
 
         <!-- BUILDING TEXTURES-->
         <texture id="grey" file="scenes/images/grey.jpg" />
+        <texture id="wood" file="scenes/images/woodLight.jpg" />
         <texture id="donut" file="scenes/images/donut-texture.png" />
 
-        <!-- EXTERIOR TEXTURES -->´
+        <!-- EXTERIOR TEXTURES -->
+        <texture id="sun" file="scenes/images/sun.jpg" />
         <texture id="moon" file="scenes/images/moon.jpg" />
         <texture id="road" file="scenes/images/highway-road.jpg" />
         <texture id="parkingLot" file="scenes/images/parking-lot.jpg" />
         <texture id="stonePath" file="scenes/images/stone-path3.png" />
-
-        <texture id="wood" file="scenes/images/woodLight.jpg" />
         <texture id="grass" file="scenes/images/grass.jpg" />
-
     </textures>
 
     <materials>
@@ -385,6 +384,9 @@
 
         <!-- EXTERIOR -->
         <primitive id="Sun">
+            <sphere radius="1" slices="40" stacks="40" />
+        </primitive>
+        <primitive id="Moon">
             <sphere radius="1" slices="40" stacks="40" />
         </primitive>
         <primitive id="Terrain">
@@ -1193,7 +1195,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodDark" length_s="0" length_t="0"/>
+            <texture id="grey" length_s="0" length_t="0"/>
             <children> 
                 <primitiveref id="Door" />              
             </children>
@@ -1205,7 +1207,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="aluminium" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children> 
                 <primitiveref id="DoorHandle" />              
             </children>
@@ -1217,7 +1219,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="aluminium" length_s="0" length_t="0"/>
+            <texture id="inherit" length_s="0" length_t="0"/>
             <children> 
                 <componentref id="DoorHandle1" />              
             </children>
@@ -1229,7 +1231,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodChair" length_s="0" length_t="0"/>
+            <texture id="aluminium" length_s="0" length_t="0"/>
             <children> 
                 <componentref id="DoorBase" />     
                 <componentref id="DoorHandle1" />
@@ -1656,7 +1658,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="grey" length_s="0" length_t="0"/>
+            <texture id="grey" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="Wall" />
             </children>
@@ -1670,7 +1672,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="grey" length_s="0" length_t="0"/>
+            <texture id="woodDark" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="Wall" />           
             </children>
@@ -1684,7 +1686,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="grey" length_s="0" length_t="0"/>
+            <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="Wall" />           
             </children>
@@ -1928,9 +1930,21 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="moon" length_s="0" length_t="0"/>
+            <texture id="sun" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="Sun" />
+            </children>
+        </component>
+        <component id="Moon">
+            <transformation>
+                <translate  x="-5" y="25" z="-10" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="moon" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="Moon" />
             </children>
         </component>
         <component id="Terrain">
@@ -2199,6 +2213,7 @@
             <texture id="none"/>
             <children>
                 <componentref id="Sun" /> 
+                <componentref id="Moon" /> 
                 <componentref id="Terrain" /> 
                 <componentref id="Road" /> 
                 <componentref id="ParkingLot" /> 
