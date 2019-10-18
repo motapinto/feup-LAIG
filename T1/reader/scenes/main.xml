@@ -377,6 +377,9 @@
         <primitive id="Window2">
             <cylinder base="1.13" top="1.13" height="4" slices="4" stacks="1" />
         </primitive>
+        <primitive id="RoofGlass">
+            <cylinder base="9.19" top="9.19" height="1" slices="4" stacks="1" />
+        </primitive>
         <primitive id="LogoDonut">
             <torus inner="2" outer="4" slices="40" loops="40" />
         </primitive>
@@ -1657,7 +1660,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="grey" length_s="1" length_t="1"/>
+            <texture id="woodChair" length_s="1" length_t="5"/>
             <children>
                 <primitiveref id="Wall" />
             </children>
@@ -1671,7 +1674,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodDark" length_s="1" length_t="1"/>
+            <texture id="woodChair" length_s="1" length_t="5"/>
             <children>
                 <primitiveref id="Wall" />           
             </children>
@@ -1685,7 +1688,7 @@
             <materials>
                 <material id="defaultMaterial" />
             </materials>
-            <texture id="woodDark" length_s="0" length_t="0"/>
+            <texture id="woodChair" length_s="1" length_t="5"/>
             <children>
                 <primitiveref id="Wall" />           
             </children>
@@ -1872,6 +1875,66 @@
                 <componentref id="Window2.1Set" />            
             </children>
         </component>
+        <component id="Window3.1Set" floor="2">
+            <transformation>
+                <translate x="0" y="13" z="5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="woodDark" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.0" />            
+            </children>
+        </component>
+        <component id="Window3.2Set" floor="2">
+            <transformation>
+                <translate x="0" y="13" z="5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="woodDark" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window2.2Set" />            
+            </children>
+        </component>
+        <component id="Window3.3Set" floor="2">
+            <transformation>
+                <translate x="0" y="-8" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="woodDark" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window3.1Set" />            
+            </children>
+        </component>
+        <component id="Window3.4Set" floor="2">
+            <transformation>
+                <translate x="0" y="-8" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="woodDark" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window3.2Set" />            
+            </children>
+        </component>
+        <component id="Window3.5Set" floor="2">
+            <transformation>
+                <translate x="0" y="21" z="5" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="woodDark" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Window1.0" />            
+            </children>
+        </component>
         <component id="Roof" floor="1">
             <transformation>
                 <translate x="0" y="0" z="5" />
@@ -1879,15 +1942,28 @@
             <materials>
                 <material id="roof" />
             </materials>
-            <texture id="grey" length_s="0" length_t="0"/>
+            <texture id="woodTile" length_s="4.5" length_t="4.5"/>
             <children>
                 <primitiveref id="Roof1" /> 
                 <primitiveref id="Roof2" />            
             </children>
         </component>
+        <component id="RoofGlass" floor="2">
+            <transformation>
+                <translate x="5.5" y="13.5" z="10" />
+                <rotate axis="z" angle="45" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="woodDark" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="RoofGlass" />   
+            </children>
+        </component>
         <component id="Logo" floor="2">
             <transformation>
-                <translate x="6" y="10.5" z="15" />
+                <translate x="6" y="10.5" z="17" />
                 <rotate axis="z" angle="90" />
                 <rotate axis="x" angle="90" />
             </transformation>
@@ -1913,6 +1989,12 @@
                 <componentref id="Window1.0" /> 
                 <componentref id="Window2.1Set" /> 
                 <componentref id="Window2.2Set" /> 
+                <componentref id="Window3.1Set" />
+                <componentref id="Window3.2Set" />
+                <componentref id="Window3.3Set" />
+                <componentref id="Window3.4Set" />
+                <componentref id="Window3.5Set" />
+                <componentref id="RoofGlass" />
                 <componentref id="Wall1" /> 
                 <componentref id="Wall2" /> 
                 <componentref id="Wall3" /> 
