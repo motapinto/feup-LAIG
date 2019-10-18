@@ -47,11 +47,14 @@ class MySphere extends CGFobject
 					this.normals.push(x, -y, -z);	//8th to 7th Quadrant
 				
 					//Tex coords
-					this.texCoords.push(0.25 - 0.25*cos_phi, 0.5 + 0.5*z); //1st to 2nd Quadrant
-					this.texCoords.push(0.75 - 0.25*cos_phi, 0.5 + 0.5*z); //4th to 3rd Quadrant
+					var phi = phi_delta*j;
+					var teta = teta_delta*i;
+
+					this.texCoords.push(phi/(Math.PI*2), 0.5 + teta/Math.PI); //1st to 2nd Quadrant
+					this.texCoords.push(1 - phi/(Math.PI*2), 0.5 + teta/Math.PI); //4th to 3rd Quadrant
 					
-					this.texCoords.push(0.25 - 0.25*cos_phi, 0.5 - 0.5*z); //5th to 6th Quadrant
-					this.texCoords.push(0.75 - 0.25*cos_phi, 0.5 - 0.5*z); //8th to 7th Quadrant
+					this.texCoords.push(phi/(Math.PI*2), 0.5 - teta/Math.PI); //5th to 6th Quadrant
+					this.texCoords.push(1 - phi/(Math.PI*2), 0.5 - teta/Math.PI); //8th to 7th Quadrant
 					
 					x *= radius;
 					y *= radius;
@@ -200,15 +203,18 @@ class MySphere extends CGFobject
 					this.normals.push(x, -y, -z);	//8th Quadrant
 				
 					//Tex coords
-					this.texCoords.push(0.25 - 0.25*cos_phi , 0.5 + 0.5*z); //1st Quadrant
-					this.texCoords.push(0.25 + 0.25*cos_phi , 0.5 + 0.5*z); //2nd Quadrant
-					this.texCoords.push(0.75 - 0.25*cos_phi , 0.5 + 0.5*z); //3rd Quadrant
-					this.texCoords.push(0.75 + 0.25*cos_phi , 0.5 + 0.5*z); //4th Quadrant
+					var phi = phi_delta*j;
+					var teta = teta_delta*i;
+
+					this.texCoords.push(phi/(Math.PI*2), 		0.5 + teta/Math.PI); //1st Quadrant
+					this.texCoords.push(0.5 - phi/(Math.PI*2),  0.5 + teta/Math.PI); //2nd Quadrant
+					this.texCoords.push(0.5 + phi/(Math.PI*2),  0.5 + teta/Math.PI); //3rd Quadrant
+					this.texCoords.push(1 - phi/(Math.PI*2),  	0.5 + teta/Math.PI); //4th Quadrant
 					
-					this.texCoords.push(0.25 - 0.25*cos_phi , 0.5 - 0.5*z); //5th Quadrant
-					this.texCoords.push(0.25 + 0.25*cos_phi , 0.5 - 0.5*z); //6th Quadrant
-					this.texCoords.push(0.75 - 0.25*cos_phi , 0.5 - 0.5*z); //7th Quadrant
-					this.texCoords.push(0.75 + 0.25*cos_phi , 0.5 -	 0.5*z);//8th Quadrant
+					this.texCoords.push(phi/(Math.PI*2), 		0.5 - teta/Math.PI); //5th Quadrant
+					this.texCoords.push(0.5 - phi/(Math.PI*2), 	0.5 - teta/Math.PI); //6th Quadrant
+					this.texCoords.push(0.5 + phi/(Math.PI*2), 	0.5 - teta/Math.PI); //7th Quadrant
+					this.texCoords.push(1 - phi/(Math.PI*2),	0.5 - teta/Math.PI);//8th Quadrant
 
 
 					x *= radius;
