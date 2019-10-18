@@ -283,13 +283,13 @@ class MySceneGraph {
             for(var j = 0; j < grandChildren.length; j++){
                 switch (grandChildren[j].nodeName) {
                     case 'from':
-                        from = this.parseCoordinates3D(grandChildren[j], "from view for ID " + viewID);
+                        from = this.parseCoordinates4D(grandChildren[j], "from view for ID " + viewID);
                         if (!Array.isArray(from))
                             return from;    
                         break;
 
                     case 'to':
-                        to = this.parseCoordinates3D(grandChildren[j], "to view for ID " + viewID);
+                        to = this.parseCoordinates4D(grandChildren[j], "to view for ID " + viewID);
                         if (!Array.isArray(to))
                             return to;    
                         break;
