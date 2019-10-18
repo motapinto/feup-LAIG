@@ -222,6 +222,12 @@
             <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
             <specular r="0.7" g="0.7" b="0.7" a="1.0" />
         </material>
+        <material id="walls" shininess="1">
+            <emission r="0.0" g="0" b="0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
         <material id="lampStick" shininess="1">
             <emission r="0.0" g="0" b="0" a="1.0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
@@ -243,6 +249,12 @@
 
 
         <!--  BUILDING -->
+         <material id="window" shininess="2">
+            <emission r="0.0" g="0" b="0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
         <material id="floor" shininess="2">
             <emission r="0.0" g="0" b="0" a="1.0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
@@ -252,6 +264,26 @@
         <material id="roof" shininess="2">
             <emission r="0.0" g="0" b="0" a="1.0" />
             <ambient r="0.5" g="0.5" b="0.5" a="1.0" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        </material>
+
+        <!-- EXTERIOR -->
+        <material id="celestial" shininess="10">
+            <emission r="0.8" g="0.8" b="0.8" a="1.0" />
+            <ambient r="0.8" g="0.8" b="0.8" a="1.0" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
+            <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+        </material>
+        <material id="terrain" shininess="10">
+            <emission r="0" g="0" b="0" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.4" g="0.4" b="0.4" a="1.0" />
+        </material>
+        <material id="stone-path" shininess="10">
+            <emission r="0" g="0" b="0" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
             <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
             <specular r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
@@ -391,7 +423,7 @@
             <rectangle x1="-1" y1="-1" x2="12" y2="18" />
         </primitive>
         <primitive id="Roof2">
-            <rectangle x1="2" y1="18" x2="12" y2="20" />
+            <rectangle x1="2.4" y1="18" x2="12" y2="20" />
         </primitive>
         <primitive id="Wall">
             <rectangle x1="0" y1="0" x2="13" y2="5" />
@@ -405,8 +437,8 @@
         <primitive id="RoofGlass">
             <cylinder base="9.19" top="9.19" height="1" slices="4" stacks="1" />
         </primitive>
-        <primitive id="LogoDonut">
-            <torus inner="2" outer="4" slices="40" loops="40" />
+        <primitive id="Donut">
+            <torus inner="0.025" outer="0.05" slices="40" loops="40" />
         </primitive>
 
         <!-- EXTERIOR -->
@@ -455,6 +487,30 @@
     <components>
 
         <!-- TABLE -->
+        <component id="Donut1" floor="2">
+            <transformation>
+                <translate x="-0.2" y="-0.2" z="1.13" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="donut" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="Donut" />           
+            </children>
+        </component>
+        <component id="Donut2" floor="2">
+            <transformation>
+                <translate x="0.4" y="0.4" z="0" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="donut" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="Donut1" />           
+            </children>
+        </component>
         <component id="Plate1">
             <transformation>
                 <translate x="-0.2" y="-0.2" z="1.101" />
@@ -565,14 +621,16 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="TableLeg" />
-                <componentref id="TableSupport" />
-                <componentref id="TableTop" />
-                <componentref id="TableCover" />
+                <componentref id="Donut1" /> 
+                <componentref id="Donut2" /> 
                 <componentref id="Plate1" />
                 <componentref id="Plate2" />
                 <componentref id="Napkin1" />
                 <componentref id="Napkin2" />
+                <componentref id="TableLeg" />
+                <componentref id="TableSupport" />
+                <componentref id="TableTop" />
+                <componentref id="TableCover" />
             </children>
         </component>
         
@@ -1484,7 +1542,7 @@
         </component>
         <component id="Lamp6">
             <transformation>
-                <translate x="0" y="16" z="0" />
+                <translate x="0" y="15.5" z="0" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -1824,7 +1882,7 @@
                 <rotate axis="x" angle="90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="walls" />
             </materials>
             <texture id="woodChair" length_s="1" length_t="5"/>
             <children>
@@ -1838,7 +1896,7 @@
                 <rotate axis="x" angle="90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="walls" />
             </materials>
             <texture id="woodChair" length_s="1" length_t="5"/>
             <children>
@@ -1852,7 +1910,7 @@
                 <rotate axis="x" angle="90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="walls" />
             </materials>
             <texture id="woodChair" length_s="1" length_t="5"/>
             <children>
@@ -1867,7 +1925,7 @@
                 <rotate axis="z" angle="45" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1880,7 +1938,7 @@
                 <scale x="0.85" y="1" z="1" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>   
@@ -1892,7 +1950,7 @@
                 <translate x="2.6" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>   
@@ -1905,7 +1963,7 @@
                 <translate x="2.6" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1918,7 +1976,7 @@
                 <translate x="2.6" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1930,7 +1988,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
@@ -1947,7 +2005,7 @@
                 <rotate axis="z" angle="45" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1960,7 +2018,7 @@
                 <scale x="1" y="1.05" z="1" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>   
@@ -1972,7 +2030,7 @@
                 <translate x="0" y="1.6" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>   
@@ -1985,7 +2043,7 @@
                 <translate x="0" y="1.6" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1998,7 +2056,7 @@
                 <translate x="0" y="1.6" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2010,7 +2068,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2022,7 +2080,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
@@ -2034,7 +2092,7 @@
                 <translate x="-12.6" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
@@ -2046,7 +2104,7 @@
                 <translate x="0" y="13" z="5" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
@@ -2058,7 +2116,7 @@
                 <translate x="0" y="13" z="5" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
@@ -2070,7 +2128,7 @@
                 <translate x="0" y="-8" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
@@ -2082,7 +2140,7 @@
                 <translate x="0" y="-8" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
@@ -2094,7 +2152,7 @@
                 <translate x="0" y="21" z="5" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="window" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
@@ -2132,25 +2190,11 @@
                 <rotate axis="z" angle="45" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="window" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="RoofGlass" />   
-            </children>
-        </component>
-        <component id="Logo" floor="2">
-            <transformation>
-                <translate x="6" y="10.5" z="17" />
-                <rotate axis="z" angle="90" />
-                <rotate axis="x" angle="90" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="donut" length_s="0" length_t="0"/>
-            <children>
-                <primitiveref id="LogoDonut" />           
             </children>
         </component>
         
@@ -2178,7 +2222,6 @@
                 <componentref id="Wall3" /> 
                 <componentref id="Roof1" /> 
                 <componentref id="Roof2" /> 
-                <componentref id="Logo" /> 
             </children>
         </component>
         
@@ -2189,7 +2232,7 @@
                 <scale  x="-1" y="1" z="1" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="celestial" />
             </materials>
             <texture id="sphereMap" length_s="2" length_t="2"/>
             <children>
@@ -2201,7 +2244,7 @@
                 <translate  x="-5" y="60" z="30" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="celestial" />
             </materials>
             <texture id="sun" length_s="0" length_t="0"/>
             <children>
@@ -2213,7 +2256,7 @@
                 <translate  x="-5" y="25" z="-10" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="celestial" />
             </materials>
             <texture id="moon" length_s="0" length_t="0"/>
             <children>
@@ -2225,7 +2268,7 @@
                 <translate  x="0" y="0" z="-0.01" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="terrain" />
             </materials>
             <texture id="grass" length_s="1" length_t="1"/>
             <children>
@@ -2237,7 +2280,7 @@
                 <translate x="-100" y="-10" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="terrain" />
             </materials>
             <texture id="road" length_s="5" length_t="3"/>
             <children>
@@ -2250,7 +2293,7 @@
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="terrain" />
             </materials>
             <texture id="parkingLot" length_s="0" length_t="0"/>
             <children>
@@ -2262,7 +2305,7 @@
                 <translate x="-3" y="-5" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="stone-path" />
             </materials>
             <texture id="stonePath" length_s="2" length_t="2"/>
             <children>
@@ -2275,7 +2318,7 @@
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="stone-path" />
             </materials>
             <texture id="stonePath" length_s="2" length_t="2"/>
             <children>
@@ -2289,7 +2332,7 @@
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="stone-path" />
             </materials>
             <texture id="stonePath" length_s="2" length_t="2"/>
             <children>
@@ -2302,7 +2345,7 @@
                 <rotate axis="z" angle="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="lampStick" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2314,7 +2357,7 @@
                 <translate x="0.01" y="0.01" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2326,7 +2369,7 @@
                 <translate x="0.42" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2338,7 +2381,7 @@
                 <translate x="0" y="0.42" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2352,7 +2395,7 @@
                 <translate x="-0.22" y="-0.22" z="4" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
@@ -2365,7 +2408,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="lampStick" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2378,7 +2421,7 @@
                 <translate x="-0.25" y="-0.25" z="4" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
@@ -2390,7 +2433,7 @@
                 <translate x="0" y="0" z="4.2" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="bulbTexture" length_s="0" length_t="0"/>
             <children>
@@ -2402,7 +2445,7 @@
                 <translate x="-14" y="-12" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2418,7 +2461,7 @@
                 <translate x="4" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2430,7 +2473,7 @@
                 <translate x="4" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2443,7 +2486,7 @@
                 <translate x="4" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2456,7 +2499,7 @@
                 <translate x="4" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -2468,7 +2511,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="lamp" />
             </materials>
             <texture id="woodDark" length_s="0" length_t="0"/>
             <children>
