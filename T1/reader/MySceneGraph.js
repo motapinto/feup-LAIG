@@ -283,13 +283,29 @@ class MySceneGraph {
             for(var j = 0; j < grandChildren.length; j++){
                 switch (grandChildren[j].nodeName) {
                     case 'from':
-                        from = this.parseCoordinates4D(grandChildren[j], "from view for ID " + viewID);
+                        from = this.parseCoordinates3D(grandChildren[j], "from view for ID " + viewID);
+                        
+                        var w = this.reader.getFloat(grandChildren[j], 'w');
+                        if(w == null) {
+                            onXMLMinorError("w value not parsed in views");
+                        }
+                        else 
+                            from = this.parseCoordinates4D(grandChildren[j], "from view for ID " + viewID);       
+            
                         if (!Array.isArray(from))
                             return from;    
                         break;
 
                     case 'to':
-                        to = this.parseCoordinates4D(grandChildren[j], "to view for ID " + viewID);
+                        to = this.parseCoordinates3D(grandChildren[j], "to view for ID " + viewID);
+                        
+                        var w = this.reader.getFloat(grandChildren[j], 'w');
+                        if(w == null) {
+                            onXMLMinorError("w value not parsed in views");
+                        }
+                        else 
+                            to = this.parseCoordinates4D(grandChildren[j], "to view for ID " + viewID);   
+
                         if (!Array.isArray(to))
                             return to;    
                         break;
