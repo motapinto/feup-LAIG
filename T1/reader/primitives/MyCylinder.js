@@ -23,138 +23,57 @@ class MyCylinder extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-        var delta_ang = 2*Math.PI/this.slices;
+        var ang = 0;
+        var alphaAng = 2*Math.PI/this.slices;
 
         var delta_z = this.height / this.stacks;
         var delta_radius = (this.top - this.base) / this.stacks;
         
 
-        if(this.slices % 2){
-          var j_max = ((this.slices + 1) >> 1) + 1; //round this.slices/4 and add 1
-  
-          for(var i = 0; i <= this.stacks; i++){
-            for(var j = 0; j < j_max; j++){
-              var ang = delta_ang*j;
-              var x = Math.cos(ang);
-              var y = Math.sin(ang);
-              var z = delta_z*i;
+        for(var i = 0; i < this.slices; i++) {
+          
+          var indices_increment = 4*i*this.stacks;
+          var x1_bottom=this.base*Math.cos(ang);
+          var y1_bottom=this.base*Math.sin(ang); 
+          var x2_bottom=this.base*Math.cos(ang+alphaAng);
+          var y2_bottom=this.base*Math.sin(ang+alphaAng);
+          
+          for(var j = 0; j < this.stacks; j++){
+            
+            var radius =  this.base + (j + 1) * delta_radius;
+            
+            var y1_top=radius*Math.sin(ang); 
+            var x2_top=radius*Math.cos(ang+alphaAng);
+            var y2_top=radius*Math.sin(ang+alphaAng);
+            var x1_top=radius*Math.cos(ang);
+            
+            this.vertices.push(x1_bottom, y1_bottom, delta_z*j);
+            this.vertices.push(x2_bottom, y2_bottom, delta_z*j);
+            this.vertices.push(x1_top, y1_top, delta_z*(j+1));
+            this.vertices.push(x2_top, y2_top, delta_z*(j+1));
+          
+            //visible from both sides
+            this.indices.push(indices_increment+4*j+1, indices_increment+4*j+3, indices_increment+4*j+2);
+            this.indices.push(indices_increment+4*j, indices_increment+4*j+1, indices_increment+4*j+2);  
+            this.indices.push(indices_increment+4*j+2, indices_increment+4*j+3, indices_increment+4*j+1);
+            this.indices.push(indices_increment+4*j+2, indices_increment+4*j+1, indices_increment+4*j);
+            
+            this.normals.push(x1_bottom, y1_bottom, 0);
+            this.normals.push(x2_bottom, y2_bottom, 0);  
+            this.normals.push(x1_top, y1_top, 0);     
+            this.normals.push(x2_top, y2_top, 0);
 
-              var n = vec3.fromValues(x, y, Math.cos(Math.atan(this.height/(this.base-this.top))) );
-              vec3.normalize(n, n);
+            this.texCoords.push(0+i*(1.0/this.slices),                            1 - j*(1.0/this.stacks));
+            this.texCoords.push((1.0/this.slices) + i*(1.0/this.slices),          1 - j*(1.0/this.stacks));
+            this.texCoords.push(0+i*(1.0/this.slices),                            1 - ((1.0/this.stacks) + j*(1.0/this.stacks)));
+            this.texCoords.push((1.0/this.slices) + i*(1.0/this.slices),          1 - ((1.0/this.stacks) + j*(1.0/this.stacks)));
 
-              this.normals.push(n[0], n[1], n[2]);   //1st to 2nd Quadrant
-              this.normals.push(n[0], -n[1], n[2]);  //4th to 3rd Quadrant
-
-              x *= (this.base + delta_radius*i);
-              y *= (this.base + delta_radius*i);
-
-              this.vertices.push(x, y, z);  //1st to 2nd Quadrant
-              this.vertices.push(x, -y, z); //4th to 3rd Quadrant
-
-              var texV = z/this.height;
-              this.texCoords.push(ang / (Math.PI*2), 1 - texV);  //1st to 2nd Quadrant
-              this.texCoords.push(1 - ang / (Math.PI*2), 1 - texV); //4th to 3rd Quadrant
-
-            }
+            x1_bottom = x1_top;
+            x2_bottom = x2_top;
+            y1_bottom = y1_top;
+            y2_bottom = y2_top;
           }
-
-          //Indices generation
-          var quadrant_delta = 2;
-          var vertices_stack = j_max * 2; //Number of vertices per stack
-
-          for(var i = 0; i < this.stacks; i++){
-            for(var j = 0; j < (j_max-1); j++){
-              var a = j * quadrant_delta + i * vertices_stack;
-							var b = (j + 1) * quadrant_delta + i * vertices_stack;
-              var c = j * quadrant_delta + (i + 1) * vertices_stack;
-              var d = (j + 1) * quadrant_delta + (i + 1) * vertices_stack;
-
-              // 1st to 2nd Quadrant
-              //Bottom left triangle
-              this.indices.push(a, b, c);
-              //Top right triangle
-              this.indices.push(b, d, c);
-
-              if(j != (j_max - 2)){
-                // 4th to 3rd Quadrant
-                //Bottom left triangle
-                this.indices.push(1 + b, 1 + a, 1 + c);
-                //Top right triangle
-                this.indices.push(1 + b, 1 + c, 1 + d);
-              }
-            }
-          }
-        }
-        else{
-          var j_max = (((this.slices >> 1) + 1) >> 1) + 1; //round this.slices/4 and add 1
-  
-          for(var i = 0; i <= this.stacks; i++){
-            for(var j = 0; j < j_max; j++){
-              var ang = delta_ang*j;
-              var x = Math.cos(ang);
-              var y = Math.sin(ang);
-              var z = delta_z*i;
-
-              var n = vec3.fromValues(x, y, Math.cos(Math.atan(this.height/(this.base-this.top))) );
-              vec3.normalize(n, n);
-
-              this.normals.push(n[0], n[1], n[2]);   //1st Quadrant
-              this.normals.push(-n[0], n[1], n[2]);  //2nd Quadrant
-              this.normals.push(-n[0], -n[1], n[2]); //3rd Quadrant
-              this.normals.push(n[0], -n[1], n[2]);  //4th Quadrant
-
-              x *= (this.base + delta_radius*i);
-              y *= (this.base + delta_radius*i);
-
-              this.vertices.push(x, y, z);  //1st Quadrant
-              this.vertices.push(-x, y, z); //2nd Quadrant
-              this.vertices.push(-x, -y, z);//3rd Quadrant
-              this.vertices.push(x, -y, z); //4th Quadrant
-
-              var texV = z/this.height;
-              this.texCoords.push(ang / (Math.PI*2), 1 - texV);  //1st Quadrant
-              this.texCoords.push(0.5 - ang / (Math.PI*2), 1 - texV); //2nd Quadrant
-              this.texCoords.push(0.5 + ang / (Math.PI*2), 1 - texV);//3rd Quadrant
-              this.texCoords.push(1 - ang / (Math.PI*2), 1 - texV); //4th Quadrant
-            }
-          }
-
-          //Indices generation
-          var quadrant_delta = 4;
-          var vertices_stack = j_max * 4; //Number of vertices per stack
-
-          for(var i = 0; i < this.stacks; i++){
-            for(var j = 0; j < (j_max-1); j++){
-              var a = j * quadrant_delta + i * vertices_stack;
-							var b = (j + 1) * quadrant_delta + i * vertices_stack;
-              var c = j * quadrant_delta + (i + 1) * vertices_stack;
-              var d = (j + 1) * quadrant_delta + (i + 1) * vertices_stack;
-
-						// 1st Quadrant
-						//Bottom left triangle
-            this.indices.push(a, b, c);
-            //Top right triangle
-            this.indices.push(b, d, c);
-
-						// 2nd Quadrant
-						//Bottom left triangle
-            this.indices.push(1 + b, 1 + a, 1 + c);
-            //Top right triangle
-            this.indices.push(1 + b, 1 + c, 1 + d);
-
-						// 3rd Quadrant
-						//Bottom left triangle
-            this.indices.push(2 + a, 2 + b, 2 + c);
-            //Top right triangle
-            this.indices.push(2 + b, 2 + d, 2 + c);
-
-						// 4th Quadrant
-						//Bottom left triangle
-            this.indices.push(3 + b, 3 + a, 3 + c);
-            //Top right triangle
-            this.indices.push(3 + b, 3 + c, 3 + d);
-            }
-          }
+          ang+=alphaAng;
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
