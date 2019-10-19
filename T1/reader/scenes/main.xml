@@ -160,6 +160,12 @@
             <diffuse r="0.2" g="0.2" b="0.2" a="1.0" />
             <specular r="0.7" g="0.7" b="0.7" a="1.0" />
         </material>
+        <material id="tableBottom1" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.3" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.4" g="0.2" b="0.2" a="1.0" />
+            <specular r="1.0" g="0.7" b="0.7" a="1.0" />
+        </material>
 
         <!-- CHAIR -->
         <material id="chairLeg" shininess="2">
@@ -174,9 +180,21 @@
             <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
             <specular r="0.5" g="0.5" b="0.5" a="1.0" />
         </material>
+        <material id="chair1" shininess="2">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.2" g="0.3" b="0.1" a="1.0" />
+            <diffuse r="0.8" g="0.9" b="0.7" a="1.0" />
+            <specular r="0.5" g="0.6" b="0.4" a="1.0" />
+        </material>
+        <material id="chair2" shininess="2">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.3" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.8" g="0.7" b="0.7" a="1.0" />
+            <specular r="0.5" g="0.4" b="0.4" a="1.0" />
+        </material>
 
         <!-- BAR COUNTER -->
-        <material id="barCounterTop" shininess="1">
+        <material id="barCounterTop" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
             <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -204,7 +222,7 @@
             <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />
             <specular r="0.4" g="0.4" b="0.6" a="1.0" />
         </material>
-        <material id="balcony" shininess="1">
+        <material id="balcony" shininess="50">
             <emission r="0.0" g="0" b="0" a="1.0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
             <diffuse r="0.4" g="0.4" b="0.4" a="1.0" />
@@ -281,7 +299,7 @@
         </material>
 
         <!-- EXTERIOR -->
-        <material id="celestial" shininess="10">
+        <material id="celestial" shininess="150">
             <emission r="0.8" g="0.8" b="0.8" a="1.0" />
             <ambient r="0.8" g="0.8" b="0.8" a="1.0" />
             <diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
@@ -292,6 +310,12 @@
             <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
             <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
             <specular r="0.4" g="0.4" b="0.4" a="1.0" />
+        </material>
+        <material id="terrain1" shininess="10">
+            <emission r="0" g="0" b="0" a="1.0" />
+            <ambient r="0.4" g="0.7" b="0.5" a="1.0" />
+            <diffuse r="0.1" g="0.3" b="0.1" a="1.0" />
+            <specular r="0.4" g="0.6" b="0.4" a="1.0" />
         </material>
         <material id="stone-path" shininess="10">
             <emission r="0" g="0" b="0" a="1.0" />
@@ -773,7 +797,9 @@
                 <translate x="0" y="0" z="0.5" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="chair" />
+                <material id="chair1" />
+                <material id="chair2" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -793,6 +819,8 @@
             </transformation>
             <materials>
                 <material id="chair" />
+                <material id="chair1" />
+                <material id="chair2" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -957,6 +985,7 @@
             </transformation>
             <materials>
                 <material id="tableBottom" />
+                <material id="tableBottom1" />
             </materials>
             <texture id="darkCement" length_s="0" length_t="0"/>
             <children>
@@ -2290,6 +2319,7 @@
             </transformation>
             <materials>
                 <material id="terrain" />
+                <material id="terrain1" />
             </materials>
             <texture id="grass" length_s="1" length_t="1"/>
             <children>
