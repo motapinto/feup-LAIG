@@ -43,7 +43,7 @@
 
     <lights>
         <spot id="Lamp0" enabled="1" angle="90.0" exponent="1.0">
-            <location x="3.3" y="3.5" z="-3.5" w="1" />
+            <location x="3.3" y="3.5" z="-3.5" w="1"/>
             <target x="3.3" y="-10" z="-3.5" />
             <ambient r="0" g="0" b="0" a="1" />
             <diffuse r="1" g="0.6" b="0" a="1" />
