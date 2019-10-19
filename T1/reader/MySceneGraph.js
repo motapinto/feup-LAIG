@@ -357,7 +357,7 @@ class MySceneGraph {
                         switch (grandChildren[j].nodeName) {
                             case 'from':
                                 position = this.parseCoordinates3D(grandChildren[j], "from view for ID " + viewID);
-                                if (!Array.isArray(target))
+                                if (!Array.isArray(position))
                                     return position;    
                                 break;
         
