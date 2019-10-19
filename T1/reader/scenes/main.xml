@@ -1325,7 +1325,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <primitiveref id="DoorHandle" />              
             </children>
@@ -1337,7 +1337,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <componentref id="DoorHandle1" />              
             </children>
@@ -1351,7 +1351,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <componentref id="DoorHandle1" />              
             </children>
@@ -1363,7 +1363,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <componentref id="DoorHandleAux1" />              
             </children>
@@ -1394,7 +1394,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <primitiveref id="BalconyHandle" />              
             </children>
@@ -1406,7 +1406,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <componentref id="BalconyHandle1" />              
             </children>
@@ -1421,7 +1421,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <primitiveref id="BalconyHandle" />              
             </children>
@@ -1433,7 +1433,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <primitiveref id="BalconyHandle" />              
             </children>
@@ -1445,7 +1445,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="0" length_t="0"/>
+            <texture id="inherit"/>
             <children> 
                 <componentref id="BalconySupport1" />              
             </children>
@@ -1456,7 +1456,7 @@
             <materials>
                 <material id="balcony" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="none"/>
             <children> 
                 <componentref id="BalconyHandle1" />
                 <componentref id="BalconyHandle2" />
@@ -2428,6 +2428,18 @@
                 <primitiveref id="LightBase" /> 
             </children>
         </component>
+        <component id="LightBaseTop">
+            <transformation>
+                <translate x="0" y="0" z="0.6" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="darkCement" length_s="0" length_t="0"/>
+            <children>
+                <componentref id="LightBase" /> 
+            </children>
+        </component>
         <component id="LightBulb">
             <transformation>
                 <translate x="0" y="0" z="4.2" />
@@ -2451,6 +2463,7 @@
             <children>
                 <componentref id="LightCone" /> 
                 <componentref id="LightBase" />
+                <componentref id="LightBaseTop" />
                 <componentref id="LightShieldSet" /> 
                 <componentref id="LightPost" /> 
                 <componentref id="LightBulb" />
