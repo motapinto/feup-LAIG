@@ -2289,26 +2289,26 @@
                 <primitiveref id="SphereMap" />
             </children>
         </component>
-        <component id="Sun">
+        <component id="Moon">
             <transformation>
                 <translate  x="-5" y="60" z="30" />
             </transformation>
             <materials>
                 <material id="celestial" />
             </materials>
-            <texture id="sun" length_s="0" length_t="0"/>
+            <texture id="moon" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="Sun" />
             </children>
         </component>
-        <component id="Moon">
+        <component id="Sun">
             <transformation>
                 <translate  x="-5" y="25" z="-10" />
             </transformation>
             <materials>
                 <material id="celestial" />
             </materials>
-            <texture id="moon" length_s="0" length_t="0"/>
+            <texture id="sun" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="Moon" />
             </children>
