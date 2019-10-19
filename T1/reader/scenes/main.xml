@@ -84,9 +84,9 @@
         </spot>
         <omni id="CelestialBody" enabled="1" >
             <location x="-5" y="30" z="-50" w="1" />
-            <ambient r="0.3" g="0.3" b="0.3" a="1" />
-            <diffuse r="0.8" g="0.8" b="0.8" a="1" />
-            <specular r="0.4" g="0.4" b="0.4" a="1" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1" />
+            <diffuse r="0.1" g="0.1" b="0.1" a="1" />
+            <specular r="0.1" g="0.1" b="0.1" a="1" />
         </omni>       
         
     </lights>
@@ -194,15 +194,15 @@
         </material>
 
         <!-- BAR COUNTER -->
-        <material id="barCounterTop" shininess="10">
+        <material id="barCounterTop" shininess="1">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
             <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
             <specular r="0.9" g="0.9" b="0.9" a="1.0" />
         </material>
         <material id="barCounter" shininess="2">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <ambient r="0.5" g="0.5" b="0.5" a="1.0" />
             <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
             <specular r="0.6" g="0.6" b="0.6" a="1.0" />
         </material>
@@ -210,7 +210,7 @@
         <!-- BAR CHAIR -->
         <material id="barChair" shininess="1">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
             <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
             <specular r="0.6" g="0.6" b="0.6" a="1.0" />
         </material>
