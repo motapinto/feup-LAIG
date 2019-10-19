@@ -1,14 +1,10 @@
 <lxs>
-    <scene root="demoRoot" axis_length="5" floorStart = "20"/>
+    <scene root="demoRoot" axis_length="5"/>
 
-    <!-- far - Far clipping plane distance -->
-    <!-- fov/angle - Field of view angle of the camera (in radians) -->
-    <!-- near - Near clipping plane distance -->
-    <!-- -->
-    <views default="topFloor">
-        <perspective id="topFloor" near="0.1" far="1000" angle="40">
-            <from x="5" y="50" z="-9" w="1"/>
-            <to x="5" y="3" z="-10" w="1"/>
+    <views default="defaultCamera">
+        <perspective id="defaultCamera" near="0.1" far="500" angle="45">
+            <from x="5" y="5" z="0" />
+            <to x="0" y="0" z="0" />
         </perspective>
     </views>
 
@@ -18,26 +14,30 @@
     </globals>
 
     <lights>
-        
-        <omni id="CelestialBody" enabled="1" >
-            <location x="-5" y="30" z="-50" w="1" />
-            <ambient r="1" g="1" b="1" a="1" />
-            <diffuse r="0.8" g="0.8" b="0.8" a="1" />
-            <specular r="0.4" g="0.4" b="0.4" a="1" />
-        </omni>       
-        
+        <omni id="demoLight" enabled="1">
+            <location x="9.8" y="11.9" z="10" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </omni>
+        <omni id="demoLight1" enabled="1">
+            <location x="-9.8" y="-11.9" z="-10" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </omni>
     </lights>
 
     <textures>
+        <texture id="demoTexture" file="scenes/images/parking-lot.jpg" />
     </textures>
 
     <materials>
-        <!--  BUILDING -->
-         <material id="window" shininess="2">
-            <emission r="0.0" g="0" b="0" a="1.0" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
-            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
-            <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+        <material id="demoMaterial" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </material>
     </materials>
 
@@ -45,211 +45,37 @@
     </transformations>
 
     <primitives>
-        <primitive id="Window1">
-            <cylinder base="1.838" top="1.838" height="4" slices="4" stacks="1" />
+        <primitive id="demoRectangle">
+            <rectangle x1="0" y1="0" x2="40" y2="3" />
         </primitive>
-        <primitive id="Window2">
-            <cylinder base="1.13" top="1.13" height="4" slices="4" stacks="1" />
+        <primitive id="demoTriangle">
+            <triangle   x1="0" y1="3" z1="0"
+                        x2="-3" y2="0" z2="0"
+                        x3="3" y3="0" z3="0" />        
         </primitive>
+        <primitive id="demoSphere">
+            <sphere radius="2" slices="21" stacks="5" />        
+        </primitive>
+        <primitive id="demoTorus">
+            <torus inner="2" outer="4" slices="5" loops="11" />
+        </primitive>
+        <primitive id="demoCylinder">
+            <cylinder base="4" top="4" height="4" slices="12" stacks="10" />
+        </primitive>
+
     </primitives>
 
     <components>
-        <component id="Window1">
-            <transformation>
-                <translate x="0.3" y="-0.64" z="2.5" />
-                <scale x="1" y="0.1" z="1.92" />
-                <rotate axis="x" angle="90" />
-                <rotate axis="z" angle="45" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>
-                <primitiveref id="Window1" />           
-            </children>
-        </component>
-        <component id="Window1.4">
-            <transformation>
-                <translate x="2.45" y="0" z="0" />
-                <scale x="0.85" y="1" z="1" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>   
-                <componentref id="Window1" />           
-            </children>
-        </component>
-        <component id="Window1.3">
-            <transformation>
-                <translate x="2.6" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>   
-                <componentref id="Window1" />           
-                <componentref id="Window1.4" />           
-            </children>
-        </component>
-        <component id="Window1.2">
-            <transformation>
-                <translate x="2.6" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>
-                <componentref id="Window1.3" />     
-                <componentref id="Window1" />           
-            </children>
-        </component>
-        <component id="Window1.1">
-            <transformation>
-                <translate x="2.6" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>
-                <componentref id="Window1.2" />     
-                <componentref id="Window1" />           
-            </children>
-        </component>
-        <component id="Window1.0" floor="2">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Window1.1" />     
-                <componentref id="Window1" />           
-            </children>
-        </component>
-        <component id="Window2">
-            <transformation>
-                <translate x="11.6" y="-0.24" z="2.5" />
-                <scale x="0.1" y="1" z="3.125" />
-                <rotate axis="z" angle="90" />
-                <rotate axis="x" angle="90" />
-                <rotate axis="z" angle="45" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <primitiveref id="Window2" />           
-            </children>
-        </component>
-        <component id="Window2.4">
-            <transformation>
-                <translate x="0" y="1.65" z="0" />
-                <scale x="1" y="1.05" z="1" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="none"/>
-            <children>   
-                <componentref id="Window2" />           
-            </children>
-        </component>
-        <component id="Window2.3">
-            <transformation>
-                <translate x="0" y="1.6" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="none"/>
-            <children>   
-                <componentref id="Window2" />           
-                <componentref id="Window2.4" />           
-            </children>
-        </component>
-        <component id="Window2.2">
-            <transformation>
-                <translate x="0" y="1.6" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <componentref id="Window2.3" />     
-                <componentref id="Window2" />           
-            </children>
-        </component>
-        <component id="Window2.1">
-            <transformation>
-                <translate x="0" y="1.6" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <componentref id="Window2.2" />     
-                <componentref id="Window2" />           
-            </children>
-        </component>
-        <component id="Window2.0" floor="2">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <componentref id="Window2.1" />     
-                <componentref id="Window2" />           
-            </children>
-        </component>
-        <component id="Window2.1Set">
-            <transformation>
-                <translate x="0" y="0.4" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Window2.0" />            
-            </children>
-        </component>
-        <component id="Window2.2Set">
-            <transformation>
-                <translate x="-12.6" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="window" />
-            </materials>
-            <texture id="none" length_s="0" length_t="0"/>
-            <children>
-                <componentref id="Window2.1Set" />            
-            </children>
-        </component>   
         <component id="demoRoot">
             <transformation>
-                <translate x="0" y="0" z="0" />
             </transformation>
             <materials>
-                <material id="window" />
+                <material id="demoMaterial" />
             </materials>
-            <texture id="none" length_s="0" length_t="0"/>
+            <texture id="demoTexture"/>
             <children>
-                <componentref id="Window2.1Set" />   
-                <componentref id="Window2.2Set" />            
-                <componentref id="Window1.0" />            
+                <primitiveref id="demoCylinder" />
             </children>
-        </component>   
+        </component>
     </components>
 </lxs>

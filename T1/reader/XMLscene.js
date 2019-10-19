@@ -94,7 +94,6 @@ class XMLscene extends CGFscene {
                     this.lights[i].setQuadraticAttenuation(light[9][2]);
                 }
 
-                this.lights[i].setVisible(true);
                 if (light[0])
                     this.lights[i].enable();
                 else
@@ -154,11 +153,9 @@ class XMLscene extends CGFscene {
         for (let key in this.lightsInterface) {
             if (this.lightsInterface.hasOwnProperty(key)) {
                 if (this.lightsInterface[key]) {
-                    this.lights[i].setVisible(true);
                     this.lights[i].enable();
                 }
                 else {
-                    this.lights[i].setVisible(false);
                     this.lights[i].disable();
                 }
                 this.lights[i++].update();

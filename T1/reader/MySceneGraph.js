@@ -221,7 +221,7 @@ class MySceneGraph {
 
         this.referenceLength = axis_length || 1;
 
-        this.scene.floor = this.reader.getString(sceneNode, 'floorStart', false);
+        this.scene.floor = this.reader.getInteger(sceneNode, 'floorStart', false);
         if (this.scene.floor == null)
             this.scene.floor = 0;
 
@@ -246,84 +246,155 @@ class MySceneGraph {
             return "no default ID defined for views";        
 
         for(var i = 0; i < children.length; i++){
-            if (children[i].nodeName != "perspective") {
-                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
-                continue;
-            }
-
-            // Get id of the current view.
-            var viewID = this.reader.getString(children[i], 'id');
-            if (viewID == null)
-                return "no ID defined for perspective";
-
-            // Checks for repeated IDs.
-            if (this.views[viewID] != null)
-                return "ID must be unique for each perspective (conflict: ID = " + viewID + ")";
-            
-            // Get near value of the current view.
-            var near = this.reader.getFloat(children[i], 'near');
-            if (near == null || isNaN(near) || near < 0)
-                return "near value must be defined and higher then 0 for perspective with ID " + viewID;
-
-            // Get far value of the current view.
-            var far = this.reader.getFloat(children[i], 'far');
-            if (far == null || isNaN(far) || far < 0)
-                return "far value must be defined and higher then 0 for perspective with ID " + viewID;
-
-            // Get angle value of the current view.
-            var angle = this.reader.getInteger(children[i], 'angle');
-            if (angle == null || isNaN(angle))
-                return "angle value must be defined for perspective with ID " + viewID;
-
-            grandChildren = children[i].children;
-
-            var from = null;
-            var to = null;
-
-            for(var j = 0; j < grandChildren.length; j++){
-                switch (grandChildren[j].nodeName) {
-                    case 'from':
-                        from = this.parseCoordinates3D(grandChildren[j], "from view for ID " + viewID);
-                        
-                        var w = this.reader.getFloat(grandChildren[j], 'w');
-                        if(w == null) {
-                            onXMLMinorError("w value not parsed in views");
-                        }
-                        else 
-                            from = this.parseCoordinates4D(grandChildren[j], "from view for ID " + viewID);       
-            
-                        if (!Array.isArray(from))
-                            return from;    
-                        break;
-
-                    case 'to':
-                        to = this.parseCoordinates3D(grandChildren[j], "to view for ID " + viewID);
-                        
-                        var w = this.reader.getFloat(grandChildren[j], 'w');
-                        if(w == null) {
-                            onXMLMinorError("w value not parsed in views");
-                        }
-                        else 
-                            to = this.parseCoordinates4D(grandChildren[j], "to view for ID " + viewID);   
-
-                        if (!Array.isArray(to))
-                            return to;    
-                        break;
+            switch (children[i].nodeName) {
+                case 'perspective':
+                    // Get id of the current view.
+                    var viewID = this.reader.getString(children[i], 'id');
+                    if (viewID == null)
+                        return "no ID defined for perspective";
+        
+                    // Checks for repeated IDs.
+                    if (this.views[viewID] != null)
+                        return "ID must be unique for each perspective (conflict: ID = " + viewID + ")";
                     
-                    default:
-                        this.onXMLMinorError("unknown tag <" + grandchildren[j].nodeName + ">");
-                        break;
-                }
+                    // Get near value of the current view.
+                    var near = this.reader.getFloat(children[i], 'near');
+                    if (near == null || isNaN(near) || near < 0)
+                        return "near value must be defined and higher then 0 for perspective with ID " + viewID;
+        
+                    // Get far value of the current view.
+                    var far = this.reader.getFloat(children[i], 'far');
+                    if (far == null || isNaN(far) || far < 0)
+                        return "far value must be defined and higher then 0 for perspective with ID " + viewID;
+        
+                    // Get angle value of the current view.
+                    var angle = this.reader.getInteger(children[i], 'angle');
+                    if (angle == null || isNaN(angle))
+                        return "angle value must be defined for perspective with ID " + viewID;
+        
+                    grandChildren = children[i].children;
+        
+                    var from = null;
+                    var to = null;
+        
+                    for(var j = 0; j < grandChildren.length; j++){
+                        switch (grandChildren[j].nodeName) {
+                            case 'from':
+                                from = this.parseCoordinates3D(grandChildren[j], "from view for ID " + viewID);
+                                if (!Array.isArray(from))
+                                    return from;    
+                                break;
+        
+                            case 'to':
+                                to = this.parseCoordinates3D(grandChildren[j], "to view for ID " + viewID);
+                                if (!Array.isArray(to))
+                                    return to;    
+                                break;
+                                 
+                            default:
+                                this.onXMLMinorError("unknown tag <" + grandchildren[j].nodeName + ">");
+                                break;
+                        }
+                    }
+        
+                    if(from == null)
+                        return "from value not found in perspective " + viewID;
+                        
+                    if(to == null)
+                        return "to value not found in perspective " + viewID;
+                        
+                    this.scene.viewsList.push(viewID);
+                    this.views[viewID] = new CGFcamera((angle/180) * Math.PI, near, far, from, to);
+                    break;
+                
+                case 'ortho':
+                    // Get id of the current view.
+                    var viewID = this.reader.getString(children[i], 'id');
+                    if (viewID == null)
+                        return "no ID defined for perspective";
+        
+                    // Checks for repeated IDs.
+                    if (this.views[viewID] != null)
+                        return "ID must be unique for each perspective (conflict: ID = " + viewID + ")";
+                    
+                    // Get left value of the current view.
+                    var left = this.reader.getFloat(children[i], 'left');
+                    if (left == null || isNaN(left) || left < 0)
+                        return "left value must be defined and higher then 0 for perspective with ID " + viewID;
+        
+                    // Get right value of the current view.
+                    var right = this.reader.getFloat(children[i], 'right');
+                    if (right == null || isNaN(right) || right < 0)
+                        return "right value must be defined and higher then 0 for perspective with ID " + viewID;
+        
+                    // Get bottom value of the current view.
+                    var bottom = this.reader.getFloat(children[i], 'bottom');
+                    if (bottom == null || isNaN(bottom) || bottom < 0)
+                        return "bottom value must be defined and higher then 0 for perspective with ID " + viewID;
+        
+                    // Get top value of the current view.
+                    var top = this.reader.getFloat(children[i], 'top');
+                    if (top == null || isNaN(top) || top < 0)
+                        return "top value must be defined and higher then 0 for perspective with ID " + viewID;
+        
+                    // Get near value of the current view.
+                    var near = this.reader.getFloat(children[i], 'near');
+                    if (near == null || isNaN(near) || near < 0)
+                        return "near value must be defined and higher then 0 for perspective with ID " + viewID;
+        
+                    // Get far value of the current view.
+                    var far = this.reader.getFloat(children[i], 'far');
+                    if (far == null || isNaN(far) || far < 0)
+                        return "far value must be defined and higher then 0 for perspective with ID " + viewID;
+        
+                    grandChildren = children[i].children;
+        
+                    var position = null;
+                    var target = null;
+                    var up = null;
+        
+                    for(var j = 0; j < grandChildren.length; j++){
+                        switch (grandChildren[j].nodeName) {
+                            case 'from':
+                                position = this.parseCoordinates3D(grandChildren[j], "from view for ID " + viewID);
+                                if (!Array.isArray(target))
+                                    return position;    
+                                break;
+        
+                            case 'to':
+                                target = this.parseCoordinates3D(grandChildren[j], "to view for ID " + viewID);
+                                if (!Array.isArray(target))
+                                    return target;    
+                                break;
+        
+                            case 'up':
+                                up = this.parseCoordinates3D(grandChildren[j], "up view for ID " + viewID, false);
+                                break;
+                
+                            default:
+                                this.onXMLMinorError("unknown tag <" + grandchildren[j].nodeName + ">");
+                                break;
+                        }
+                    }
+        
+                    if(position == null)
+                        return "position value not found in perspective " + viewID;
+                        
+                    if(target == null)
+                        return "target value not found in perspective " + viewID;
+
+                    if (!Array.isArray(up))
+                        up = [0,1,0];    
+            
+                    this.scene.viewsList.push(viewID);
+                    this.views[viewID] = new CGFcameraOrth(left, right, bottom, top, near, far, position, target, up);
+                    break;
+
+                default:
+                    this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                    break;
             }
 
-            if(from == null)
-                return "from value not found in perspective " + viewID;
-                
-            if(to == null)
-                return "to value not found in perspective " + viewID;
-                
-            this.scene.viewsList.push(viewID);
-            this.views[viewID] = new CGFcamera((angle/180) * Math.PI, near, far, from, to);
         }
 
         if(this.views[this.idView] == null)
@@ -331,7 +402,6 @@ class MySceneGraph {
 
         this.scene.selectedCamera = this.idView;
         
-
         return null;
     }
 
@@ -605,28 +675,19 @@ class MySceneGraph {
                         return emissionRGBA;
                 }
                 //Ambient
-                else if (grandChildren[j].nodeName == "ambient"){
-                    // var ambientIndex = nodeNames.indexOf("ambient");
-                    // if (ambientIndex == -1)
-                    
+                else if (grandChildren[j].nodeName == "ambient"){                    
                     ambientRGBA = this.parseColor(grandChildren[j], "ambient");
                     if(ambientRGBA.length != 4)
                         return ambientRGBA;    
                 }
                 //Difuse
                 else if (grandChildren[j].nodeName == "diffuse"){
-                    // var diffuseIndex = nodeNames.indexOf("difuse");
-                    // if (diffuseIndex == -1)
-                    
                     diffuseRGBA = this.parseColor(grandChildren[j], "diffuse");
                     if(diffuseRGBA.length != 4)
                         return diffuseRGBA;    
                 }
                 //Specular
                 else if (grandChildren[j].nodeName == "specular"){
-                    // var specularIndex = nodeNames.indexOf("specular");
-                    // if (specularIndex == -1)
-                    
                     specularRGBA = this.parseColor(grandChildren[j], "specular");
                     if(specularRGBA.length != 4)
                         return specularRGBA;    

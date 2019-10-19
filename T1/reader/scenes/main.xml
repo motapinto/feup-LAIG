@@ -7,32 +7,32 @@
     <!-- -->
     <views default="topFloor">
         <perspective id="topFloor" near="0.1" far="1000" angle="40">
-            <from x="5" y="50" z="-9" w="1"/>
-            <to x="5" y="3" z="-10" w="1"/>
+            <from x="5" y="50" z="-9" />
+            <to x="5" y="3" z="-10" />
         </perspective>
         <perspective id="topFloorInclined" near="0.1" far="1000" angle="20">
-            <from x="5" y="32" z="50" w="1"/>
-            <to x="5" y="8" z="-5" w="1"/>
+            <from x="5" y="32" z="50" />
+            <to x="5" y="8" z="-5" />
         </perspective>
         <perspective id="outsidePrespective" near="0.1" far="1000" angle="30 ">
-            <from x="5" y="3" z="15" w="1"/>
-            <to x="5" y="3" z="-5" w="1"/>
+            <from x="5" y="3" z="15" />
+            <to x="5" y="3" z="-5" />
         </perspective>
         <perspective id="roadPrespective" near="0.1" far="1000" angle="25">
-            <from x="60" y="2" z="5" w="1"/>
-            <to x="-10" y="2" z="0" w="1"/>
+            <from x="60" y="2" z="5" />
+            <to x="-10" y="2" z="0" />
         </perspective>
         <perspective id="insideFloor1" near="0.1" far="1000" angle="80 ">
-            <from x="11" y="4" z="-20" w="1"/>
-            <to x="-1" y="1" z="5" w="1"/>
+            <from x="11" y="4" z="-20" />
+            <to x="-1" y="1" z="5" />
         </perspective>
         <perspective id="insideFloor2" near="0.1" far="1000" angle="80">
-            <from x="5" y="9" z="-20" w="1"/>
-            <to x="5" y="6" z="5" w="1"/>
+            <from x="5" y="9" z="-20" />
+            <to x="5" y="6" z="5" />
         </perspective>
         <perspective id="globalPrespective" near="0.1" far="1000" angle="40">
-            <from x="-5" y="50" z="90" w="1"/>
-            <to x="5" y="0" z="-20" w="1"/>
+            <from x="-5" y="50" z="90" />
+            <to x="5" y="0" z="-20" />
         </perspective>
     </views>
 
