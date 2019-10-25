@@ -25,8 +25,6 @@ class XMLscene extends CGFscene {
 
         // Interface lights to be changed in display
         this.lightsInterface = {};
-        // Interface lights to be changed in display
-        this.camerasInterface = {};
 
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
@@ -40,6 +38,8 @@ class XMLscene extends CGFscene {
         this.floorMax = 0;
         this.viewsList = [];
         this.selectedCamera = null;
+        this.tInit = null;
+        this.updatePeriod = 100;
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -55,7 +55,7 @@ class XMLscene extends CGFscene {
                 this.floor = this.floorMax - 1;
         }
 
-        this.setUpdatePeriod(100);
+        this.setUpdatePeriod(this.updatePeriod);
     }
 
     /**
@@ -106,6 +106,9 @@ class XMLscene extends CGFscene {
         }
     }
 
+    /**
+     * Sets default appearance.
+     */
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -113,8 +116,9 @@ class XMLscene extends CGFscene {
         this.setShininess(10.0);
     }
 
-    /** Handler called when the graph is finally loaded. 
-     * As loading is asynchronous, this may be called already after the application has started the run loop
+    /** 
+     * Handler called when the graph is finally loaded. 
+     *  As loading is asynchronous, this may be called already after the application has started the run loop
      */
     onGraphLoaded() { 
         this.axis = new CGFaxis(this, this.graph.referenceLength);
@@ -132,21 +136,37 @@ class XMLscene extends CGFscene {
         this.updateCamera();
     }
 
+    /**
+     * Checks keys input.
+     */
     checkKeys(t) {
         if (this.gui.isKeyPressed("KeyM")) {
             this.graph.materialRotate++;
         }
     }
 
+    /**
+     * Update function.
+     */
     update(t) {
+        if(this.tInit == null)
+            this.tInit = t;
+
         this.checkKeys(t);
+        this.graph.updateAnimations(t - this.tInit);
     }
 
+    /**
+     * Selects interface camara choosen.
+     */
     updateCamera() {
         this.camera = this.graph.views[this.selectedCamera];
         this.interface.setActiveCamera(this.camera);
     }
 
+    /**
+     * Updates interface selected lights
+     */
     updateLights() {
         //Updates lights in the display
         let i = 0;
@@ -180,7 +200,6 @@ class XMLscene extends CGFscene {
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
             this.updateLights();
             
-
             if (this.sceneInited) {
                 // Draw axis
                 this.setDefaultAppearance();
@@ -191,7 +210,6 @@ class XMLscene extends CGFscene {
             if(this.displayAxis) {
                 this.axis.display();
             }
-
 
         this.popMatrix();
         // ---- END Background, camera and axis setup

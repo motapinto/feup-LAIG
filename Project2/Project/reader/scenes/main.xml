@@ -364,6 +364,17 @@
 
     </transformations>
 
+    <animations>
+
+        <animation id="dayCycle" >
+            <keyframe instant="10">
+                <translate x="20" y="100" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+    </animations>
+
     <primitives>
         <!-- TABLE -->
          <primitive id="TableLeg">
@@ -2305,9 +2316,11 @@
             <transformation>
                 <translate  x="-5" y="25" z="-10" />
             </transformation>
+            <animationref id="dayCycle" />
             <materials>
                 <material id="celestial" />
             </materials>
+
             <texture id="sun" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="Moon" />

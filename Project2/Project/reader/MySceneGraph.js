@@ -8,15 +8,19 @@ var LIGHTS_INDEX = 3;
 var TEXTURES_INDEX = 4;
 var MATERIALS_INDEX = 5;
 var TRANSFORMATIONS_INDEX = 6;
-var PRIMITIVES_INDEX = 7;
-var COMPONENTS_INDEX = 8;
+var ANIMATIONS_INDEX = 7;
+var PRIMITIVES_INDEX = 8;
+var COMPONENTS_INDEX = 9;
 
 /**
  * MySceneGraph class, representing the scene graph.
  */
 class MySceneGraph {
+    
     /**
      * @constructor
+     * @param {string} filename
+     * @param {scene} scene
      */
     constructor(filename, scene) {
         this.loadedOk = null;
@@ -49,7 +53,7 @@ class MySceneGraph {
         this.reader.open('scenes/' + filename, this);
     }
 
-    /*
+    /**
      * Callback to be executed after successful reading
      */
     onXMLReady() {
@@ -172,6 +176,18 @@ class MySceneGraph {
 
             //Parse transformations block
             if ((error = this.parseTransformations(nodes[index])) != null)
+                return error;
+        }
+
+        // <animations>
+        if ((index = nodeNames.indexOf("animations")) == -1)
+            return "tag <animations> missing";
+        else {
+            if (index != ANIMATIONS_INDEX)
+                this.onXMLMinorError("tag <animations> out of order");
+
+            //Parse textures block
+            if ((error = this.parseAnimations(nodes[index])) != null)
                 return error;
         }
 
@@ -727,7 +743,6 @@ class MySceneGraph {
      * Parses the <transformations> block.
      * @param {transformations block element} transformationsNode
      */
-    //BASED ON: http://glmatrix.net/docs/module-mat4.html
     parseTransformations(transformationsNode) {
         var children = transformationsNode.children;
         var grandChildren = [];
@@ -802,6 +817,98 @@ class MySceneGraph {
         }
 
         this.log("Parsed transformations");
+        return null;
+    }
+
+    /**
+     * Parses the <animations> block. 
+     * @param {animations block element} animationsNode
+     */
+    parseAnimations(animationsNode) {
+        var children = animationsNode.children;
+        this.animations = [];
+        this.animationsIDsList = [];
+
+        for (var i = 0; i < children.length; i++) {
+            var keyframes = [];
+
+            if (children[i].nodeName != "animation ") {
+                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                continue;
+            }
+
+            // Get id of the current animation.
+            var animationID = this.reader.getString(children[i], 'id');
+            if (animationID == null)
+                return "no ID defined for animation";
+            // Checks for repeated IDs.
+            if (this.animations[animationID] != null)
+                return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
+
+            grandChildren = children[i].children;
+
+            if(grandChildren.length < 1) {
+                return "There must be at least one keyframe element";
+            }
+
+            for(var k = 0; k < grandChildren.length; k++) {
+                var scale = [];
+                var translate = [];
+                var rotate = [];
+                
+                grandgrandChildren = grandChildren[k].children;
+                 // Get animation instant of the current animation.
+                var instant = this.reader.getString(grandChildren[i], 'instant');
+                
+                if (instant == null)
+                    return "no instant defined for animation with ID " + animationID ;
+                if (istant < 0)
+                    return "instant must be higher than 0 for animation with ID " + animationID ;
+
+                if(grandgrandChildren.length != 3) 
+                    return "There must be 3 elements containing translate, rotate and scale for animation with ID " + animationID ;
+
+                if(grandgrandChildren[0].nodeName != 'translate')
+                    return "Translate must be the first element to be defined for animation with ID " + animationID;
+                
+                if(grandgrandChildren[1].nodeName != 'rotate')
+                    return "Rotate must be the second element to be defined for animation with ID " + animationID;
+                
+                if(grandgrandChildren[2].nodeName != 'scale')
+                    return "Scale must be the third element to be defined for animation with ID " + animationID;
+
+                translate = this.parseCoordinates3D(grandgrandChildren[0], "animation transformation for ID " + animationID);
+                if (!Array.isArray(translate))
+                    return translate;
+                
+                rotate = this.parseCoordinates3DRotation(grandgrandChildren[1], "animation transformation for ID " + animationID)
+                if (!Array.isArray(rotate))
+                    return rotate;
+
+                scale = this.parseCoordinates3D(grandgrandChildren[2], "animation transformation for ID " + animationID)
+                if (!Array.isArray(scale))
+                    return scale;
+
+                    
+                var keyframe = {
+                    instant: instant,
+                    translate: translate,
+                    scale: scale,
+                    rotate: rotate
+                };
+                keyframes.push(keyframe);
+            }
+
+            var animation = {
+                matrix: mat4.create(),
+                keyframes: keyframes
+            };
+
+            this.animations[animationID] = animation;
+            this.animationsIDsList.push(animationID);
+        }
+
+        this.log("Parsed animations");
         return null;
     }
 
@@ -996,11 +1103,10 @@ class MySceneGraph {
         return null;
     }
 
-
     /**
-   * Parses the <components> block.
-   * @param {components block element} componentsNode
-   */
+     * Parses the <components> block.
+     * @param {components block element} componentsNode
+     */
     parseComponents(componentsNode) {
         var children = componentsNode.children;
 
@@ -1046,6 +1152,7 @@ class MySceneGraph {
             var transformationIndex = nodeNames.indexOf("transformation");
             var materialsIndex = nodeNames.indexOf("materials");
             var textureIndex = nodeNames.indexOf("texture");
+            var animationIndex = nodeNames.indexOf("animationref");
             var childrenIndex = nodeNames.indexOf("children");
 
             // Transformations
@@ -1160,6 +1267,16 @@ class MySceneGraph {
                     this.onXMLMinorError("length_s and length_t must not be defined in texture in component " + componentID);
             } 
 
+            //Animation
+            var animationId = null;
+            if(animationIndex != -1) {
+                animationId = this.reader.getString(grandChildren[animationIndex], "id", false);
+                if (animationId != null && !this.animations[animationId]){
+                    this.onXMLMinorError("animation not defined for animationwith ID " + animationId + " in component " + componentID + " assuming no animation");
+                    animationId = null;
+                }
+            }
+
             // Children
             var components = [];
             var primitives = [];
@@ -1197,6 +1314,7 @@ class MySceneGraph {
                 transfMatrix: transfMatrix, 
                 materials: materials, 
                 texture: texture, 
+                animation: animationId,
                 childComponents: components, 
                 childPrimitives: primitives};
             this.components[componentID] = component;
@@ -1208,7 +1326,6 @@ class MySceneGraph {
         this.log("Parsed components");
         return null;
     }
-
 
     /**
      * Parse the coordinates from a node with ID = id
@@ -1236,6 +1353,33 @@ class MySceneGraph {
 
         position.push(...[x, y, z]);
         return position;
+    }
+
+    /**
+     * Parse the coordinates from a node with ID = id
+     * @param {block element} node
+     * @param {message to be displayed in case of error} messageError
+     */
+    parseCoordinates3DRotation(node, messageError) {
+        var rotation = [];
+
+        // angle_x
+        var angle_x = this.reader.getFloat(node, 'angle_x');
+        if (!(angle_x != null && !isNaN(angle_x)))
+            return "unable to parse x-coordinate of the " + messageError;
+
+        // angle_y
+        var angle_y = this.reader.getFloat(node, 'angle_y');
+        if (!(angle_y != null && !isNaN(angle_y)))
+            return "unable to parse y-coordinate of the " + messageError;
+
+        // angle_z
+        var angle_z = this.reader.getFloat(node, 'angle_z');
+        if (!(angle_z != null && !isNaN(angle_z)))
+            return "unable to parse angle z-coordinate of the " + messageError;
+
+        rotation.push(...[angle_x, angle_y, angle_z]);
+        return rotation;
     }
 
     /**
@@ -1296,7 +1440,7 @@ class MySceneGraph {
         return color;
     }
 
-    /*
+    /**
      * Callback to be executed on any read error, showing an error on the console.
      * @param {string} message
      */
@@ -1322,7 +1466,98 @@ class MySceneGraph {
     }
 
     /**
+     * Update animations matrix, to be called on every scene update.
+     * @param {float} instant
+     */
+    updateAnimations(instant) {
+        // animationsIDsList has the animations ID's
+        for(let i in this.animationsIDsList) {
+            var keyframes = this.animations[this.animationsIDsList[i]].keyframes;
+            var matrix = mat4.create();
+            var translate = [0, 0, 0];
+            var rotate = [0, 0, 0];
+            var scale = [1, 1, 1];
+
+            for(let j in keyframes){
+                //Work before keyframes[j].instant >= instant
+                if(keyframes[j].instant < instant){
+                    //Tranlation - Addictive operation 
+                    translate[0] += keyframes[j].translate[0];
+                    translate[1] += keyframes[j].translate[1];
+                    translate[2] += keyframes[j].translate[2];
+                    //Rotation - Addictive operation 
+                    rotate[0] += keyframes[j].rotate[0];
+                    rotate[1] += keyframes[j].rotate[1];
+                    rotate[2] += keyframes[j].rotate[2];
+                    //Scale - Multiplicative operation 
+                    scale[0] *= keyframes[j].scale[0];
+                    scale[1] *= keyframes[j].scale[1];
+                    scale[2] *= keyframes[j].scale[2];
+                }
+                else{
+                    var deltaInstant;
+                    if(j == 0)
+                        deltaInstant = keyframes[j].instant;
+                    else{
+                        deltaInstant = keyframes[j].instant - keyframes[j-1].instant;
+                        instant -= keyframes[j-1].instant;
+                    }
+                    
+                    //Number of divisions for the keyframe
+                    var framesPerKeyframe = deltaInstant*1000 / this.scene.updatePeriod;
+                    //Number of curent frame in keyframe
+                    var nFrame = (framesPerKeyframe * instant) / keyframes[j].instant;
+
+                    //R = root^n(S0/Sn)
+                    var scaleRX = Math.pow(scale[0] / keyframes[j].scale[0], 1 / framesPerKeyframe);
+                    var scaleRY = Math.pow(scale[1] / keyframes[j].scale[1], 1 / framesPerKeyframe);
+                    var scaleRZ = Math.pow(scale[2] / keyframes[j].scale[2], 1 / framesPerKeyframe);
+                    //Angular velocity
+                    var wX = keyframes[j].rotate[0] / deltaInstant;
+                    var wY = keyframes[j].rotate[1] / deltaInstant;
+                    var wZ = keyframes[j].rotate[2] / deltaInstant;
+                    //Velocity = d/t
+                    var vX = keyframes[j].translate[0] / deltaInstant;
+                    var vY = keyframes[j].translate[1] / deltaInstant;
+                    var vZ = keyframes[j].translate[2] / deltaInstant;
+
+                    //Translation - Addictive operation 
+                    translate[0] += vX*instant;
+                    translate[1] += vY*instant;
+                    translate[2] += vZ*instant;
+                    //Rotation - Addictive operation 
+                    rotate[0] += wX*instant;
+                    rotate[1] += wY*instant;
+                    rotate[2] += wZ*instant;
+                    //Scale - Multiplicative operation 
+                    scale[0] *= Math.pow(scaleRX, nFrame);
+                    scale[1] *= Math.pow(scaleRY, nFrame);
+                    scale[2] *= Math.pow(scaleRZ, nFrame);
+                }
+            }
+
+            //mat4.translate(dest, op1, op2)
+            mat4.translate(matrix, matrix, translate);
+            //mat4.rotate(dest, op1, angle, axis)
+            mat4.rotate(matrix, matrix, rotate[0] * Math.PI / 180, 1, 0, 0);
+            mat4.rotate(matrix, matrix, rotate[1] * Math.PI / 180, 0, 1, 0);
+            mat4.rotate(matrix, matrix, rotate[2] * Math.PI / 180, 0, 0, 1);
+            //mat4.scale(dest, op1, op2)
+            mat4.scale(matrix, matrix, scale);
+
+            //Updates Ma(animation matrix)
+            this.animations[this.animationsIDsList[i]].matrix = matrix;
+        }
+    }
+
+    /**
      * Processes Nodes Recursively
+     * @param {int} id
+     * @param {mat4} matrix
+     * @param {material} material
+     * @param {texture} texture
+     * @param {float} length_s
+     * @param {float} length_t
      */
     processComponentNode(id, matrix, material, texture, length_s, length_t){
         if(this.components[id] == null){
@@ -1348,6 +1583,7 @@ class MySceneGraph {
 
         //Compute transformation matrix
         mat4.mul(matrix, matrix, node.transfMatrix);        
+        mat4.mul(matrix, matrix, this.animations[node.animation].matrix);        
 
         //process all children components
         for(let i = 0; i < node.childComponents.length; i++){
