@@ -7,8 +7,8 @@
 > **Project developed by:**\
 > Luís Ramos ([luispvramos](https://github.com/LuisPRamos))\
 > Martim Silva ([motapinto](https://github.com/motapinto))
-
-### Any problems?
+>
+> **Any problems?**\
 > Start an Issue please.
 
 **Disclaimer** - This repository was created for educational purposes and we do not take any responsibility for anything related to its content. You are free to use any code or algorithm you find, but do so at your own risk.
