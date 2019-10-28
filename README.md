@@ -8,12 +8,6 @@
 > Luís Ramos ([luispvramos](https://github.com/LuisPRamos))\
 > Martim Silva ([motapinto](https://github.com/motapinto))
 
-### To do
-
-- [ ] Animations
-- [ ] Render-to-text
-- [ ] Shaders
-
 ### Any problems?
 > Start an Issue please.
 
