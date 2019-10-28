@@ -4,7 +4,7 @@
  * pointing into Y+.
  */
 
-class Plane extends CFGobject{
+class Plane extends CGFobject{
     /**
      * @constructor
      * @param {scene} scene
@@ -12,8 +12,8 @@ class Plane extends CFGobject{
      * @param {integer} divZ
      */
     constructor (scene, divX, divZ) {
+          super(scene);
           this.scene = scene;
-          this.obj;
   
           let controlvertexes = 
           [
@@ -31,12 +31,15 @@ class Plane extends CFGobject{
           ];
   
           let nurbsSurface = new CGFnurbsSurface(1, 1, controlvertexes);
-          obj = new CGFnurbsObject(scene, divX, divZ, nurbsSurface );
+          this.obj = new CGFnurbsObject(scene, divX, divZ, nurbsSurface );
     }
   
     display() {
-      this.pushMatrix();
+      this.scene.pushMatrix();
           this.obj.display();
-      this.popMatrix();
+      this.scene.popMatrix();
+    }
+
+    updateTexCoords(length_s, length_t) {
     }
   }

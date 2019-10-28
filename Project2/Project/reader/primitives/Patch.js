@@ -4,7 +4,7 @@
  * pointing into Y+.
  */
 
-class Patch extends CFGobject{
+class Patch extends CGFobject{
     /**
      * @constructor
      * @param {scene} scene
@@ -14,8 +14,8 @@ class Patch extends CFGobject{
      * @param {integer} degreeV
      */
     constructor (scene, divU, divV, degreeU, degreeV) {
+          super(scene);
           this.scene = scene;
-          this.obj;
   
           let controlvertexes = 
           [
@@ -32,13 +32,16 @@ class Patch extends CFGobject{
              ]
           ];
   
-          let nurbsSurface = new CGFnurbsSurface(degreeu, degreeV, controlvertexes);
-          obj = new CGFnurbsObject(scene, divU, divV, nurbsSurface);
+          let nurbsSurface = new CGFnurbsSurface(degreeU, degreeV, controlvertexes);
+          this.obj = new CGFnurbsObject(scene, divU, divV, nurbsSurface);
     }
   
     display() {
-      this.pushMatrix();
+      this.scene.pushMatrix();
           this.obj.display();
-      this.popMatrix();
+      this.scene.popMatrix();
+    }
+
+    updateTexCoords(length_s, length_t) {
     }
   }
