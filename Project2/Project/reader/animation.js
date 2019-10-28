@@ -14,7 +14,7 @@ class Animation {
    * @param {vec3} scaleFinal
    * @param {integer} updatePeriod
    */
-  constructor (scene, deltaTime, translateInit, translateFinal, rotateInit, rotateFinal, scaleInit, scaleFinal, updatePeriod) {
+  constructor (scene, timeInit, timeFinal, translateInit, translateFinal, rotateInit, rotateFinal, scaleInit, scaleFinal, updatePeriod) {
     if (this.constructor === Animation) {
       throw new TypeError('Abstract class "Animation" cannot be instantiated directly.'); 
     }
@@ -27,22 +27,25 @@ class Animation {
       throw new TypeError('Classes extending the Animation abstract class');
     }
 
-  this.scene = scene;
+    this.scene = scene;
 
-    this.deltaTime = deltaTime;
+    this.timeInit = timeInit;
+    this.timeFinal = timeFinal;
+
+    var deltaTime = timeFinal - timeInit;
 
     this.framesPerKeyFrame = deltaTime*1000 / updatePeriod;
 
     this.linearVelocity = [
-      (translateFinal[0] - translateInit[0]) / deltaInstant,
-      (translateFinal[1] - translateInit[1]) / deltaInstant,
-      (translateFinal[2] - translateInit[2]) / deltaInstant
+      (translateFinal[0] - translateInit[0]) / deltaTime,
+      (translateFinal[1] - translateInit[1]) / deltaTime,
+      (translateFinal[2] - translateInit[2]) / deltaTime
     ];
 
     this.angularVelocity = [
-      (rotateFinal[0] - rotateInit[0]) / deltaInstant,
-      (rotateFinal[1] - rotateInit[1]) / deltaInstant,
-      (rotateFinal[2] - rotateInit[2]) / deltaInstant
+      (rotateFinal[0] - rotateInit[0]) / deltaTime,
+      (rotateFinal[1] - rotateInit[1]) / deltaTime,
+      (rotateFinal[2] - rotateInit[2]) / deltaTime
     ];
 
     this.scaleR = [

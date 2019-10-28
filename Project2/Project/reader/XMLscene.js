@@ -153,7 +153,7 @@ class XMLscene extends CGFscene {
             this.tInit = t;
 
         this.checkKeys(t);
-        this.graph.updateAnimations(t - this.tInit);
+        this.graph.updateAnimations((t - this.tInit) / 1000);
     }
 
     /**

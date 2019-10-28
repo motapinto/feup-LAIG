@@ -366,13 +366,18 @@
 
     <animations>
 
-        <animation id="dayCycle" >
-            <keyframe instant="10">
-                <translate x="20" y="100" z="0" />
+        <animation id="dayCycleMoon" >
+            <keyframe instant="20">
+                <translate x="0" y="0" z="-50" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-        </animation>
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>        
     </animations>
 
     <primitives>
@@ -2304,6 +2309,7 @@
             <transformation>
                 <translate  x="-5" y="60" z="30" />
             </transformation>
+            <animationref id="dayCycleMoon" />
             <materials>
                 <material id="celestial" />
             </materials>
@@ -2316,7 +2322,7 @@
             <transformation>
                 <translate  x="-5" y="25" z="-10" />
             </transformation>
-            <animationref id="dayCycle" />
+            <animationref id="dayCycleSun" />
             <materials>
                 <material id="celestial" />
             </materials>

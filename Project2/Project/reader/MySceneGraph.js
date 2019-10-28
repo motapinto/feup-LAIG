@@ -826,13 +826,20 @@ class MySceneGraph {
      */
     parseAnimations(animationsNode) {
         var children = animationsNode.children;
+        var grandChildren;
+        var grandgrandChildren;
         this.animations = [];
         this.animationsIDsList = [];
 
         for (var i = 0; i < children.length; i++) {
             var keyframes = [];
+            var timeInit = 0;
+            var scaleInit = [1, 1, 1];
+            var translateInit = [0, 0, 0];
+            var rotateInit = [0, 0, 0];
 
-            if (children[i].nodeName != "animation ") {
+
+            if (children[i].nodeName != "animation") {
                 this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
                 continue;
             }
@@ -852,18 +859,18 @@ class MySceneGraph {
             }
 
             for(var k = 0; k < grandChildren.length; k++) {
-                var scale = [];
-                var translate = [];
-                var rotate = [];
+                var scaleFinal = [];
+                var translateFinal = [];
+                var rotateFinal = [];
                 
                 grandgrandChildren = grandChildren[k].children;
                  // Get animation instant of the current animation.
-                var instant = this.reader.getString(grandChildren[i], 'instant');
+                var timeFinal = this.reader.getInteger(grandChildren[i], 'instant');
                 
-                if (instant == null)
+                if (timeFinal == null)
                     return "no instant defined for animation with ID " + animationID ;
-                if (istant < 0)
-                    return "instant must be higher than 0 for animation with ID " + animationID ;
+                if (timeFinal < timeInit)
+                    return "instant must be higher than previous keyframes instant for animation with ID " + animationID ;
 
                 if(grandgrandChildren.length != 3) 
                     return "There must be 3 elements containing translate, rotate and scale for animation with ID " + animationID ;
@@ -877,34 +884,27 @@ class MySceneGraph {
                 if(grandgrandChildren[2].nodeName != 'scale')
                     return "Scale must be the third element to be defined for animation with ID " + animationID;
 
-                translate = this.parseCoordinates3D(grandgrandChildren[0], "animation transformation for ID " + animationID);
-                if (!Array.isArray(translate))
-                    return translate;
+                translateFinal = this.parseCoordinates3D(grandgrandChildren[0], "animation transformation for ID " + animationID);
+                if (!Array.isArray(translateFinal))
+                    return translateFinal;
                 
-                rotate = this.parseCoordinates3DRotation(grandgrandChildren[1], "animation transformation for ID " + animationID)
-                if (!Array.isArray(rotate))
-                    return rotate;
+                rotateFinal = this.parseCoordinates3DRotation(grandgrandChildren[1], "animation transformation for ID " + animationID)
+                if (!Array.isArray(rotateFinal))
+                    return rotateFinal;
 
-                scale = this.parseCoordinates3D(grandgrandChildren[2], "animation transformation for ID " + animationID)
-                if (!Array.isArray(scale))
-                    return scale;
+                scaleFinal = this.parseCoordinates3D(grandgrandChildren[2], "animation transformation for ID " + animationID)
+                if (!Array.isArray(scaleFinal))
+                    return scaleFinal;
 
-                    
-                var keyframe = {
-                    instant: instant,
-                    translate: translate,
-                    scale: scale,
-                    rotate: rotate
-                };
-                keyframes.push(keyframe);
+                keyframes.push(new KeyframeAnimation(this.scene, timeInit, timeFinal, translateInit, translateFinal, rotateInit, rotateFinal, scaleInit, scaleFinal, this.scene.updatePeriod));
+                
+                translateInit = translateFinal;
+                rotateInit = rotateFinal;
+                scaleInit = scaleFinal;
+                timeInit = timeFinal;
             }
 
-            var animation = {
-                matrix: mat4.create(),
-                keyframes: keyframes
-            };
-
-            this.animations[animationID] = animation;
+            this.animations[animationID] = keyframes;
             this.animationsIDsList.push(animationID);
         }
 
@@ -1472,81 +1472,11 @@ class MySceneGraph {
     updateAnimations(instant) {
         // animationsIDsList has the animations ID's
         for(let i in this.animationsIDsList) {
-            var keyframes = this.animations[this.animationsIDsList[i]].keyframes;
-            var matrix = mat4.create();
-            var translate = [0, 0, 0];
-            var rotate = [0, 0, 0];
-            var scale = [1, 1, 1];
+            var keyframes = this.animations[this.animationsIDsList[i]];
 
             for(let j in keyframes){
-                //Work before keyframes[j].instant >= instant
-                if(keyframes[j].instant < instant){
-                    //Tranlation - Addictive operation 
-                    translate[0] += keyframes[j].translate[0];
-                    translate[1] += keyframes[j].translate[1];
-                    translate[2] += keyframes[j].translate[2];
-                    //Rotation - Addictive operation 
-                    rotate[0] += keyframes[j].rotate[0];
-                    rotate[1] += keyframes[j].rotate[1];
-                    rotate[2] += keyframes[j].rotate[2];
-                    //Scale - Multiplicative operation 
-                    scale[0] *= keyframes[j].scale[0];
-                    scale[1] *= keyframes[j].scale[1];
-                    scale[2] *= keyframes[j].scale[2];
-                }
-                else{
-                    var deltaInstant;
-                    if(j == 0)
-                        deltaInstant = keyframes[j].instant;
-                    else{
-                        deltaInstant = keyframes[j].instant - keyframes[j-1].instant;
-                        instant -= keyframes[j-1].instant;
-                    }
-                    
-                    //Number of divisions for the keyframe
-                    var framesPerKeyframe = deltaInstant*1000 / this.scene.updatePeriod;
-                    //Number of curent frame in keyframe
-                    var nFrame = (framesPerKeyframe * instant) / keyframes[j].instant;
-
-                    //R = root^n(S0/Sn)
-                    var scaleRX = Math.pow(scale[0] / keyframes[j].scale[0], 1 / framesPerKeyframe);
-                    var scaleRY = Math.pow(scale[1] / keyframes[j].scale[1], 1 / framesPerKeyframe);
-                    var scaleRZ = Math.pow(scale[2] / keyframes[j].scale[2], 1 / framesPerKeyframe);
-                    //Angular velocity
-                    var wX = keyframes[j].rotate[0] / deltaInstant;
-                    var wY = keyframes[j].rotate[1] / deltaInstant;
-                    var wZ = keyframes[j].rotate[2] / deltaInstant;
-                    //Velocity = d/t
-                    var vX = keyframes[j].translate[0] / deltaInstant;
-                    var vY = keyframes[j].translate[1] / deltaInstant;
-                    var vZ = keyframes[j].translate[2] / deltaInstant;
-
-                    //Translation - Addictive operation 
-                    translate[0] += vX*instant;
-                    translate[1] += vY*instant;
-                    translate[2] += vZ*instant;
-                    //Rotation - Addictive operation 
-                    rotate[0] += wX*instant;
-                    rotate[1] += wY*instant;
-                    rotate[2] += wZ*instant;
-                    //Scale - Multiplicative operation 
-                    scale[0] *= Math.pow(scaleRX, nFrame);
-                    scale[1] *= Math.pow(scaleRY, nFrame);
-                    scale[2] *= Math.pow(scaleRZ, nFrame);
-                }
+              keyframes[j].update(instant);
             }
-
-            //mat4.translate(dest, op1, op2)
-            mat4.translate(matrix, matrix, translate);
-            //mat4.rotate(dest, op1, angle, axis)
-            mat4.rotate(matrix, matrix, rotate[0] * Math.PI / 180, 1, 0, 0);
-            mat4.rotate(matrix, matrix, rotate[1] * Math.PI / 180, 0, 1, 0);
-            mat4.rotate(matrix, matrix, rotate[2] * Math.PI / 180, 0, 0, 1);
-            //mat4.scale(dest, op1, op2)
-            mat4.scale(matrix, matrix, scale);
-
-            //Updates Ma(animation matrix)
-            this.animations[this.animationsIDsList[i]].matrix = matrix;
         }
     }
 
@@ -1582,8 +1512,14 @@ class MySceneGraph {
         }
 
         //Compute transformation matrix
-        mat4.mul(matrix, matrix, node.transfMatrix);        
-        mat4.mul(matrix, matrix, this.animations[node.animation].matrix);        
+        var animationMatrix = mat4.create();
+        for(let i in this.animations[node.animation]){
+            mat4.mul(animationMatrix, animationMatrix, this.animations[node.animation][i].matrix);
+        }       
+        
+        mat4.mul(animationMatrix, node.transfMatrix, animationMatrix);       
+
+        mat4.mul(matrix, matrix, animationMatrix);
 
         //process all children components
         for(let i = 0; i < node.childComponents.length; i++){
