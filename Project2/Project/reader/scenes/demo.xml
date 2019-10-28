@@ -44,6 +44,17 @@
     <transformations>
     </transformations>
 
+    <animations>
+
+        <animation id="dayCycleMoon" >
+            <keyframe instant="20">
+                <translate x="0" y="0" z="-50" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="0.1" y="0.1" z="0.1" />
+            </keyframe>
+        </animation>            
+    </animations>
+
     <primitives>
         <primitive id="demoRectangle">
             <rectangle x1="0" y1="0" x2="40" y2="3" />
@@ -62,6 +73,9 @@
         <primitive id="demoCylinder">
             <cylinder base="4" top="4" height="4" slices="12" stacks="10" />
         </primitive>
+        <primitive id="demoPlane">
+            <plane npartsU="5" npartsV="5" />
+        </primitive>
 
     </primitives>
 
@@ -74,7 +88,7 @@
             </materials>
             <texture id="demoTexture"/>
             <children>
-                <primitiveref id="demoCylinder" />
+                <primitiveref id="demoPlane" />
             </children>
         </component>
     </components>
