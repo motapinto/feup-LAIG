@@ -865,8 +865,8 @@ class MySceneGraph {
                 
                 grandgrandChildren = grandChildren[k].children;
                  // Get animation instant of the current animation.
-                var timeFinal = this.reader.getInteger(grandChildren[i], 'instant');
-                
+                var timeFinal = this.reader.getInteger(grandChildren[k], 'instant');
+
                 if (timeFinal == null)
                     return "no instant defined for animation with ID " + animationID ;
                 if (timeFinal < timeInit)

@@ -49,9 +49,9 @@ class Animation {
     ];
 
     this.scaleR = [
-      Math.pow(scaleInit[0] / scaleFinal[0], 1 / this.framesPerKeyFrame),
-      Math.pow(scaleInit[1] / scaleFinal[1], 1 / this.framesPerKeyFrame),
-      Math.pow(scaleInit[2] / scaleFinal[2], 1 / this.framesPerKeyFrame)
+      Math.pow(scaleFinal[0] / scaleInit[0], 1 / this.framesPerKeyFrame),
+      Math.pow(scaleFinal[1] / scaleInit[1], 1 / this.framesPerKeyFrame),
+      Math.pow(scaleFinal[2] / scaleInit[2], 1 / this.framesPerKeyFrame)
     ];
 
     this.matrix = mat4.create();
