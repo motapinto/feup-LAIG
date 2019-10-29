@@ -865,7 +865,7 @@ class MySceneGraph {
                 
                 grandgrandChildren = grandChildren[k].children;
                  // Get animation instant of the current animation.
-                var timeFinal = this.reader.getInteger(grandChildren[i], 'instant');
+                var timeFinal = this.reader.getInteger(grandChildren[k], 'instant');
                 
                 if (timeFinal == null)
                     return "no instant defined for animation with ID " + animationID ;
@@ -1555,7 +1555,7 @@ class MySceneGraph {
         for(let i in this.animations[node.animation]){
             mat4.mul(animationMatrix, animationMatrix, this.animations[node.animation][i].matrix);
         }       
-        
+
         mat4.mul(animationMatrix, node.transfMatrix, animationMatrix);       
 
         mat4.mul(matrix, matrix, animationMatrix);
