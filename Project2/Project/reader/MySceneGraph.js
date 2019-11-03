@@ -832,12 +832,7 @@ class MySceneGraph {
         this.animationsIDsList = [];
 
         for (var i = 0; i < children.length; i++) {
-            var keyframes = [];
-            var timeInit = 0;
-            var scaleInit = [1, 1, 1];
-            var translateInit = [0, 0, 0];
-            var rotateInit = [0, 0, 0];
-
+            var animation = new KeyframeAnimation(this.scene, this.scene.updatePeriod);
 
             if (children[i].nodeName != "animation") {
                 this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
@@ -858,19 +853,16 @@ class MySceneGraph {
                 return "There must be at least one keyframe element";
             }
 
-            for(var k = 0; k < grandChildren.length; k++) {
-                var scaleFinal = [];
-                var translateFinal = [];
-                var rotateFinal = [];
-                
+            for(var k = 0; k < grandChildren.length; k++) {                
                 grandgrandChildren = grandChildren[k].children;
                  // Get animation instant of the current animation.
-                var timeFinal = this.reader.getInteger(grandChildren[k], 'instant');
+                var instant = this.reader.getInteger(grandChildren[k], 'instant');
                 
-                if (timeFinal == null)
+                if (instant == null)
                     return "no instant defined for animation with ID " + animationID ;
-                if (timeFinal < timeInit)
-                    return "instant must be higher than previous keyframes instant for animation with ID " + animationID ;
+
+                if (instant <= 0)
+                return "instant defined for animation with ID " + animationID + " must be higher than 0";
 
                 if(grandgrandChildren.length != 3) 
                     return "There must be 3 elements containing translate, rotate and scale for animation with ID " + animationID ;
@@ -884,27 +876,24 @@ class MySceneGraph {
                 if(grandgrandChildren[2].nodeName != 'scale')
                     return "Scale must be the third element to be defined for animation with ID " + animationID;
 
-                translateFinal = this.parseCoordinates3D(grandgrandChildren[0], "animation transformation for ID " + animationID);
-                if (!Array.isArray(translateFinal))
-                    return translateFinal;
+                var translate = this.parseCoordinates3D(grandgrandChildren[0], "animation transformation for ID " + animationID);
+                if (!Array.isArray(translate))
+                    return translate;
                 
-                rotateFinal = this.parseCoordinates3DRotation(grandgrandChildren[1], "animation transformation for ID " + animationID)
-                if (!Array.isArray(rotateFinal))
-                    return rotateFinal;
+                var rotate = this.parseCoordinates3DRotation(grandgrandChildren[1], "animation transformation for ID " + animationID)
+                if (!Array.isArray(rotate))
+                    return rotate;
 
-                scaleFinal = this.parseCoordinates3D(grandgrandChildren[2], "animation transformation for ID " + animationID)
-                if (!Array.isArray(scaleFinal))
-                    return scaleFinal;
+                var scale = this.parseCoordinates3D(grandgrandChildren[2], "animation transformation for ID " + animationID)
+                if (!Array.isArray(scale))
+                    return scale;
 
-                keyframes.push(new KeyframeAnimation(this.scene, timeInit, timeFinal, translateInit, translateFinal, rotateInit, rotateFinal, scaleInit, scaleFinal, this.scene.updatePeriod));
-                
-                translateInit = translateFinal;
-                rotateInit = rotateFinal;
-                scaleInit = scaleFinal;
-                timeInit = timeFinal;
+                if(!animation.addKeyframe(instant, translate, rotate, scale)){
+                  return "instant defined for animation with ID " + animationID + " must be higher than previous keyframes";
+                }
             }
 
-            this.animations[animationID] = keyframes;
+            this.animations[animationID] = animation;
             this.animationsIDsList.push(animationID);
         }
 
@@ -1511,11 +1500,7 @@ class MySceneGraph {
     updateAnimations(instant) {
         // animationsIDsList has the animations ID's
         for(let i in this.animationsIDsList) {
-            var keyframes = this.animations[this.animationsIDsList[i]];
-
-            for(let j in keyframes){
-              keyframes[j].update(instant);
-            }
+            this.animations[this.animationsIDsList[i]].update(instant);
         }
     }
 
@@ -1551,14 +1536,9 @@ class MySceneGraph {
         }
 
         //Compute transformation matrix
-        var animationMatrix = mat4.create();
-        for(let i in this.animations[node.animation]){
-            mat4.mul(animationMatrix, animationMatrix, this.animations[node.animation][i].matrix);
-        }       
-
-        mat4.mul(animationMatrix, node.transfMatrix, animationMatrix);       
-
-        mat4.mul(matrix, matrix, animationMatrix);
+        mat4.mul(matrix, matrix, node.transfMatrix);       
+        //Compute animation matrix
+        mat4.mul(matrix, matrix, this.animations[node.animation].matrix);
 
         //process all children components
         for(let i = 0; i < node.childComponents.length; i++){
