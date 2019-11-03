@@ -1538,7 +1538,8 @@ class MySceneGraph {
         //Compute transformation matrix
         mat4.mul(matrix, matrix, node.transfMatrix);       
         //Compute animation matrix
-        mat4.mul(matrix, matrix, this.animations[node.animation].matrix);
+        if(node.animation != null)
+          mat4.mul(matrix, matrix, this.animations[node.animation].matrix);
 
         //process all children components
         for(let i = 0; i < node.childComponents.length; i++){

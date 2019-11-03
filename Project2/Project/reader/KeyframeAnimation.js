@@ -57,9 +57,9 @@ class KeyframeAnimation extends Animation {
 
           //R = root^n(S0/Sn)
           var scaleR = [
-            Math.pow(scale[0] / this.keyframes[i].scale[0], 1 / framesPerKeyframe),
-            Math.pow(scale[1] / this.keyframes[i].scale[1], 1 / framesPerKeyframe),
-            Math.pow(scale[2] / this.keyframes[i].scale[2], 1 / framesPerKeyframe)
+            Math.pow(this.keyframes[i].scale[0] / scale[0], 1 / framesPerKeyframe),
+            Math.pow(this.keyframes[i].scale[1] / scale[1], 1 / framesPerKeyframe),
+            Math.pow(this.keyframes[i].scale[2] / scale[2], 1 / framesPerKeyframe)
           ];
           //All rotation done in the keyframe
           var totalRotation = [
