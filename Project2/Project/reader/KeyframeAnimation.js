@@ -53,7 +53,7 @@ class KeyframeAnimation extends Animation {
           //Number of divisions for the keyframe
           var framesPerKeyframe = deltaInstant*1000 / this.scene.updatePeriod;
           //Number of curent frame in keyframe
-          var nFrame = (framesPerKeyframe * instant) / this.keyframes[i].instant;
+          var nFrame = (framesPerKeyframe * instant) / deltaInstant;
 
           //R = root^n(S0/Sn)
           var scaleR = [
@@ -61,6 +61,7 @@ class KeyframeAnimation extends Animation {
             Math.pow(this.keyframes[i].scale[1] / scale[1], 1 / framesPerKeyframe),
             Math.pow(this.keyframes[i].scale[2] / scale[2], 1 / framesPerKeyframe)
           ];
+
           //All rotation done in the keyframe
           var totalRotation = [
             this.keyframes[i].rotate[0] - rotate[0],
