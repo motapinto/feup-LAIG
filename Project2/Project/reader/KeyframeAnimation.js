@@ -1,9 +1,9 @@
 /**
-* KeyframeAnimation
-* @constructor
-* @param {scene} scene
-* @param {integer} updatePeriod
-*/
+ * KeyframeAnimation
+ * @constructor
+ * @param {scene} scene
+ * @param {integer} updatePeriod
+ */
 class KeyframeAnimation extends Animation {
     constructor (scene, updatePeriod){
       super(scene, updatePeriod);
@@ -29,7 +29,7 @@ class KeyframeAnimation extends Animation {
       for(let i in this.keyframes){
         //Work before this.keyframes[i].instant >= instant
         if(this.keyframes[i].instant < instant){
-            //Tranlation - Addictive operation 
+            //Translation - Addictive operation 
             translate[0] = this.keyframes[i].translate[0];
             translate[1] = this.keyframes[i].translate[1];
             translate[2] = this.keyframes[i].translate[2];
@@ -42,7 +42,7 @@ class KeyframeAnimation extends Animation {
             scale[1] = this.keyframes[i].scale[1];
             scale[2] = this.keyframes[i].scale[2];
         }
-        else{
+        else {
           var deltaInstant = this.keyframes[i].instant;
           //First iteration instant is always 0
           if(i != 0){
@@ -97,9 +97,9 @@ class KeyframeAnimation extends Animation {
       //mat4.translate(dest, op1, op2)
       mat4.translate(this.matrix, this.matrix, translate);
       //mat4.rotate(dest, op1, angle, axis)
-      mat4.rotate(this.matrix, this.matrix, rotate[0] * Math.PI / 180, [1, 0, 0]);
-      mat4.rotate(this.matrix, this.matrix, rotate[1] * Math.PI / 180, [0, 1, 0]);
-      mat4.rotate(this.matrix, this.matrix, rotate[2] * Math.PI / 180, [0, 0, 1]);
+      mat4.rotate(this.matrix, this.matrix, rotate[0] * Math.PI / 180, [1, 0, 0]); //X
+      mat4.rotate(this.matrix, this.matrix, rotate[1] * Math.PI / 180, [0, 1, 0]); //Y
+      mat4.rotate(this.matrix, this.matrix, rotate[2] * Math.PI / 180, [0, 0, 1]); //Z
       //mat4.scale(dest, op1, op2)
       mat4.scale(this.matrix, this.matrix, scale);    
     }

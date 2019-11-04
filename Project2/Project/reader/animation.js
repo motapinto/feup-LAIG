@@ -1,12 +1,10 @@
 /**
  * Animation class, representing the base class for Keyframe Animations.
+ * @constructor
+ * @param {scene} scene
+ * @param {integer} updatePeriod
  */
 class Animation {
-    /**
-   * @constructor
-   * @param {scene} scene
-   * @param {integer} updatePeriod
-   */
   constructor (scene, updatePeriod) {
     if (this.constructor === Animation) {
       throw new TypeError('Abstract class "Animation" cannot be instantiated directly.'); 
@@ -21,9 +19,7 @@ class Animation {
     }
 
     this.scene = scene;
-
     this.updatePeriod = updatePeriod;
-
     this.matrix = mat4.create();
   }
 }

@@ -862,7 +862,7 @@ class MySceneGraph {
                     return "no instant defined for animation with ID " + animationID ;
 
                 if (instant <= 0)
-                return "instant defined for animation with ID " + animationID + " must be higher than 0";
+                    return "instant defined for animation with ID " + animationID + " must be higher than 0";
 
                 if(grandgrandChildren.length != 3) 
                     return "There must be 3 elements containing translate, rotate and scale for animation with ID " + animationID ;

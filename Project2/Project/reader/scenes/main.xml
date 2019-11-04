@@ -37,7 +37,8 @@
     </views>
 
     <globals>
-        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <!--<ambient r="0.2" g="0.2" b="0.2" a="1.0" />-->
+        <ambient r="0.9" g="0.9" b="0.9" a="1.0" />
         <background r="0.0" g="0.0" b="0.0" a="1.0" />
     </globals>
 
@@ -377,7 +378,103 @@
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-        </animation>        
+        </animation> 
+
+        <!-- CHAIR animations-->
+        <animation id="chair1:complete" >
+            <keyframe instant="1">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="-45" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="5">
+                <translate x="0" y="-10" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="-135" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="10">
+                <translate x="0" y="-20" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="-135" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="10.5">
+                <translate x="0" y="-20" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="-315" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="15">
+                <translate x="0" y="-10" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="-315" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="19">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="-360" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            
+            
+        </animation>
+        <animation id="chair:legs" >
+            <keyframe instant="5">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="-15" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="6">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>´
+            <keyframe instant="7">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="-15" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="8">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="9">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="-15" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="-45" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+
+        </animation>
+
+        <animation id="door" >
+            <keyframe instant="2">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="4">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="-90" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+
+        <animation id="chair2:complete" >
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="12">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>  
+ 
         <animation id="dayCycleSun" >
             <keyframe instant="20">
                 <translate x="0" y="0" z="50" />
@@ -701,6 +798,7 @@
             <materials>
                 <material id="chairLeg" />
             </materials>
+            <animationref id="chair:legs" />
             <texture id="inherit"/>
             <children>
                 <primitiveref id="ChairLeg1" />
@@ -710,6 +808,7 @@
             <transformation>
                 <translate x="0" y="0.3" z="-0.5" />
             </transformation>
+            <animationref id="chair:legs" />
             <materials>
                 <material id="chairLeg" />
             </materials>
@@ -819,6 +918,7 @@
             <transformation>
                 <translate x="0" y="0" z="0.5" />
             </transformation>
+            <animationref id="chair1:complete" />
             <materials>
                 <material id="chair" />
                 <material id="chair1" />
@@ -839,7 +939,9 @@
             <transformation>
                 <translate x="1" y="1" z="0" />
                 <rotate axis="z" angle="180" />
+                 <translate x="0" y="0" z="0.5" />
             </transformation>
+            <animationref id="chair2:complete" />
             <materials>
                 <material id="chair" />
                 <material id="chair1" />
@@ -847,7 +949,13 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <componentref id="Chair1" />
+                <componentref id="ChairLeg1.1" />
+                <componentref id="ChairLeg1.2" />
+                <componentref id="ChairLeg2.1" />´
+                <componentref id="ChairLeg2.2" />
+                <componentref id="ChairBack" />
+                <componentref id="ChairBase" />
+                <componentref id="ChairBaseCover" />
             </children>
         </component>
 
@@ -1436,6 +1544,7 @@
             <transformation>
                 <translate x="12.01" y="10" z="0" />
             </transformation>
+            <animationref id="door"/>
             <materials>
                 <material id="door" />
             </materials>

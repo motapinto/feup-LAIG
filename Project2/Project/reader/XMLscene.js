@@ -151,9 +151,11 @@ class XMLscene extends CGFscene {
     update(t) {
         if(this.tInit == null)
             this.tInit = t;
+        
+        let instant = (t - this.tInit) / 1000;
 
         this.checkKeys(t);
-        this.graph.updateAnimations((t - this.tInit) / 1000);
+        this.graph.updateAnimations(instant); //t is in miliseconds
     }
 
     /**
