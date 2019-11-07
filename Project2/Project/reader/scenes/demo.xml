@@ -79,6 +79,9 @@
                 <controlpoint xx="1.5" yy="1.5" zz="0.0" />
             </patch>
         </primitive>
+        <primitive id="demoCylinder2">
+            <cylinder2 base="4" top="4" height="4" slices="12" stacks="10" />
+        </primitive>
 
     </primitives>
 
@@ -91,7 +94,7 @@
             </materials>
             <texture id="demoTexture"/>
             <children>
-                <primitiveref id="demoPatch" />
+                <primitiveref id="demoCylinder2" />
             </children>
         </component>
     </components>

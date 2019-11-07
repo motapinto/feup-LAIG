@@ -20,15 +20,19 @@ serialInclude(['../lib/CGF.js',
                 'XMLscene.js',
                 'MySceneGraph.js',
                 'MyInterface.js',
-                'Animation.js',
-                'KeyframeAnimation.js',
+                //Primitves
                 'primitives/MyRectangle.js',
                 'primitives/MyTriangle.js',
                 'primitives/MyCylinderOpt.js',
                 'primitives/MySphere.js',
                 'primitives/MyTorus.js',
+                //Nurbs Surfaces
                 'primitives/nurbs/Plane.js',
-                'primitives//nurbs/Patch.js',
+                'primitives/nurbs/Patch.js',
+                'primitives/nurbs/Cylinder2.js',
+                //Animation
+                'Animation.js',
+                'KeyframeAnimation.js',
 
 main=function()
 {
