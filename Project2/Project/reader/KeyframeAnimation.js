@@ -22,9 +22,9 @@ class KeyframeAnimation extends Animation {
 
   update(instant){
     this.matrix = mat4.create();
-    var translate = [0, 0, 0];
-    var rotate = [0, 0, 0];
-    var scale = [1, 1, 1];
+    let translate = [0, 0, 0];
+    let rotate = [0, 0, 0];
+    let scale = [1, 1, 1];
 
     for(let i in this.keyframes){
       //Work before this.keyframes[i].instant >= instant
@@ -44,7 +44,7 @@ class KeyframeAnimation extends Animation {
       }
       
       else {
-        var deltaInstant = this.keyframes[i].instant;
+        let deltaInstant = this.keyframes[i].instant;
         //First iteration instant is always 0
         if(i != 0){
             deltaInstant -= this.keyframes[i-1].instant;
@@ -52,32 +52,32 @@ class KeyframeAnimation extends Animation {
         }
 
         //Number of divisions for the keyframe
-        var framesPerKeyframe = deltaInstant*1000 / this.scene.updatePeriod;
+        let framesPerKeyframe = deltaInstant*1000 / this.scene.updatePeriod;
         //Number of curent frame in keyframe
-        var nFrame = (framesPerKeyframe * instant) / deltaInstant;
+        let nFrame = (framesPerKeyframe * instant) / deltaInstant;
 
         //this.keyframes[i].scale = S0 ; scale = Sn ; R = root^n(S0/Sn)
-        var scaleR = [
+        let scaleR = [
           Math.pow(this.keyframes[i].scale[0] / scale[0], 1 / framesPerKeyframe),
           Math.pow(this.keyframes[i].scale[1] / scale[1], 1 / framesPerKeyframe),
           Math.pow(this.keyframes[i].scale[2] / scale[2], 1 / framesPerKeyframe)
         ];
 
         //All rotation done in the keyframe
-        var totalRotation = [
+        let totalRotation = [
           this.keyframes[i].rotate[0] - rotate[0],
           this.keyframes[i].rotate[1] - rotate[1],
           this.keyframes[i].rotate[2] - rotate[2]
         ];
         //All translation done in keyframe
-        var totalTranslation = [
+        let totalTranslation = [
           this.keyframes[i].translate[0] - translate[0],
           this.keyframes[i].translate[1] - translate[1],
           this.keyframes[i].translate[2] - translate[2]
         ];
 
         // Percentage of time during keyframe
-        var keyframePercentage = instant / deltaInstant;
+        let keyframePercentage = instant / deltaInstant;
 
         //Translation - Addictive operation 
         translate[0] += totalTranslation[0]*keyframePercentage;

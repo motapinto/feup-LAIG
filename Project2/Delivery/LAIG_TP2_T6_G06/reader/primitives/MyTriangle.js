@@ -53,7 +53,7 @@ class MyTriangle extends CGFobject {
         //Presented in T1 lab pdf
         this.c = Math.sqrt(Math.pow(x1 - x3, 2) + Math.pow(y1 - y3, 2) + Math.pow(z1 - z3, 2));
         this.a = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2) + Math.pow(z2 - z1, 2));
-        let b = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2) + Math.pow(z3 - z2, 2));
+        var b = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2) + Math.pow(z3 - z2, 2));
         
         var alpha = Math.acos((Math.pow(this.a, 2) - Math.pow(b, 2) + Math.pow(this.c, 2)) / (2 * this.a * this.c));
         this.cosAlpha = Math.cos(alpha);

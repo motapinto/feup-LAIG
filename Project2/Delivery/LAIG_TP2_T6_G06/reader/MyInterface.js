@@ -37,7 +37,7 @@ class MyInterface extends CGFinterface {
     LightsFolder(lights) {
         var lightsFolder = this.gui.addFolder("Lights");
         
-        for (let key in lights) { //key = light name 
+        for (var key in lights) { //key = light name 
             if (lights.hasOwnProperty(key)) {
                     this.scene.lightsInterface[key] = lights[key][0]; 
                     lightsFolder.add(this.scene.lightsInterface, key);

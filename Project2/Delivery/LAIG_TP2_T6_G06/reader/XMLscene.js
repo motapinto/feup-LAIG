@@ -149,8 +149,8 @@ class XMLscene extends CGFscene {
 
     updateLights() {
         //Updates lights in the display
-        let i = 0;
-        for (let key in this.lightsInterface) {
+        var i = 0;
+        for (var key in this.lightsInterface) {
             if (this.lightsInterface.hasOwnProperty(key)) {
                 if (this.lightsInterface[key]) {
                     this.lights[i].enable();

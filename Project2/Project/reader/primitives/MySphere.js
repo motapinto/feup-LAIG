@@ -21,24 +21,24 @@ class MySphere extends CGFobject
 		this.normals = [];
 		this.texCoords = [];
 
-		var teta_delta = Math.PI/(2*this.stacks);
-		var phi_delta = 2*Math.PI/this.slices;
+		let teta_delta = Math.PI/(2*this.stacks);
+		let phi_delta = 2*Math.PI/this.slices;
 
 		if(this.slices % 2){
-			var j_max = ((this.slices + 1) >> 1) + 1; //round this.slices/4 and add 1
+			let j_max = ((this.slices + 1) >> 1) + 1; //round this.slices/4 and add 1
 	
 			//Vertices and normals generation
-			for(var i = 0; i < (this.stacks + 1); i++) {
+			for(let i = 0; i < (this.stacks + 1); i++) {
 		
 				// 1 more cycle to avoid special cases in the connect parts of the quadrants
-				for(var j = 0; j < j_max ; j++) {
-					var cos_phi = Math.cos(phi_delta*j);
-					var sin_phi = Math.sin(phi_delta*j);
-					var cos_teta = Math.cos(teta_delta*i);
+				for(let j = 0; j < j_max ; j++) {
+					let cos_phi = Math.cos(phi_delta*j);
+					let sin_phi = Math.sin(phi_delta*j);
+					let cos_teta = Math.cos(teta_delta*i);
 
-					var x = cos_teta * cos_phi;
-					var y = cos_teta * sin_phi;
-					var z =  Math.sin(teta_delta*i);
+					let x = cos_teta * cos_phi;
+					let y = cos_teta * sin_phi;
+					let z =  Math.sin(teta_delta*i);
 					
 					this.normals.push(x, y, z);     //1st to 2nd Quadrant
 					this.normals.push(x, -y, z);	//4th to 3rd Quadrant
@@ -47,8 +47,8 @@ class MySphere extends CGFobject
 					this.normals.push(x, -y, -z);	//8th to 7th Quadrant
 				
 					//Tex coords
-					var phi = phi_delta*j;
-					var teta = teta_delta*i;
+					let phi = phi_delta*j;
+					let teta = teta_delta*i;
 
 					this.texCoords.push(phi/(Math.PI*2), 0.5 - teta/Math.PI); //1st to 2nd Quadrant
 					this.texCoords.push(1 - phi/(Math.PI*2), 0.5 - teta/Math.PI); //4th to 3rd Quadrant
@@ -69,11 +69,11 @@ class MySphere extends CGFobject
 	
 	
 			//Indices generation
-			var quadrant_delta = 4;
-			var vertices_stack = j_max * 4; //Number of vertices per stack
+			let quadrant_delta = 4;
+			let vertices_stack = j_max * 4; //Number of vertices per stack
 	
-			for(var i = 0; i < this.stacks; i++){
-				for(var j = 0; j < (j_max - 1); j++){
+			for(let i = 0; i < this.stacks; i++){
+				for(let j = 0; j < (j_max - 1); j++){
 					//Check for top of sphere
 					if(i != (this.stacks - 1)){
 	
@@ -176,21 +176,21 @@ class MySphere extends CGFobject
 
 		}
 		else{
-			var j_max = (((this.slices >> 1) + 1) >> 1) + 1; //round this.slices/4 and add 1
+			let j_max = (((this.slices >> 1) + 1) >> 1) + 1; //round this.slices/4 and add 1
 	
 			//Vertices and normals generation
-			for(var i = 0; i < (this.stacks + 1); i++) {
+			for(let i = 0; i < (this.stacks + 1); i++) {
 		
 				// 1 more cycle to avoid special cases in the connect parts of the quadrants
-				for(var j = 0; j < j_max ; j++) {
+				for(let j = 0; j < j_max ; j++) {
 
-					var cos_phi = Math.cos(phi_delta*j);
-					var sin_phi = Math.sin(phi_delta*j);
-					var cos_teta = Math.cos(teta_delta*i);
+					let cos_phi = Math.cos(phi_delta*j);
+					let sin_phi = Math.sin(phi_delta*j);
+					let cos_teta = Math.cos(teta_delta*i);
 
-					var x = cos_teta * cos_phi;
-					var y = cos_teta * sin_phi;
-					var z =  Math.sin(teta_delta*i);
+					let x = cos_teta * cos_phi;
+					let y = cos_teta * sin_phi;
+					let z =  Math.sin(teta_delta*i);
 					
 					this.normals.push(x, y, z);     //1st Quadrant
 					this.normals.push(-x, y, z);	//2nd Quadrant
@@ -203,8 +203,8 @@ class MySphere extends CGFobject
 					this.normals.push(x, -y, -z);	//8th Quadrant
 				
 					//Tex coords
-					var phi = phi_delta*j;
-					var teta = teta_delta*i;
+					let phi = phi_delta*j;
+					let teta = teta_delta*i;
 
 					this.texCoords.push(phi/(Math.PI*2), 		0.5 - teta/Math.PI); //1st Quadrant
 					this.texCoords.push(0.5 - phi/(Math.PI*2),  0.5 - teta/Math.PI); //2nd Quadrant
@@ -234,11 +234,11 @@ class MySphere extends CGFobject
 	
 	
 			//Indices generation
-			var quadrant_delta = 8;
-			var vertices_stack = j_max * 8; //Number of vertices per stack
+			let quadrant_delta = 8;
+			let vertices_stack = j_max * 8; //Number of vertices per stack
 	
-			for(var i = 0; i < this.stacks; i++){
-				for(var j = 0; j < (j_max - 1); j++){
+			for(let i = 0; i < this.stacks; i++){
+				for(let j = 0; j < (j_max - 1); j++){
 					//Check for top of sphere
 					if(i != (this.stacks - 1)){
 	

@@ -1053,7 +1053,7 @@ class MySceneGraph {
             grandgrandChildren = grandChildren[transformationIndex].children;
 
             if(grandgrandChildren.length == 1 && grandgrandChildren[0].nodeName == 'transformationref'){
-                let matrixID = this.reader.getString(grandgrandChildren[0], "id");
+                var matrixID = this.reader.getString(grandgrandChildren[0], "id");
                 if(matrixID == null || this.transformations[matrixID] == null)
                     return "unable to parse transformation id of " + componentID;
 
@@ -1330,7 +1330,7 @@ class MySceneGraph {
             return;
         }
 
-        let node = this.components[id];
+        var node = this.components[id];
 
         if(node.floor > this.scene.floor)
             return;
@@ -1350,12 +1350,12 @@ class MySceneGraph {
         mat4.mul(matrix, matrix, node.transfMatrix);        
 
         //process all children components
-        for(let i = 0; i < node.childComponents.length; i++){
+        for(var i = 0; i < node.childComponents.length; i++){
             this.processComponentNode(node.childComponents[i], mat4.clone(matrix), material, texture, length_s, length_t);
         }
 
         //process all children primitives
-        for(let i = 0; i < node.childPrimitives.length; i++){
+        for(var i = 0; i < node.childPrimitives.length; i++){
             this.scene.pushMatrix();
 
             //change texture

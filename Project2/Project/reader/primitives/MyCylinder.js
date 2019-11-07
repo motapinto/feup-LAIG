@@ -23,29 +23,29 @@ class MyCylinder extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-        var ang = 0;
-        var alphaAng = 2*Math.PI/this.slices;
+        let ang = 0;
+        let alphaAng = 2*Math.PI/this.slices;
 
-        var delta_z = this.height / this.stacks;
-        var delta_radius = (this.top - this.base) / this.stacks;
+        let delta_z = this.height / this.stacks;
+        let delta_radius = (this.top - this.base) / this.stacks;
         
 
-        for(var i = 0; i < this.slices; i++) {
+        for(let i = 0; i < this.slices; i++) {
           
-          var indices_increment = 4*i*this.stacks;
-          var x1_bottom=this.base*Math.cos(ang);
-          var y1_bottom=this.base*Math.sin(ang); 
-          var x2_bottom=this.base*Math.cos(ang+alphaAng);
-          var y2_bottom=this.base*Math.sin(ang+alphaAng);
+          let indices_increment = 4*i*this.stacks;
+          let x1_bottom=this.base*Math.cos(ang);
+          let y1_bottom=this.base*Math.sin(ang); 
+          let x2_bottom=this.base*Math.cos(ang+alphaAng);
+          let y2_bottom=this.base*Math.sin(ang+alphaAng);
           
-          for(var j = 0; j < this.stacks; j++){
+          for(let j = 0; j < this.stacks; j++){
             
-            var radius =  this.base + (j + 1) * delta_radius;
+            let radius =  this.base + (j + 1) * delta_radius;
             
-            var y1_top=radius*Math.sin(ang); 
-            var x2_top=radius*Math.cos(ang+alphaAng);
-            var y2_top=radius*Math.sin(ang+alphaAng);
-            var x1_top=radius*Math.cos(ang);
+            let y1_top=radius*Math.sin(ang); 
+            let x2_top=radius*Math.cos(ang+alphaAng);
+            let y2_top=radius*Math.sin(ang+alphaAng);
+            let x1_top=radius*Math.cos(ang);
             
             this.vertices.push(x1_bottom, y1_bottom, delta_z*j);
             this.vertices.push(x2_bottom, y2_bottom, delta_z*j);

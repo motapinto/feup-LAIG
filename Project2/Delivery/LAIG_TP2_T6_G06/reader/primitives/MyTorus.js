@@ -23,8 +23,8 @@ class MyTorus extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-        let delta_phi = 2*Math.PI/this.loops;
-        let delta_theta = 2*Math.PI/this.slices;
+        var delta_phi = 2*Math.PI/this.loops;
+        var delta_theta = 2*Math.PI/this.slices;
 
 
         if(this.loops % 2){
@@ -32,15 +32,15 @@ class MyTorus extends CGFobject {
             var max_slices = (this.slices + 1) >> 1;
 
             // Vertices and normals generation
-            for(let i = 0; i <= max_slices; i++) {
-                for(let j = 0; j < j_max; j++) {                
-                    let nx = Math.cos(delta_theta*i)*Math.cos(delta_phi*j);
-                    let ny = Math.cos(delta_theta*i)*Math.sin(delta_phi*j);
-                    let nz = Math.sin(delta_theta*i);
+            for(var i = 0; i <= max_slices; i++) {
+                for(var j = 0; j < j_max; j++) {                
+                    var nx = Math.cos(delta_theta*i)*Math.cos(delta_phi*j);
+                    var ny = Math.cos(delta_theta*i)*Math.sin(delta_phi*j);
+                    var nz = Math.sin(delta_theta*i);
                     
-                    let x = (this.outerRadius + this.innerRadius*Math.cos(delta_theta*i))*Math.cos(delta_phi*j);
-                    let y = (this.outerRadius + this.innerRadius*Math.cos(delta_theta*i))*Math.sin(delta_phi*j);
-                    let z = this.innerRadius*nz;
+                    var x = (this.outerRadius + this.innerRadius*Math.cos(delta_theta*i))*Math.cos(delta_phi*j);
+                    var y = (this.outerRadius + this.innerRadius*Math.cos(delta_theta*i))*Math.sin(delta_phi*j);
+                    var z = this.innerRadius*nz;
     
     
                     this.vertices.push(x, y, z);  //1st 2nd Quadrant
@@ -56,8 +56,8 @@ class MyTorus extends CGFobject {
                     this.normals.push(nx, ny, -nz); //5th 6th Quadrant
                     this.normals.push(nx, -ny, -nz);//8th 7th Quadrant
     
-                    let teta = delta_theta*i;
-                    let phi = delta_phi*j;
+                    var teta = delta_theta*i;
+                    var phi = delta_phi*j;
     
                     this.texCoords.push(phi / (Math.PI*2),          teta / (Math.PI*2));
                     this.texCoords.push(1 - phi / (Math.PI*2),      teta / (Math.PI*2));
@@ -71,13 +71,13 @@ class MyTorus extends CGFobject {
             var quadrant_delta = 4;
             var vertices_slice = j_max * 4; //Number of vertices per stack
     
-            for(let i = 0; i < max_slices; i++) {
-                for(let j = 0; j < (j_max - 1); j++) {
+            for(var i = 0; i < max_slices; i++) {
+                for(var j = 0; j < (j_max - 1); j++) {
                     
-                    let a = (j+1)*quadrant_delta + i * vertices_slice;
-                    let b = j*quadrant_delta + (i + 1) * vertices_slice;
-                    let c = j*quadrant_delta + i * vertices_slice;
-                    let d = (j + 1)*quadrant_delta + (i + 1) * vertices_slice;
+                    var a = (j+1)*quadrant_delta + i * vertices_slice;
+                    var b = j*quadrant_delta + (i + 1) * vertices_slice;
+                    var c = j*quadrant_delta + i * vertices_slice;
+                    var d = (j + 1)*quadrant_delta + (i + 1) * vertices_slice;
     
                     // 1st 2nd Quadrant
                     //Bottom left triangle
@@ -116,15 +116,15 @@ class MyTorus extends CGFobject {
             var max_slices = (this.slices + 1) >> 1;
 
             // Vertices and normals generation
-            for(let i = 0; i <= max_slices; i++) {
-                for(let j = 0; j < j_max; j++) {                
-                    let nx = Math.cos(delta_theta*i)*Math.cos(delta_phi*j);
-                    let ny = Math.cos(delta_theta*i)*Math.sin(delta_phi*j);
-                    let nz = Math.sin(delta_theta*i);
+            for(var i = 0; i <= max_slices; i++) {
+                for(var j = 0; j < j_max; j++) {                
+                    var nx = Math.cos(delta_theta*i)*Math.cos(delta_phi*j);
+                    var ny = Math.cos(delta_theta*i)*Math.sin(delta_phi*j);
+                    var nz = Math.sin(delta_theta*i);
                     
-                    let x = (this.outerRadius + this.innerRadius*Math.cos(delta_theta*i))*Math.cos(delta_phi*j);
-                    let y = (this.outerRadius + this.innerRadius*Math.cos(delta_theta*i))*Math.sin(delta_phi*j);
-                    let z = this.innerRadius*nz;
+                    var x = (this.outerRadius + this.innerRadius*Math.cos(delta_theta*i))*Math.cos(delta_phi*j);
+                    var y = (this.outerRadius + this.innerRadius*Math.cos(delta_theta*i))*Math.sin(delta_phi*j);
+                    var z = this.innerRadius*nz;
     
     
                     this.vertices.push(x, y, z); //1st Quadrant
@@ -148,8 +148,8 @@ class MyTorus extends CGFobject {
                     this.normals.push(-nx, -ny, -nz); //7th Quadrant
                     this.normals.push(nx, -ny, -nz); //8th Quadrant
     
-                    let teta = delta_theta*i;
-                    let phi = delta_phi*j;
+                    var teta = delta_theta*i;
+                    var phi = delta_phi*j;
     
                     this.texCoords.push(phi / (Math.PI*2),          teta / (Math.PI*2));
                     this.texCoords.push(0.5 - phi / (Math.PI*2),    teta / (Math.PI*2));
@@ -167,13 +167,13 @@ class MyTorus extends CGFobject {
             var quadrant_delta = 8;
             var vertices_slice = j_max * 8; //Number of vertices per slice
     
-            for(let i = 0; i < max_slices; i++) {
-                for(let j = 0; j < (j_max - 1); j++) {
+            for(var i = 0; i < max_slices; i++) {
+                for(var j = 0; j < (j_max - 1); j++) {
                     
-                    let a = (j+1)*quadrant_delta + i * vertices_slice;
-                    let b = j*quadrant_delta + (i + 1) * vertices_slice;
-                    let c = j*quadrant_delta + i * vertices_slice;
-                    let d = (j + 1)*quadrant_delta + (i + 1) * vertices_slice;
+                    var a = (j+1)*quadrant_delta + i * vertices_slice;
+                    var b = j*quadrant_delta + (i + 1) * vertices_slice;
+                    var c = j*quadrant_delta + i * vertices_slice;
+                    var d = (j + 1)*quadrant_delta + (i + 1) * vertices_slice;
     
                     // 1st Quadrant
                     //Bottom left triangle

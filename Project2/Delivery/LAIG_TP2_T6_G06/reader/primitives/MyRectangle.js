@@ -24,12 +24,12 @@ class MyRectangle extends CGFobject {
 
 		this.length = x2-x1;
 		this.height = y2-y1;
-		let x_iter = this.length/this.stacks;
-		let y_iter = this.height/this.slices;
+		var x_iter = this.length/this.stacks;
+		var y_iter = this.height/this.slices;
 
 		//vertice and normal generation
-		for(let x = x1; x <= x2; x += x_iter) {
-			for(let y = y1; y <= y2; y += y_iter) {
+		for(var x = x1; x <= x2; x += x_iter) {
+			for(var y = y1; y <= y2; y += y_iter) {
 				this.vertices.push(x, y, 0);
 				this.texCoords.push((x-x1)/this.length, (y2-y)/this.height);
 
@@ -44,8 +44,8 @@ class MyRectangle extends CGFobject {
 		//indices generation
 		var n_y = this.slices+1;
 
-		for(let i = 0; i < this.stacks; i++){
-			for(let j = 0; j < this.slices; j++){
+		for(var i = 0; i < this.stacks; i++){
+			for(var j = 0; j < this.slices; j++){
 				this.indices.push((j + 1 + i*n_y)*2, 	(j + i * n_y)*2, 	(j + 1 + (i + 1)*n_y)*2);
 				this.indices.push((j + i * n_y)*2, 		(j + (i + 1)*n_y)*2, (j + 1 + (i + 1)*n_y)*2);
 				//Both sides visible
@@ -66,11 +66,11 @@ class MyRectangle extends CGFobject {
 		}
 		this.texCoords = [];
 
-		let s_var = (this.length / this.stacks) / length_s;
-		let t_var = (this.height / this.slices) / length_t;
+		var s_var = (this.length / this.stacks) / length_s;
+		var t_var = (this.height / this.slices) / length_t;
 
-		for(let i = 0; i < (this.stacks + 1); i++){
-			for(let j = 0; j < (this.slices + 1); j++){
+		for(var i = 0; i < (this.stacks + 1); i++){
+			for(var j = 0; j < (this.slices + 1); j++){
 				this.texCoords.push(s_var * i, t_var * j);
 				this.texCoords.push(s_var * i, t_var * j);
 			}

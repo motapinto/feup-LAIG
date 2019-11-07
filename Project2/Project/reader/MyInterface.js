@@ -35,7 +35,7 @@ class MyInterface extends CGFinterface {
     }
 
     LightsFolder(lights) {
-        var lightsFolder = this.gui.addFolder("Lights");
+        let lightsFolder = this.gui.addFolder("Lights");
         
         for (let key in lights) { //key = light name 
             if (lights.hasOwnProperty(key)) {

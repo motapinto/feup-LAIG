@@ -23,23 +23,23 @@ class MyCylinder extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-        var delta_ang = 2*Math.PI/this.slices;
+        let delta_ang = 2*Math.PI/this.slices;
 
-        var delta_z = this.height / this.stacks;
-        var delta_radius = (this.top - this.base) / this.stacks;
+        let delta_z = this.height / this.stacks;
+        let delta_radius = (this.top - this.base) / this.stacks;
         
 
         if(this.slices % 2){
-          var j_max = ((this.slices + 1) >> 1) + 1; //round this.slices/4 and add 1
+          let j_max = ((this.slices + 1) >> 1) + 1; //round this.slices/4 and add 1
   
-          for(var i = 0; i <= this.stacks; i++){
-            for(var j = 0; j < j_max; j++){
-              var ang = delta_ang*j;
-              var x = Math.cos(ang);
-              var y = Math.sin(ang);
-              var z = delta_z*i;
+          for(let i = 0; i <= this.stacks; i++){
+            for(let j = 0; j < j_max; j++){
+              let ang = delta_ang*j;
+              let x = Math.cos(ang);
+              let y = Math.sin(ang);
+              let z = delta_z*i;
 
-              var n = vec3.fromValues(x, y, Math.cos(Math.atan(this.height/(this.base-this.top))) );
+              let n = vec3.fromValues(x, y, Math.cos(Math.atan(this.height/(this.base-this.top))) );
               vec3.normalize(n, n);
 
               this.normals.push(n[0], n[1], n[2]);   //1st to 2nd Quadrant
@@ -51,7 +51,7 @@ class MyCylinder extends CGFobject {
               this.vertices.push(x, y, z);  //1st to 2nd Quadrant
               this.vertices.push(x, -y, z); //4th to 3rd Quadrant
 
-              var texV = z/this.height;
+              let texV = z/this.height;
               this.texCoords.push(ang / (Math.PI*2), 1 - texV);  //1st to 2nd Quadrant
               this.texCoords.push(1 - ang / (Math.PI*2), 1 - texV); //4th to 3rd Quadrant
 
@@ -59,15 +59,15 @@ class MyCylinder extends CGFobject {
           }
 
           //Indices generation
-          var quadrant_delta = 2;
-          var vertices_stack = j_max * 2; //Number of vertices per stack
+          let quadrant_delta = 2;
+          let vertices_stack = j_max * 2; //Number of vertices per stack
 
-          for(var i = 0; i < this.stacks; i++){
-            for(var j = 0; j < (j_max-1); j++){
-              var a = j * quadrant_delta + i * vertices_stack;
-							var b = (j + 1) * quadrant_delta + i * vertices_stack;
-              var c = j * quadrant_delta + (i + 1) * vertices_stack;
-              var d = (j + 1) * quadrant_delta + (i + 1) * vertices_stack;
+          for(let i = 0; i < this.stacks; i++){
+            for(let j = 0; j < (j_max-1); j++){
+              let a = j * quadrant_delta + i * vertices_stack;
+							let b = (j + 1) * quadrant_delta + i * vertices_stack;
+              let c = j * quadrant_delta + (i + 1) * vertices_stack;
+              let d = (j + 1) * quadrant_delta + (i + 1) * vertices_stack;
 
               // 1st to 2nd Quadrant
               //Bottom left triangle
@@ -86,16 +86,16 @@ class MyCylinder extends CGFobject {
           }
         }
         else{
-          var j_max = (((this.slices >> 1) + 1) >> 1) + 1; //round this.slices/4 and add 1
+          let j_max = (((this.slices >> 1) + 1) >> 1) + 1; //round this.slices/4 and add 1
   
-          for(var i = 0; i <= this.stacks; i++){
-            for(var j = 0; j < j_max; j++){
-              var ang = delta_ang*j;
-              var x = Math.cos(ang);
-              var y = Math.sin(ang);
-              var z = delta_z*i;
+          for(let i = 0; i <= this.stacks; i++){
+            for(let j = 0; j < j_max; j++){
+              let ang = delta_ang*j;
+              let x = Math.cos(ang);
+              let y = Math.sin(ang);
+              let z = delta_z*i;
 
-              var n = vec3.fromValues(x, y, Math.cos(Math.atan(this.height/(this.base-this.top))) );
+              let n = vec3.fromValues(x, y, Math.cos(Math.atan(this.height/(this.base-this.top))) );
               vec3.normalize(n, n);
 
               this.normals.push(n[0], n[1], n[2]);   //1st Quadrant
@@ -111,7 +111,7 @@ class MyCylinder extends CGFobject {
               this.vertices.push(-x, -y, z);//3rd Quadrant
               this.vertices.push(x, -y, z); //4th Quadrant
 
-              var texV = z/this.height;
+              let texV = z/this.height;
               this.texCoords.push(ang / (Math.PI*2), 1 - texV);  //1st Quadrant
               this.texCoords.push(0.5 - ang / (Math.PI*2), 1 - texV); //2nd Quadrant
               this.texCoords.push(0.5 + ang / (Math.PI*2), 1 - texV);//3rd Quadrant
@@ -120,15 +120,15 @@ class MyCylinder extends CGFobject {
           }
 
           //Indices generation
-          var quadrant_delta = 4;
-          var vertices_stack = j_max * 4; //Number of vertices per stack
+          let quadrant_delta = 4;
+          let vertices_stack = j_max * 4; //Number of vertices per stack
 
-          for(var i = 0; i < this.stacks; i++){
-            for(var j = 0; j < (j_max-1); j++){
-              var a = j * quadrant_delta + i * vertices_stack;
-							var b = (j + 1) * quadrant_delta + i * vertices_stack;
-              var c = j * quadrant_delta + (i + 1) * vertices_stack;
-              var d = (j + 1) * quadrant_delta + (i + 1) * vertices_stack;
+          for(let i = 0; i < this.stacks; i++){
+            for(let j = 0; j < (j_max-1); j++){
+              let a = j * quadrant_delta + i * vertices_stack;
+							let b = (j + 1) * quadrant_delta + i * vertices_stack;
+              let c = j * quadrant_delta + (i + 1) * vertices_stack;
+              let d = (j + 1) * quadrant_delta + (i + 1) * vertices_stack;
 
 						// 1st Quadrant
 						//Bottom left triangle

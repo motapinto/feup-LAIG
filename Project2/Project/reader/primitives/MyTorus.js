@@ -28,8 +28,8 @@ class MyTorus extends CGFobject {
 
 
         if(this.loops % 2){
-            var j_max = ((this.loops + 1) >> 1) + 1; //round this.loops/4 and add 1
-            var max_slices = (this.slices + 1) >> 1;
+            let j_max = ((this.loops + 1) >> 1) + 1; //round this.loops/4 and add 1
+            let max_slices = (this.slices + 1) >> 1;
 
             // Vertices and normals generation
             for(let i = 0; i <= max_slices; i++) {
@@ -68,8 +68,8 @@ class MyTorus extends CGFobject {
             }
     
             //Indices generation
-            var quadrant_delta = 4;
-            var vertices_slice = j_max * 4; //Number of vertices per stack
+            let quadrant_delta = 4;
+            let vertices_slice = j_max * 4; //Number of vertices per stack
     
             for(let i = 0; i < max_slices; i++) {
                 for(let j = 0; j < (j_max - 1); j++) {
@@ -112,8 +112,8 @@ class MyTorus extends CGFobject {
             }
         }
         else{
-            var j_max = (((this.loops >> 1) + 1) >> 1) + 1; //round this.loops/4 and add 1
-            var max_slices = (this.slices + 1) >> 1;
+            let j_max = (((this.loops >> 1) + 1) >> 1) + 1; //round this.loops/4 and add 1
+            let max_slices = (this.slices + 1) >> 1;
 
             // Vertices and normals generation
             for(let i = 0; i <= max_slices; i++) {
@@ -164,8 +164,8 @@ class MyTorus extends CGFobject {
             }
     
             //Indices generation
-            var quadrant_delta = 8;
-            var vertices_slice = j_max * 8; //Number of vertices per slice
+            let quadrant_delta = 8;
+            let vertices_slice = j_max * 8; //Number of vertices per slice
     
             for(let i = 0; i < max_slices; i++) {
                 for(let j = 0; j < (j_max - 1); j++) {

@@ -42,7 +42,7 @@ class MyRectangle extends CGFobject {
 		}
 
 		//indices generation
-		var n_y = this.slices+1;
+		let n_y = this.slices+1;
 
 		for(let i = 0; i < this.stacks; i++){
 			for(let j = 0; j < this.slices; j++){
@@ -66,13 +66,13 @@ class MyRectangle extends CGFobject {
 		}
 		this.texCoords = [];
 
-		let s_var = (this.length / this.stacks) / length_s;
-		let t_var = (this.height / this.slices) / length_t;
+		let s_let = (this.length / this.stacks) / length_s;
+		let t_let = (this.height / this.slices) / length_t;
 
 		for(let i = 0; i < (this.stacks + 1); i++){
 			for(let j = 0; j < (this.slices + 1); j++){
-				this.texCoords.push(s_var * i, t_var * j);
-				this.texCoords.push(s_var * i, t_var * j);
+				this.texCoords.push(s_let * i, t_let * j);
+				this.texCoords.push(s_let * i, t_let * j);
 			}
 		}
 

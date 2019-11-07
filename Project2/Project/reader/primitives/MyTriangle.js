@@ -17,11 +17,11 @@ class MyTriangle extends CGFobject {
 
 	initBuffers(x1, y1, z1, x2, y2, z2, x3, y3, z3) {
         //Because the triangule is in 1 plane we can only compute 1 of the normals (and the other will be the same)
-        var vec21 = vec3.fromValues(x2-x1, y2-y1, z2-z1);
-        var vec32 = vec3.fromValues(x3-x2, y3-y2, z3-z2);
+        let vec21 = vec3.fromValues(x2-x1, y2-y1, z2-z1);
+        let vec32 = vec3.fromValues(x3-x2, y3-y2, z3-z2);
         
         //vector that defines plane of the triangle (normal ao plano)
-        var vec_cross = vec3.create();
+        let vec_cross = vec3.create();
         vec3.cross(vec_cross, vec21, vec32);
         vec3.normalize(vec_cross, vec_cross);
         
@@ -55,7 +55,7 @@ class MyTriangle extends CGFobject {
         this.a = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2) + Math.pow(z2 - z1, 2));
         let b = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2) + Math.pow(z3 - z2, 2));
         
-        var alpha = Math.acos((Math.pow(this.a, 2) - Math.pow(b, 2) + Math.pow(this.c, 2)) / (2 * this.a * this.c));
+        let alpha = Math.acos((Math.pow(this.a, 2) - Math.pow(b, 2) + Math.pow(this.c, 2)) / (2 * this.a * this.c));
         this.cosAlpha = Math.cos(alpha);
         this.sinAlpha = Math.sin(alpha);
 
