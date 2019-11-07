@@ -1,7 +1,7 @@
 /**
- * Path class, representing, using NURBS a plane with 1*1 dimension
+ * Patch class, representing, using NURBS a plane with 1*1 dimension
  * in the plane XZ centered in graphic origin with the visible face 
- * pointing into Y+.
+ * pointing into Y+ and with different degres in both U and V directions
  */
 
 class Patch extends CGFobject{

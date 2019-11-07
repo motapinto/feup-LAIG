@@ -76,11 +76,7 @@
         <primitive id="demoPlane">
             <plane npartsU="5" npartsV="5" />
         </primitive>
-        <primitive id="demoPatch">
-            <patch npointsU="3" npointsV="5" npartsU="90" npartsV="90" >
-                <controlpoint xx="2" yy="1" zz="1" />
-            </patch>
-        </primitive>
+        
 
     </primitives>
 
@@ -93,7 +89,7 @@
             </materials>
             <texture id="demoTexture"/>
             <children>
-                <primitiveref id="demoPatch" />
+                <primitiveref id="demoPlane" />
             </children>
         </component>
     </components>
