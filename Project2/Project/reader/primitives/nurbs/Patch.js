@@ -20,16 +20,18 @@ class Patch extends CGFobject{
 
           //Benzier points of control
           let controlPoints = [[[]]];
+          let posCounter = 0;
 
-          for(let uDiv = 0; uDiv < divU; uDiv++) {
-            for(let vDiv = 0; vDiv < divV; vDiv++) {
-              controlVertexes[uDiv*vDiv].push(1);
-              controlPoints[0][uDiv][vDiv] = controlVertexes[uDiv*vDiv];
+          for(let uDiv = 0; uDiv <= divU; uDiv++) {
+            controlPoints[0][uDiv] = [];
+            for(let vDiv = 0; vDiv <= divV; vDiv++) {
+              controlPoints[0][uDiv][vDiv] = controlVertexes[posCounter];
+              controlPoints[0][uDiv][vDiv].push(1);
+              posCounter++;
             }
           }
 
-          /*//Benzier points of control
-          let controlvertexes = [[]]
+          /*Example of control points for patch
           [
               // U = 0
               [   // V = 0..1;
@@ -50,7 +52,7 @@ class Patch extends CGFobject{
   
     display() {
       this.scene.pushMatrix();
-          this.obj.display();
+        this.obj.display();
       this.scene.popMatrix();
     }
 
