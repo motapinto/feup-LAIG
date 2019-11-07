@@ -1104,31 +1104,31 @@ class MySceneGraph {
                 var controlpoints = [];
 
                 // npointsU
-                var npointsU = this.reader.getFloat(grandChildren[0], 'npointsU');
+                var npointsU = this.reader.getInteger(grandChildren[0], 'npointsU');
                 if (!(npointsU != null && !isNaN(npointsU) && npointsU>0))
                     return "unable to parse npartsV of the primitive coordinates for with = " + primitiveID;
                 
                 // npointsV
-                var npointsV = this.reader.getFloat(grandChildren[0], 'npointsV');
+                var npointsV = this.reader.getInteger(grandChildren[0], 'npointsV');
                 if (!(npointsV != null && !isNaN(npointsV) && npointsV>0))
                     return "unable to parse npartsV of the primitive coordinates for with = " + primitiveID;
                 
                 // npartsU
-                var npartsU = this.reader.getFloat(grandChildren[0], 'npartsU');
+                var npartsU = this.reader.getInteger(grandChildren[0], 'npartsU');
                 if (!(npartsU != null && !isNaN(npartsU) && npartsU>0))
                     return "unable to parse npartsU of the primitive coordinates for with = " + primitiveID;
                 
                 // npartsV
-                var npartsV = this.reader.getFloat(grandChildren[0], 'npartsV');
+                var npartsV = this.reader.getInteger(grandChildren[0], 'npartsV');
                 if (!(npartsV != null && !isNaN(npartsV) && npartsV>0))
                     return "unable to parse npartsV of the primitive coordinates with ID = " + primitiveID;
             
                 //controlpoints
                 var grandgrandChildren = grandChildren[0].children;
                 let numControlPoints;
-                for(numControlPoints = 0; k < grandgrandChildren.length; k++) {
+                for(numControlPoints = 0; numControlPoints < grandgrandChildren.length; numControlPoints++) {
 
-                    var controlpoint = this.parseCoordinatesNurbs3D(grandgrandChildren[k], "controlpoint in primitive " + primitiveID);
+                    var controlpoint = this.parseCoordinatesNurbs3D(grandgrandChildren[numControlPoints], "controlpoint in primitive " + primitiveID);
                     if (!Array.isArray(controlpoint))
                         return controlpoint;
                     
@@ -1139,7 +1139,7 @@ class MySceneGraph {
                     return "incorrect number of control points of the primitive coordinates with ID = " + primitiveID;
                 }
     
-                var patch = new Patch(this.scene, npartsU, npartsV, npointsU, npointsV, controlpoints);
+                var patch = new Patch(this.scene, npointsU, npointsV, npartsU, npartsV, controlpoints);
                 this.primitives[primitiveID] = patch;
             }
         }

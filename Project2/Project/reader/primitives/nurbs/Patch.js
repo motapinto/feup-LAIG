@@ -1,53 +1,55 @@
 /**
- * Patch class, representing, using NURBS a plane with 1*1 dimension
- * in the plane XZ centered in graphic origin with the visible face 
- * pointing into Y+ and with different degres in both U and V directions
+ * @constructor
+ * @param {scene} scene
+ * @param {integer} divU
+ * @param {integer} divV
+ * @param {integer} npointsV //degreeU
+ * @param {integer} npointsV //degreeV
  */
 
-
 class Patch extends CGFobject{
-    /**
-     * @constructor
-     * @param {scene} scene
-     * @param {integer} divU
-     * @param {integer} divV
-     * @param {integer} degreeU
-     * @param {integer} degreeV
-     */
-    constructor (scene, divU, divV, degreeU, degreeV, controlVertexes) {
+    constructor (scene, npointsU, npointsV, npartsU, npartsV, controlVertexes) {
           super(scene);
           this.scene = scene;
 
           //Benzier points of control
-          let controlPoints = [[[]]];
+          let controlPoints = [[]];
           let posCounter = 0;
 
-          for(let uDiv = 0; uDiv <= divU; uDiv++) {
-            controlPoints[0][uDiv] = [];
-            for(let vDiv = 0; vDiv <= divV; vDiv++) {
-              controlPoints[0][uDiv][vDiv] = controlVertexes[posCounter];
-              controlPoints[0][uDiv][vDiv].push(1);
+          for(let uDiv = 0; uDiv <= npartsU; uDiv++) {
+            controlPoints[uDiv] = [];
+            for(let vDiv = 0; vDiv <= npartsV; vDiv++) {
+              controlPoints[uDiv][vDiv] = controlVertexes[posCounter];
+              controlPoints[uDiv][vDiv].push(1);
               posCounter++;
             }
           }
+		
+		var nurbsSurface = new CGFnurbsSurface(npartsU, npartsV, controlPoints);
+		this.obj = new CGFnurbsObject(scene, npointsU, npointsV, nurbsSurface );
 
-          /*Example of control points for patch
-          [
-              // U = 0
-              [   // V = 0..1;
-                  [-0.5, 0.0, -0.5, 1 ],
-                  [-0.5, 0.0, 0.5, 1 ]
-                 
-              ],
-             // U = 1
-             [    // V = 0..1;
-                  [ 0.5, 0.0, -0.5, 1 ],
-                  [ 0.5, 0.0, 0.5, 1 ]							 
-             ]
-          ];*/
+          //Example of control points for patch
+          let controlPoints1 = 
+          [	// U = 0
+            [ // V = 0..1;
+              [ -1.5, -1.5, 0.0, 1 ],
+              [ -1.5,  1.5, 0.0, 1 ]
+              
+            ],
+            // U = 1
+            [ // V = 0..1
+              [ 0, -1.5, 3.0, 1 ],
+              [ 0,  1.5, 3.0, 1 ]							 
+            ],
+            // U = 2
+            [ // V = 0..1							 
+              [ 1.5, -1.5, 0.0, 1 ],
+              [ 1.5,  1.5, 0.0, 1 ]
+            ]
+          ];
   
-          let nurbsSurface = new CGFnurbsSurface(degreeU, degreeV, controlPoints);
-          this.obj = new CGFnurbsObject(scene, divU, divV, nurbsSurface);
+          //let nurbsSurface = new CGFnurbsSurface(npartsU, npartsV, controlPoints1);
+          //this.obj = new CGFnurbsObject(scene, npointsU, npointsV, nurbsSurface);
     }
   
     display() {
