@@ -10,18 +10,12 @@
 
     <globals>
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
-        <background r="1.0" g="0.3" b="0.2" a="1.0" />
+        <background r="0.0" g="0.0" b="0.0" a="1.0" />
     </globals>
 
     <lights>
         <omni id="demoLight" enabled="1">
             <location x="9.8" y="11.9" z="10" w="1.0" />
-            <ambient r="0" g="0" b="0" a="1.0" />
-            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
-            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
-        </omni>
-        <omni id="demoLight1" enabled="1">
-            <location x="-9.8" y="-11.9" z="-10" w="1.0" />
             <ambient r="0" g="0" b="0" a="1.0" />
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -34,7 +28,7 @@
 
     <materials>
         <material id="demoMaterial" shininess="10">
-            <emission r="1.0" g="1.0" b="1.0" a="1.0" />
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -45,14 +39,13 @@
     </transformations>
 
     <animations>
-
-        <animation id="dayCycleMoon" >
+        <animation id="demoAnim" >
             <keyframe instant="20">
                 <translate x="0" y="0" z="-50" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="0.1" y="0.1" z="0.1" />
             </keyframe>
-        </animation>            
+        </animation>               
     </animations>
 
     <primitives>
@@ -74,9 +67,13 @@
             <cylinder base="4" top="4" height="4" slices="12" stacks="10" />
         </primitive>
         <primitive id="demoPlane">
-            <plane npartsU="5" npartsV="5" />
+           <plane npartsU="2" npartsV="2" />
         </primitive>
-        
+        <primitive id="demoPatch">
+            <patch npointsU="1" npointsV="1" npartsU="1" npartsV="1" >
+                <controlpoint xx="1.0" yy="1.0" zz="1.0" />
+            </patch>
+        </primitive>
 
     </primitives>
 
@@ -89,7 +86,7 @@
             </materials>
             <texture id="demoTexture"/>
             <children>
-                <primitiveref id="demoPlane" />
+                <primitiveref id="demoPatch" />
             </children>
         </component>
     </components>

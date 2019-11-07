@@ -4,6 +4,7 @@
  * pointing into Y+ and with different degres in both U and V directions
  */
 
+
 class Patch extends CGFobject{
     /**
      * @constructor
@@ -13,11 +14,21 @@ class Patch extends CGFobject{
      * @param {integer} degreeU
      * @param {integer} degreeV
      */
-    constructor (scene, divU, divV, degreeU, degreeV) {
+    constructor (scene, divU, divV, degreeU, degreeV, controlVertexes) {
           super(scene);
           this.scene = scene;
-  
-          var controlvertexes = 
+
+          //Benzier points of control
+          let controlPoints = [[[]]];
+
+          for(let uDiv = 0; uDiv < divU; uDiv++) {
+            for(let vDiv = 0; vDiv < divV; vDiv++) {
+              controlPoints[0][uDiv][vDiv] = controlVertexes[uDiv*vDiv];
+            }
+          }
+
+          /*//Benzier points of control
+          let controlvertexes = [[]]
           [
               // U = 0
               [   // V = 0..1;
@@ -30,9 +41,9 @@ class Patch extends CGFobject{
                   [ 0.5, 0.0, -0.5, 1 ],
                   [ 0.5, 0.0, 0.5, 1 ]							 
              ]
-          ];
+          ];*/
   
-          var nurbsSurface = new CGFnurbsSurface(degreeU, degreeV, controlvertexes);
+          let nurbsSurface = new CGFnurbsSurface(degreeU, degreeV, controlPoints);
           this.obj = new CGFnurbsObject(scene, divU, divV, nurbsSurface);
     }
   

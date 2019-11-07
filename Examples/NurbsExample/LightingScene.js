@@ -55,8 +55,8 @@ class LightingScene extends CGFscene
 						], // translation of surface 
 						[-7.5,0,0]);
 
-		this.makeSurface("1", 2, // degree on U: 3 control vertexes U
-						 1, // degree on V: 2 control vertexes on V
+		this.makeSurface("1", 2, // degree on U: 2 control vertexes U
+						 1, // degree on V: 1 control vertexes on V
 						[	// U = 0
 							[ // V = 0..1;
 								 [ -1.5, -1.5, 0.0, 1 ],
@@ -186,7 +186,7 @@ class LightingScene extends CGFscene
 
 		// draw surfaces
 		this.appearance.apply();
-		for (i =0; i<this.surfaces.length; i++) {
+		for (let i =0; i<this.surfaces.length; i++) {
 			this.pushMatrix();
 		
 			this.translate(this.translations[i][0], this.translations[i][1], this.translations[i][2]);

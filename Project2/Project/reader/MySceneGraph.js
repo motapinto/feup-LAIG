@@ -853,7 +853,7 @@ class MySceneGraph {
                 return "There must be at least one keyframe element";
             }
 
-            for(var k = 0; k < grandChildren.length; k++) {                
+            for(let k = 0; k < grandChildren.length; k++) {                
                 grandgrandChildren = grandChildren[k].children;
                  // Get animation instant of the current animation.
                 var instant = this.reader.getInteger(grandChildren[k], 'instant');
@@ -907,10 +907,8 @@ class MySceneGraph {
      */
     parsePrimitives(primitivesNode) {
         var children = primitivesNode.children;
-
-        this.primitives = [];
-
         var grandChildren = [];
+        this.primitives = [];
 
         // Any number of primitives.
         for (var i = 0; i < children.length; i++) {
@@ -1103,6 +1101,8 @@ class MySceneGraph {
                 this.primitives[primitiveId] = plane;
             }
             else if (primitiveType == 'patch') {
+                var controlpoints = [];
+
                 // npointsU
                 var npointsU = this.reader.getFloat(grandChildren[0], 'npointsU');
                 if (!(npointsU != null && !isNaN(npointsU) && npointsU>0))
@@ -1122,8 +1122,19 @@ class MySceneGraph {
                 var npartsV = this.reader.getFloat(grandChildren[0], 'npartsV');
                 if (!(npartsV != null && !isNaN(npartsV) && npartsV>0))
                     return "unable to parse npartsV of the primitive coordinates for ID = " + primitiveId;
-                
-                var patch = new Patch(this.scene, npartsU, npartsV, npointsU, npointsV);
+            
+                //controlpoints
+                for(let k = 0; k < grandChildren.length; k++) {
+                    var grandgrandChildren = grandChildren[k].children;
+
+                    var controlpoint = this.parseCoordinatesNurbs3D(grandgrandChildren[k], "controlpoint in primitive " + primitiveId);
+                    if (!Array.isArray(controlpoint))
+                        return controlpoint;
+                    
+                    controlpoints.push(controlpoint);
+                }
+    
+                var patch = new Patch(this.scene, npartsU, npartsV, npointsU, npointsV, controlpoints);
                 this.primitives[primitiveId] = patch;
             }
         }
@@ -1360,7 +1371,6 @@ class MySceneGraph {
      * @param {block element} node
      * @param {message to be displayed in case of error} messageError
      */
-    //BASED ON: http://glmatrix.net/docs/module-mat4.html
     parseCoordinates3D(node, messageError) {
         var position = [];
 
@@ -1376,6 +1386,33 @@ class MySceneGraph {
 
         // z
         var z = this.reader.getFloat(node, 'z');
+        if (!(z != null && !isNaN(z)))
+            return "unable to parse z-coordinate of the " + messageError;
+
+        position.push(...[x, y, z]);
+        return position;
+    }
+
+    /**
+     * Parse the coordinates from a node with ID = id
+     * @param {block element} node
+     * @param {message to be displayed in case of error} messageError
+     */
+    parseCoordinatesNurbs3D(node, messageError) {
+        var position = [];
+
+        // x
+        var x = this.reader.getFloat(node, 'xx');
+        if (!(x != null && !isNaN(x)))
+            return "unable to parse x-coordinate of the " + messageError;
+
+        // y
+        var y = this.reader.getFloat(node, 'yy');
+        if (!(y != null && !isNaN(y)))
+            return "unable to parse y-coordinate of the " + messageError;
+
+        // z
+        var z = this.reader.getFloat(node, 'zz');
         if (!(z != null && !isNaN(z)))
             return "unable to parse z-coordinate of the " + messageError;
 
