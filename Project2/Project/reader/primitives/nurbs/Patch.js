@@ -23,6 +23,7 @@ class Patch extends CGFobject{
 
           for(let uDiv = 0; uDiv < divU; uDiv++) {
             for(let vDiv = 0; vDiv < divV; vDiv++) {
+              controlVertexes[uDiv*vDiv].push(1);
               controlPoints[0][uDiv][vDiv] = controlVertexes[uDiv*vDiv];
             }
           }

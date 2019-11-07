@@ -1124,8 +1124,8 @@ class MySceneGraph {
                     return "unable to parse npartsV of the primitive coordinates for ID = " + primitiveId;
             
                 //controlpoints
-                for(let k = 0; k < grandChildren.length; k++) {
-                    var grandgrandChildren = grandChildren[k].children;
+                var grandgrandChildren = grandChildren[0].children;
+                for(let k = 0; k < grandgrandChildren.length; k++) {
 
                     var controlpoint = this.parseCoordinatesNurbs3D(grandgrandChildren[k], "controlpoint in primitive " + primitiveId);
                     if (!Array.isArray(controlpoint))

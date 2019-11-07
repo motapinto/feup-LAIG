@@ -71,7 +71,10 @@
         </primitive>
         <primitive id="demoPatch">
             <patch npointsU="1" npointsV="1" npartsU="1" npartsV="1" >
-                <controlpoint xx="1.0" yy="1.0" zz="1.0" />
+                <controlpoint xx="-0.5" yy="0.0" zz="-0.5" />
+                <controlpoint xx="-0.5" yy="0.0" zz="0.5" />
+                <controlpoint xx="0.5" yy="0.0" zz="-0.5" />
+                <controlpoint xx="0.5" yy="0.0" zz="0.5" />
             </patch>
         </primitive>
 
