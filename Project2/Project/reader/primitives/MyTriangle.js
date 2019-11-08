@@ -43,12 +43,12 @@ class MyTriangle extends CGFobject {
         ];
         
         this.normals = [];
-        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
-        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
-        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
         this.normals.push(-vec_cross[0], -vec_cross[1], -vec_cross[2]);
         this.normals.push(-vec_cross[0], -vec_cross[1], -vec_cross[2]);
         this.normals.push(-vec_cross[0], -vec_cross[1], -vec_cross[2]);
+        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
+        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
+        this.normals.push(vec_cross[0], vec_cross[1], vec_cross[2]);
 
         //Presented in T1 lab pdf
         this.c = Math.sqrt(Math.pow(x1 - x3, 2) + Math.pow(y1 - y3, 2) + Math.pow(z1 - z3, 2));

@@ -53,14 +53,25 @@
         </primitive>
 
         <primitive id="carFront">
-          <rectangle x1="0" y1="0" x2="4" y2="2" />
+          <rectangle x1="0" y1="0" x2="2.83" y2="1.5" />
         </primitive>
         <primitive id="carBack">
-          <rectangle x1="0" y1="0" x2="4" y2="2" />
+          <rectangle x1="0" y1="0" x2="2.83" y2="1" />
         </primitive>
         <primitive id="carAround">
-          <cylinder2 base="4" top="4" height="2" slices="2" stacks="2" />
+          <cylinder2 base="4" top="4" height="1" slices="2" stacks="2" />
         </primitive>
+        <primitive id="carWindowSideFront">
+            <triangle  x1="0" y1="0" z1="0"
+                        x2="0" y2="0" z2="1.06"
+                        x3="0" y3="-1.06" z3="0" />  
+        </primitive>
+        <primitive id="carWindowSideBack">
+            <triangle  x1="0" y1="0" z1="0"
+                        x2="0" y2="0" z2="1.06"
+                        x3="0" y3="1.06" z3="0" />  
+        </primitive>
+        
     </primitives>
 
     <components>
@@ -73,11 +84,17 @@
             <texture id="none"/>
             <children>
                 <componentref id="carFront" />
+                <componentref id="carFrontWindow" />
+                <componentref id="carBack" />
+                <componentref id="carBackWindow" />
+                <componentref id="carTop" />
                 <componentref id="carAround" />
+                <componentref id="carSideWindow" />
             </children>
         </component>
         <component id="carFront">
             <transformation>
+              <translate x="-1.415" y="-2.83" z="1"/>
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -87,9 +104,98 @@
                 <primitiveref id="carFront" />
             </children>
         </component>
+        <component id="carFrontWindow">
+            <transformation>
+              <translate x="-1.415" y="-1.34" z="1"/>
+              <rotate axis="x" angle="45"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carFront" />
+            </children>
+        </component>
+        <component id="carTop">
+            <transformation>
+              <translate x="-1.415" y="-0.3" z="2.06"/>
+              <scale x="1" y="0.74" z="1" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carFront" />
+            </children>
+        </component>
+        <component id="carBackWindow">
+            <transformation>
+              <translate x="-1.415" y="0.8" z="2.06"/>
+              <rotate axis="x" angle="-45"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carFront" />
+            </children>
+        </component>
+        <component id="carBack">
+            <transformation>
+              <translate x="-1.415" y="1.85" z="1"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carBack" />
+            </children>
+        </component>
+        <component id="carSideWindow">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="carWindowSideBackRight" />
+                <componentref id="carWindowSideBackLeft" />
+            </children>
+        </component>
+        <component id="carWindowSideBackRight">
+            <transformation>
+              <translate x="-1.415" y="0.8" z="1"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carWindowSideBack" />
+            </children>
+        </component>
+        <component id="carWindowSideBackLeft">
+            <transformation>
+              <scale x="-1" y="1" z="1"/>
+              <translate x="-1.415" y="0.8" z="1"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carWindowSideBack" />
+            </children>
+        </component>
         <component id="carAround">
             <transformation>
-              <translate x="2" y="0" z="2"/>
+              <scale x="0.5" y="1" z="1"/>
+              <rotate axis="z" angle="45"/>
             </transformation>
             <materials>
                 <material id="demoMaterial" />
