@@ -64,7 +64,7 @@
             <torus inner="2" outer="4" slices="5" loops="11" />
         </primitive>
         <primitive id="demoCylinder">
-            <cylinder base="4" top="4" height="4" slices="12" stacks="10" />
+            <cylinder base="2" top="1" height="1" slices="10" stacks="2" />
         </primitive>
         <primitive id="demoPlane">
            <plane npartsU="2" npartsV="2" />
@@ -80,7 +80,7 @@
             </patch>
         </primitive>
         <primitive id="demoCylinder2">
-            <cylinder2 base="1" top="1" height="2" slices="4" stacks="10" />
+            <cylinder2 base="2" top="1" height="1" slices="5" stacks="2" />
         </primitive>
 
     </primitives>
@@ -95,6 +95,7 @@
             <texture id="demoTexture"/>
             <children>
                 <primitiveref id="demoCylinder2" />
+                <primitiveref id="demoCylinder" />
             </children>
         </component>
     </components>

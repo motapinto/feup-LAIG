@@ -29,7 +29,7 @@ class Patch extends CGFobject{
 		this.obj = new CGFnurbsObject(scene, npointsU, npointsV, nurbsSurface );
 
           //Example of control points for patch
-          let controlPoints1 = 
+          /*let controlPoints1 = 
           [	// U = 0
             [ // V = 0..1;
               [ -1.5, -1.5, 0.0, 1 ],
@@ -46,10 +46,7 @@ class Patch extends CGFobject{
               [ 1.5, -1.5, 0.0, 1 ],
               [ 1.5,  1.5, 0.0, 1 ]
             ]
-          ];
-  
-          //let nurbsSurface = new CGFnurbsSurface(npartsU, npartsV, controlPoints1);
-          //this.obj = new CGFnurbsObject(scene, npointsU, npointsV, nurbsSurface);
+          ];*/
     }
   
     display() {

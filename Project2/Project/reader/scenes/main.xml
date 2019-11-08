@@ -487,13 +487,13 @@
     <primitives>
         <!-- TABLE -->
          <primitive id="TableLeg">
-            <cylinder base="0.1" top="0.1" height="1" slices="20" stacks="1" />
+            <cylinder2 base="0.1" top="0.1" height="1" slices="10" stacks="1" />
         </primitive>
         <primitive id="TableSupport">
-            <cylinder base="0.5" top="0.1" height="0.2" slices="4" stacks="1" />
+            <cylinder2 base="0.5" top="0.1" height="0.2" slices="2" stacks="1" />
         </primitive>
         <primitive id="TableTop">
-            <cylinder base="0.8" top="0.8" height="0.1" slices="4" stacks="1" />
+            <cylinder2 base="0.8" top="0.8" height="0.1" slices="2" stacks="1" />
         </primitive>
         <primitive id="TableCover">
             <rectangle x1="0" y1="0" x2="1.13" y2="1.13" />
@@ -510,19 +510,19 @@
 
         <!-- CHAIR -->
         <primitive id="ChairLeg1">
-            <cylinder base="0.05" top="0.05" height="0.5" slices="4" stacks="1" />
+            <cylinder2 base="0.05" top="0.05" height="0.5" slices="2" stacks="1" />
         </primitive>
         <primitive id="ChairLeg2">
-            <cylinder base="0.05" top="0.05" height="0.85" slices="4" stacks="1" />
+            <cylinder2 base="0.05" top="0.05" height="0.85" slices="2" stacks="1" />
         </primitive>
         <primitive id="ChairBackSupport">
-            <cylinder base="0.45" top="0.45" height="0.07" slices="4" stacks="1" />
+            <cylinder2 base="0.45" top="0.45" height="0.07" slices="2" stacks="1" />
         </primitive>
         <primitive id="ChairBackSupportCover">
             <rectangle x1="0" y1="0" x2="0.64" y2="0.64" />
         </primitive>
         <primitive id="ChairBase">
-            <cylinder base="0.4" top="0.4" height="0.2" slices="4" stacks="1" />
+            <cylinder2 base="0.4" top="0.4" height="0.2" slices="2" stacks="1" />
         </primitive>
         <primitive id="ChairBaseCover">
             <rectangle x1="0" y1="0" x2="0.57" y2="0.57" />
@@ -530,16 +530,16 @@
 
         <!-- BAR -->
         <primitive id="BarCounterTop">
-            <cylinder base="1" top="1" height="0.3" slices="4" stacks="1" />
+            <cylinder2 base="1" top="1" height="0.3" slices="2" stacks="1" />
         </primitive>
         <primitive id="BarCounterTopCover">
             <rectangle x1="0" y1="0" x2="1.41" y2="1.41" />
         </primitive>
         <primitive id="BarCounterCenter">
-            <cylinder base="0.7" top="0.7" height="1.5" slices="4" stacks="1" />
+            <cylinder2 base="0.7" top="0.7" height="1.5" slices="2" stacks="1" />
         </primitive>
         <primitive id="BarChairLeg">
-            <cylinder base="0.1" top="0.1" height="1.2" slices="20" stacks="5" />
+            <cylinder2 base="0.1" top="0.1" height="1.2" slices="10" stacks="5" />
         </primitive>
         
         <!-- RESTAURANT ACCESSORIES-->
@@ -547,22 +547,22 @@
             <rectangle x1="0" y1="0" x2="3" y2="1.5" />
         </primitive>
         <primitive id="DoorHandle">
-            <cylinder base="0.01" top="0.01" height="1" slices="20" stacks="1" />
+            <cylinder2 base="0.01" top="0.01" height="1" slices="10" stacks="1" />
         </primitive>
         <primitive id="BalconyHandle">
-            <cylinder base="0.05" top="0.05" height="1.5" slices="20" stacks="1" />
+            <cylinder2 base="0.05" top="0.05" height="1.5" slices="10" stacks="1" />
         </primitive>
         <primitive id="LampLight">
-            <cylinder base="0.5" top="0.2" height="0.5" slices="4" stacks="1" />
+            <cylinder2 base="0.5" top="0.2" height="0.5" slices="2" stacks="1" />
         </primitive>
         <primitive id="LampStick">
-            <cylinder base="0.08" top="0.08" height="0.8" slices="4" stacks="1" />
+            <cylinder2 base="0.08" top="0.08" height="0.8" slices="2" stacks="1" />
         </primitive>
         <primitive id="LampCover">
             <rectangle x1="0" y1="0" x2="0.28" y2="0.28" />
         </primitive>
         <primitive id="StairSupport">
-            <cylinder base="0.05" top="0.05" height="3.53" slices="20" stacks="1" />
+            <cylinder2 base="0.05" top="0.05" height="3.53" slices="10" stacks="1" />
         </primitive>
         <primitive id="StairStep">
             <rectangle x1="0" y1="0" x2="1" y2="0.2" />
@@ -585,27 +585,27 @@
             <rectangle x1="0" y1="0" x2="13" y2="5" />
         </primitive>
         <primitive id="Window1">
-            <cylinder base="1.838" top="1.838" height="4" slices="4" stacks="1" />
+            <cylinder2 base="1.838" top="1.838" height="4" slices="2" stacks="1" />
         </primitive>
         <primitive id="Window2">
-            <cylinder base="1.13" top="1.13" height="4" slices="4" stacks="1" />
+            <cylinder2 base="1.13" top="1.13" height="4" slices="2" stacks="1" />
         </primitive>
         <primitive id="RoofGlass">
-            <cylinder base="9.19" top="9.19" height="1" slices="4" stacks="1" />
+            <cylinder2 base="9.19" top="9.19" height="1" slices="2" stacks="1" />
         </primitive>
         <primitive id="Donut">
-            <torus inner="0.025" outer="0.05" slices="40" loops="40" />
+            <torus inner="0.025" outer="0.05" slices="20" loops="40" />
         </primitive>
 
         <!-- EXTERIOR -->
         <primitive id="SphereMap">
-            <sphere radius="80" slices="40" stacks="40" />
+            <sphere radius="80" slices="20" stacks="40" />
         </primitive>
         <primitive id="Moon">
-            <sphere radius="5" slices="40" stacks="40" />
+            <sphere radius="5" slices="20" stacks="40" />
         </primitive>
         <primitive id="Sun">
-            <sphere radius="1" slices="40" stacks="40" />
+            <sphere radius="1" slices="20" stacks="40" />
         </primitive>
         <primitive id="Terrain">
             <rectangle x1="-100" y1="-100" x2="100" y2="100" />
@@ -623,19 +623,19 @@
             <rectangle x1="0" y1="0" x2="1" y2="3" />
         </primitive>
         <primitive id="LightPost">
-            <cylinder base="0.2" top="0.2" height="4" slices="4" stacks="1" />
+            <cylinder2 base="0.2" top="0.2" height="4" slices="2" stacks="1" />
         </primitive>
         <primitive id="LightBase">
             <rectangle x1="0" y1="0" x2="0.5" y2="0.5" />
         </primitive>
         <primitive id="LightShield">
-            <cylinder base="0.02" top="0.02" height="0.6" slices="4" stacks="1" />
+            <cylinder2 base="0.02" top="0.02" height="0.6" slices="2" stacks="1" />
         </primitive>
         <primitive id="LightCone">
-            <cylinder base="0.4" top="0" height="0.2" slices="4" stacks="1" />
+            <cylinder2 base="0.4" top="0" height="0.2" slices="2" stacks="1" />
         </primitive>
         <primitive id="LightBulb">
-            <sphere radius="0.15" slices="20" stacks="10" />
+            <sphere radius="0.15" slices="2" stacks="10" />
         </primitive>
 
     </primitives>
@@ -798,7 +798,6 @@
             <materials>
                 <material id="chairLeg" />
             </materials>
-            <animationref id="chair:legs" />
             <texture id="inherit"/>
             <children>
                 <primitiveref id="ChairLeg1" />
@@ -808,7 +807,6 @@
             <transformation>
                 <translate x="0" y="0.3" z="-0.5" />
             </transformation>
-            <animationref id="chair:legs" />
             <materials>
                 <material id="chairLeg" />
             </materials>
@@ -918,7 +916,6 @@
             <transformation>
                 <translate x="0" y="0" z="0.5" />
             </transformation>
-            <animationref id="chair1:complete" />
             <materials>
                 <material id="chair" />
                 <material id="chair1" />
@@ -941,7 +938,6 @@
                 <rotate axis="z" angle="180" />
                  <translate x="0" y="0" z="0.5" />
             </transformation>
-            <animationref id="chair2:complete" />
             <materials>
                 <material id="chair" />
                 <material id="chair1" />
