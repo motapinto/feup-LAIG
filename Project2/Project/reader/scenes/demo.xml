@@ -80,7 +80,7 @@
             </patch>
         </primitive>
         <primitive id="demoCylinder2">
-            <cylinder2 base="4" top="4" height="4" slices="12" stacks="10" />
+            <cylinder2 base="1" top="1" height="2" slices="4" stacks="10" />
         </primitive>
 
     </primitives>
