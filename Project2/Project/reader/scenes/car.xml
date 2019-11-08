@@ -1,0 +1,103 @@
+<lxs>
+    <scene root="Car" axis_length="5"/>
+
+    <views default="defaultCamera">
+        <perspective id="defaultCamera" near="0.1" far="500" angle="45">
+            <from x="5" y="5" z="5" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+    </views>
+
+    <globals>
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <background r="0.0" g="0.0" b="0.0" a="1.0" />
+    </globals>
+
+    <lights>
+        <omni id="demoLight" enabled="1">
+            <location x="9.8" y="11.9" z="10" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </omni>
+    </lights>
+
+    <textures>
+    </textures>
+
+    <materials>
+        <material id="demoMaterial" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </material>
+    </materials>
+
+    <transformations>
+    </transformations>
+
+    <animations>
+        <animation id="demoAnim" >
+            <keyframe instant="20">
+                <translate x="0" y="0" z="-50" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="0.1" y="0.1" z="0.1" />
+            </keyframe>
+        </animation>               
+    </animations>
+
+    <primitives>
+        <primitive id="demoRectangle">
+            <rectangle x1="0" y1="0" x2="40" y2="3" />
+        </primitive>
+
+        <primitive id="carFront">
+          <rectangle x1="0" y1="0" x2="4" y2="2" />
+        </primitive>
+        <primitive id="carBack">
+          <rectangle x1="0" y1="0" x2="4" y2="2" />
+        </primitive>
+        <primitive id="carAround">
+          <cylinder2 base="4" top="4" height="2" slices="2" stacks="2" />
+        </primitive>
+    </primitives>
+
+    <components>
+        <component id="Car">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="carFront" />
+                <componentref id="carAround" />
+            </children>
+        </component>
+        <component id="carFront">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carFront" />
+            </children>
+        </component>
+        <component id="carAround">
+            <transformation>
+              <translate x="2" y="0" z="2"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carAround" />
+            </children>
+        </component>
+    </components>
+</lxs>
