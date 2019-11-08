@@ -37,8 +37,7 @@
     </views>
 
     <globals>
-        <!--<ambient r="0.2" g="0.2" b="0.2" a="1.0" />-->
-        <ambient r="0.9" g="0.9" b="0.9" a="1.0" />
+        <ambient r="0.7" g="0.7" b="0.7" a="1.0" />
         <background r="0.0" g="0.0" b="0.0" a="1.0" />
     </globals>
 
@@ -123,6 +122,7 @@
         <texture id="sun" file="scenes/images/sun.jpg" />
         <texture id="moon" file="scenes/images/moon.jpg" />
         <texture id="road" file="scenes/images/highway-road.jpg" />
+        <texture id="sidewalk" file="scenes/images/sidewalk.jpg" />
         <texture id="parkingLot" file="scenes/images/parking-lot.jpg" />
         <texture id="stonePath" file="scenes/images/stone-path3.png" />
         <texture id="grass" file="scenes/images/grass.jpg" />
@@ -611,7 +611,12 @@
             <rectangle x1="-100" y1="-100" x2="100" y2="100" />
         </primitive>
         <primitive id="Road">
-            <rectangle x1="0" y1="0" x2="200" y2="3" />
+            <patch npointsU="20" npointsV="20" npartsU="1" npartsV="1" >
+                <controlpoint xx="0.0" yy="-10.0" zz="0.0" />
+                <controlpoint xx="0.0" yy="0.0" zz="0.0" />
+                <controlpoint xx="200.0" yy="-10.0" zz="0.0" />
+                <controlpoint xx="200.0" yy="0.0" zz="0.0" />
+            </patch>
         </primitive>
         <primitive id="ParkingLot">
             <rectangle x1="0" y1="0" x2="22" y2="17" />
@@ -636,6 +641,9 @@
         </primitive>
         <primitive id="LightBulb">
             <sphere radius="0.15" slices="2" stacks="10" />
+        </primitive>
+        <primitive id="SideWalk">
+            <cylinder2 base="0.5" top="0.5" height="200" slices="2" stacks="1" />
         </primitive>
 
     </primitives>
@@ -2438,7 +2446,6 @@
             <materials>
                 <material id="celestial" />
             </materials>
-
             <texture id="sun" length_s="0" length_t="0"/>
             <children>
                 <primitiveref id="Sun" />
@@ -2636,7 +2643,7 @@
         </component>
         <component id="LightPostSet">
             <transformation>
-                <translate x="-14" y="-12" z="0" />
+                <translate x="-14" y="-22" z="0" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -2714,6 +2721,21 @@
                 <componentref id="LightPostSet1" /> 
             </children>
         </component>
+        <component id="SideWalk">
+            <transformation>
+                <translate x="0" y="-9" z="0.5" />
+                <rotate angle="90" axis="y" />
+                <rotate angle="90" axis="z" />
+                <scale x="1" y="0.5" z="1" />
+            </transformation>
+            <materials>
+                <material id="lamp" />
+            </materials>
+            <texture id="sidewalk" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="SideWalk" /> 
+            </children>
+        </component>
         
         <!-- EXTERIOR -->
         <component id="Exterior">
@@ -2734,6 +2756,7 @@
                 <componentref id="Stone-Path2" /> 
                 <componentref id="Stone-Path3" /> 
                 <componentref id="LightPostSet0" />
+                <componentref id="SideWalk" />
             </children>
         </component>
 

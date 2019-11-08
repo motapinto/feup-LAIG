@@ -56,7 +56,7 @@ class KeyframeAnimation extends Animation {
         //Number of curent frame in keyframe
         let nFrame = (framesPerKeyframe * instant) / deltaInstant;
 
-        //this.keyframes[i].scale = S0 ; scale = Sn ; R = root^n(S0/Sn)
+        //this.keyframes[i].scale = Sn ; scale = S0 ; Sn = S0 * R^n
         let scaleR = [
           Math.pow(this.keyframes[i].scale[0] / scale[0], 1 / framesPerKeyframe),
           Math.pow(this.keyframes[i].scale[1] / scale[1], 1 / framesPerKeyframe),
@@ -88,10 +88,7 @@ class KeyframeAnimation extends Animation {
         rotate[1] += totalRotation[1]*keyframePercentage;
         rotate[2] += totalRotation[2]*keyframePercentage;
         //Scale - Multiplicative operation 
-        //this.keyframes[i].scale = S0 ; scale = Sn ; Sn = S0 * R^n
-        //scale[0] =  this.keyframes[i].scale[0] * Math.pow(scaleR[0], nFrame);
-        //scale[1] =  this.keyframes[i].scale[1] * Math.pow(scaleR[1], nFrame);
-        //scale[2] =  this.keyframes[i].scale[2] * Math.pow(scaleR[2], nFrame);
+        //this.keyframes[i].scale = Sn ; scale = S0 ; Sn = S0 * R^n
         scale[0] *= Math.pow(scaleR[0], nFrame);
         scale[1] *= Math.pow(scaleR[1], nFrame);
         scale[2] *= Math.pow(scaleR[2], nFrame);
