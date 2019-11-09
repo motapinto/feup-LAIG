@@ -520,6 +520,31 @@
     </animations>
 
     <primitives>
+        <!-- PRIMITIVES-->
+        <primitive id="triangle">
+            <triangle x1="0" y1="0" z1="1" x2="1" y2="0" z2="0" x3="0" y3="1" z3="0" />
+        </primitive>
+        <primitive id="rectangle">
+            <rectangle x1="-1" y1="-1" x2="1" y2="1" />
+        </primitive>
+        <primitive id="square">
+            <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
+        </primitive>
+        <primitive id="cylinder">  
+            <cylinder base="1" top="1" height="1" slices="25" stacks="25" />
+        </primitive>
+        <primitive id="sphere">  
+            <sphere radius="1" slices="20" stacks="20" />
+        </primitive>
+        <primitive id="torus">  
+            <torus inner="0.1" outer="0.4" slices="20" loops="20" />
+        </primitive>       
+        <primitive id="hexagon">
+                <torus inner="0.1" outer="1" slices="6" loops="4" />
+        </primitive>  
+        <primitive id="cone">
+            <cylinder base="1" top="0" height="1" slices="30" stacks="5"/>
+        </primitive>       
 
         <!-- CAR -->
         <primitive id="carFront">
