@@ -23,6 +23,8 @@
     </lights>
 
     <textures>
+      <texture id="tire" file="scenes/images/tire.jpg" />
+      <texture id="rim" file="scenes/images/sidewalk.jpg" />
     </textures>
 
     <materials>
@@ -38,11 +40,23 @@
     </transformations>
 
     <animations>
-        <animation id="demoAnim" >
-            <keyframe instant="20">
-                <translate x="0" y="0" z="-50" />
+        <animation id="WheelTurn" >
+            <keyframe instant="5">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="20" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="0.1" y="0.1" z="0.1" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>               
+        <animation id="WheelSpin" >
+            <keyframe instant="20">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="720" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>               
     </animations>
@@ -101,8 +115,9 @@
         </component>
         <component id="AxisFront">
           <transformation>
-            <translate x="0" y="-1.6" z="0"/>
+            <translate x="0" y="-1.6" z="0.28"/>
           </transformation>
+          <animationref id="WheelSpin" />
           <materials>
             <material id="demoMaterial" />
           </materials>
@@ -115,8 +130,9 @@
         </component>
         <component id="AxisBack">
           <transformation>
-            <translate x="0" y="1.4" z="0"/>
+            <translate x="0" y="1.4" z="0.28"/>
           </transformation>
+          <animationref id="WheelSpin" />
           <materials>
             <material id="demoMaterial" />
           </materials>
@@ -129,7 +145,7 @@
         </component>
         <component id="Axis">
           <transformation>
-            <translate x="-1.15" y="0" z="0.28"/>
+            <translate x="-1.15" y="0" z="0"/>
             <rotate axis="y" angle="90"/>
           </transformation>
           <materials>
@@ -144,6 +160,7 @@
           <transformation>
             <translate x="-1.4" y="0" z="0"/>
           </transformation>
+          <animationref id="WheelTurn" />
           <materials>
             <material id="demoMaterial" />
           </materials>
@@ -156,6 +173,7 @@
           <transformation>
             <translate x="0.92" y="0" z="0"/>
           </transformation>
+          <animationref id="WheelTurn" />
           <materials>
             <material id="demoMaterial" />
           </materials>
@@ -194,7 +212,7 @@
           <materials>
             <material id="demoMaterial" />
           </materials>
-          <texture id="none"/>
+          <texture id="rim"/>
           <children>
             <componentref id="wheelCenterIn" />
             <componentref id="wheelCenterOut" />
@@ -203,39 +221,39 @@
         </component>
         <component id="wheelCenterIn">
           <transformation>
-            <translate x="0.48" y="0" z="0.28"/>
+            <translate x="0.48" y="0" z="0"/>
             <scale x="0.2" y="1" z="1"/>
           </transformation>
           <materials>
             <material id="demoMaterial" />
           </materials>
-          <texture id="none"/>
+          <texture id="inherit"/>
           <children>
             <primitiveref id="WheelCenter" />
           </children>
         </component>
         <component id="wheelCenterOut">
           <transformation>
-            <translate x="0" y="0" z="0.28"/>
+            <translate x="0" y="0" z="0"/>
             <scale x="0.2" y="1" z="1"/>
           </transformation>
           <materials>
             <material id="demoMaterial" />
           </materials>
-          <texture id="none"/>
+          <texture id="inherit"/>
           <children>
             <primitiveref id="WheelCenter" />
           </children>
         </component>
         <component id="wheelOut">
           <transformation>
-            <translate x="0.005" y="0" z="0.28"/>
+            <translate x="0.005" y="0" z="0"/>
             <rotate axis="y" angle="90"/>
           </transformation>
           <materials>
             <material id="demoMaterial" />
           </materials>
-          <texture id="none"/>
+          <texture id="tire"/>
           <children>
             <primitiveref id="WheelOut" />
           </children>
