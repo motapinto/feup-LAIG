@@ -75,9 +75,9 @@
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
         </spot>
         <spot id="LightsPost" enabled="1" angle="90.0" exponent="1.0">
-            <location x="-6" y="5" z="12" w="1" />
-            <target x="6" y="-6" z="-10.0" />
-            <ambient r="0.1" g="0.1" b="0.1" a="1" />
+            <location x="-6" y="5" z="22" w="1" />
+            <target x="-6" y="5" z="-10.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
             <specular r="1" g="1" b="1" a="1.0" />
             <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
@@ -85,8 +85,8 @@
         <omni id="CelestialBody" enabled="1" >
             <location x="-5" y="30" z="-50" w="1" />
             <ambient r="0.1" g="0.1" b="0.1" a="1" />
-            <diffuse r="0.1" g="0.1" b="0.1" a="1" />
-            <specular r="0.1" g="0.1" b="0.1" a="1" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1" />
+            <specular r="0.3" g="0.3" b="0.3" a="1" />
         </omni>       
         
     </lights>
@@ -343,6 +343,33 @@
             <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
             <specular r="0.1" g="0.1" b="0.1" a="1.0" />
         </material>
+
+        <!-- Car Materials -->
+        <material id="Black" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.12" g="0.12" b="0.12" a="1.0" />
+            <diffuse r="0.12" g="0.12" b="0.12" a="1.0" />
+            <specular r="0.12" g="0.12" b="0.12" a="1.0" />
+        </material>
+        <material id="Window" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.05" g="0.05" b="0.2" a="1.0" />
+            <diffuse r="0.4" g="0.4" b="0.8" a="1.0" />
+            <specular r="0.4" g="0.4" b="0.8" a="1.0" />
+        </material>
+        <material id="Body" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.2" g="0.05" b="0.05" a="1.0" />
+            <diffuse r="0.8" g="0.2" b="0.2" a="1.0" />
+            <specular r="0.8" g="0.2" b="0.2" a="1.0" />
+        </material>
+        <material id="White" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+            <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+            <specular r="0.8" g="0.8" b="0.8" a="1.0" />
+        </material>
+
     </materials>
 
     <transformations>
@@ -394,9 +421,14 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation> 
-        <animation id="CarTranslation" >
-            <keyframe instant="100">
-                <translate x="0" y="-200" z="0" />
+        <animation id="carMoving" >
+            <keyframe instant="5">
+                <translate x="0" y="-5" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="40">
+                <translate x="0" y="-140" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -570,11 +602,11 @@
         <primitive id="WheelCenter">
           <sphere radius="0.282" slices="40" stacks="40" />
         </primitive>
-        <primitive id="WheelOut">
-          <cylinder2 base="0.28" top="0.28" height="0.5" slices="40" stacks="2" />
-        </primitive>
         <primitive id="Axis">
-          <cylinder2 base="0.05" top="0.05" height="2.3" slices="40" stacks="20" />
+          <cylinder2 base="0.05" top="0.05" height="2.83" slices="40" stacks="20" />
+        </primitive>
+        <primitive id="WheelOut">
+          <torus inner="0.1" outer="0.2" slices="20" loops="40" />
         </primitive>
 
         <!-- PERSON -->
@@ -755,16 +787,93 @@
     </primitives>
 
     <components>
-
-        <!-- CAR -->
-        <component id="Car">
+        <!-- ROOT -->
+        <component id="Restaurant">
             <transformation>
-                <translate x="1" y="-12.5" z="0"/>
-                <rotate axis="z" angle="90"/>
+                <rotate angle="-90" axis="x" />
             </transformation>
-            <animationref id="CarTranslation" />
             <materials>
                 <material id="defaultMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+
+                <!-- TABLE SET -->
+                <componentref id="TableSetRow0" />
+                <!-- BAR -->
+                <componentref id="BarCounter8" />
+                <componentref id="BarChair8" />
+                <!-- RESTAURANT ACCESSORIES-->
+                <componentref id="Lamp0" /> 
+                <componentref id="Stair" />
+                <componentref id="Door" /> 
+                <componentref id="Balcony" /> 
+                <!-- BUILDING -->
+                <componentref id="Building" />
+                <!-- EXTERIOR -->
+                <componentref id="Exterior" />
+
+            </children>
+        </component>    
+
+        <!-- CAR -->
+        <component id="Car3">
+            <transformation>
+              <translate x="0" y="-30" z="0"/>
+              <rotate axis="z" angle="180"/>
+            </transformation>
+            <materials>
+                <material id="Body" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="Car0" />
+            </children>
+        </component>
+        <component id="Car2">
+            <transformation>
+              <translate x="10" y="0" z="0"/>
+            </transformation>
+            <materials>
+                <material id="Body" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="Car1" />
+            </children>
+        </component>
+        <component id="Car1">
+            <transformation>
+              <translate x="10" y="0" z="0"/>
+            </transformation>
+            <materials>
+                <material id="Body" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="Car0" />
+            </children>
+        </component>
+        <component id="Car0">
+            <transformation>
+              <translate x="-70" y="0" z="0"/>
+            </transformation>
+            <materials>
+                <material id="Body" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="Car" />
+            </children>
+        </component>
+        <component id="Car">
+            <transformation>
+              <translate x="0" y="-12.5" z="0"/>
+              <rotate axis="z" angle="90"/>
+            </transformation>
+            <animationref id="carMoving"/>
+            <materials>
+                <material id="Body" />
             </materials>
             <texture id="none"/>
             <children>
@@ -775,11 +884,11 @@
         </component>
         <component id="AxisFront">
           <transformation>
-            <translate x="0" y="-1.6" z="0.28"/>
+            <translate x="0" y="-1.4" z="0.28"/>
           </transformation>
           <animationref id="WheelSpin" />
           <materials>
-            <material id="defaultMaterial" />
+            <material id="White" />
           </materials>
           <texture id="none"/>
           <children>
@@ -794,7 +903,7 @@
           </transformation>
           <animationref id="WheelSpin" />
           <materials>
-            <material id="defaultMaterial" />
+            <material id="White" />
           </materials>
           <texture id="none"/>
           <children>
@@ -805,11 +914,11 @@
         </component>
         <component id="Axis">
           <transformation>
-            <translate x="-1.15" y="0" z="0"/>
+            <translate x="-1.415" y="0" z="0"/>
             <rotate axis="y" angle="90"/>
           </transformation>
           <materials>
-            <material id="defaultMaterial" />
+            <material id="White" />
           </materials>
           <texture id="none"/>
           <children>
@@ -818,11 +927,10 @@
         </component>
         <component id="wheelFrontRight">
           <transformation>
-            <translate x="-1.4" y="0" z="0"/>
+            <translate x="-1.8" y="0" z="0"/>
           </transformation>
-          
           <materials>
-            <material id="defaultMaterial" />
+            <material id="inherit" />
           </materials>
           <texture id="none"/>
           <children>
@@ -833,9 +941,8 @@
           <transformation>
             <translate x="0.92" y="0" z="0"/>
           </transformation>
-          
           <materials>
-            <material id="defaultMaterial" />
+            <material id="inherit" />
           </materials>
           <texture id="none"/>
           <children>
@@ -844,10 +951,10 @@
         </component>
         <component id="wheelBackRight">
           <transformation>
-            <translate x="-1.4" y="0" z="0"/>
+            <translate x="-1.8" y="0" z="0"/>
           </transformation>
           <materials>
-            <material id="defaultMaterial" />
+            <material id="inherit" />
           </materials>
           <texture id="none"/>
           <children>
@@ -859,7 +966,7 @@
             <translate x="0.92" y="0" z="0"/>
           </transformation>
           <materials>
-            <material id="defaultMaterial" />
+            <material id="inherit" />
           </materials>
           <texture id="none"/>
           <children>
@@ -870,35 +977,21 @@
           <transformation>
           </transformation>
           <materials>
-            <material id="defaultMaterial" />
+            <material id="inherit" />
           </materials>
-          <texture id="rim"/>
+          <texture id="none"/>
           <children>
-            <componentref id="wheelCenterIn" />
-            <componentref id="wheelCenterOut" />
+            <componentref id="wheelCenter" />
             <componentref id="wheelOut" />
           </children>
         </component>
-        <component id="wheelCenterIn">
+        <component id="wheelCenter">
           <transformation>
-            <translate x="0.48" y="0" z="0"/>
-            <scale x="0.2" y="1" z="1"/>
+            <translate x="0.4" y="0" z="0"/>
+            <scale x="0.4" y="1" z="1"/>
           </transformation>
           <materials>
-            <material id="defaultMaterial" />
-          </materials>
-          <texture id="inherit"/>
-          <children>
-            <primitiveref id="WheelCenter" />
-          </children>
-        </component>
-        <component id="wheelCenterOut">
-          <transformation>
-            <translate x="0" y="0" z="0"/>
-            <scale x="0.2" y="1" z="1"/>
-          </transformation>
-          <materials>
-            <material id="defaultMaterial" />
+            <material id="inherit" />
           </materials>
           <texture id="inherit"/>
           <children>
@@ -907,11 +1000,11 @@
         </component>
         <component id="wheelOut">
           <transformation>
-            <translate x="0.005" y="0" z="0"/>
+            <translate x="0.4" y="0" z="0"/>
             <rotate axis="y" angle="90"/>
           </transformation>
           <materials>
-            <material id="defaultMaterial" />
+            <material id="White" />
           </materials>
           <texture id="tire"/>
           <children>
@@ -923,7 +1016,7 @@
               <translate x="0" y="0" z="0.6"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -942,20 +1035,7 @@
               <translate x="-1.415" y="-2.83" z="1"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <primitiveref id="carFront" />
-            </children>
-        </component>
-        <component id="carFrontWindow">
-            <transformation>
-              <translate x="-1.415" y="-1.34" z="1"/>
-              <rotate axis="x" angle="45"/>
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -968,7 +1048,32 @@
               <scale x="1" y="0.74" z="1" />
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carFront" />
+            </children>
+        </component>
+        <component id="carBack">
+            <transformation>
+              <translate x="-1.415" y="1.85" z="1"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carBack" />
+            </children>
+        </component>
+        <component id="carFrontWindow">
+            <transformation>
+              <translate x="-1.415" y="-1.34" z="1"/>
+              <rotate axis="x" angle="45"/>
+            </transformation>
+            <materials>
+                <material id="Window" />
             </materials>
             <texture id="none"/>
             <children>
@@ -981,30 +1086,18 @@
               <rotate axis="x" angle="-45"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="Window" />
             </materials>
             <texture id="none"/>
             <children>
                 <primitiveref id="carFront" />
             </children>
         </component>
-        <component id="carBack">
-            <transformation>
-              <translate x="-1.415" y="1.85" z="1"/>
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <primitiveref id="carBack" />
-            </children>
-        </component>
         <component id="carSideWindow">
             <transformation>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="Window" />
             </materials>
             <texture id="none"/>
             <children>
@@ -1022,7 +1115,7 @@
               <scale x="-1" y="-1" z="1"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -1035,7 +1128,7 @@
               <scale x="-1" y="-1" z="1"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -1047,7 +1140,7 @@
               <translate x="-1.415" y="0.82" z="1"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -1059,24 +1152,11 @@
               <translate x="1.415" y="0.82" z="1"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
               <primitiveref id="carWindowSide" />
-            </children>
-        </component>
-        <component id="carAround">
-            <transformation>
-              <scale x="0.5" y="1" z="1"/>
-              <rotate axis="z" angle="45"/>
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <primitiveref id="carAround" />
             </children>
         </component>
         <component id="carSideRight">
@@ -1085,7 +1165,7 @@
               <rotate axis="y" angle="-90"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -1098,19 +1178,32 @@
               <rotate axis="y" angle="-90"/>
             </transformation>
             <materials>
-                <material id="defaultMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
                 <primitiveref id="carSide" />
             </children>
-        </component>      
+        </component>    
+        <component id="carAround">
+            <transformation>
+              <scale x="0.5" y="1" z="1"/>
+              <rotate axis="z" angle="45"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="carAround" />
+            </children>
+        </component>  
         <component id="carBottom">
           <transformation>
             <translate x="-1.415" y="-2.83" z="0"/>
           </transformation>
           <materials>
-              <material id="defaultMaterial" />
+              <material id="Black" />
           </materials>
           <texture id="none"/>
           <children>
@@ -3424,7 +3517,10 @@
             </materials>
             <texture id="none"/>
             <children>
-                <componentref id="Car" />
+                <componentref id="Car3" />
+                <componentref id="Car2" />
+                <componentref id="Car1" />
+                <componentref id="Car0" />
                 <componentref id="SphereMap" /> 
                 <componentref id="Sun" /> 
                 <componentref id="Moon" /> 
@@ -3439,33 +3535,5 @@
             </children>
         </component>
 
-        <!-- ROOT -->
-        <component id="Restaurant">
-            <transformation>
-                <rotate angle="-90" axis="x" />
-            </transformation>
-            <materials>
-                <material id="defaultMaterial" />
-            </materials>
-            <texture id="none"/>
-            <children>
-
-                <!-- TABLE SET -->
-                <componentref id="TableSetRow0" />
-                <!-- BAR -->
-                <componentref id="BarCounter8" />
-                <componentref id="BarChair8" />
-                <!-- RESTAURANT ACCESSORIES-->
-                <componentref id="Lamp0" /> 
-                <componentref id="Stair" />
-                <componentref id="Door" /> 
-                <componentref id="Balcony" /> 
-                <!-- BUILDING -->
-                <componentref id="Building" />
-                <!-- EXTERIOR -->
-                <componentref id="Exterior" />
-
-            </children>
-        </component>    
     </components>
 </lxs>

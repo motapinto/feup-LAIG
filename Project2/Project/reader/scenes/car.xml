@@ -45,7 +45,7 @@
             <diffuse r="0.8" g="0.2" b="0.2" a="1.0" />
             <specular r="0.8" g="0.2" b="0.2" a="1.0" />
         </material>
-        <material id="NoMaterial" shininess="10">
+        <material id="White" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.8" g="0.8" b="0.8" a="1.0" />
             <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
@@ -123,7 +123,7 @@
           </transformation>
           <animationref id="WheelSpin" />
           <materials>
-            <material id="NoMaterial" />
+            <material id="White" />
           </materials>
           <texture id="none"/>
           <children>
@@ -138,7 +138,7 @@
           </transformation>
           <animationref id="WheelSpin" />
           <materials>
-            <material id="NoMaterial" />
+            <material id="White" />
           </materials>
           <texture id="none"/>
           <children>
@@ -153,7 +153,7 @@
             <rotate axis="y" angle="90"/>
           </transformation>
           <materials>
-            <material id="NoMaterial" />
+            <material id="White" />
           </materials>
           <texture id="none"/>
           <children>
@@ -164,10 +164,6 @@
           <transformation>
             <translate x="-1.8" y="0" z="0"/>
           </transformation>
-<<<<<<< HEAD
-=======
-          
->>>>>>> f488ea16c9a893eda18fae75f2f912e07d960081
           <materials>
             <material id="inherit" />
           </materials>
@@ -180,10 +176,6 @@
           <transformation>
             <translate x="0.92" y="0" z="0"/>
           </transformation>
-<<<<<<< HEAD
-=======
-          
->>>>>>> f488ea16c9a893eda18fae75f2f912e07d960081
           <materials>
             <material id="inherit" />
           </materials>
@@ -247,7 +239,7 @@
             <rotate axis="y" angle="90"/>
           </transformation>
           <materials>
-            <material id="NoMaterial" />
+            <material id="White" />
           </materials>
           <texture id="tire"/>
           <children>
