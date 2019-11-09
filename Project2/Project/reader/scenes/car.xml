@@ -53,9 +53,9 @@
             </keyframe>
         </animation>               
         <animation id="WheelSpin" >
-            <keyframe instant="20">
+            <keyframe instant="100">
                 <translate x="0" y="0" z="0" />
-                <rotate angle_x="720" angle_y="0" angle_z="0" />
+                <rotate angle_x="15000" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>               
@@ -160,7 +160,7 @@
           <transformation>
             <translate x="-1.4" y="0" z="0"/>
           </transformation>
-          <animationref id="WheelTurn" />
+          
           <materials>
             <material id="demoMaterial" />
           </materials>
@@ -173,7 +173,7 @@
           <transformation>
             <translate x="0.92" y="0" z="0"/>
           </transformation>
-          <animationref id="WheelTurn" />
+          
           <materials>
             <material id="demoMaterial" />
           </materials>
