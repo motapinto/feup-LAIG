@@ -8,9 +8,8 @@
 //bibliography: https://tpzf.github.io/GlobWeb/api/symbols/vec3.html
 
 class MyTriangle extends CGFobject {
-	constructor(scene, id, x1, x2, x3, y1, y2, y3, z1, z2, z3) { 
+	constructor(scene, x1, x2, x3, y1, y2, y3, z1, z2, z3) { 
         super(scene);
-        this.id = id;
 
         this.initBuffers(x1, y1, z1, x2, y2, z2, x3, y3, z3);
 	}

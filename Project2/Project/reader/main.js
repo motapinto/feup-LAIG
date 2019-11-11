@@ -30,11 +30,12 @@ serialInclude(['../lib/CGF.js',
                 'primitives/nurbs/Plane.js',
                 'primitives/nurbs/Patch.js',
                 'primitives/nurbs/Cylinder2.js',
+                'primitives/nurbs/Triangle2.js',
                 //Animation
                 'Animation.js',
                 'KeyframeAnimation.js',
 
-main=function()
+main = function()
 {
 	// Standard application, scene and interface setup
     let app = new CGFapplication(document.body);

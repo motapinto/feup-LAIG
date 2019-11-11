@@ -32,7 +32,7 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.scaleFactor = 1;
         this.floor = 0;
         this.floorMax = 0;

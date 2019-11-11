@@ -363,6 +363,12 @@
             <diffuse r="0.8" g="0.2" b="0.2" a="1.0" />
             <specular r="0.8" g="0.2" b="0.2" a="1.0" />
         </material>
+        <material id="Body1" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.2" g="0.05" b="0.05" a="1.0" />
+            <diffuse r="0.5" g="0.3" b="0.1" a="1.0" />
+            <specular r="0.5" g="0.3" b="0.1" a="1.0" />
+        </material>
         <material id="White" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
@@ -421,6 +427,7 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation> 
+
         <animation id="carMoving" >
             <keyframe instant="5">
                 <translate x="0" y="-5" z="0" />
@@ -447,75 +454,6 @@
             </keyframe>
         </animation> 
 
-        <!-- CHAIR animations-->
-        <animation id="chair1:complete" >
-            <keyframe instant="1">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-45" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="5">
-                <translate x="0" y="-10" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-135" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="10">
-                <translate x="0" y="-20" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-135" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="10.5">
-                <translate x="0" y="-20" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-315" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="15">
-                <translate x="0" y="-10" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-315" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="19">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-360" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            
-            
-        </animation>
-        <animation id="chair:legs" >
-            <keyframe instant="5">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="-15" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="6">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="7">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="-15" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="8">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="9">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="-15" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="10">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="-45" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-
-        </animation>
-
         <animation id="door" >
             <keyframe instant="2">
                 <translate x="0" y="0" z="0" />
@@ -528,19 +466,6 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
-
-        <animation id="chair2:complete" >
-            <keyframe instant="10">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="12">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-        </animation>  
  
         <animation id="dayCycleSun" >
             <keyframe instant="20">
@@ -823,7 +748,7 @@
               <rotate axis="z" angle="180"/>
             </transformation>
             <materials>
-                <material id="Body" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -832,10 +757,10 @@
         </component>
         <component id="Car2">
             <transformation>
-              <translate x="10" y="0" z="0"/>
+              <translate x="25" y="0" z="0"/>
             </transformation>
             <materials>
-                <material id="Body" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -844,10 +769,10 @@
         </component>
         <component id="Car1">
             <transformation>
-              <translate x="10" y="0" z="0"/>
+              <translate x="25" y="0" z="0"/>
             </transformation>
             <materials>
-                <material id="Body" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
@@ -860,6 +785,7 @@
             </transformation>
             <materials>
                 <material id="Body" />
+                <material id="Body1" />
             </materials>
             <texture id="none"/>
             <children>
