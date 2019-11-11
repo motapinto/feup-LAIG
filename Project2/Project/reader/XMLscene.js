@@ -40,6 +40,8 @@ class XMLscene extends CGFscene {
         this.selectedCamera = null;
         this.tInit = null;
         this.updatePeriod = 100;
+        this.textureRTT = new CGFtextureRTT(this, 0.5, 0.5);
+        this.securityCamera = new MySecurityCamera(this, this.textureRTT);
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -62,7 +64,9 @@ class XMLscene extends CGFscene {
      * Initializes the scene cameras.
      */
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 350, vec3.fromValues(5, 5, 5), vec3.fromValues(0, 0, 0));
+      this.cameraNorm = new CGFcamera(0.4, 0.1, 350, vec3.fromValues(5, 5, 5), vec3.fromValues(0, 0, 0));
+      this.camera = this.cameraNorm;
+      this.securityCGFcamera = new CGFcamera(0.4, 0.1, 350, vec3.fromValues(5,5,5), vec3.fromValues(0,0,0));
     }
 
     /**
@@ -165,6 +169,11 @@ class XMLscene extends CGFscene {
         this.camera = this.graph.views[this.selectedCamera];
         this.interface.setActiveCamera(this.camera);
     }
+    
+    setCamera(camera){
+      this.camera = camera;
+      this.interface.setActiveCamera(camera);
+    }
 
     /**
      * Updates interface selected lights
@@ -187,9 +196,30 @@ class XMLscene extends CGFscene {
     }
 
     /**
-     * Displays the scene.
+     * Display the scene.
      */
-    display() {
+    display(){
+      if(this.sceneInited){
+        this.textureRTT.attachToFrameBuffer();
+        this.render(this.securityCGFcamera);
+        this.textureRTT.detachFromFrameBuffer();
+  
+        if(this.selectedCamera)
+          this.render(this.graph.views[this.selectedCamera]);
+        else
+          this.render(this.cameraNorm);
+
+        this.gl.disable(this.gl.DEPTH_TEST);
+        this.securityCamera.display();
+        this.gl.enable(this.gl.DEPTH_TEST);
+      }
+    }
+
+    /**
+     * Renders the scene.
+     */
+    render(camera) {
+        this.setCamera(camera);
 
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -198,7 +228,8 @@ class XMLscene extends CGFscene {
         this.applyViewMatrix();
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
-        
+        this.gl.enable(this.gl.DEPTH_TEST);
+
         this.pushMatrix();
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
             this.updateLights();

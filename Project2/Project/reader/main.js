@@ -33,6 +33,8 @@ serialInclude(['../lib/CGF.js',
                 //Animation
                 'Animation.js',
                 'KeyframeAnimation.js',
+                //Render To Texture
+                'MySecurityCamera.js',
 
 main=function()
 {
