@@ -160,6 +160,8 @@ class XMLscene extends CGFscene {
 
         this.checkKeys(t);
         this.graph.updateAnimations(instant); //t is in miliseconds
+
+        this.securityCamera.update(t);
     }
 
     /**
