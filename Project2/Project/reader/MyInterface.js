@@ -46,10 +46,14 @@ class MyInterface extends CGFinterface {
     }
 
     CamerasFolder() {
-        //Dropdown for cameras
-        this.gui.add(this.scene, 'selectedCamera', this.scene.viewsList).name('Camera').onChange(this.scene.updateCamera.bind(this.scene));
+      //Dropdown for cameras
+      this.gui.add(this.scene, 'selectedCamera', this.scene.viewsList).name('Camera').onChange(this.scene.updateCamera.bind(this.scene));
     }
-    
+    SecurityCamerasFolder() {
+      //Dropdown for cameras
+      this.gui.add(this.scene, 'selectedSecurityCamera', this.scene.viewsList).name('Security Camera');
+    }
+
     /**
      * initKeys
      */

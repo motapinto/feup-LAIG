@@ -38,10 +38,10 @@ class XMLscene extends CGFscene {
         this.floorMax = 0;
         this.viewsList = [];
         this.selectedCamera = null;
+        this.selectedSecurityCamera = null;
         this.tInit = null;
         this.updatePeriod = 100;
-        this.textureRTT = new CGFtextureRTT(this, 0.5, 0.5);
-        this.securityCamera = new MySecurityCamera(this, this.textureRTT);
+        this.securityCamera = new MySecurityCamera(this);
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -64,9 +64,7 @@ class XMLscene extends CGFscene {
      * Initializes the scene cameras.
      */
     initCameras() {
-      this.cameraNorm = new CGFcamera(0.4, 0.1, 350, vec3.fromValues(5, 5, 5), vec3.fromValues(0, 0, 0));
-      this.camera = this.cameraNorm;
-      this.securityCGFcamera = new CGFcamera(0.4, 0.1, 350, vec3.fromValues(5,5,5), vec3.fromValues(0,0,0));
+      this.camera = new CGFcamera(0.4, 0.1, 350, vec3.fromValues(5, 5, 5), vec3.fromValues(0, 0, 0));
     }
 
     /**
@@ -133,10 +131,12 @@ class XMLscene extends CGFscene {
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
+        this.selectedSecurityCamera = this.graph.idView;
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
         this.interface.CamerasFolder(this.graph.views);
+        this.interface.SecurityCamerasFolder(this.graph.views);
         this.updateCamera();
     }
 
@@ -200,14 +200,11 @@ class XMLscene extends CGFscene {
      */
     display(){
       if(this.sceneInited){
-        this.textureRTT.attachToFrameBuffer();
-        this.render(this.securityCGFcamera);
-        this.textureRTT.detachFromFrameBuffer();
+        this.securityCamera.attachToFrameBuffer();
+        this.render(this.graph.views[this.selectedSecurityCamera]);
+        this.securityCamera.detachFromFrameBuffer();
   
-        if(this.selectedCamera)
-          this.render(this.graph.views[this.selectedCamera]);
-        else
-          this.render(this.cameraNorm);
+        this.render(this.graph.views[this.selectedCamera]);
 
         this.gl.disable(this.gl.DEPTH_TEST);
         this.securityCamera.display();
@@ -216,7 +213,7 @@ class XMLscene extends CGFscene {
     }
 
     /**
-     * Renders the scene.
+     * Renders the scene with given camera
      */
     render(camera) {
         this.setCamera(camera);
@@ -228,7 +225,6 @@ class XMLscene extends CGFscene {
         this.applyViewMatrix();
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
-        this.gl.enable(this.gl.DEPTH_TEST);
 
         this.pushMatrix();
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
