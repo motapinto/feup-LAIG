@@ -10,20 +10,21 @@ class Triangle2 extends CGFobject{
         super(scene);
         this.scene = scene;
                 
-        let controlPoints = [[]];
-
     let controlPoints =
       [
         // U = 0
         [   // V = 0..3;
-          [x1, y1, z1, 1],
           [x2, y2, z2, 1],
+          [x1, y1, z1, 1]
+        ],
+        // U = 1
+        [   // V = 0..3;
           [x3, y3, z3, 1],
-          [x1, y1, z1, 1],
+          [x1, y1, z1, 1]
         ],
       ];
 
-        let nurbsSurface = new CGFnurbsSurface(0, 3, controlPoints);
+        let nurbsSurface = new CGFnurbsSurface(1, 1, controlPoints);
         this.obj = new CGFnurbsObject(scene, npartsU, npartsV, nurbsSurface);
   }
 
