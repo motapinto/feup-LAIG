@@ -66,7 +66,7 @@ class MyRectangle extends CGFobject {
 		this.texCoords = [];
 
 		let s_let = (this.length / this.stacks) / length_s;
-		let t_let = (this.height / this.slices) / length_t;
+		let t_let = -(this.height / this.slices) / length_t;
 
 		for(let i = 0; i < (this.stacks + 1); i++){
 			for(let j = 0; j < (this.slices + 1); j++){
