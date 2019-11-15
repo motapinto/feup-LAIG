@@ -37,50 +37,34 @@
     </views>
 
     <globals>
-        <ambient r="0.7" g="0.7" b="0.7" a="1.0" />
+        <ambient r="0.5" g="0.5" b="0.5" a="1.0" />
         <background r="0.0" g="0.0" b="0.0" a="1.0" />
     </globals>
 
     <lights>
-        <spot id="Lamp0" enabled="1" angle="90.0" exponent="1.0">
-            <location x="3.3" y="3.5" z="-3.5" w="1"/>
+        <spot id="LampTables" enabled="1" angle="90.0" exponent="1.0">
+            <location x="5" y="3.5" z="-3.5" w="1"/>
             <target x="3.3" y="-10" z="-3.5" />
             <ambient r="0" g="0" b="0" a="1" />
             <diffuse r="1" g="0.6" b="0" a="1" />
             <specular r="0.8" g="0.5" b="0" a="1.0" />
-            <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
+            <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
         </spot>
-        <spot id="Lamp1" enabled="1" angle="90.0" exponent="1.0">
-            <location x="7.7" y="3.5" z="-3.5" w="1" />
-            <target x="7.7" y="-10" z="-3.5" />
+        <spot id="LampCounter" enabled="1" angle="90.0" exponent="1.0">
+            <location x="5" y="3.5" z="-18" w="1" />
+            <target x="5" y="-10" z="-18" />
             <ambient r="0" g="0" b="0" a="1" />
             <diffuse r="1" g="0.6" b="0" a="1" />
             <specular r="0.8" g="0.5" b="0" a="1.0" />
-            <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
-        </spot>
-        <spot id="Lamp2" enabled="1" angle="90.0" exponent="1.0">
-            <location x="6" y="2.5" z="-18" w="1" />
-            <target x="6" y="2.5" z="-18" />
-            <ambient r="0" g="0" b="0" a="1" />
-            <diffuse r="1" g="0.6" b="0" a="1" />
-            <specular r="0.8" g="0.5" b="0" a="1.0" />
-            <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
-        </spot>
-        <spot id="StairLight" enabled="1" angle="180.0" exponent="1.0">
-            <location x="-0.5" y="4" z="-19.5" w="1" />
-            <target x="0" y="0" z="0" />
-            <ambient r="0" g="0" b="0" a="1" />
-            <diffuse r="1" g="0.6" b="0" a="1" />
-            <specular r="0.8" g="0.5" b="0" a="1.0" />
-            <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
+            <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
         </spot>
         <spot id="LightsPost" enabled="1" angle="90.0" exponent="1.0">
-            <location x="-6" y="5" z="22" w="1" />
-            <target x="-6" y="5" z="-10.0" />
+            <location x="-6" y="10" z="22" w="1" />
+            <target x="0" y="-10" z="0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
             <specular r="1" g="1" b="1" a="1.0" />
-            <attenuation constant="0.0" linear="1.0" quadratic="0.0" />
+            <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
         </spot>
         <omni id="CelestialBody" enabled="1" >
             <location x="-5" y="30" z="-50" w="1" />
@@ -284,7 +268,7 @@
         <material id="floor" shininess="2">
             <emission r="0.0" g="0" b="0" a="1.0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
-            <diffuse r="0.8" g="0.8" b="0.8" a="1.0" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
             <specular r="0.5" g="0.5" b="0.5" a="1.0" />
         </material>
         <material id="floor1" shininess="2">
@@ -746,10 +730,16 @@
             <sphere radius="1" slices="20" stacks="40" />
         </primitive>
         <primitive id="Terrain">
-            <rectangle x1="-100" y1="-100" x2="100" y2="100" />
+            <patch npointsU="200" npointsV="200" npartsU="1" npartsV="1" >
+                <controlpoint xx="-100.0" yy="-100.0" zz="0.0" />
+                <controlpoint xx="-100.0" yy="100.0" zz="0.0" />
+                <controlpoint xx="100.0" yy="-100.0" zz="0.0" />
+                <controlpoint xx="100.0" yy="100.0" zz="0.0" />
+            </patch>
+            <!-- <rectangle x1="-100" y1="-100" x2="100" y2="100" /> -->
         </primitive>
         <primitive id="Road">
-            <patch npointsU="20" npointsV="20" npartsU="1" npartsV="1" >
+            <patch npointsU="200" npointsV="20" npartsU="1" npartsV="1" >
                 <controlpoint xx="0.0" yy="-10.0" zz="0.0" />
                 <controlpoint xx="0.0" yy="0.0" zz="0.0" />
                 <controlpoint xx="200.0" yy="-10.0" zz="0.0" />
@@ -3224,7 +3214,7 @@
         </component>
         <component id="Terrain">
             <transformation>
-                <translate  x="0" y="0" z="-0.01" />
+                <translate  x="0" y="0" z="-0.1" />
             </transformation>
             <materials>
                 <material id="terrain" />

@@ -10,13 +10,12 @@ class MySecurityCamera {
     this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);;
     this.rectangle = new MyRectangle(this.scene, 0.5, 1, -1, -0.5, 1, 1);
     this.cameraShader = new CGFshader(this.scene.gl, "shaders/securityCamera.vert", "shaders/securityCamera.frag");
-    this.cameraShader.setUniformsValues({ vGrayScale: 40.0 });
-    this.cameraShader.setUniformsValues({ timeFactor: 0 });
-    this.rectangle.updateTexCoords(0.5, 0.5);
-    console.log(this.rectangle.vertices);
-    console.log(this.rectangle.texCoords);
+    this.cameraShader.setUniformsValues({ linesNumber: 40.0 });
+    this.cameraShader.setUniformsValues({ lineDiff: 1.0 });
+    this.rectangle.updateTexCoords(0.5, 0.5);    
+    this.lineSpeed = 1;
   }
-
+  
   attachToFrameBuffer(){
     this.texture.attachToFrameBuffer();
   }
@@ -26,7 +25,7 @@ class MySecurityCamera {
   }
 
   update(t){
-    this.cameraShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
+    this.cameraShader.setUniformsValues({ timeFactor: (t / 100 % 1000) * this.lineSpeed });
   }
 
   display(){
