@@ -57,13 +57,33 @@
     </transformations>
 
     <animations>
+        <animation id="WheelTurn" >
+            <keyframe instant="5">	          
+                <translate x="0" y="0" z="0" />	                
+                <rotate angle_x="0" angle_y="0" angle_z="20" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />	               
+                <scale x="1" y="1" z="1" />	             
+            </keyframe>
+        </animation>              
         <animation id="WheelSpin" >
             <keyframe instant="100">
                 <translate x="0" y="0" z="0" />
                 <rotate angle_x="15000" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-        </animation>               
+        </animation>     
+        <animation id="CarTranslate" >
+            <keyframe instant="20">
+                <translate x="0" y="20" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        
     </animations>
 
     <primitives>
@@ -107,6 +127,7 @@
             <transformation>
               <!-- <rotate axis="z" angle="180"/> -->
             </transformation>
+            <animationref id="CarTranslate" />
             <materials>
                 <material id="Body" />
             </materials>
@@ -121,7 +142,7 @@
           <transformation>
             <translate x="0" y="-1.4" z="0.28"/>
           </transformation>
-          <animationref id="WheelSpin" />
+          <animationref id="WheelTurn" />
           <materials>
             <material id="White" />
           </materials>
@@ -136,7 +157,6 @@
           <transformation>
             <translate x="0" y="1.4" z="0.28"/>
           </transformation>
-          <animationref id="WheelSpin" />
           <materials>
             <material id="White" />
           </materials>
@@ -211,6 +231,7 @@
         <component id="wheel">
           <transformation>
           </transformation>
+          <animationref id="WheelSpin" />
           <materials>
             <material id="inherit" />
           </materials>
