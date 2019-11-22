@@ -53,7 +53,6 @@ class MyRectangle extends CGFobject {
 				this.indices.push((j + 1 + (i + 1)*n_y)*2 + 1, 		(j + (i + 1)*n_y)*2 + 1, (j + i * n_y)*2 + 1);
 			}
 		}
-
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
@@ -62,11 +61,6 @@ class MyRectangle extends CGFobject {
 	updateTexCoords(length_s, length_t) {
 		this.texCoords = [];
 		
-		if(length_s == 0 || length_t == 0) {
-			length_s = this.length;
-			length_t = this.height;
-		}
-
 		let s_let = (this.length / this.stacks) / length_s;
 		let t_let = -(this.height / this.slices) / length_t;
 

@@ -141,12 +141,8 @@
             </materials>
             <texture id="demoTexture" length_s="2" length_t="2"/>
             <children>
-<<<<<<< HEAD
-                <primitiveref id="RoundRoad" />
-=======
                 <componentref id="demoRooti" />
                 <componentref id="one" />
->>>>>>> c9db8097a5dde33dd125f6f20c26a751b3df3394
             </children>
         </component>
     </components>

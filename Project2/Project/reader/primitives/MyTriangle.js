@@ -67,36 +67,21 @@ class MyTriangle extends CGFobject {
 			1, 0,
 			0, 0,
 		];
-
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
     }
 
     //updates Texture Coords
     updateTexCoords(length_s, length_t) {
-      if(length_s == 0 || length_t == 0) {
         this.texCoords = [
-          0, 0,
-          1, 0,
-          this.c * this.cosAlpha / this.c , -this.c * this.sinAlpha / this.c,
-    
-          this.c * this.cosAlpha / this.c , -this.c * this.sinAlpha / this.c,
-          1, 0,
-          0, 0,
+            0, 0,
+            this.a / length_s, 0,
+            this.c * this.cosAlpha / length_s , -this.c * this.sinAlpha / length_t,
+
+            this.c * this.cosAlpha / length_s , -this.c * this.sinAlpha / length_t,
+            this.a / length_s, 0,
+            0, 0,
         ];
         this.updateTexCoordsGLBuffers();
-        return;
-      }
-
-      this.texCoords = [
-        0, 0,
-        this.a / length_s, 0,
-        this.c * this.cosAlpha / length_s , -this.c * this.sinAlpha / length_t,
-
-        this.c * this.cosAlpha / length_s , -this.c * this.sinAlpha / length_t,
-        this.a / length_s, 0,
-        0, 0,
-      ];
-      this.updateTexCoordsGLBuffers();
 	}
 }
