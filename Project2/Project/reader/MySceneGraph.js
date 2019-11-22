@@ -1118,12 +1118,12 @@ class MySceneGraph {
                 
                 // npartsU
                 var npartsU = this.reader.getInteger(grandChildren[0], 'npartsU');
-                if (!(npartsU != null && !isNaN(npartsU) && npartsU>0))
+                if (!(npartsU != null && !isNaN(npartsU) && npartsU>=0))
                     return "unable to parse npartsU of the primitive coordinates for with = " + primitiveID;
                 
                 // npartsV
                 var npartsV = this.reader.getInteger(grandChildren[0], 'npartsV');
-                if (!(npartsV != null && !isNaN(npartsV) && npartsV>0))
+                if (!(npartsV != null && !isNaN(npartsV) && npartsV>=0))
                     return "unable to parse npartsV of the primitive coordinates with ID = " + primitiveID;
             
                 //controlpoints
