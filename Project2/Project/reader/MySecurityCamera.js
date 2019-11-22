@@ -18,7 +18,6 @@ class MySecurityCamera {
     this.textureMaterial.setSpecular(1, 1, 1, 1);
     this.textureMaterial.setEmission(1, 1, 1, 1);
     this.textureMaterial.setTextureWrap('REPEAT', 'REPEAT');
-    this.textureMaterial.setTexture(this.texture);
 
 
     // Shader
@@ -61,6 +60,7 @@ class MySecurityCamera {
     this.scene.setActiveShader(this.cameraShader);
     
     this.textureMaterial.apply();
+    this.texture.bind();
     this.rectangle.display();
 
     // restore default shader

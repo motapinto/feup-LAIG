@@ -24,6 +24,7 @@
 
     <textures>
         <texture id="demoTexture" file="scenes/images/parking-lot.jpg" />
+        <texture id="road" file="scenes/images/highway-road.jpg" />
     </textures>
 
     <materials>
@@ -94,6 +95,9 @@
                 <controlpoint xx="2" yy="2" zz="1.0" />
             </patch>
         </primitive>
+        <primitive id="demoRoad">
+            <cylinder2 base="2" top="1" height="0" slices="20" stacks="20" />
+        </primitive>
         <primitive id="demoCylinder2">
             <cylinder2 base="2" top="1" height="1" slices="5" stacks="2" />
         </primitive>
@@ -103,13 +107,14 @@
     <components>
         <component id="demoRoot">
             <transformation>
+                <scale x="20" y="20" z="20" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="demoTexture"/>
+            <texture id="road"/>
             <children>
-                <primitiveref id="demoTriangle2" />
+                <primitiveref id="demoRoad" />
             </children>
         </component>
     </components>
