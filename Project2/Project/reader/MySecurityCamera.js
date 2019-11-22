@@ -7,16 +7,29 @@
 class MySecurityCamera {
   constructor(scene){
     this.scene = scene;
+    
+    this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);;
+    this.rectangle = new MyRectangle(this.scene, 0.5, 1, -1, -0.5, 1, 1);
+    
+    this.textureMaterial = new CGFappearance(this.scene);
+    this.textureMaterial.setShininess(1);
+    this.textureMaterial.setAmbient(1, 1, 1, 1);
+    this.textureMaterial.setDiffuse(1, 1, 1, 1);
+    this.textureMaterial.setSpecular(1, 1, 1, 1);
+    this.textureMaterial.setEmission(1, 1, 1, 1);
+    this.textureMaterial.setTextureWrap('REPEAT', 'REPEAT');
+    this.textureMaterial.setTexture(this.texture);
+
+
+    // Shader
+    this.cameraShader = new CGFshader(this.scene.gl, "shaders/securityCamera.vert", "shaders/securityCamera.frag");
+
+    // Shader settings
     this.lineSpeed = 1;
     this.linesNumber = 40.0;
     this.lineDiff = 1.0;
     this.radiusVar = 2.0;
     this.brightness = 1.2;
-
-    this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);;
-    this.rectangle = new MyRectangle(this.scene, 0.5, 1, -1, -0.5, 1, 1);
-    this.cameraShader = new CGFshader(this.scene.gl, "shaders/securityCamera.vert", "shaders/securityCamera.frag");
-
     this.cameraShader.setUniformsValues({ linesNumber: this.linesNumber });
     this.cameraShader.setUniformsValues({ lineDiff: this.lineDiff });
     this.cameraShader.setUniformsValues({ radiusVar: this.radiusVar });
@@ -47,7 +60,7 @@ class MySecurityCamera {
   display(){
     this.scene.setActiveShader(this.cameraShader);
     
-    this.texture.bind();
+    this.textureMaterial.apply();
     this.rectangle.display();
 
     // restore default shader

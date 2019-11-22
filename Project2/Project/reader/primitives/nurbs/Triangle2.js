@@ -14,13 +14,13 @@ class Triangle2 extends CGFobject{
       [
         // U = 0
         [   // V = 0..3;
-          [x2, y2, z2, 1],
-          [x1, y1, z1, 1]
+          [x1, y1, z1, 1],
+          [x2, y2, z2, 1]
         ],
         // U = 1
         [   // V = 0..3;
           [x3, y3, z3, 1],
-          [x1, y1, z1, 1]
+          [x2, y2, z2, 1]
         ],
       ];
 

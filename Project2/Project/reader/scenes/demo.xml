@@ -58,9 +58,10 @@
                         x3="3" y3="0" z3="0" />        
         </primitive>
         <primitive id="demoTriangle2">
-            <triangle2   x3="0" y3="5" z3="0"
-                        x1="0" y1="-10" z1="0"
-                        x2="3" y2="0" z2="0" 
+            <triangle2   
+                        x1="-3" y1="0" z1="0"
+                        x2="0" y2="5" z2="0"
+                        x3="3" y3="0" z3="0" 
                         npartsU="10" npartsV="10"/>        
         </primitive>
         <primitive id="demoSphere">
@@ -106,7 +107,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="none"/>
+            <texture id="demoTexture"/>
             <children>
                 <primitiveref id="demoTriangle2" />
             </children>

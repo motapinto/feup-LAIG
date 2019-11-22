@@ -137,7 +137,8 @@ class XMLscene extends CGFscene {
         this.interface.LightsFolder(this.graph.lights);
         this.interface.CamerasFolder(this.graph.views);
         this.interface.SecurityCamerasFolder(this.graph.views);
-        this.updateCamera();
+
+        this.setCamera(this.graph.views[this.selectedCamera]);
     }
 
     /**
@@ -165,13 +166,8 @@ class XMLscene extends CGFscene {
     }
 
     /**
-     * Selects interface camara choosen.
+     * Selects active camara.
      */
-    updateCamera() {
-        this.camera = this.graph.views[this.selectedCamera];
-        this.interface.setActiveCamera(this.camera);
-    }
-    
     setCamera(camera){
       this.camera = camera;
       this.interface.setActiveCamera(camera);
