@@ -183,7 +183,7 @@ class XMLscene extends CGFscene {
             if (this.lightsInterface.hasOwnProperty(key)) {
                 if (this.lightsInterface[key]) {
                     this.lights[i].enable();
-                    this.lights[i].setVisible(true);
+                    this.lights[i].setVisible(false);
                 }
                 else {
                     this.lights[i].disable();

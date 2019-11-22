@@ -5,7 +5,7 @@
     <!-- fov/angle - Field of view angle of the camera (in radians) -->
     <!-- near - Near clipping plane distance -->
     <!-- -->
-    <views default="topFloor">
+    <views default="outsidePrespective">
         <perspective id="topFloor" near="0.1" far="1000" angle="40">
             <from x="5" y="50" z="-9" />
             <to x="5" y="3" z="-10" />
@@ -766,7 +766,7 @@
             <sphere radius="0.15" slices="2" stacks="10" />
         </primitive>
         <primitive id="SideWalk">
-            <cylinder2 base="0.5" top="0.5" height="200" slices="2" stacks="1" />
+            <cylinder2 base="0.5" top="0.5" height="0.5" slices="2" stacks="1" />
         </primitive>
 
     </primitives>
@@ -3479,10 +3479,10 @@
         </component>
         <component id="SideWalk">
             <transformation>
-                <translate x="0" y="-9" z="0.5" />
-                <rotate angle="90" axis="y" />
-                <rotate angle="90" axis="z" />
-                <scale x="1" y="0.5" z="1" />
+                <translate x="0" y="-10" z="0.5" />
+                <rotate axis="z" angle="90" />
+                <scale x="1" y="300" z="1" />
+                <rotate axis="z" angle="45" />
             </transformation>
             <materials>
                 <material id="lamp" />
