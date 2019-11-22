@@ -77,22 +77,27 @@
         <primitive id="demoPlane">
            <plane npartsU="2" npartsV="2" />
         </primitive>
-        <primitive id="demoPatch">
-            <patch npointsU="20" npointsV="20" npartsU="2" npartsV="3" >
-                <controlpoint xx="-2" yy="-2" zz="1.0" />
-                <controlpoint xx="-2" yy="-1" zz="-2.0" />
-                <controlpoint xx="-2" yy="1" zz="5.0" />
-                <controlpoint xx="-2" yy="2" zz="-1.0" />
+        <primitive id="RoundRoad">
+            <patch npointsU="100" npointsV="100" npartsU="3" npartsV="3" >
+                <controlpoint xx="-15" zz="0" yy="0" />
+                <controlpoint xx="-18.333" zz="0" yy="0" />
+                <controlpoint xx="-21.667" zz="0" yy="0" />
+                <controlpoint xx="-25" zz="0" yy="0" />
 
-                <controlpoint xx="0" yy="-2" zz="0.0" />
-                <controlpoint xx="0" yy="-1" zz="-1.0" />
-                <controlpoint xx="0" yy="1" zz="1.5" />
-                <controlpoint xx="0" yy="2" zz="0.0" />
+                <controlpoint xx="-15" zz="-20" yy="0" />
+                <controlpoint xx="-18.333" zz="-24.44" yy="0" />
+                <controlpoint xx="-21.667" zz="-28.889" yy="0" />
+                <controlpoint xx="-25" zz="-33.333" yy="0" />
 
-                <controlpoint xx="2" yy="-2" zz="-1.0" />
-                <controlpoint xx="2" yy="-1" zz="2.0" />
-                <controlpoint xx="2" yy="1" zz="-5.0" />
-                <controlpoint xx="2" yy="2" zz="1.0" />
+                <controlpoint xx="15" zz="-20" yy="0" />
+                <controlpoint xx="18.333" zz="-24.44" yy="0" />
+                <controlpoint xx="21.667" zz="-28.889" yy="0" />
+                <controlpoint xx="25" zz="-33.333" yy="0" />
+                
+                <controlpoint xx="15" zz="0" yy="0" />
+                <controlpoint xx="18.333" zz="0" yy="0" />
+                <controlpoint xx="21.667" zz="0" yy="0" />
+                <controlpoint xx="25" zz="0" yy="0" />
             </patch>
         </primitive>
         <primitive id="demoRoad">
@@ -107,14 +112,13 @@
     <components>
         <component id="demoRoot">
             <transformation>
-                <scale x="20" y="20" z="20" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
             <texture id="road"/>
             <children>
-                <primitiveref id="demoRoad" />
+                <primitiveref id="RoundRoad" />
             </children>
         </component>
     </components>

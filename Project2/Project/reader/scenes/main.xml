@@ -741,6 +741,29 @@
                 <controlpoint xx="200.0" yy="0.0" zz="0.0" />
             </patch>
         </primitive>
+        <primitive id="RoundRoad">
+            <patch npointsU="100" npointsV="100" npartsU="3" npartsV="3" >
+                <controlpoint xx="-35" zz="0" yy="0" />
+                <controlpoint xx="-38.333" zz="0" yy="0" />
+                <controlpoint xx="-41.667" zz="0" yy="0" />
+                <controlpoint xx="-45" zz="0" yy="0" />
+
+                <controlpoint xx="-35" zz="-46.667" yy="0" />
+                <controlpoint xx="-38.333" zz="-54.44" yy="0" />
+                <controlpoint xx="-41.667" zz="-58.889" yy="0" />
+                <controlpoint xx="-45" zz="-63.333" yy="0" />
+
+                <controlpoint xx="35" zz="-46.667" yy="0" />
+                <controlpoint xx="38.333" zz="-54.44" yy="0" />
+                <controlpoint xx="41.667" zz="-58.889" yy="0" />
+                <controlpoint xx="45" zz="-63.333" yy="0" />
+                
+                <controlpoint xx="35" zz="0" yy="0" />
+                <controlpoint xx="38.333" zz="0" yy="0" />
+                <controlpoint xx="41.667" zz="0" yy="0" />
+                <controlpoint xx="45" zz="0" yy="0" />
+            </patch>
+        </primitive>
         <primitive id="ParkingLot">
             <rectangle x1="0" y1="0" x2="22" y2="17" />
         </primitive>
@@ -3492,6 +3515,20 @@
                 <primitiveref id="SideWalk" /> 
             </children>
         </component>
+        <component id="RoundRoad">
+            <transformation>
+                <translate x="0" y="-10.35" z="0.005" />
+                <rotate axis="x" angle="90" />
+            </transformation>
+            <materials>
+                <material id="defaultMaterial" />
+            </materials>
+            <texture id="road" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="RoundRoad" /> 
+            </children>
+        </component>
+        
         
         <!-- EXTERIOR -->
         <component id="Exterior">
@@ -3511,6 +3548,7 @@
                 <componentref id="Moon" /> 
                 <componentref id="Terrain" /> 
                 <componentref id="Road" /> 
+                <componentref id="RoundRoad" /> 
                 <componentref id="ParkingLot" /> 
                 <componentref id="Stone-Path1" /> 
                 <componentref id="Stone-Path2" /> 
