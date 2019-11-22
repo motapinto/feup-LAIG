@@ -5,7 +5,7 @@
     <!-- fov/angle - Field of view angle of the camera (in radians) -->
     <!-- near - Near clipping plane distance -->
     <!-- -->
-    <views default="outsidePrespective">
+    <views default="globalPrespective">
         <perspective id="topFloor" near="0.1" far="1000" angle="40">
             <from x="5" y="50" z="-9" />
             <to x="5" y="3" z="-10" />
@@ -59,7 +59,7 @@
             <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
         </spot>
         <spot id="LightsPost" enabled="1" angle="135.0" exponent="1.0">
-            <location x="-6" y="10" z="22" w="1" />
+            <location x="4" y="10" z="22" w="1" />
             <target x="0" y="-10" z="0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
@@ -82,7 +82,6 @@
 
         <!-- CAR -->
         <texture id="tire" file="scenes/images/tire.jpg" />
-        <texture id="rim" file="scenes/images/sidewalk.jpg" />
         
         <!-- PERSON -->
         <texture id="personFace" file="scenes/images/person/face.jpg" />
@@ -118,7 +117,6 @@
         <texture id="sun" file="scenes/images/sun.jpg" />
         <texture id="moon" file="scenes/images/moon.jpg" />
         <texture id="road" file="scenes/images/highway-road.jpg" />
-        <texture id="sidewalk" file="scenes/images/sidewalk.jpg" />
         <texture id="parkingLot" file="scenes/images/parking-lot.jpg" />
         <texture id="stonePath" file="scenes/images/stone-path3.png" />
         <texture id="grass" file="scenes/images/grass.jpg" />
@@ -426,74 +424,13 @@
             </keyframe>
         </animation> 
 
-        <!-- CHAIR animations-->
-        <animation id="chair1:complete" >
-            <keyframe instant="1">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-45" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="5">
-                <translate x="0" y="-10" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-135" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="10">
-                <translate x="0" y="-20" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-135" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="10.5">
-                <translate x="0" y="-20" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-315" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="15">
-                <translate x="0" y="-10" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-315" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="19">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="-360" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            
-            
-        </animation>
-        <animation id="chair:legs" >
-            <keyframe instant="5">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="-15" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="6">
-                <translate x="0" y="0" z="0" />
+        <animation id="dayCycleSun" >
+            <keyframe instant="20">
+                <translate x="0" y="-35" z="50" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
+                <scale x="10" y="10" z="10" />
             </keyframe>
-            <keyframe instant="7">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="-15" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="8">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="9">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="-15" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="10">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="-45" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-
-        </animation>
+        </animation>  
 
         <animation id="door" >
             <keyframe instant="2">
@@ -507,27 +444,7 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
-
-        <animation id="chair2:complete" >
-            <keyframe instant="10">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="12">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-        </animation>  
- 
-        <animation id="dayCycleSun" >
-            <keyframe instant="20">
-                <translate x="0" y="0" z="50" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="10" y="10" z="10" />
-            </keyframe>
-        </animation>        
+      
     </animations>
 
     <primitives>
@@ -764,9 +681,6 @@
         </primitive>
         <primitive id="LightBulb">
             <sphere radius="0.15" slices="2" stacks="10" />
-        </primitive>
-        <primitive id="SideWalk">
-            <cylinder2 base="0.5" top="0.5" height="0.5" slices="2" stacks="1" />
         </primitive>
 
     </primitives>
@@ -3399,7 +3313,7 @@
         </component>
         <component id="LightPostSet">
             <transformation>
-                <translate x="-14" y="-22" z="0" />
+                <translate x="-2" y="-22" z="0" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -3477,21 +3391,6 @@
                 <componentref id="LightPostSet1" /> 
             </children>
         </component>
-        <component id="SideWalk">
-            <transformation>
-                <translate x="0" y="-10" z="0.5" />
-                <rotate axis="z" angle="90" />
-                <scale x="1" y="300" z="1" />
-                <rotate axis="z" angle="45" />
-            </transformation>
-            <materials>
-                <material id="lamp" />
-            </materials>
-            <texture id="sidewalk" length_s="1" length_t="1"/>
-            <children>
-                <primitiveref id="SideWalk" /> 
-            </children>
-        </component>
         
         <!-- EXTERIOR -->
         <component id="Exterior">
@@ -3516,7 +3415,6 @@
                 <componentref id="Stone-Path2" /> 
                 <componentref id="Stone-Path3" /> 
                 <componentref id="LightPostSet0" />
-                <componentref id="SideWalk" />
             </children>
         </component>
 

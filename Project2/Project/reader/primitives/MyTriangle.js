@@ -75,8 +75,19 @@ class MyTriangle extends CGFobject {
     //updates Texture Coords
     updateTexCoords(length_s, length_t) {
       if(length_s == 0 || length_t == 0) {
+        this.texCoords = [
+          0, 0,
+          1, 0,
+          this.c * this.cosAlpha / this.c , -this.c * this.sinAlpha / this.c,
+    
+          this.c * this.cosAlpha / this.c , -this.c * this.sinAlpha / this.c,
+          1, 0,
+          0, 0,
+        ];
+        this.updateTexCoordsGLBuffers();
         return;
       }
+
       this.texCoords = [
         0, 0,
         this.a / length_s, 0,

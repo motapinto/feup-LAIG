@@ -50,7 +50,7 @@
 
     <primitives>
         <primitive id="demoRectangle">
-            <rectangle x1="0" y1="0" x2="40" y2="3" />
+            <rectangle x1="0" y1="0" x2="5" y2="5" />
         </primitive>
         <primitive id="demoTriangle">
             <triangle   x1="0" y1="3" z1="0"
@@ -101,15 +101,39 @@
     </primitives>
 
     <components>
+    <component id="one">
+            <transformation>
+                <translate x="0" y="0" z="2" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="demoRectangle" />
+            </children>
+        </component>
+        <component id="demoRooti">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="demoRectangle" />
+            </children>
+        </component>
         <component id="demoRoot">
             <transformation>
             </transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="demoTexture"/>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
             <children>
-                <primitiveref id="demoTriangle2" />
+                <componentref id="demoRooti" />
+                <componentref id="one" />
             </children>
         </component>
     </components>
