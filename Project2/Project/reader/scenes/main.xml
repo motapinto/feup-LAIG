@@ -1399,57 +1399,6 @@
                 <componentref id="TableSet0" />
             </children>
         </component>
-        <component id="TableSetRow6">
-            <transformation>
-                <translate x="-3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>
-                <componentref id="TableSetRow" />
-            </children>
-        </component>
-        <component id="TableSetRow5">
-            <transformation>
-                <translate x="-3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>
-                <componentref id="TableSetRow6" />
-                <componentref id="TableSetRow" />
-            </children>
-        </component>
-        <component id="TableSetRow4" floor="1">
-            <transformation>
-                <translate x="0" y="8" z="5" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>
-                <componentref id="TableSetRow5" />
-                <componentref id="TableSetRow" />
-            </children>
-        </component>
-        <component id="TableSetRow3">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>
-                <componentref id="TableSetRow4" />
-                <componentref id="TableSetRow" />
-            </children>
-        </component>
         <component id="TableSetRow2">
             <transformation>
                 <translate x="3" y="0" z="0" />
@@ -1463,31 +1412,7 @@
                 <componentref id="TableSetRow" />
             </children>
         </component>
-        <component id="TableSetRow1">
-            <transformation>
-                <translate x="3" y="0" z="0" />
-            </transformation>
-            <materials>
-                <material id="inherit" />
-            </materials>
-            <texture id="inherit"/>
-            <children>
-                <componentref id="TableSetRow2" />
-                <componentref id="TableSetRow" />
-            </children>
-        </component>
-        <component id="TableSetRow0">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="tableBottom" />
-                <material id="tableBottom1" />
-            </materials>
-            <texture id="darkCement" length_s="1" length_t="1"/>
-            <children>
-                <componentref id="TableSetRow1" />
-            </children>
-        </component>
+
         
         <!-- BAR COUNTER-->
         <component id="BarCounterTopCover">
@@ -2431,7 +2356,7 @@
                 <material id="walls1" />
                 <material id="walls2" />
             </materials>
-            <texture id="woodChair" length_s="1" length_t="1"/>
+            <texture id="woodChair" length_s="0.1" length_t="1"/>
             <children>
                 <primitiveref id="rectangle" />
             </children>
@@ -2448,7 +2373,7 @@
                 <material id="walls1" />
                 <material id="walls2" />
             </materials>
-            <texture id="woodChair" length_s="1" length_t="1"/>
+            <texture id="woodChair" length_s="0.1" length_t="1"/>
             <children>
                 <primitiveref id="rectangle" />           
             </children>
@@ -2465,7 +2390,7 @@
                 <material id="walls1" />
                 <material id="walls2" />
             </materials>
-            <texture id="woodChair" length_s="1" length_t="5"/>
+            <texture id="woodChair" length_s="0.1" length_t="1"/>
             <children>
                 <primitiveref id="rectangle" />           
             </children>
