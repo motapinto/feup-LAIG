@@ -11,9 +11,8 @@
 > **Any problems?**\
 > Start an Issue please.
 
-<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img1.JPG" width="800"><br><br>
-<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img2.JPG" width="800"><br><br>
-<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img3.JPG" width="800"><br>
-
-
 **Disclaimer** - This repository was created for educational purposes and we do not take any responsibility for anything related to its content. You are free to use any code or algorithm you find, but do so at your own risk.
+
+<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img1.JPG" width="600"><br><br>
+<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img2.JPG" width="600"><br><br>
+<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img3.JPG" width="600"><br>
