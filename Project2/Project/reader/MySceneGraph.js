@@ -1,6 +1,7 @@
 var DEGREE_TO_RAD = Math.PI / 180;
 
 // Order of the groups in the XML document.
+// Used to check indices in parseXMLFile()
 var SCENE_INDEX = 0;
 var VIEWS_INDEX = 1;
 var GLOBALS_INDEX = 2;
@@ -87,6 +88,8 @@ class MySceneGraph {
         // Reads the names of the nodes to an auxiliary buffer.
         var nodeNames = [];
 
+        //nodeNames = (9) ["scene", "views", "globals", "lights", "textures", 
+        //          "materials", "transformations", "animations", "primitives"]
         for (var i = 0; i < nodes.length; i++) {
             nodeNames.push(nodes[i].nodeName);
         }
@@ -96,7 +99,7 @@ class MySceneGraph {
         // Processes each node, verifying errors.
 
         // <scene>
-        var index;
+        var index; //index = 0 in nodeNames
         if ((index = nodeNames.indexOf("scene")) == -1)
             return "tag <scene> missing";
         else {
@@ -108,7 +111,7 @@ class MySceneGraph {
                 return error;
         }
 
-        // <views>
+        // <views> //index = 1 in nodeNames
         if ((index = nodeNames.indexOf("views")) == -1)
             return "tag <views> missing";
         else {
@@ -186,7 +189,7 @@ class MySceneGraph {
             if (index != ANIMATIONS_INDEX)
                 this.onXMLMinorError("tag <animations> out of order");
 
-            //Parse textures block
+            //Parse animations block
             if ((error = this.parseAnimations(nodes[index])) != null)
                 return error;
         }
@@ -257,6 +260,7 @@ class MySceneGraph {
         this.views = [];
 
         // Get id of the current view.
+        //1st id: default="defaultCamera"
         this.idView = this.reader.getString(viewsNode, 'default');
         if (this.idView == null)
             return "no default ID defined for views";        
