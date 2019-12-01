@@ -598,6 +598,9 @@
             </materials>
             <texture id="none"/>
             <children>
+
+                <!-- TABLE SET -->
+                <componentref id="TableSetRow0" />
                 <!-- BAR -->
                 <componentref id="BarCounter8" />
                 <componentref id="BarChair8" />
