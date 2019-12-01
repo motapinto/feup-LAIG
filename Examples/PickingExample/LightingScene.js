@@ -75,8 +75,8 @@ class LightingScene extends CGFscene{
 		this.loadIdentity();
 		// Apply transformations corresponding to the camera position relative to the origin
 		this.applyViewMatrix();
-		//this.scale(5,5,5);
-		// Update all lights used
+
+        // Update all lights used
 		this.lights[0].update();
 		// Draw axis
 		this.axis.display();
@@ -88,10 +88,10 @@ class LightingScene extends CGFscene{
 			this.translate(i * 2, 0, 0);
 
 			//Id for pickable objects must be >= 1
-			this.registerForPick(i + 1, this.objects[i]);
+            this.registerForPick(i + 1, this.cylinder);
 			this.objects[i].display();
-			this.translate(0, 0, -2);
-			if (i != this.objects.length - 1)
+			this.translate(10, 0, -2);
+            if (i != this.objects.length - 1)
 				this.cylinder.display();
 			this.popMatrix();
 		}

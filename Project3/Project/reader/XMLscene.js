@@ -42,6 +42,7 @@ class XMLscene extends CGFscene {
         this.tInit = null;
         this.updatePeriod = 100;
         this.securityCamera = new MySecurityCamera(this);
+        this.plane = new CGFplane(this);
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -58,6 +59,7 @@ class XMLscene extends CGFscene {
         }
 
         this.setUpdatePeriod(this.updatePeriod);
+        this.setPickEnabled(true);
     }
 
     /**
@@ -193,21 +195,44 @@ class XMLscene extends CGFscene {
         }
     }
 
+
+    /**
+     * logs picking results in console
+     */
+    logPicking() {
+        if (this.pickMode == false) {
+            if (this.pickResults != null && this.pickResults.length > 0) {
+                for (var i = 0; i < this.pickResults.length; i++) {
+                    var obj = this.pickResults[i][0];
+                    if (obj) {
+                        var customId = this.pickResults[i][1];
+                        console.log("Picked object: " + obj + ", with pick id " + customId);
+                    }
+                }
+                this.pickResults.splice(0, this.pickResults.length);
+            }
+        }
+    }
+
+
     /**
      * Display the scene.
      */
-    display(){
-      if(this.sceneInited){
-        this.securityCamera.attachToFrameBuffer();
-        this.render(this.graph.views[this.selectedSecurityCamera]);
-        this.securityCamera.detachFromFrameBuffer();
-  
-        this.render(this.graph.views[this.selectedCamera]);
+    display() {  
+        this.logPicking();
+        this.clearPickRegistration();
 
-        this.gl.disable(this.gl.DEPTH_TEST);
-        this.securityCamera.display();
-        this.gl.enable(this.gl.DEPTH_TEST);
-      }
+        if(this.sceneInited){
+            this.securityCamera.attachToFrameBuffer();
+            this.render(this.graph.views[this.selectedSecurityCamera]);
+            this.securityCamera.detachFromFrameBuffer();
+    
+            this.render(this.graph.views[this.selectedCamera]);
+
+            this.gl.disable(this.gl.DEPTH_TEST);
+            this.securityCamera.display();
+            this.gl.enable(this.gl.DEPTH_TEST);
+        }
     }
 
     /**
@@ -225,19 +250,38 @@ class XMLscene extends CGFscene {
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
 
         this.pushMatrix();
-            this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-            this.updateLights();
-            
-            if (this.sceneInited) {
-                // Draw axis
-                this.setDefaultAppearance();
-                // Displays the scene (MySceneGraph function).
-                this.graph.displayScene();
-            }
 
-            if(this.displayAxis) {
-                this.axis.display();
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        this.updateLights();
+        
+        if (this.sceneInited) {
+            // Draw axis
+            this.setDefaultAppearance();
+            // Displays the scene (MySceneGraph function).
+            this.graph.displayScene();
+        }
+
+        if(this.displayAxis) {
+            this.axis.display();
+        }
+        
+        for (let i = 0; i < 11; i++){
+            for (let j = 0; j < 12; j++) {
+                this.pushMatrix();
+
+                if (i % 2) {
+                    if (j == 11) continue;
+                    this.translate(j + 0.5, i, 0);
+                }
+                else
+                    this.translate(j, i, 0);
+                this.registerForPick(j + 1 + 12*i, this.plane);
+                this.graph.displayComponent('RedPiece');
+                this.clearPickRegistration();
+
+                this.popMatrix();
             }
+        }
 
         this.popMatrix();
         // ---- END Background, camera and axis setup

@@ -1719,4 +1719,8 @@ class MySceneGraph {
     displayScene() {
         this.processComponentNode(this.idRoot, mat4.create(), "", "none", 1, 1);
     }
+
+    displayComponent(component) {
+        this.processComponentNode(component, mat4.create(), "demoMaterial", "none", 0, 0);
+    }
 }
