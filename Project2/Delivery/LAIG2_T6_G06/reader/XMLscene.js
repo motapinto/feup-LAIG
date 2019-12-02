@@ -36,11 +36,13 @@ class XMLscene extends CGFscene {
         this.scaleFactor = 1;
         this.floor = 0;
         this.floorMax = 0;
-        this.viewsList = [];
-        this.selectedCamera = null;
-        this.selectedSecurityCamera = null;
+
+        //animation
         this.tInit = null;
         this.updatePeriod = 100;
+        //security camera
+        this.selectedCamera = null;
+        this.selectedSecurityCamera = null;
         this.securityCamera = new MySecurityCamera(this);
 
         this.floorUp = function(){
@@ -127,7 +129,6 @@ class XMLscene extends CGFscene {
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
         
-        
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
@@ -198,10 +199,11 @@ class XMLscene extends CGFscene {
      */
     display(){
       if(this.sceneInited){
+        //associa o framebuffer à textura
         this.securityCamera.attachToFrameBuffer();
         this.render(this.graph.views[this.selectedSecurityCamera]);
+        //desassocia o framebuffer à textura
         this.securityCamera.detachFromFrameBuffer();
-  
         this.render(this.graph.views[this.selectedCamera]);
 
         this.gl.disable(this.gl.DEPTH_TEST);
