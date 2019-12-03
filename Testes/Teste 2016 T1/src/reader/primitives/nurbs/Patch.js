@@ -8,7 +8,7 @@
  */
 
 class Patch extends CGFobject{
-    constructor(scene, npointsU, npointsV, npartsU, npartsV, controlVertexes) {
+    constructor (scene, npointsU, npointsV, npartsU, npartsV, controlVertexes) {
           super(scene);
           this.scene = scene;
 
@@ -16,17 +16,17 @@ class Patch extends CGFobject{
           let controlPoints = [[]];
           let posCounter = 0;
 
-          for(let uDiv = 0; uDiv < npointsU; uDiv++) {
+          for(let uDiv = 0; uDiv <= npartsU; uDiv++) {
             controlPoints[uDiv] = [];
-            for(let vDiv = 0; vDiv < npointsV; vDiv++) {
+            for(let vDiv = 0; vDiv <= npartsV; vDiv++) {
               controlPoints[uDiv][vDiv] = controlVertexes[posCounter];
               controlPoints[uDiv][vDiv].push(1);
               posCounter++;
             }
           }
 		
-        var nurbsSurface = new CGFnurbsSurface(npointsU-1, npointsV-1, controlPoints);
-        this.obj = new CGFnurbsObject(scene, npartsU, npartsV, nurbsSurface );
+		var nurbsSurface = new CGFnurbsSurface(npartsU, npartsV, controlPoints);
+		this.obj = new CGFnurbsObject(scene, npointsU, npointsV, nurbsSurface );
 
           //Example of control points for patch
           /*let controlPoints1 = 

@@ -676,11 +676,6 @@ class MySceneGraph {
             if (materialShininess == null || materialShininess <= 0 || isNaN(materialShininess))
                 return "Shininess value is incorrect";
 
-            // Invert (optional)
-            var matInvert = this.reader.getBoolean(children[i], 'invert');
-            if (matInvert == null || isNaN(matInvert))
-                matInvert = false;
-
             var grandChildren = children[i].children;
 
             //initialize all variables to be able to check them after cycle
@@ -733,24 +728,6 @@ class MySceneGraph {
                 return "Diffuse value undefined for material with ID = " + materialID;
             if(specularRGBA == null)
                 return "Specular value undefined for material with ID = " + materialID;
-
-            if(matInvert) {
-                emissionRGBA[0] = 1 - emissionRGBA[0];
-                emissionRGBA[1] = 1 - emissionRGBA[0];
-                emissionRGBA[2] = 1 - emissionRGBA[0];
-
-                ambientRGBA[0] = 1 - ambientRGBA[0];
-                ambientRGBA[1] = 1 - ambientRGBA[0];
-                ambientRGBA[2] = 1 - ambientRGBA[0];
-
-                diffuseRGBA[0] = 1 - diffuseRGBA[0];
-                diffuseRGBA[1] = 1 - diffuseRGBA[0];
-                diffuseRGBA[2] = 1 - diffuseRGBA[0];
-
-                specularRGBA[0] = 1 - specularRGBA[0];
-                specularRGBA[1] = 1 - specularRGBA[0];
-                specularRGBA[2] = 1 - specularRGBA[0];
-            }
 
             // Creates material with the lxs specifics
             var readMaterial = new CGFappearance(this.scene);
