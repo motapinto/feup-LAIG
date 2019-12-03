@@ -23,7 +23,7 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/parking-lot.jpg" />
+        <texture id="demoTexture" file="scenes/images/texture.jpg" />
         <texture id="road" file="scenes/images/highway-road.jpg" />
     </textures>
 
@@ -77,27 +77,15 @@
         <primitive id="demoPlane">
            <plane npartsU="2" npartsV="2" />
         </primitive>
-        <primitive id="RoundRoad">
-            <patch npointsU="100" npointsV="100" npartsU="3" npartsV="3" >
-                <controlpoint xx="-15" zz="0" yy="0" />
-                <controlpoint xx="-18.333" zz="0" yy="0" />
-                <controlpoint xx="-21.667" zz="0" yy="0" />
-                <controlpoint xx="-25" zz="0" yy="0" />
+        <primitive id="patch">
+            <patch npointsU="2" npointsV="3" npartsU="20" npartsV="20" >
+                <controlpoint xx="-1" zz="-1" yy="4" />
+                <controlpoint xx="0" zz="-0.5" yy="0" />
+                <controlpoint xx="1" zz="-1" yy="4" />
 
-                <controlpoint xx="-15" zz="-20" yy="0" />
-                <controlpoint xx="-18.333" zz="-24.44" yy="0" />
-                <controlpoint xx="-21.667" zz="-28.889" yy="0" />
-                <controlpoint xx="-25" zz="-33.333" yy="0" />
-
-                <controlpoint xx="15" zz="-20" yy="0" />
-                <controlpoint xx="18.333" zz="-24.44" yy="0" />
-                <controlpoint xx="21.667" zz="-28.889" yy="0" />
-                <controlpoint xx="25" zz="-33.333" yy="0" />
-                
-                <controlpoint xx="15" zz="0" yy="0" />
-                <controlpoint xx="18.333" zz="0" yy="0" />
-                <controlpoint xx="21.667" zz="0" yy="0" />
-                <controlpoint xx="25" zz="0" yy="0" />
+                <controlpoint xx="-1" zz="1" yy="4" />
+                <controlpoint xx="0" zz="0.5" yy="0" />
+                <controlpoint xx="1" zz="1" yy="4" />
             </patch>
         </primitive>
         <primitive id="demoRoad">
@@ -110,29 +98,6 @@
     </primitives>
 
     <components>
-    <component id="one">
-            <transformation>
-                <translate x="0" y="0" z="2" />
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="demoTexture" length_s="0" length_t="0"/>
-            <children>
-                <primitiveref id="demoRectangle" />
-            </children>
-        </component>
-        <component id="demoRooti">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="demoTexture" length_s="2" length_t="2"/>
-            <children>
-                <primitiveref id="demoRectangle" />
-            </children>
-        </component>
         <component id="demoRoot">
             <transformation>
             </transformation>
@@ -141,8 +106,7 @@
             </materials>
             <texture id="demoTexture" length_s="2" length_t="2"/>
             <children>
-                <componentref id="demoRooti" />
-                <componentref id="one" />
+                <primitiveref id="patch" />
             </children>
         </component>
     </components>
