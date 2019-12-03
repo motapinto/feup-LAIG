@@ -1,0 +1,23 @@
+attribute vec3 aVertexPosition;
+attribute vec3 aVertexNormal;
+attribute vec2 aTextureCoord;
+
+uniform mat4 uMVMatrix;
+uniform mat4 uPMatrix;
+uniform mat4 uNMatrix;
+
+
+void main() {
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+}
+
+/*
+Crie novos vertex e fragment shaders por forma a colorir o bule em função da posição
+ocupada na janela pelos fragmentos - amarelo na metade superior, azul na metade
+inferior. Para isso, deve usar a posição dos vértices após a transformação (tal como
+armazenada em gl_Position). Para tal crie uma variável varying no vertex shader que
+guarde a posição do vértice para ser passada para o fragment shader. Aí, recupere
+esse valor e apresente a cor azul se y > 0.5 e amarela se menor.
+
+*/
+
