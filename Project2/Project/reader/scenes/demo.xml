@@ -79,13 +79,13 @@
         </primitive>
         <primitive id="patch">
             <patch npointsU="2" npointsV="3" npartsU="20" npartsV="20" >
-                <controlpoint xx="-1" zz="-1" yy="4" />
-                <controlpoint xx="0" zz="-0.5" yy="0" />
-                <controlpoint xx="1" zz="-1" yy="4" />
+                <controlpoint xx="-1" yy="4" zz="-1" />
+                <controlpoint xx="0" yy="0" zz="-0.5" />
+                <controlpoint xx="1" yy="4" zz="-1" />
 
-                <controlpoint xx="-1" zz="1" yy="4" />
-                <controlpoint xx="0" zz="0.5" yy="0" />
-                <controlpoint xx="1" zz="1" yy="4" />
+                <controlpoint xx="-1" yy="4" zz="1" />
+                <controlpoint xx="0" yy="0" zz="0.5"  />
+                <controlpoint xx="1" yy="4" zz="1" />
             </patch>
         </primitive>
         <primitive id="demoRoad">
