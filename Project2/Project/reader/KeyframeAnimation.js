@@ -44,19 +44,22 @@ class KeyframeAnimation extends Animation {
       }
       
       else {
+        //delta time between keyframes
         let deltaInstant = this.keyframes[i].instant;
         //First iteration instant is always 0
+        //For example keyframe(5) keyframe(15) when i==1 & instant=6 -> keyframe(0) keyframe(10)
+        //deltainstant = 10 instant=1
         if(i != 0){
             deltaInstant -= this.keyframes[i-1].instant;
             instant -= this.keyframes[i-1].instant;
         }
 
-        //Number of divisions for the keyframe
+        //Number of divisions for the keyframe (deltainstant=10 -> framesPerKeyframe=100)
         let framesPerKeyframe = deltaInstant*1000 / this.scene.updatePeriod;
-        //Number of curent frame in keyframe
+        //Number of curent frame in keyframe (for example nFrame=2.26 in 100)
         let nFrame = (framesPerKeyframe * instant) / deltaInstant;
 
-        //this.keyframes[i].scale = Sn ; scale = S0 ; Sn = S0 * R^n
+        //this.keyframes[i].scale = Sn ; scale = S0 ; Sn = S0 * R^n ; R = raiz(n)(Sn-S0)
         let scaleR = [
           Math.pow(this.keyframes[i].scale[0] / scale[0], 1 / framesPerKeyframe),
           Math.pow(this.keyframes[i].scale[1] / scale[1], 1 / framesPerKeyframe),
@@ -64,6 +67,9 @@ class KeyframeAnimation extends Animation {
         ];
 
         //All rotation done in the keyframe
+        //keyframe 2: rotate(180, 0, 0)
+        //keyframe 4: rotate(-20, 0, 0)
+        //when i=1(keyframe 4) totalRotation=(-20-180, 0, 0)=(-200, 0, 0)
         let totalRotation = [
           this.keyframes[i].rotate[0] - rotate[0],
           this.keyframes[i].rotate[1] - rotate[1],
@@ -77,6 +83,7 @@ class KeyframeAnimation extends Animation {
         ];
 
         // Percentage of time during keyframe
+        // instant=2.16 deltaInstant=10 -> keyframePercentage=0.216
         let keyframePercentage = instant / deltaInstant;
 
         //Translation - Addictive operation 

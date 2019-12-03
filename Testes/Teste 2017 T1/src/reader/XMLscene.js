@@ -36,13 +36,12 @@ class XMLscene extends CGFscene {
         this.scaleFactor = 1;
         this.floor = 0;
         this.floorMax = 0;
-
-        //animation
-        this.tInit = null;
-        this.updatePeriod = 100;
-        //security camera
+        this.viewsList = [];
         this.selectedCamera = null;
         this.selectedSecurityCamera = null;
+        this.materialMarkVisible = true;
+        this.tInit = null;
+        this.updatePeriod = 100;
         this.securityCamera = new MySecurityCamera(this);
 
         this.floorUp = function(){
@@ -160,6 +159,9 @@ class XMLscene extends CGFscene {
         
         let instant = (t - this.tInit) / 1000;
 
+        if(this.materialMarkVisible)
+            this.graph.materialRotate++;
+
         this.checkKeys(t);
         this.graph.updateAnimations(instant); //t is in miliseconds
 
@@ -199,11 +201,10 @@ class XMLscene extends CGFscene {
      */
     display(){
       if(this.sceneInited){
-        //associa o framebuffer à textura
         this.securityCamera.attachToFrameBuffer();
         this.render(this.graph.views[this.selectedSecurityCamera]);
-        //desassocia o framebuffer à textura
         this.securityCamera.detachFromFrameBuffer();
+  
         this.render(this.graph.views[this.selectedCamera]);
 
         this.gl.disable(this.gl.DEPTH_TEST);

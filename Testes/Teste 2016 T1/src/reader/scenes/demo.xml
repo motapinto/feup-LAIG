@@ -1,0 +1,149 @@
+<lxs>
+    <scene root="demoRoot" axis_length="5"/>
+
+    <views default="defaultCamera">
+        <perspective id="defaultCamera" near="0.1" far="500" angle="45">
+            <from x="5" y="5" z="5" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+    </views>
+
+    <globals>
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <background r="0.0" g="0.0" b="0.0" a="1.0" />
+    </globals>
+
+    <lights>
+        <omni id="demoLight" enabled="1">
+            <location x="9.8" y="11.9" z="10" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </omni>
+    </lights>
+
+    <textures>
+        <texture id="demoTexture" file="scenes/images/parking-lot.jpg" />
+        <texture id="road" file="scenes/images/highway-road.jpg" />
+    </textures>
+
+    <materials>
+        <material id="demoMaterial" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </material>
+    </materials>
+
+    <transformations>
+    </transformations>
+
+    <animations>
+        <animation id="demoAnim" >
+            <keyframe instant="20">
+                <translate x="0" y="0" z="-50" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="0.1" y="0.1" z="0.1" />
+            </keyframe>
+        </animation>               
+    </animations>
+
+    <primitives>
+        <primitive id="demoRectangle">
+            <rectangle x1="0" y1="0" x2="5" y2="5" />
+        </primitive>
+        <primitive id="demoTriangle">
+            <triangle   x1="0" y1="3" z1="0"
+                        x2="-3" y2="0" z2="0"
+                        x3="3" y3="0" z3="0" />        
+        </primitive>
+        <primitive id="demoTriangle2">
+            <triangle2   
+                        x1="-3" y1="0" z1="0"
+                        x2="0" y2="5" z2="0"
+                        x3="3" y3="0" z3="0" 
+                        npartsU="10" npartsV="10"/>        
+        </primitive>
+        <primitive id="demoSphere">
+            <sphere radius="2" slices="21" stacks="5" />        
+        </primitive>
+        <primitive id="demoTorus">
+            <torus inner="2" outer="4" slices="5" loops="11" />
+        </primitive>
+        <primitive id="demoCylinder">
+            <cylinder base="2" top="1" height="1" slices="10" stacks="2" />
+        </primitive>
+        <primitive id="demoPlane">
+           <plane npartsU="2" npartsV="2" />
+        </primitive>
+        <primitive id="RoundRoad">
+            <patch npointsU="100" npointsV="100" npartsU="3" npartsV="3" >
+                <controlpoint xx="-15" zz="0" yy="0" />
+                <controlpoint xx="-18.333" zz="0" yy="0" />
+                <controlpoint xx="-21.667" zz="0" yy="0" />
+                <controlpoint xx="-25" zz="0" yy="0" />
+
+                <controlpoint xx="-15" zz="-20" yy="0" />
+                <controlpoint xx="-18.333" zz="-24.44" yy="0" />
+                <controlpoint xx="-21.667" zz="-28.889" yy="0" />
+                <controlpoint xx="-25" zz="-33.333" yy="0" />
+
+                <controlpoint xx="15" zz="-20" yy="0" />
+                <controlpoint xx="18.333" zz="-24.44" yy="0" />
+                <controlpoint xx="21.667" zz="-28.889" yy="0" />
+                <controlpoint xx="25" zz="-33.333" yy="0" />
+                
+                <controlpoint xx="15" zz="0" yy="0" />
+                <controlpoint xx="18.333" zz="0" yy="0" />
+                <controlpoint xx="21.667" zz="0" yy="0" />
+                <controlpoint xx="25" zz="0" yy="0" />
+            </patch>
+        </primitive>
+        <primitive id="demoRoad">
+            <cylinder2 base="2" top="1" height="0" slices="20" stacks="20" />
+        </primitive>
+        <primitive id="demoCylinder2">
+            <cylinder2 base="2" top="1" height="1" slices="5" stacks="2" />
+        </primitive>
+
+    </primitives>
+
+    <components>
+    <component id="one">
+            <transformation>
+                <translate x="0" y="0" z="2" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="0" length_t="0"/>
+            <children>
+                <primitiveref id="demoRectangle" />
+            </children>
+        </component>
+        <component id="demoRooti">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="demoRectangle" />
+            </children>
+        </component>
+        <component id="demoRoot">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="demoRooti" />
+                <componentref id="one" />
+            </children>
+        </component>
+    </components>
+</lxs>

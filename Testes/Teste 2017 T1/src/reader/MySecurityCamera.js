@@ -8,7 +8,7 @@ class MySecurityCamera {
   constructor(scene){
     this.scene = scene;
     
-    this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);
+    this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);;
     this.rectangle = new MyRectangle(this.scene, 0.5, 1, -1, -0.5, 1, 1);
     
     this.textureMaterial = new CGFappearance(this.scene);
@@ -18,6 +18,7 @@ class MySecurityCamera {
     this.textureMaterial.setSpecular(1, 1, 1, 1);
     this.textureMaterial.setEmission(1, 1, 1, 1);
     this.textureMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
 
     // Shader
     this.cameraShader = new CGFshader(this.scene.gl, "shaders/securityCamera.vert", "shaders/securityCamera.frag");
