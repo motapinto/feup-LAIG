@@ -29,7 +29,7 @@ class KeyframeAnimation extends Animation {
     for(let i in this.keyframes){
       //Work before this.keyframes[i].instant >= instant
       if(instant > this.keyframes[i].instant){
-          console.log("instant>.. " + i);
+          console.log('instant>.. ' + i);
           //Translation - Addictive operation 
           translate[0] = this.keyframes[i].translate[0];
           translate[1] = this.keyframes[i].translate[1];

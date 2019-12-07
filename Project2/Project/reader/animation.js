@@ -7,7 +7,7 @@
 class Animation {
   constructor (scene, updatePeriod) {
     if (this.constructor === Animation) {
-      throw new TypeError('Abstract class "Animation" cannot be instantiated directly.'); 
+      throw new TypeError('Abstract class 'Animation' cannot be instantiated directly.'); 
     }
 
     if (this.update === undefined) {

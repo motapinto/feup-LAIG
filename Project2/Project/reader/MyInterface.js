@@ -22,11 +22,11 @@ class MyInterface extends CGFinterface {
         this.initKeys();
 
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
-        this.gui.add(this.scene, 'displayAxis').name("Display axis"); //checkbox
+        this.gui.add(this.scene, 'displayAxis').name('Display axis'); //checkbox
 
         //Sims still floor
-        this.gui.add(this.scene, 'floorUp').name("Floor Up"); 
-        this.gui.add(this.scene, 'floorDown').name("Floor Down"); 
+        this.gui.add(this.scene, 'floorUp').name('Floor Up'); 
+        this.gui.add(this.scene, 'floorDown').name('Floor Down'); 
 
         //LightsFolder called in onGraphLoaded() function
         //CamerasFolder called in onGraphLoaded() function
@@ -35,7 +35,7 @@ class MyInterface extends CGFinterface {
     }
 
     LightsFolder(lights) {
-        let lightsFolder = this.gui.addFolder("Lights");
+        let lightsFolder = this.gui.addFolder('Lights');
         
         for (let key in lights) { //key = light name 
             if (lights.hasOwnProperty(key)) {
@@ -55,7 +55,7 @@ class MyInterface extends CGFinterface {
       this.SecurityCamerasOptionsFolder();
     }
     SecurityCamerasOptionsFolder() {
-      let securityCameraFolder = this.gui.addFolder("Security Camera Options");
+      let securityCameraFolder = this.gui.addFolder('Security Camera Options');
 
       securityCameraFolder.add(this.scene.securityCamera, 'lineSpeed', 0.1, 10.0).name('Line Speed').onChange(this.scene.securityCamera.updateShader.bind(this.scene.securityCamera));
       securityCameraFolder.add(this.scene.securityCamera, 'linesNumber', 1, 100.0).name('Number of lines').onChange(this.scene.securityCamera.updateShader.bind(this.scene.securityCamera));

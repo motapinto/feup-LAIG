@@ -21,7 +21,7 @@ class MySecurityCamera {
 
 
     // Shader
-    this.cameraShader = new CGFshader(this.scene.gl, "shaders/securityCamera.vert", "shaders/securityCamera.frag");
+    this.cameraShader = new CGFshader(this.scene.gl, 'shaders/securityCamera.vert', 'shaders/securityCamera.frag');
 
     // Shader settings
     this.lineSpeed = 1;
