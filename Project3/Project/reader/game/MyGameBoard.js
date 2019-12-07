@@ -57,5 +57,28 @@ class MyGameBoard{
         return this.board[position.row][position.col];
     }
 
+    display() {
+        this.scene.pushMatrix();
 
+        for (let i = 0; i < 11; i++){
+            for (let j = 0; j < 12; j++) {
+                this.pushMatrix();
+
+                if (i % 2) {
+                    if (j == 11) continue;
+                    this.translate(j + 0.5, i, 0);
+                }
+                else
+                    this.translate(j, i, 0);
+                this.registerForPick(j + 1 + 12*i, this.plane);
+                let piece = this.getPiece(i, j);
+                this.graph.displayComponent('Piece' + piece.type);
+                this.clearPickRegistration();
+
+                this.popMatrix();
+            }
+        }
+
+        this.scene.popMatrix();
+    }
 }

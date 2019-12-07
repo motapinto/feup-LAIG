@@ -264,24 +264,6 @@ class XMLscene extends CGFscene {
         if(this.displayAxis) {
             this.axis.display();
         }
-        
-        for (let i = 0; i < 11; i++){
-            for (let j = 0; j < 12; j++) {
-                this.pushMatrix();
-
-                if (i % 2) {
-                    if (j == 11) continue;
-                    this.translate(j + 0.5, i, 0);
-                }
-                else
-                    this.translate(j, i, 0);
-                this.registerForPick(j + 1 + 12*i, this.plane);
-                this.graph.displayComponent('RedPiece');
-                this.clearPickRegistration();
-
-                this.popMatrix();
-            }
-        }
 
         this.popMatrix();
         // ---- END Background, camera and axis setup
