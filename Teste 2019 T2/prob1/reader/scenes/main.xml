@@ -536,7 +536,7 @@
 
         <!-- EXTERIOR -->
         <primitive id="Terrain">
-            <patch npointsU="100" npointsV="100" npartsU="1" npartsV="1" >
+            <patch npointsU="2" npointsV="2" npartsU="100" npartsV="100" >
                 <controlpoint xx="-100.0" yy="-100.0" zz="0.0" />
                 <controlpoint xx="-100.0" yy="100.0" zz="0.0" />
                 <controlpoint xx="100.0" yy="-100.0" zz="0.0" />
@@ -545,7 +545,7 @@
             <!-- <rectangle x1="-100" y1="-100" x2="100" y2="100" /> -->
         </primitive>
         <primitive id="Road">
-            <patch npointsU="50" npointsV="5" npartsU="1" npartsV="1" >
+            <patch npointsU="2" npointsV="2" npartsU="50" npartsV="5" >
                 <controlpoint xx="0.0" yy="-10.0" zz="0.0" />
                 <controlpoint xx="0.0" yy="0.0" zz="0.0" />
                 <controlpoint xx="200.0" yy="-10.0" zz="0.0" />
@@ -553,7 +553,7 @@
             </patch>
         </primitive>
         <primitive id="RoundRoad">
-            <patch npointsU="20" npointsV="5" npartsU="3" npartsV="3" >
+            <patch npointsU="4" npointsV="4" npartsU="20" npartsV="5" >
                 <controlpoint xx="-35" zz="0" yy="0" />
                 <controlpoint xx="-38.333" zz="0" yy="0" />
                 <controlpoint xx="-41.667" zz="0" yy="0" />

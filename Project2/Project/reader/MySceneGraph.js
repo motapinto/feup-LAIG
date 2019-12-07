@@ -833,7 +833,6 @@ class MySceneGraph {
         var grandChildren;
         var grandgrandChildren;
         this.animations = [];
-        this.animationsIDsList = [];
 
         for (var i = 0; i < children.length; i++) {
             var animation = new KeyframeAnimation(this.scene, this.scene.updatePeriod);
@@ -898,7 +897,6 @@ class MySceneGraph {
             }
 
             this.animations[animationID] = animation;
-            this.animationsIDsList.push(animationID);
         }
 
         this.log("Parsed animations");
@@ -1209,7 +1207,7 @@ class MySceneGraph {
                 var tri = new Triangle2(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3, npartsU, npartsV);
                 this.primitives[primitiveID] = tri;
                 break;
-            
+                
             case 'cylinder2':
                 // base
                 var base = this.reader.getFloat(grandChildren[0], 'base');
@@ -1643,9 +1641,8 @@ class MySceneGraph {
      * @param {float} instant
      */
     updateAnimations(instant) {
-        // animationsIDsList has the animations ID's
-        for(let i in this.animationsIDsList) {
-            this.animations[this.animationsIDsList[i]].update(instant);
+        for(let i in this.animations) {
+            this.animations[i].update(instant);
         }
     }
 

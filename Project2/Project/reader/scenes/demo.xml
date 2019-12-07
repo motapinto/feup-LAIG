@@ -41,10 +41,20 @@
 
     <animations>
         <animation id="demoAnim" >
-            <keyframe instant="20">
-                <translate x="0" y="0" z="-50" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="0.1" y="0.1" z="0.1" />
+            <keyframe instant="2">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="20" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="4">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="-20" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="6">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="-40" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>               
     </animations>
@@ -101,6 +111,7 @@
         <component id="demoRoot">
             <transformation>
             </transformation>
+             <animationref id="demoAnim" />
             <materials>
                 <material id="demoMaterial" />
             </materials>

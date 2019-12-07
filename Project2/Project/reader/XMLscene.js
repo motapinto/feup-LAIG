@@ -160,7 +160,10 @@ class XMLscene extends CGFscene {
         let instant = (t - this.tInit) / 1000;
 
         this.checkKeys(t);
-        this.graph.updateAnimations(instant); //t is in miliseconds
+
+        for(let i in this.graph.animations) {
+            this.graph.animations[i].update(instant);
+        }
 
         this.securityCamera.update(t);
     }

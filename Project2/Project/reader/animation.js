@@ -13,10 +13,6 @@ class Animation {
     if (this.update === undefined) {
       throw new TypeError('Classes extending the Animation abstract class');
     }
-  
-    if (this.apply === undefined) {
-      throw new TypeError('Classes extending the Animation abstract class');
-    }
 
     this.scene = scene;
     this.updatePeriod = updatePeriod;
