@@ -1,10 +1,10 @@
 <?xml version='1.0'?>
 <!DOCTYPE FILES [
-    <!ENTITY tableTransformations SYSTEM "file:/table/tableTransformations.xml">
-    <!ENTITY tableTextures SYSTEM "file:/table/tableTextures.xml">
-    <!ENTITY tablePrimitives SYSTEM "file:/table/tablePrimitives.xml">
-    <!ENTITY tableMaterials SYSTEM "file:/table/tableMaterials.xml">
-    <!ENTITY tableComponents SYSTEM "file:/table/tableComponents.xml">
+    <!ENTITY tableTransformations SYSTEM "table/tableTransformations.xml">
+    <!ENTITY tableTextures SYSTEM "table/tableTextures.xml">
+    <!ENTITY tablePrimitives SYSTEM "table/tablePrimitives.xml">
+    <!ENTITY tableMaterials SYSTEM "table/tableMaterials.xml">
+    <!ENTITY tableComponents SYSTEM "table/tableComponents.xml">
 ]>
 
 <lxs>
