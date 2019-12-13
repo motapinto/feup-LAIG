@@ -42,7 +42,6 @@ class XMLscene extends CGFscene {
         this.tInit = null;
         this.updatePeriod = 100;
         this.securityCamera = new MySecurityCamera(this);
-        this.plane = new CGFplane(this);
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)

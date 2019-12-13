@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="demoRoot" axis_length="5"/>
+    <scene root="RedPiece" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
@@ -49,17 +49,23 @@
     </animations>
 
     <primitives>
+        <primitive id="triangle">
+            <triangle x1="0" y1="0" z1="1" x2="1" y2="0" z2="0" x3="0" y3="1" z3="0" />
+        </primitive>
+        <primitive id="rectangle">
+            <plane npartsU="1" npartsV="1" />
+        </primitive>
         <primitive id="cylinder">  
-            <cylinder base="1" top="1" height="1" slices="50" stacks="25" />
+            <cylinder base="1" top="1" height="1" slices="25" stacks="25" />
         </primitive>
         <primitive id="sphere">  
-            <sphere radius="1" slices="50" stacks="25" />
+            <sphere radius="1" slices="40" stacks="20" />
         </primitive>
-        <primitive id="hexagon">  
-            <hexagon radius="1" />
-        </primitive> 
-        <primitive id="cylinder2">  
-            <cylinder base="1" top="1" height="0.5" slices="6" stacks="1" />
+        <primitive id="torus">  
+            <torus inner="1" outer="2" slices="20" loops="20" />
+        </primitive>  
+        <primitive id="cylinder4">  
+            <cylinder2 base="1" top="1" height="1" slices="2" stacks="1" />
         </primitive> 
     </primitives>
 
@@ -73,53 +79,39 @@
             </materials>
             <texture id="demoTexture" length_s="2" length_t="2"/>
             <children>
-                <componentref id="Board" />
-                <componentref id="RedPiece" />
-            </children>
-        </component>
-
-        <component id="Board">
-            <transformation>
-                <rotate angle="90" axis="z"/>
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="none"/>
-            <children>
                 <componentref id="BoardCover" />
                 <componentref id="BoardSide" />
             </children>
         </component>
         <component id="BoardCover">
             <transformation>
-                <translate x="0" y="0" z="0.5"/>
-                <scale x="1" y="1" z="0.1"/>
+                <scale x="1.4142" y="1.4142" z="1"/>
+                <translate x="0" y="0" z="1"/>
+                <rotate axis="x" angle="90"/>
             </transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
             <texture id="none"/>
             <children>
-                <primitiveref id="hexagon" />
+                <primitiveref id="rectangle" />
             </children>
         </component>
         <component id="BoardSide">
             <transformation>
+                <rotate axis="z" angle="45"/>
             </transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
             <texture id="none"/>
             <children>
-                <primitiveref id="cylinder2" />
+                <primitiveref id="cylinder4" />
             </children>
         </component>
-
         <component id="RedPiece">
             <transformation>
-                <translate x="0" y="0" z="0.85"/>
-                <scale x="0.5" y="0.5" z="0.5" />
+                <scale x="0.5" y="0.5" z="0.2" />
             </transformation>
             <materials>
                 <material id="Red" />

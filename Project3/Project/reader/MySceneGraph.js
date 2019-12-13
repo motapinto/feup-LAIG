@@ -933,8 +933,7 @@ class MySceneGraph {
 
             // Validate the primitive type
           if (grandChildren.length != 1)
-            return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere, torus, plane, patch, triangle2 or cylinder2)"
-
+            return "There must be exactly 1 primitive type (rectangle, triangle, hexagon, cylinder, sphere, torus, plane, patch, triangle2 or cylinder2)"
                 
                 // Retrieves the primitive coordinates.
           switch (primitiveType) {
@@ -1011,6 +1010,16 @@ class MySceneGraph {
 
                 var tri = new MyTriangle(this.scene, x1, x2, x3, y1, y2, y3, z1, z2, z3);
                 this.primitives[primitiveID] = tri;
+                break;
+
+            case 'hexagon':                    
+                // radius
+                var radius = this.reader.getFloat(grandChildren[0], 'radius');
+                if (!(radius != null && !isNaN(radius)))
+                    return "unable to parse radius of the primitive coordinates with ID = " + primitiveID;
+
+                var rect = new MyHexagon(this.scene, radius);
+                this.primitives[primitiveID] = rect;
                 break;
             
             case 'cylinder':
