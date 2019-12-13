@@ -123,7 +123,7 @@ class KeyframeAnimation extends Animation {
 class Keyframe {
   constructor(instant, translate, rotate, scale){
     this.instant = instant;
-    this.translate = translate;
+    this.scene.translate = translate;
     this.rotate = rotate;
     this.scale = scale;
   }

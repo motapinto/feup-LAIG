@@ -23,6 +23,7 @@ serialInclude(['../lib/CGF.js',
                 //Primitves
                 'primitives/MyRectangle.js',
                 'primitives/MyTriangle.js',
+                'primitives/MyHexagon.js',
                 'primitives/MyCylinderOpt.js',
                 'primitives/MySphere.js',
                 'primitives/MyTorus.js',
@@ -36,6 +37,12 @@ serialInclude(['../lib/CGF.js',
                 'KeyframeAnimation.js',
                 //Render To Texture
                 'MySecurityCamera.js',
+                //Game
+                'game/MyScoreBoard.js',
+                'game/MyGameMove.js',
+                'game/MyGameBoard.js',
+                'game/MyTile.js',
+                'game/MyPiece.js',
 
 main=function()
 {

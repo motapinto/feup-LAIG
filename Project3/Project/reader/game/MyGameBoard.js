@@ -15,9 +15,10 @@ class MyGameBoard{
         this.scorePlayer2 = new MyScoreBoard(scene, graph);
     }
 
-    id(col, row) { return (col * 10 + row); }
+    id = (col, row) => (col * 10 + row);
 
-    position(id) { return {col: id % 100, row: Math.floor(id / 100)}; }
+    position(id) { return {col: id % 100, row: Math.floor(id / 100)}}; 
+
 
     positionCoords(id) {
         let pos = this.position(id);
@@ -37,20 +38,20 @@ class MyGameBoard{
         for (let row = 0; row < 11; row++) {
             let rowVals = [];
             for (let col = 0; col < 12; col++) {
-                if (!(row % 2) && col == 11) continue;
-                rowVals.push(new MyTile(scene, this.graph, this, this.id(col, row)));
+                if (row % 2 && col == 11) continue;
+                rowVals.push(new MyTile(this.scene, this.graph, this, this.id(col, row), new MyPiece(this.scene, this.graph, 1)));
             }
             this.board.push(rowVals);
         }
     }
 
+    getPiece = (row, col) => this.board[row][col].getPiece();
+
     setPiece(row, col, piece = null) {
         this.board[row][col].setPiece(piece);
     }
 
-    getPiece(row, col) { return this.board[row][col].getPiece(); }
-
-    getTile(row, col) { return this.board[row][col]; }
+    getTile = (row, col) => this.board[row][col];
 
     getTile(id) {
         let position = this.position(id);
@@ -62,20 +63,18 @@ class MyGameBoard{
 
         for (let i = 0; i < 11; i++){
             for (let j = 0; j < 12; j++) {
-                this.pushMatrix();
+                this.scene.pushMatrix();
 
                 if (i % 2) {
                     if (j == 11) continue;
-                    this.translate(j + 0.5, i, 0);
+                    this.scene.translate((j + 0.5)*1.8, i*1.55, 0);
                 }
                 else
-                    this.translate(j, i, 0);
-                this.registerForPick(j + 1 + 12*i, this.plane);
-                let piece = this.getPiece(i, j);
-                this.graph.displayComponent('Piece' + piece.type);
-                this.clearPickRegistration();
+                    this.scene.translate(j*1.8, i*1.55, 0);
 
-                this.popMatrix();
+                this.board[i][j].display();
+
+                this.scene.popMatrix();
             }
         }
 

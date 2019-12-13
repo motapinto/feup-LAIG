@@ -1,5 +1,15 @@
+<?xml version='1.0'?>
+<!DOCTYPE FILES [
+    <!ENTITY tableTransformations SYSTEM "file:/table/tableTransformations.xml">
+    <!ENTITY tableTextures SYSTEM "file:/table/tableTextures.xml">
+    <!ENTITY tablePrimitives SYSTEM "file:/table/tablePrimitives.xml">
+    <!ENTITY tableMaterials SYSTEM "file:/table/tableMaterials.xml">
+    <!ENTITY tableComponents SYSTEM "file:/table/tableComponents.xml">
+]>
+
 <lxs>
-    <scene root="RedPiece" axis_length="5"/>
+
+    <scene root="demoRoot" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
@@ -23,11 +33,13 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/parking-lot.jpg" />
-        <texture id="road" file="scenes/images/highway-road.jpg" />
+        &tableTextures;
+        <texture id="border" file="scenes/images/border.png" />
     </textures>
 
     <materials>
+        &tableMaterials;
+
         <material id="demoMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -40,78 +52,106 @@
             <diffuse r="1.0" g="0.5" b="0.5" a="1.0" />
             <specular r="1.0" g="0.5" b="0.5" a="1.0" />
         </material>
+        <material id="Yellow" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.5" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="0.5" g="1.0" b="1.0" a="1.0" />
+            <specular r="0.5" g="1.0" b="1.0" a="1.0" />
+        </material>
+        <material id="Blue" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.5" g="0.5" b="1" a="1.0" />
+            <diffuse r="0.5" g="0.5" b="1" a="1.0" />
+            <specular r="0.5" g="0.5" b="1" a="1.0" />
+        </material>
     </materials>
 
     <transformations>
+        &tableTransformations;
     </transformations>
 
     <animations>
     </animations>
 
     <primitives>
-        <primitive id="triangle">
-            <triangle x1="0" y1="0" z1="1" x2="1" y2="0" z2="0" x3="0" y3="1" z3="0" />
-        </primitive>
-        <primitive id="rectangle">
-            <plane npartsU="1" npartsV="1" />
-        </primitive>
+        &tablePrimitives;
+
+        <!-- PIECE -->
         <primitive id="cylinder">  
-            <cylinder base="1" top="1" height="1" slices="25" stacks="25" />
+            <cylinder base="1" top="1" height="1" slices="50" stacks="25" />
         </primitive>
         <primitive id="sphere">  
-            <sphere radius="1" slices="40" stacks="20" />
+            <sphere radius="1" slices="50" stacks="25" />
         </primitive>
-        <primitive id="torus">  
-            <torus inner="1" outer="2" slices="20" loops="20" />
-        </primitive>  
-        <primitive id="cylinder4">  
-            <cylinder2 base="1" top="1" height="1" slices="2" stacks="1" />
+
+        <!-- TILE -->
+        <primitive id="hexagon">  
+            <hexagon radius="1" />
+        </primitive> 
+        <primitive id="tileBase">  
+            <cylinder base="1" top="1" height="0.5" slices="6" stacks="1" />
         </primitive> 
     </primitives>
 
     <components>
+
+        &tableComponents;
+
         <component id="demoRoot" pickable="true">
             <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="Table" />
+            </children>
+        </component>
+
+        <component id="Tile">
+            <transformation>
+                <rotate angle="90" axis="z"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="TileCover" />
+                <componentref id="TileSide" />
+            </children>
+        </component>
+        <component id="TileCover">
+            <transformation>
+                <translate x="0" y="0" z="0.5"/>
+                <scale x="1" y="1" z="0.1"/>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="hexagon" />
+            </children>
+        </component>
+        <component id="TileSide">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="tileBase" />
+            </children>
+        </component>
+
+        <component id="Piece1">
+            <transformation>
+                <translate x="0" y="0" z="0.55"/>
                 <scale x="1" y="1" z="0.2"/>
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="demoTexture" length_s="2" length_t="2"/>
-            <children>
-                <componentref id="BoardCover" />
-                <componentref id="BoardSide" />
-            </children>
-        </component>
-        <component id="BoardCover">
-            <transformation>
-                <scale x="1.4142" y="1.4142" z="1"/>
-                <translate x="0" y="0" z="1"/>
-                <rotate axis="x" angle="90"/>
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <primitiveref id="rectangle" />
-            </children>
-        </component>
-        <component id="BoardSide">
-            <transformation>
-                <rotate axis="z" angle="45"/>
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <primitiveref id="cylinder4" />
-            </children>
-        </component>
-        <component id="RedPiece">
-            <transformation>
-                <scale x="0.5" y="0.5" z="0.2" />
+                <scale x="0.5" y="0.5" z="0.5" />
             </transformation>
             <materials>
                 <material id="Red" />
@@ -123,6 +163,39 @@
                 <componentref id="Cover" />
             </children>
         </component>
+        <component id="Piece2">
+            <transformation>
+                <translate x="0" y="0" z="0.55"/>
+                <scale x="1" y="1" z="0.2"/>
+                <scale x="0.5" y="0.5" z="0.5" />
+            </transformation>
+            <materials>
+                <material id="Yellow" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder" />
+                <componentref id="Top" />
+                <componentref id="Cover" />
+            </children>
+        </component>
+        <component id="Piece3">
+            <transformation>
+                <translate x="0" y="0" z="0.55"/>
+                <scale x="1" y="1" z="0.2"/>
+                <scale x="0.5" y="0.5" z="0.5" />
+            </transformation>
+            <materials>
+                <material id="Blue" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="cylinder" />
+                <componentref id="Top" />
+                <componentref id="Cover" />
+            </children>
+        </component>
+
         <component id="Top">
             <transformation>
                 <translate x="0" y="0" z="1" />
