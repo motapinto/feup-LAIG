@@ -22,13 +22,13 @@ class MyTile {
     display() {
         this.scene.pushMatrix();
 
-        this.registerForPick(this.tileId, this);
+        this.scene.registerForPick(this.tileId, this);
 
         this.graph.displayComponent('Tile');
         if (this.piece != null)
             this.piece.display();
 
-        this.clearPickRegistration();
+        this.scene.clearPickRegistration();
 
         this.scene.popMatrix();
     }

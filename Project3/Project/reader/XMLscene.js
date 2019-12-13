@@ -133,6 +133,9 @@ class XMLscene extends CGFscene {
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
         this.selectedSecurityCamera = this.graph.idView;
+
+        this.board = new MyGameBoard(this, this.graph);
+        this.board.createInstance();
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
@@ -253,16 +256,8 @@ class XMLscene extends CGFscene {
         this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
         this.updateLights();
         
-        if (this.sceneInited) {
-            // Draw axis
-            this.setDefaultAppearance();
-            // Displays the scene (MySceneGraph function).
-            this.graph.displayScene();
-        }
-
-        if(this.displayAxis) {
-            this.axis.display();
-        }
+        this.setDefaultAppearance();    
+        this.board.display();
 
         this.popMatrix();
         // ---- END Background, camera and axis setup
