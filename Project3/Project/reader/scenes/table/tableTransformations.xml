@@ -1,0 +1,8 @@
+<transformation id="TableXY">
+    <translate x="0.5" y="0.5" z="0" />
+</transformation>
+<transformation id="TableCover">
+        <translate x="0" y="-0.8" z="1.1" />
+        <rotate axis="z" angle="45" />
+        <scale x="1.13" y="1.13" z="1" />
+</transformation>

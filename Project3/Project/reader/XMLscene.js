@@ -258,6 +258,7 @@ class XMLscene extends CGFscene {
         
         this.setDefaultAppearance();    
         this.board.display();
+        this.graph.displayScene();
 
         this.popMatrix();
         // ---- END Background, camera and axis setup

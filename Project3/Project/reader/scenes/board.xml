@@ -1,4 +1,14 @@
+<?xml version='1.0'?>
+<!DOCTYPE FILES [
+    <!ENTITY tableTransformations SYSTEM "file:/table/tableTransformations.xml">
+    <!ENTITY tableTextures SYSTEM "file:/table/tableTextures.xml">
+    <!ENTITY tablePrimitives SYSTEM "file:/table/tablePrimitives.xml">
+    <!ENTITY tableMaterials SYSTEM "file:/table/tableMaterials.xml">
+    <!ENTITY tableComponents SYSTEM "file:/table/tableComponents.xml">
+]>
+
 <lxs>
+
     <scene root="demoRoot" axis_length="5"/>
 
     <views default="defaultCamera">
@@ -23,10 +33,13 @@
     </lights>
 
     <textures>
+        &tableTextures;
         <texture id="border" file="scenes/images/border.png" />
     </textures>
 
     <materials>
+        &tableMaterials;
+
         <material id="demoMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -54,12 +67,15 @@
     </materials>
 
     <transformations>
+        &tableTransformations;
     </transformations>
 
     <animations>
     </animations>
 
     <primitives>
+        &tablePrimitives;
+
         <!-- PIECE -->
         <primitive id="cylinder">  
             <cylinder base="1" top="1" height="1" slices="50" stacks="25" />
@@ -78,17 +94,18 @@
     </primitives>
 
     <components>
+
+        &tableComponents;
+
         <component id="demoRoot" pickable="true">
             <transformation>
-                <scale x="1" y="1" z="0.2"/>
             </transformation>
             <materials>
                 <material id="demoMaterial" />
             </materials>
             <texture id="none" length_s="2" length_t="2"/>
             <children>
-                <componentref id="Tile" />
-                <componentref id="Piece" />
+                <componentref id="Table" />
             </children>
         </component>
 
