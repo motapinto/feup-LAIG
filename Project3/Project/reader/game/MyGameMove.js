@@ -18,11 +18,11 @@ class MyGameMove {
         this.score = score;
         this.piece = tile.getPiece();
         this.animating = false;
+        this.reversing = false;
         this.startTime = null;
         this.createAnimation(coordsInit, coordsFin);
     }
 
-    // ADD REVERSE OPTION FOR FILM
     createAnimation(coordsInit, coordsFin) {
         this.coordsDiff = {
             x: coordsFin.x - coordsInit.x,
@@ -31,37 +31,51 @@ class MyGameMove {
         let distOffset = 0.1 * Math.sqrt(this.coordsDiff.x * this.coordsDiff.x + this.coordsDiff.y * this.coordsDiff.y);
         this.deltaTime = 1 + distOffset;
         this.height = 0.5 + distOffset;
+        this.animate();
     }
 
     animate() {
         this.animating = true;
         this.startTime = null;
-        this.tileInit.setPiece();
+        if (this.reversing)
+            this.score.removePiece();
+        else
+            this.tileInit.setPiece();
     }
 
-    quadratic(percent) {
-        return -4 * Math.pow(percent - 0.5, 2) + this.height;
+    quadratic = (percent) => -4 * (percent - 0.5) * (percent - 0.5) + this.height;
+    
+    endAnimation() {
+        this.animating = false;
+        this.startTime = null;
+        if (this.reversing)
+            this.tileInit.setPiece(this.piece);
+        else
+            this.score.addPiece(this.piece);
+    }
+
+    reverse() {
+        this.reversing = true;
+        this.coordsDiff.x = -this.coordsDiff.x;
+        this.coordsDiff.y = -this.coordsDiff.y;
+        if (this.animating) this.startTime -= this.deltaTime - this.delta;
     }
 
     update(t) {
         if (!this.animating) return;
 
         if (this.startTime == null) this.startTime = t;
+
+        this.delta = t - this.startTime;
         
-        if ((t - this.startTime) > this.deltaTime) {
+        if (this.delta > this.deltaTime) {
             this.endAnimation();
             return;
         }
 
-        let percent = (t - this.startTime) / this.deltaTime;
+        let percent = this.delta / this.deltaTime;
 
         mat4.translate(this.matrix, mat4.create(), [this.coordsDiff.x * percent, this.coordsDiff.y * percent, this.quadratic(percent)]);
-    }
-
-    endAnimation() {
-        this.animating = false;
-        this.startTime = null;
-        this.score.addPiece(this.piece);
     }
 
     display() { this.scene.multMatrix(this.matrix); }

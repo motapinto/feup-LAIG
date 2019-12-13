@@ -26,6 +26,11 @@ class MyScoreBoard {
         this.pieces[piece.type - 1].push(piece);
     }
 
+    removePiece(type) {
+        this.score[type - 1]--;
+        return this.pieces[type - 1].pop(piece);
+    }
+
     getPiecePos(number) { return { x: number % 3 + 0.2, y: Math.floor(number / 3) + 0.2 }; }
 
     display() {
