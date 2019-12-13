@@ -128,14 +128,15 @@ class XMLscene extends CGFscene {
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
         
+        this.board = new MyGameBoard(this, this.graph);
+        this.board.createInstance();
+        this.sequence = new MyGameSequence(this, this.graph);
         
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
         this.selectedSecurityCamera = this.graph.idView;
 
-        this.board = new MyGameBoard(this, this.graph);
-        this.board.createInstance();
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
@@ -158,15 +159,19 @@ class XMLscene extends CGFscene {
      * Update function.
      */
     update(t) {
-        if(this.tInit == null)
-            this.tInit = t;
-        
-        let instant = (t - this.tInit) / 1000;
-
-        this.checkKeys(t);
-        this.graph.updateAnimations(instant); //t is in miliseconds
-
-        this.securityCamera.update(t);
+        if (this.sceneInited) {
+            if(this.tInit == null)
+                this.tInit = t;
+            
+            let instant = (t - this.tInit) / 1000;
+    
+            this.checkKeys(t);
+            this.graph.updateAnimations(instant); //t is in miliseconds
+    
+            this.securityCamera.update(t);
+    
+            this.sequence.update(t);            
+        }
     }
 
     /**
@@ -209,6 +214,8 @@ class XMLscene extends CGFscene {
                     if (obj) {
                         var customId = this.pickResults[i][1];
                         console.log("Picked object: " + obj + ", with pick id " + customId);
+                        let pos = this.board.scorePlayer1.getNewPiecePos(1);
+                        this.sequence.addMove(this.board.getTile(customId), this.board.scorePlayer1, pos.x, pos.y);
                     }
                 }
                 this.pickResults.splice(0, this.pickResults.length);
@@ -258,7 +265,7 @@ class XMLscene extends CGFscene {
         
         this.setDefaultAppearance();    
         this.board.display();
-        this.graph.displayScene();
+        this.sequence.display();
 
         this.popMatrix();
         // ---- END Background, camera and axis setup

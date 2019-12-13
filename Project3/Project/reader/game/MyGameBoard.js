@@ -15,7 +15,7 @@ class MyGameBoard{
         this.scorePlayer2 = new MyScoreBoard(scene, graph);
     }
 
-    id = (col, row) => (col * 10 + row);
+    id = (col, row) => (row * 10 + col);
 
     position(id) { return {col: id % 100, row: Math.floor(id / 100)}}; 
 
@@ -50,8 +50,6 @@ class MyGameBoard{
     setPiece(row, col, piece = null) {
         this.board[row][col].setPiece(piece);
     }
-
-    getTile = (row, col) => this.board[row][col];
 
     getTile(id) {
         let position = this.position(id);

@@ -41,6 +41,7 @@ serialInclude(['../lib/CGF.js',
                 'game/MyScoreBoard.js',
                 'game/MyGameMove.js',
                 'game/MyGameBoard.js',
+                'game/MyGameSequence.js',
                 'game/MyTile.js',
                 'game/MyPiece.js',
 

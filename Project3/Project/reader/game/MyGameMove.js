@@ -16,10 +16,11 @@ class MyGameMove {
         this.graph = graph;
         this.tileInit = tileInit;
         this.score = score;
-        this.piece = tile.getPiece();
+        this.piece = tileInit.getPiece();
         this.animating = false;
         this.reversing = false;
         this.startTime = null;
+        this.matrix = mat4.create();
         this.createAnimation(coordsInit, coordsFin);
     }
 
@@ -66,6 +67,8 @@ class MyGameMove {
 
         if (this.startTime == null) this.startTime = t;
 
+        this.matrix = mat4.create();
+
         this.delta = t - this.startTime;
         
         if (this.delta > this.deltaTime) {
@@ -75,8 +78,13 @@ class MyGameMove {
 
         let percent = this.delta / this.deltaTime;
 
-        mat4.translate(this.matrix, mat4.create(), [this.coordsDiff.x * percent, this.coordsDiff.y * percent, this.quadratic(percent)]);
+        mat4.translate(this.matrix, this.matrix, [this.coordsDiff.x * percent, this.coordsDiff.y * percent, this.quadratic(percent)]);
     }
 
-    display() { this.scene.multMatrix(this.matrix); }
+    display() {
+        if (this.animating) {
+            this.scene.multMatrix(this.matrix);
+            this.piece.display();
+        }
+    }
 }
