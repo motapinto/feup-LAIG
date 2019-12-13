@@ -23,8 +23,7 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/parking-lot.jpg" />
-        <texture id="road" file="scenes/images/highway-road.jpg" />
+        <texture id="border" file="scenes/images/border.png" />
     </textures>
 
     <materials>
@@ -86,7 +85,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <texture id="none" length_s="2" length_t="2"/>
             <children>
                 <componentref id="Tile" />
                 <componentref id="Piece" />
@@ -133,7 +132,8 @@
 
         <component id="Piece1">
             <transformation>
-                <translate x="0" y="0" z="0.85"/>
+                <translate x="0" y="0" z="0.55"/>
+                <scale x="1" y="1" z="0.2"/>
                 <scale x="0.5" y="0.5" z="0.5" />
             </transformation>
             <materials>
@@ -148,7 +148,8 @@
         </component>
         <component id="Piece2">
             <transformation>
-                <translate x="0" y="0" z="0.85"/>
+                <translate x="0" y="0" z="0.55"/>
+                <scale x="1" y="1" z="0.2"/>
                 <scale x="0.5" y="0.5" z="0.5" />
             </transformation>
             <materials>
@@ -163,7 +164,8 @@
         </component>
         <component id="Piece3">
             <transformation>
-                <translate x="0" y="0" z="0.85"/>
+                <translate x="0" y="0" z="0.55"/>
+                <scale x="1" y="1" z="0.2"/>
                 <scale x="0.5" y="0.5" z="0.5" />
             </transformation>
             <materials>

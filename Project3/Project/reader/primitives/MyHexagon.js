@@ -16,11 +16,15 @@ class MyHexagon extends CGFobject {
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
+		this.texCoords = [];
 
 
 		this.vertices.push(0, 0, 0);
+		this.texCoords.push(0.5, 0.5);
+		this.normals.push(0, 0, 1);
 		for(let i=0; i<(2*Math.PI); i+=Math.PI / 3) {
 				this.vertices.push(this.radius*Math.cos(i), this.radius*Math.sin(i), 0);
+				this.texCoords.push(0.5, 1);
 				this.normals.push(0, 0, 1);
 		}
         

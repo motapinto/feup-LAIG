@@ -732,7 +732,7 @@ class MySceneGraph {
             readMaterial.setDiffuse(diffuseRGBA[0], diffuseRGBA[1], diffuseRGBA[2], diffuseRGBA[3]);
             readMaterial.setSpecular(specularRGBA[0], specularRGBA[1], specularRGBA[2], specularRGBA[3]);
             readMaterial.setEmission(emissionRGBA[0], emissionRGBA[1], emissionRGBA[2], emissionRGBA[3]);
-            readMaterial.setTextureWrap('REPEAT', 'REPEAT');
+            readMaterial.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
             this.materials[materialID] = readMaterial;
         }
         this.log("Parsed materials");

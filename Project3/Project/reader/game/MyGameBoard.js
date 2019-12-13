@@ -39,12 +39,10 @@ class MyGameBoard{
             let rowVals = [];
             for (let col = 0; col < 12; col++) {
                 if (row % 2 && col == 11) continue;
-                rowVals.push(new MyTile(this.scene, this.graph, this, this.id(col, row)));
+                rowVals.push(new MyTile(this.scene, this.graph, this, this.id(col, row), new MyPiece(this.scene, this.graph, 1)));
             }
             this.board.push(rowVals);
         }
-
-        console.log(this.board);
     }
 
     getPiece = (row, col) => this.board[row][col].getPiece();
@@ -69,19 +67,12 @@ class MyGameBoard{
 
                 if (i % 2) {
                     if (j == 11) continue;
-                    this.scene.translate(j + 0.5, i, 0);
+                    this.scene.translate((j + 0.5)*1.8, i*1.55, 0);
                 }
                 else
-                    this.scene.translate(j, i, 0);
+                    this.scene.translate(j*1.8, i*1.55, 0);
 
-                this.scene.registerForPick(j + 1 + 12*i, this.plane);
-                
-                let piece = this.getPiece(i, j);
-
-                if(piece != null) 
-                    this.graph.displayComponent('Piece' + piece.type);
-                
-                this.scene.clearPickRegistration();
+                this.board[i][j].display();
 
                 this.scene.popMatrix();
             }
