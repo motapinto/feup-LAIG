@@ -136,7 +136,6 @@ class XMLscene extends CGFscene {
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
         this.selectedSecurityCamera = this.graph.idView;
-
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
@@ -202,7 +201,6 @@ class XMLscene extends CGFscene {
         }
     }
 
-
     /**
      * logs picking results in console
      */
@@ -222,7 +220,6 @@ class XMLscene extends CGFscene {
             }
         }
     }
-
 
     /**
      * Display the scene.

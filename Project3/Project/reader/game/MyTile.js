@@ -15,21 +15,16 @@ class MyTile {
         this.piece = piece;
     }
 
-    setPiece(piece = null) { this.piece = piece; }
+    setPiece = (piece = null) => this.piece = piece; 
 
-    getPiece() { return this.piece; } 
+    getPiece = () => this.piece; 
 
     display() {
         this.scene.pushMatrix();
-
-        this.scene.registerForPick(this.tileId, this);
-
-        this.graph.displayComponent('Tile');
-        if (this.piece != null)
-            this.piece.display();
-
-        this.scene.clearPickRegistration();
-
+            this.scene.registerForPick(this.tileId, this);
+            this.graph.displayComponent('Tile');
+            if (this.piece != null) this.piece.display();
+            this.scene.clearPickRegistration();
         this.scene.popMatrix();
     }
 }

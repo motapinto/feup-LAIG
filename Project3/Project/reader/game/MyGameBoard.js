@@ -19,11 +19,7 @@ class MyGameBoard{
 
     position(id) { return {col: id % 100, row: Math.floor(id / 100)}}; 
 
-
-    positionCoords(id) {
-        let pos = this.position(id);
-        return this.positionCoords(pos.col, pos.row);
-    }
+    positionCoords = (id) => this.positionCoords(this.position(id).col, this.position(id).row);
 
     positionCoords(col, row) {
         let y = 10 - row + 0.5;
@@ -58,24 +54,19 @@ class MyGameBoard{
 
     display() {
         this.scene.pushMatrix();
-
-        for (let i = 0; i < 11; i++){
-            for (let j = 0; j < 12; j++) {
-                this.scene.pushMatrix();
-
-                if (i % 2) {
-                    if (j == 11) continue;
-                    this.scene.translate((j + 0.5)*1.8, i*1.55, 0);
+            for (let i = 0; i < 11; i++){
+                for (let j = 0; j < 12; j++) {
+                    this.scene.pushMatrix();
+                    if (i % 2) {
+                        if (j == 11) continue;
+                        this.scene.translate((j + 0.5)*1.8, i*1.55, 0);
+                    }
+                    else
+                        this.scene.translate(j*1.8, i*1.55, 0);
+                    this.board[i][j].display();
+                    this.scene.popMatrix();
                 }
-                else
-                    this.scene.translate(j*1.8, i*1.55, 0);
-
-                this.board[i][j].display();
-
-                this.scene.popMatrix();
             }
-        }
-
         this.scene.popMatrix();
     }
 }

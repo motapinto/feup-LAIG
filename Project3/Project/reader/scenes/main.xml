@@ -598,7 +598,6 @@
             </materials>
             <texture id="none"/>
             <children>
-
                 <!-- TABLE SET -->
                 <componentref id="TableSetRow0" />
                 <!-- BAR -->
@@ -613,7 +612,6 @@
                 <componentref id="Building" />
                 <!-- EXTERIOR -->
                 <componentref id="Exterior" />
-
             </children>
         </component>    
 
