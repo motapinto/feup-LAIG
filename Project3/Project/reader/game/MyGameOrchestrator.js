@@ -12,7 +12,7 @@ class MyGameOrchestrator{
         // this.animator = new MyAnimator(…);
         
         this.theme = new MyScenegraph('main.xml', this.scene);
-        this.gameSequence = new MyGameSequence(this, this.theme);
+        this.gameSequence = new MyGameSequence(this.scene, this.theme);
         this.gameBoard = new MyGameboard(this.scene, this.theme);
         this.scorePlayer1 = new MyScoreBoard(this.scene, this.theme);
         this.scorePlayer2 = new MyScoreBoard(this.scene, this.theme);
@@ -53,13 +53,28 @@ class MyGameOrchestrator{
         }
     }
 
+    getMoveCoords(type) {
+        if (this.player) {
+            let pos = this.scorePlayer2.getNewPiecePos(type);
+            pos.y += 2 * 11;
+            return pos;
+        }
+        else {
+            let pos = this.scorePlayer1.getNewPiecePos(type);
+            pos.y = -pos.y;
+            return pos;
+        }
+    }
+
     update(t) {
         this.gameSequence.update(t);
-        this.animator.update(t);
+        // this.animator.update(t);
     }
 
     display() {
-        this.board.display();
+        this.gameBoard.display();
         this.gameSequence.display();
+        this.scorePlayer1.display();
+        this.scorePlayer2.display();
     }
 }
