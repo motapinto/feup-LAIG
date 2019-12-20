@@ -35,20 +35,16 @@ class MyScoreBoard {
 
     display() {
         this.scene.pushMatrix();
-
-        for (let type = 0; type < 3; type++){
-            for (let nPiece = 0; nPiece < this.score[1]; nPiece++) {
-                this.scene.pushMatrix();
-    
-                let pos = this.getPiecePos(nPiece);
-                this.scene.translate(pos.x, pos.y, 0);
-                this.pieces[type][nPiece].display();
-    
-                this.scene.popMatrix();
+            for (let type = 0; type < 3; type++){
+                for (let nPiece = 0; nPiece < this.score[1]; nPiece++) {
+                    this.scene.pushMatrix();
+                    let pos = this.getPiecePos(nPiece);
+                    this.scene.translate(pos.x, pos.y, 0);
+                    this.pieces[type][nPiece].display();
+                    this.scene.popMatrix();
+                }
+                this.scene.translate(0.2, 0, 0);
             }
-            this.scene.translate(0.2, 0, 0);
-        }
-
         this.scene.popMatrix();
     }
 

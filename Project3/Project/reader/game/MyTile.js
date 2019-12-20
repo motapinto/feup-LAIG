@@ -15,9 +15,9 @@ class MyTile {
         this.piece = piece;
     }
 
-    setPiece(piece = null) { this.piece = piece; }
+    setPiece = (piece = null) => this.piece = piece; 
 
-    getPiece() { return this.piece; } 
+    getPiece = () => this.piece; 
 
     display() {
         this.scene.pushMatrix();

@@ -11,7 +11,5 @@ class MyPiece {
         this.type = type;
     }
 
-    display() {
-        this.graph.displayComponent('Piece' + this.type);
-    }
+    display = () => this.graph.displayComponent('Piece' + this.type);
 }
