@@ -42,6 +42,7 @@ class XMLscene extends CGFscene {
         this.tInit = null;
         this.updatePeriod = 100;
         this.securityCamera = new MySecurityCamera(this);
+        this.gameMenu = new MyGameMenu(this);
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -263,8 +264,9 @@ class XMLscene extends CGFscene {
         this.setDefaultAppearance();    
         this.board.display();
         this.sequence.display();
+        this.gameMenu.display();
+        this.graph.displayScene();
 
         this.popMatrix();
-        // ---- END Background, camera and axis setup
     }
 }

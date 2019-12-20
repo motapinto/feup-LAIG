@@ -54,15 +54,23 @@ class MyGameBoard{
 
     display() {
         this.scene.pushMatrix();
+            this.scene.translate(0, 1.2, 0);
+
+            
             for (let i = 0; i < 11; i++){
                 for (let j = 0; j < 12; j++) {
                     this.scene.pushMatrix();
+                    
                     if (i % 2) {
-                        if (j == 11) continue;
+                        if (j == 11) {
+                            this.scene.popMatrix();
+                            continue;
+                        };
                         this.scene.translate((j + 0.5)*1.8, i*1.55, 0);
                     }
                     else
                         this.scene.translate(j*1.8, i*1.55, 0);
+                    
                     this.board[i][j].display();
                     this.scene.popMatrix();
                 }
