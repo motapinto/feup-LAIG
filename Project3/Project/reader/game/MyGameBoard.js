@@ -11,13 +11,11 @@ class MyGameBoard{
         this.scene = scene;
         this.graph = graph;
         this.board = [];
-        this.scorePlayer1 = new MyScoreBoard(scene, graph);
-        this.scorePlayer2 = new MyScoreBoard(scene, graph);
     }
 
-    id = (col, row) => (row * 10 + col);
+    id = (col, row) => (row * 10 + col + 1);
 
-    position(id) { return {col: id % 100, row: Math.floor(id / 100)}}; 
+    position(id) { return {col: (id - 1) % 100, row: Math.floor((id - 1) / 100)}}; 
 
 
     positionCoords(id) {

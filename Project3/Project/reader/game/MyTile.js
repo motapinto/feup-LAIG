@@ -22,7 +22,7 @@ class MyTile {
     display() {
         this.scene.pushMatrix();
 
-        this.scene.registerForPick(this.tileId, this);
+        this.scene.registerForPick(this.tileId, (this.piece == null)?this:this.piece);
 
         this.graph.displayComponent('Tile');
         if (this.piece != null)

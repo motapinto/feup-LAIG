@@ -127,11 +127,7 @@ class XMLscene extends CGFscene {
         this.axis = new CGFaxis(this, this.graph.referenceLength);
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
-        
-        this.board = new MyGameBoard(this, this.graph);
-        this.board.createInstance();
-        this.sequence = new MyGameSequence(this, this.graph);
-        
+                
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
@@ -202,33 +198,11 @@ class XMLscene extends CGFscene {
         }
     }
 
-
-    /**
-     * logs picking results in console
-     */
-    logPicking() {
-        if (this.pickMode == false) {
-            if (this.pickResults != null && this.pickResults.length > 0) {
-                for (var i = 0; i < this.pickResults.length; i++) {
-                    var obj = this.pickResults[i][0];
-                    if (obj) {
-                        var customId = this.pickResults[i][1];
-                        console.log("Picked object: " + obj + ", with pick id " + customId);
-                        let pos = this.board.scorePlayer1.getNewPiecePos(1);
-                        this.sequence.addMove(this.board.getTile(customId), this.board.scorePlayer1, pos.x, pos.y);
-                    }
-                }
-                this.pickResults.splice(0, this.pickResults.length);
-            }
-        }
-    }
-
-
     /**
      * Display the scene.
      */
     display() {  
-        this.logPicking();
+        this.gameOrchestrator(this.pickMode, this.pickResults);
         this.clearPickRegistration();
 
         if(this.sceneInited){
