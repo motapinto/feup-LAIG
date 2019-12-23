@@ -7,10 +7,9 @@ class MyTile {
      * @param {integer} tileId
      * @param {MyPiece} piece
      */
-    constructor(scene, graph, gameboard, tileId, piece = null) {
+    constructor(scene, graph, tileId, piece = null) {
         this.scene = scene;
         this.graph = graph;
-        this.gameboard = gameboard;
         this.tileId = tileId;
         this.piece = piece;
     }
