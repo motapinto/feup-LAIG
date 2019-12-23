@@ -12,14 +12,13 @@ class MyGameStats {
         this.scene = scene;
         this.score1 = score1;
         this.score2 = score2;
-        this.scoreBoardStick = new MyCylinder(scene, 3, 3, 4, 4, 1);
 
         //this.removeLaterBoard = new MyGameBoard(this.scene, this.scene.graph);
 
-        this.initTime();
+        this.init();
     }
 
-    initTime() {
+    init() {
         this.minutesOnes = new MyRectangle(this.scene, 0, 1, 0, 1);
         this.secondsTens = new MyRectangle(this.scene, 2, 3, 0, 1);
         this.secondsOnes = new MyRectangle(this.scene, 3, 4, 0, 1);
@@ -27,10 +26,13 @@ class MyGameStats {
         this.player1Score = new MyRectangle(this.scene, -2, 0, -0.5, 1.5);
         this.player2Score = new MyRectangle(this.scene, 4, 6, -0.5, 1.5);
 
-        this.tv1 = new MyRectangle(this.scene, -2, 6, -0.5, 1.5);
-        this.tv2 = new MyRectangle(this.scene, -2, 6, -0.5, 1.5);
-        this.tv3 = new MyRectangle(this.scene, -2, 6, -0.5, 1.5);
-        this.tv4 = new MyRectangle(this.scene, -2, 6, -0.5, 1.5);
+        this.tvs = [];
+        this.tvs.push(new MyRectangle(this.scene, -2, 6, -0.5, 1.5));
+        this.tvs.push(new MyRectangle(this.scene, -2, 6, -0.5, 1.5));
+        this.tvs.push(new MyRectangle(this.scene, -2, 6, -0.5, 1.5));
+        this.tvs.push(new MyRectangle(this.scene, -2, 6, -0.5, 1.5));
+
+        this.scoreBoardStick = new MyCylinder(this.scene, 3, 3, 4, 4, 1);
 
         // Stores all numbers textures
         this.digitTextures = [];
@@ -92,7 +94,7 @@ class MyGameStats {
                 this.scene.pushMatrix();
                     this.showStats();
                     this.scene.translate(0, 2, 0);
-                    this.tv1.display();
+                    this.tvs[i].display();
                 this.scene.popMatrix();
             }
 
@@ -102,7 +104,7 @@ class MyGameStats {
                     this.scene.translate(2.5, 0, 6.25);
                     this.showStats();
                     this.scene.translate(0, 2, 0);
-                    this.tv1.display();
+                    this.tvs[i].display();
                 this.scene.popMatrix();
             }
 
@@ -112,7 +114,7 @@ class MyGameStats {
                     this.scene.translate(-6.25, 0, 2.25);
                     this.showStats();
                     this.scene.translate(0, 2, 0);
-                    this.tv1.display();
+                    this.tvs[i].display();
                 this.scene.popMatrix();
             }
 
@@ -122,7 +124,7 @@ class MyGameStats {
                     this.scene.translate(-3.8, 0, 8.5);
                     this.showStats();
                     this.scene.translate(0, 2, 0);
-                    this.tv1.display();
+                    this.tvs[i].display();
                 this.scene.popMatrix();
             }
         }

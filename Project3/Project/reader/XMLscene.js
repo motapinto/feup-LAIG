@@ -44,7 +44,7 @@ class XMLscene extends CGFscene {
         this.securityCamera = new MySecurityCamera(this);
         this.gameMenu = new MyGameMenu(this);
 
-        this.scoreBoard = new MyGameStats(this, 1, 3);
+        this.gameStats = new MyGameStats(this, 1, 3);
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -242,7 +242,7 @@ class XMLscene extends CGFscene {
         this.updateLights();
         
         //this.board.display();
-        this.scoreBoard.display();
+        this.gameStats.display();
         //this.sequence.display();
         //this.gameMenu.display();
         //this.graph.displayScene();
