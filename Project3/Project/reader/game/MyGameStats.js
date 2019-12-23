@@ -27,10 +27,10 @@ class MyGameStats {
         this.player2Score = new MyRectangle(this.scene, 4, 6, -0.5, 1.5);
 
         this.tvs = [];
-        this.tvs.push(new MyRectangle(this.scene, -2, 6, -0.5, 1.5));
-        this.tvs.push(new MyRectangle(this.scene, -2, 6, -0.5, 1.5));
-        this.tvs.push(new MyRectangle(this.scene, -2, 6, -0.5, 1.5));
-        this.tvs.push(new MyRectangle(this.scene, -2, 6, -0.5, 1.5));
+        this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
+        this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
+        this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
+        this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
 
         this.scoreBoardStick = new MyCylinder(this.scene, 3, 3, 4, 4, 1);
 
@@ -88,7 +88,7 @@ class MyGameStats {
 
         this.scene.pushMatrix();
             this.scene.scale(0.5, 0.7, 0.5);
-            this.scene.translate(-2, 3, 4.25); // y = -5
+            this.scene.translate(-2, -5, 4.25); // y = -5
         for(let i = 0; i < 4; i++) {
             if(i == 0) {
                 this.scene.pushMatrix();
