@@ -24,7 +24,7 @@ serialInclude(['../lib/CGF.js',
                 'primitives/MyRectangle.js',
                 'primitives/MyTriangle.js',
                 'primitives/MyHexagon.js',
-                'primitives/MyCylinderOpt.js',
+                'primitives/MyCylinder.js',
                 'primitives/MySphere.js',
                 'primitives/MyTorus.js',
                 //Nurbs Surfaces

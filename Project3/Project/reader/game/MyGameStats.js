@@ -13,7 +13,7 @@ class MyGameStats {
         this.score1 = score1;
         this.score2 = score2;
 
-        //this.removeLaterBoard = new MyGameBoard(this.scene, this.scene.graph);
+        this.removeLaterBoard = new MyGameBoard(this.scene, this.scene.graph);
 
         this.init();
     }
@@ -23,8 +23,8 @@ class MyGameStats {
         this.secondsTens = new MyRectangle(this.scene, 2, 3, 0, 1);
         this.secondsOnes = new MyRectangle(this.scene, 3, 4, 0, 1);
         this.divider = new MyRectangle(this.scene, 1, 2, 0, 1);
-        this.player1Score = new MyRectangle(this.scene, -2, 0, -0.5, 1.5);
-        this.player2Score = new MyRectangle(this.scene, 4, 6, -0.5, 1.5);
+        this.player1Score = new MyRectangle(this.scene, -2, -0.5, -0.5, 1.5);
+        this.player2Score = new MyRectangle(this.scene, 4.5, 6, -0.5, 1.5);
 
         this.tvs = [];
         this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
@@ -81,54 +81,61 @@ class MyGameStats {
 
     display() {
         this.scene.pushMatrix();
-            this.scene.rotate(90 * DEGREE_TO_RAD, 1, 0, 0);
-            this.scene.rotate(45 * DEGREE_TO_RAD, 0, 0, 1);
-            this.scoreBoardStick.display();
+            this.scene.translate(5, 4.9, -12);
+            this.scene.scale(0.5, 0.5, 0.5);
+            this.scene.pushMatrix();
+                this.scene.rotate(90 * DEGREE_TO_RAD, 1, 0, 0);
+                this.scene.rotate(45 * DEGREE_TO_RAD, 0, 0, 1);
+                this.scoreBoardStick.display();
+            this.scene.popMatrix();
+
+            this.scene.pushMatrix();
+                this.scene.scale(0.5, 0.7, 0.5);
+                this.scene.translate(-2, -5, 4.25); // y = -5
+            for(let i = 0; i < 4; i++) {
+                if(i == 0) {
+                    this.scene.pushMatrix();
+                        this.showStats();
+                        this.scene.translate(0, 2, 0);
+                        this.tvs[i].display();
+                    this.scene.popMatrix();
+                }
+
+                if(i == 1) {
+                    this.scene.pushMatrix();
+                        this.scene.rotate(90 * DEGREE_TO_RAD, 0, 1, 0);
+                        this.scene.translate(2.5, 0, 6.25);
+                        this.showStats();
+                        this.scene.translate(0, 2, 0);
+                        this.tvs[i].display();
+                    this.scene.popMatrix();
+                }
+
+                if(i == 2) {
+                    this.scene.pushMatrix();
+                        this.scene.rotate(-90 * DEGREE_TO_RAD, 0, 1, 0);
+                        this.scene.translate(-6.25, 0, 2.25);
+                        this.showStats();
+                        this.scene.translate(0, 2, 0);
+                        this.tvs[i].display();
+                    this.scene.popMatrix();
+                }
+
+                if(i == 3) {
+                    this.scene.pushMatrix();
+                        this.scene.rotate(180 * DEGREE_TO_RAD, 0, 1, 0);
+                        this.scene.translate(-3.8, 0, 8.5);
+                        this.showStats();
+                        this.scene.translate(0, 2, 0);
+                        this.tvs[i].display();
+                    this.scene.popMatrix();
+                }
+            }
+            this.scene.popMatrix();
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();
-            this.scene.scale(0.5, 0.7, 0.5);
-            this.scene.translate(-2, -5, 4.25); // y = -5
-        for(let i = 0; i < 4; i++) {
-            if(i == 0) {
-                this.scene.pushMatrix();
-                    this.showStats();
-                    this.scene.translate(0, 2, 0);
-                    this.tvs[i].display();
-                this.scene.popMatrix();
-            }
-
-            if(i == 1) {
-                this.scene.pushMatrix();
-                    this.scene.rotate(90 * DEGREE_TO_RAD, 0, 1, 0);
-                    this.scene.translate(2.5, 0, 6.25);
-                    this.showStats();
-                    this.scene.translate(0, 2, 0);
-                    this.tvs[i].display();
-                this.scene.popMatrix();
-            }
-
-            if(i == 2) {
-                this.scene.pushMatrix();
-                    this.scene.rotate(-90 * DEGREE_TO_RAD, 0, 1, 0);
-                    this.scene.translate(-6.25, 0, 2.25);
-                    this.showStats();
-                    this.scene.translate(0, 2, 0);
-                    this.tvs[i].display();
-                this.scene.popMatrix();
-            }
-
-            if(i == 3) {
-                this.scene.pushMatrix();
-                    this.scene.rotate(180 * DEGREE_TO_RAD, 0, 1, 0);
-                    this.scene.translate(-3.8, 0, 8.5);
-                    this.showStats();
-                    this.scene.translate(0, 2, 0);
-                    this.tvs[i].display();
-                this.scene.popMatrix();
-            }
-        }
-        this.scene.popMatrix();
+        this.scene.graph.displayScene();
+        //this.removeLaterBoard.display();
     }
 
 }
