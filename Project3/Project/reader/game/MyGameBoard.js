@@ -11,6 +11,34 @@ class MyGameBoard{
         this.scene = scene;
         this.graph = graph;
         this.board = [];
+
+        init();
+    }
+
+    init() {
+        this.minutesOnes = new MyRectangle(this.scene,-2, 2, -1, 0);
+        this.divider = new MyRectangle(this.scene, -1, 2, 0, 0);
+
+        this.secondsTens = new MyRectangle(this.scene, 0, 2, 1, 0);
+        this.secondsOnes = new MyRectangle(this.scene, 1, 2, 2, 0);
+
+        this.playerScores = new MyRectangle(this.scene,  3, 3,  5, -1);
+
+        // Stores all numbers textures
+        this.digitTextures = [];
+        for (let i = 0; i < 10; ++i) {
+            let digitTex = new CGFappearance(this.scene);
+            digitTex.loadTexture("scenes/numbers/" + i + ".png");
+            this.digitTextures.push(digitTex);
+        }
+
+        this.dividerTex = new CGFappearance(this.scene);
+        this.dividerTex.loadTexture("scenes/numbers/divider.png");
+
+        // Current values for game time
+        this.currentminutesOnes = 0;
+        this.currentsecondsTens = 0;
+        this.currentsecondsOnes = 0;
     }
 
     id = (col, row) => (row * 10 + col + 1);
@@ -54,7 +82,6 @@ class MyGameBoard{
         this.scene.pushMatrix();
             this.scene.translate(0, 1.2, 0);
 
-            
             for (let i = 0; i < 11; i++){
                 for (let j = 0; j < 12; j++) {
                     this.scene.pushMatrix();

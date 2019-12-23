@@ -44,6 +44,8 @@ class XMLscene extends CGFscene {
         this.securityCamera = new MySecurityCamera(this);
         this.gameMenu = new MyGameMenu(this);
 
+        this.scoreBoard = new MyScoreBoard(this, 1);
+
         this.floorUp = function(){
             if(this.floor < this.floorMax)
                 this.floor++;
@@ -166,7 +168,7 @@ class XMLscene extends CGFscene {
     
             this.securityCamera.update(t);
     
-            this.sequence.update(t);            
+            // this.sequence.update(t);            
         }
     }
 
@@ -202,7 +204,7 @@ class XMLscene extends CGFscene {
      * Display the scene.
      */
     display() {  
-        this.gameOrchestrator(this.pickMode, this.pickResults);
+        // this.gameOrchestrator(this.pickMode, this.pickResults);
         this.clearPickRegistration();
 
         if(this.sceneInited){
@@ -235,13 +237,14 @@ class XMLscene extends CGFscene {
         this.pushMatrix();
 
         this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        this.setDefaultAppearance();    
         this.updateLights();
         
-        this.setDefaultAppearance();    
-        this.board.display();
-        this.sequence.display();
-        this.gameMenu.display();
-        this.graph.displayScene();
+        //this.board.display();
+        this.scoreBoard.display();
+        //this.sequence.display();
+        //this.gameMenu.display();
+        //this.graph.displayScene();
 
         this.popMatrix();
     }
