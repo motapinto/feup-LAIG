@@ -49,7 +49,7 @@ class XMLscene extends CGFscene {
         this.board = new MyGameBoard(this, this.graph);
 
         /* Extras */
-        this.waterPlane = new MyRectangle(this, -100, 100, -100, 100);
+        this.waterPlane = new MyRectangle(this, -50, 50, -50, 50, 100, 100);
         this.waterPlane.updateTexCoords(10, 10);
         this.waterMat = new CGFappearance(this);
 		this.waterMat.setAmbient(0.3, 0.3, 0.3, 1);
@@ -62,7 +62,7 @@ class XMLscene extends CGFscene {
         this.waterMat.setTexture(this.water_tex);
         this.waterMat.setTextureWrap('REPEAT', 'REPEAT');
         this.waterShader = new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag");
-        this.waterShader.setUniformsValues({ timeFactor: 0 });
+        this.waterShader.setUniformsValues({ timeFactor: 1 });
         this.waterShader.setUniformsValues({ uSampler2: 1 });
 
         this.floorUp = function(){
@@ -269,10 +269,14 @@ class XMLscene extends CGFscene {
 
             /* Extras */
             this.pushMatrix();
+                this.setActiveShader(this.waterShader);
+                this.water_map.bind(1);
                 this.waterMat.apply();
                 this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
                 this.translate(0, 0, 1);
                 this.waterPlane.display();
+                this.setActiveShader(this.defaultShader);
+
             this.popMatrix();
 
         this.popMatrix();

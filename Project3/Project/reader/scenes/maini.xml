@@ -530,14 +530,14 @@
             </primitive>
         <!-- PIECE -->
         <!-- BOARD -->
-            <primitive id="board">  
+            <!-- <primitive id="board">  
                 <board />
-            </primitive> 
+            </primitive>  -->
         <!-- BOARD -->
         <!-- MENU -->
-            <primitive id="menu">  
+            <!-- <primitive id="menu">  
                 <menu />
-            </primitive> 
+            </primitive>  -->
         <!-- MENU -->
 
             <primitive id="hexagon">  

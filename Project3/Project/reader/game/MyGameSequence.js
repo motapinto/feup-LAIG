@@ -13,7 +13,7 @@ class MyGameSequence {
         this.moves = [];
     }
 
-    addMove = (tile, score, x, y) => this.moves.push(new MyGameMove(this.scene, this.graph, tile, score, {x, y}, {x, y}));
+    addMove = (tile, score, x, y) => this.moves.push(new MyGameMove(this.scene, this.graph, tile, score, {x: x, y: y}, {x, y}));
 
     undo() {
         if (this.moves.length < 1 || this.moves[this.moves.length - 1].reversing)

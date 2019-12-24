@@ -43,7 +43,7 @@ class MyGameOrchestrator{
 
     OnObjectSelected(obj, uniqueId) {
         if (obj instanceof MyPiece) {
-            // do something with id knowing it is a piece
+            this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player?this.scorePlayer2:this.scorePlayer1,)
         }
         else if (obj instanceof MyTile) {
             // do something with id knowing it is a tile
