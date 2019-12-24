@@ -11,6 +11,8 @@ class MyGameBoard{
         this.scene = scene;
         this.graph = graph;
         this.board = [];
+
+        this.createInstance();
     }
 
     id = (col, row) => (row * 10 + col + 1);
@@ -54,7 +56,6 @@ class MyGameBoard{
         this.scene.pushMatrix();
             this.scene.translate(0, 1.2, 0);
 
-            
             for (let i = 0; i < 11; i++){
                 for (let j = 0; j < 12; j++) {
                     this.scene.pushMatrix();

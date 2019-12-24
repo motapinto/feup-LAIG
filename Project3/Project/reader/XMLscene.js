@@ -41,8 +41,29 @@ class XMLscene extends CGFscene {
         this.selectedSecurityCamera = null;
         this.tInit = null;
         this.updatePeriod = 100;
+        this.setUpdatePeriod(this.updatePeriod);
+        this.setPickEnabled(true);
         this.securityCamera = new MySecurityCamera(this);
         this.gameMenu = new MyGameMenu(this);
+        this.gameStats = new MyGameStats(this, 1, 3);
+        this.board = new MyGameBoard(this, this.graph);
+
+        /* Extras */
+        this.waterPlane = new MyRectangle(this, -100, 100, -100, 100);
+        this.waterPlane.updateTexCoords(10, 10);
+        this.waterMat = new CGFappearance(this);
+		this.waterMat.setAmbient(0.3, 0.3, 0.3, 1);
+		this.waterMat.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.waterMat.setSpecular(0.0, 0.0, 0.0, 1);
+		this.waterMat.setShininess(120);
+        this.water_tex = new CGFtexture(this, "scenes/images/waterTex.jpg");
+        this.water_map = new CGFtexture(this, "scenes/images/waterMap.jpg");
+        this.water_map.bind(1);
+        this.waterMat.setTexture(this.water_tex);
+        this.waterMat.setTextureWrap('REPEAT', 'REPEAT');
+        this.waterShader = new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag");
+        this.waterShader.setUniformsValues({ timeFactor: 0 });
+        this.waterShader.setUniformsValues({ uSampler2: 1 });
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -57,9 +78,6 @@ class XMLscene extends CGFscene {
             if(this.floor > this.floorMax)
                 this.floor = this.floorMax - 1;
         }
-
-        this.setUpdatePeriod(this.updatePeriod);
-        this.setPickEnabled(true);
     }
 
     /**
@@ -126,7 +144,8 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() { 
         this.axis = new CGFaxis(this, this.graph.referenceLength);
-        this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
+        this.gl.clearColor(1, 1, 1, 1);
+        //this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
                 
         this.initLights();
@@ -166,7 +185,10 @@ class XMLscene extends CGFscene {
     
             this.securityCamera.update(t);
     
-            this.sequence.update(t);            
+            // this.sequence.update(t);  
+            
+            /* Extras */
+            this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
         }
     }
 
@@ -202,7 +224,7 @@ class XMLscene extends CGFscene {
      * Display the scene.
      */
     display() {  
-        this.gameOrchestrator(this.pickMode, this.pickResults);
+        // this.gameOrchestrator(this.pickMode, this.pickResults);
         this.clearPickRegistration();
 
         if(this.sceneInited){
@@ -234,14 +256,24 @@ class XMLscene extends CGFscene {
 
         this.pushMatrix();
 
-        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-        this.updateLights();
-        
-        this.setDefaultAppearance();    
-        this.board.display();
-        this.sequence.display();
-        this.gameMenu.display();
-        this.graph.displayScene();
+            this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+            this.setDefaultAppearance();    
+            this.updateLights();
+            
+            //this.board.display();
+            this.gameStats.display();
+            //this.graph.displayComponent('Table'),
+            //this.sequence.display();
+            //this.gameMenu.display();
+            //this.graph.displayScene();
+
+            /* Extras */
+            this.pushMatrix();
+                this.waterMat.apply();
+                this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                this.translate(0, 0, 1);
+                this.waterPlane.display();
+            this.popMatrix();
 
         this.popMatrix();
     }

@@ -6,7 +6,7 @@
  * @param y - Scale of rectangle in Y
  */
 class MyRectangle extends CGFobject {
-	constructor(scene, x1, x2, y1, y2, stacks = 5, slices = 5) {
+	constructor(scene, x1, x2, y1, y2, stacks = 4, slices = 4) {
 		//point 1 must have lower y and lower x than point 2
 		super(scene);
 
