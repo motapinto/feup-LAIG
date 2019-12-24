@@ -9,7 +9,6 @@ class MyPlayerStash {
      */
     constructor(scene, player) {
         this.scene = scene;
-        this.player = player;
 
         this.createInstance();
     }
@@ -22,7 +21,7 @@ class MyPlayerStash {
 
     hasWon() {
         for(let i = 0 ; i < 3; i++) {
-            if(this.score[i] != 5)
+            if(this.score[i] < 5)
                 return false;
         }
         return true;
@@ -36,8 +35,8 @@ class MyPlayerStash {
         this.score[piece.type - 1]++;
         this.pieces[piece.type - 1].push(piece);
         this.scoreVal++;
-        if(hasWon())
-            alert('Player ' + this.player + ' has won!');
+        // if(hasWon())
+        //     alert('Player ' + this.player + ' has won!');
     }
 
     removePiece(type) {

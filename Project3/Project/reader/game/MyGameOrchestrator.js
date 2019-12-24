@@ -7,15 +7,17 @@ class MyGameOrchestrator{
      * @param {Scene} scene
      * @param {SceneGraph} graph
      */
-    constructor(scene) {
+    constructor(scene, theme) {
         this.scene = scene;
+        this.theme = theme;
         // this.animator = new MyAnimator(…);
         
-        this.theme = new MyScenegraph('main.xml', this.scene);
+        // this.theme = new MyScenegraph('main.xml', this.scene);
         this.gameSequence = new MyGameSequence(this.scene, this.theme);
-        this.gameBoard = new MyGameboard(this.scene, this.theme);
-        this.scorePlayer1 = new MyScoreBoard(this.scene, this.theme);
-        this.scorePlayer2 = new MyScoreBoard(this.scene, this.theme);
+        this.gameBoard = new MyGameBoard(this.scene, this.theme);
+        this.gameBoard.createInstance();
+        this.scorePlayer1 = new MyPlayerStash(this.scene);
+        this.scorePlayer2 = new MyPlayerStash(this.scene);
         // this.prolog = new MyPrologInterface(…);
         this.pickMode = false;
         this.player = 0;
@@ -43,7 +45,7 @@ class MyGameOrchestrator{
 
     OnObjectSelected(obj, uniqueId) {
         if (obj instanceof MyPiece) {
-            this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player?this.scorePlayer2:this.scorePlayer1,)
+            this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.position(uniqueId), this.getMoveCoords(obj.type))
         }
         else if (obj instanceof MyTile) {
             // do something with id knowing it is a tile

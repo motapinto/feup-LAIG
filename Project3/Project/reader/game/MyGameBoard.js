@@ -15,41 +15,41 @@ class MyGameBoard{
         this.createInstance();
     }
 
-    id = (col, row) => (row * 10 + col + 1);
+    id = (x, y) => (y * 10 + x + 1);
 
-    position(id) { return {col: (id - 1) % 100, row: Math.floor((id - 1) / 100)}}; 
+    position(id) { return {x: (id - 1) % 100, y: Math.floor((id - 1) / 100)} }; 
 
-    positionCoords = (id) => this.positionCoords(this.position(id).col, this.position(id).row);
+    positionCoords = (id) => this.positionCoords(this.position(id).x, this.position(id).y);
 
-    positionCoords(col, row) {
-        let y = 10 - row + 0.5;
-        let x = col + 0.5;
-        if (row % 2)
+    positionCoords(x, y) {
+        y = 10 - y + 0.5;
+        x = x + 0.5;
+        if (y % 2)
             x += 0.5;
         
         return { x: x, y: y };
     }
 
     createInstance() {
-        for (let row = 0; row < 11; row++) {
-            let rowVals = [];
-            for (let col = 0; col < 12; col++) {
-                if (row % 2 && col == 11) continue;
-                rowVals.push(new MyTile(this.scene, this.graph, this, this.id(col, row), new MyPiece(this.scene, this.graph, 1)));
+        for (let y = 0; y < 11; y++) {
+            let yVals = [];
+            for (let x = 0; x < 12; x++) {
+                if (y % 2 && x == 11) continue;
+                yVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, 1)));
             }
-            this.board.push(rowVals);
+            this.board.push(yVals);
         }
     }
 
-    getPiece = (row, col) => this.board[row][col].getPiece();
+    getPiece = (y, x) => this.board[y][x].getPiece();
 
-    setPiece(row, col, piece = null) {
-        this.board[row][col].setPiece(piece);
+    setPiece(y, x, piece = null) {
+        this.board[y][x].setPiece(piece);
     }
 
     getTile(id) {
         let position = this.position(id);
-        return this.board[position.row][position.col];
+        return this.board[position.y][position.x];
     }
 
     display() {

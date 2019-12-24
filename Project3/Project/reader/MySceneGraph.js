@@ -1734,10 +1734,10 @@ class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
-        this.processComponentNode(this.idRoot, mat4.create(), "DefaultMaterial", "none", 1, 1);
+        this.processComponentNode(this.idRoot, mat4.create(), "defaultMaterial", "none", 1, 1);
     }
 
     displayComponent(component) {
-        this.processComponentNode(component, mat4.create(), "DefaultMaterial", "none", 1, 1);
+        this.processComponentNode(component, mat4.create(), "defaultMaterial", "none", 1, 1);
     }
 }

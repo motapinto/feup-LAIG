@@ -45,7 +45,6 @@ class XMLscene extends CGFscene {
         this.setPickEnabled(true);
         this.gameMenu = new MyGameMenu(this);
         this.gameStats = new MyGameStats(this, 1, 3);
-        this.board = new MyGameBoard(this, this.graph);
         this.securityCamera = new MySecurityCamera(this);
 
         /* Extras */
@@ -147,7 +146,8 @@ class XMLscene extends CGFscene {
         this.gl.clearColor(1, 1, 1, 1);
         //this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
-                
+        
+        this.orchestrator = new MyGameOrchestrator(this, this.graph);
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
@@ -156,6 +156,7 @@ class XMLscene extends CGFscene {
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
         this.interface.CamerasFolder(this.graph.views);
+
 
         this.setCamera(this.graph.views[this.selectedCamera]);
     }
@@ -185,6 +186,7 @@ class XMLscene extends CGFscene {
             this.gameStats.update(instant);
     
             // this.sequence.update(t);  
+            this.orchestrator.update(t);
             
             /* Extras */
             this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
@@ -223,10 +225,10 @@ class XMLscene extends CGFscene {
      * Display the scene.
      */
     display() {  
-        // this.gameOrchestrator(this.pickMode, this.pickResults);
         this.clearPickRegistration();
-
+        
         if(this.sceneInited){
+            this.orchestrator.managePick(this.pickMode, this.pickResults);
             this.securityCamera.attachToFrameBuffer();
             this.render(this.graph.views[this.selectedSecurityCamera]);
             this.securityCamera.detachFromFrameBuffer();
@@ -261,10 +263,11 @@ class XMLscene extends CGFscene {
             
             //this.board.display();
             this.gameStats.display();
-            //this.graph.displayComponent('Table'),
+            // this.graph.displayComponent('Table'),
             //this.sequence.display();
             //this.gameMenu.display();
             //this.graph.displayScene();
+        this.orchestrator.display();
 
             /* Extras */
             this.pushMatrix();
