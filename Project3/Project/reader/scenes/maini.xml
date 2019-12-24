@@ -4,8 +4,8 @@
 
     <views default="topFloor">
         <perspective id="topFloor" near="0.1" far="1000" angle="40">
-            <from x="5" y="50" z="-9" />
-            <to x="5" y="3" z="-10" />
+            <from x="5" y="3.6" z="-12.001" />
+            <to x="5" y="1" z="-11.9" />
         </perspective>
         <perspective id="topFloorInclined" near="0.1" far="1000" angle="20">
             <from x="5" y="32" z="50" />
@@ -27,9 +27,9 @@
             <from x="5" y="9" z="-20" />
             <to x="5" y="6" z="5" />
         </perspective>
-        <perspective id="globalPrespective" near="0.1" far="1000" angle="40">
-            <from x="-5" y="50" z="90" />
-            <to x="5" y="0" z="-20" />
+        <perspective id="gameView" near="0.1" far="1000" angle="40">
+            <from x="5" y="3.6" z="-12.001" />
+            <to x="5" y="1" z="-11.9" />
         </perspective>
     </views>
 

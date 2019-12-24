@@ -230,7 +230,7 @@ class XMLscene extends CGFscene {
         if(this.sceneInited){
             this.orchestrator.managePick(this.pickMode, this.pickResults);
             this.scoreCamera.attachToFrameBuffer();
-            this.render(this.graph.views[this.selectedSecurityCamera]);
+            this.render(this.graph.views['gameView']);
             this.scoreCamera.detachFromFrameBuffer();
                 
             this.render(this.graph.views[this.selectedCamera]);
