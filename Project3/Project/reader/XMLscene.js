@@ -232,11 +232,19 @@ class XMLscene extends CGFscene {
             this.securityCamera.attachToFrameBuffer();
             this.render(this.graph.views[this.selectedSecurityCamera]);
             this.securityCamera.detachFromFrameBuffer();
+            
+            // for(let i=0; i<4; i++) {
+            //     this.gameStats.tvs[i].attachToFrameBuffer();
+            //     this.render(this.graph.views[this.selectedSecurityCamera]);
+            //     this.gameStats.tvs[i].detachFromFrameBuffer();
+            // }
     
             this.render(this.graph.views[this.selectedCamera]);
 
             this.gl.disable(this.gl.DEPTH_TEST);
-            this.securityCamera.display();
+            // for(let i=0; i<4; i++) {
+            //     this.gameStats.tvs[i].display();
+            // }
             this.gl.enable(this.gl.DEPTH_TEST);
         }
     }

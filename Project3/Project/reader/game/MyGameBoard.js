@@ -31,11 +31,19 @@ class MyGameBoard{
     }
 
     createInstance() {
+<<<<<<< HEAD
         for (let y = 0; y < 11; y++) {
             let yVals = [];
             for (let x = 0; x < 12; x++) {
                 if (y % 2 && x == 11) continue;
                 yVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, 1)));
+=======
+        for (let row = 0; row < 11; row++) {
+            let rowVals = [];
+            for (let col = 0; col < 12; col++) {
+                if (row % 2 && col == 11) continue;
+                rowVals.push(new MyTile(this.scene, this.graph, this.id(col, row), new MyPiece(this.scene, this.graph, 1)));
+>>>>>>> 4a214c2c0cf09890997c468f22bbc7cf5927983d
             }
             this.board.push(yVals);
         }

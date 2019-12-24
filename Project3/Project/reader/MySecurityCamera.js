@@ -6,10 +6,10 @@
 */
 class MySecurityCamera {
   constructor(scene){
-    this.scene = scene;
+	this.scene = scene;
     
     this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);;
-	this.rectangle = this.scene.gameStats.tvs[0];
+	this.rectangle = new MyRectangle(this.scene, -2, 6, 0, 3)
 	
     this.textureMaterial = new CGFappearance(this.scene);
     this.textureMaterial.setShininess(1);
@@ -18,8 +18,6 @@ class MySecurityCamera {
     this.textureMaterial.setSpecular(1, 1, 1, 1);
     this.textureMaterial.setEmission(1, 1, 1, 1);
     this.textureMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
-    this.rectangle.updateTexCoords(0.5, -0.5);    
   }
   
   attachToFrameBuffer(){
@@ -32,7 +30,6 @@ class MySecurityCamera {
 
   display(){
 	this.scene.pushMatrix();
-	
 		this.textureMaterial.apply();
 		this.texture.bind();
 		this.rectangle.display();
