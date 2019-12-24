@@ -143,9 +143,5 @@ class MyGameStats {
             }
             this.scene.popMatrix();
         this.scene.popMatrix();
-
-        this.scene.graph.displayScene();
-        //this.removeLaterBoard.display();
     }
-
 }

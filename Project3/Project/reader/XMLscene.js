@@ -269,13 +269,13 @@ class XMLscene extends CGFscene {
             this.setDefaultAppearance();    
             this.updateLights();
             
-            //this.board.display();
+            this.orchestrator.display();
             this.gameStats.display();
-            // this.graph.displayComponent('Table'),
+            this.graph.displayScene();
+
             //this.sequence.display();
             //this.gameMenu.display();
             //this.graph.displayScene();
-        this.orchestrator.display();
 
             /* Extras */
             this.pushMatrix();
