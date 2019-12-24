@@ -184,6 +184,8 @@ class XMLscene extends CGFscene {
             this.graph.updateAnimations(instant); //t is in miliseconds
     
             this.securityCamera.update(t);
+
+            this.gameStats.update(instant);
     
             // this.sequence.update(t);  
             
@@ -210,7 +212,7 @@ class XMLscene extends CGFscene {
             if (this.lightsInterface.hasOwnProperty(key)) {
                 if (this.lightsInterface[key]) {
                     this.lights[i].enable();
-                    this.lights[i].setVisible(false);
+                    this.lights[i].setVisible(true);
                 }
                 else {
                     this.lights[i].disable();
