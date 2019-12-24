@@ -1250,7 +1250,7 @@ class MySceneGraph {
                 this.primitives[primitiveID] = board;
 
             case 'menu':
-                var menu = new MyGameMenu(this.scene, this);
+                var menu = new MyGameMenu(this.scene);
                 this.primitives[primitiveID] = menu;
             
             default:

@@ -12,8 +12,7 @@ class MyGameStats {
         this.scene = scene;
         this.score1 = score1;
         this.score2 = score2;
-
-        this.removeLaterBoard = new MyGameBoard(this.scene, this.scene.graph);
+        this.startTime = true;
 
         this.init();
     }
@@ -31,8 +30,9 @@ class MyGameStats {
         this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
         this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
         this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
+        this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);
 
-        this.scoreBoardStick = new MyCylinder(this.scene, 3, 3, 4, 4, 1);
+        this.scoreBoardStick = new MyCylinder(this.scene, 2.99, 2.99, 4, 4, 1);
 
         // Stores all numbers textures
         this.digitTextures = [];
@@ -52,12 +52,22 @@ class MyGameStats {
     }
 
     update(t) {
-        let minutes = Math.floor(t / 60);
-        let seconds = t % 60;
+        if(this.startTime) {
+            let minutes = Math.floor(t / 60);
+            let seconds = t % 60;
+    
+            this.currentMinutesOnes = Math.abs(minutes);
+            this.currentSecondsTens = Math.abs(Math.floor(seconds / 10));
+            this.currentSecondsOnes = Math.abs(seconds % 10);
+        }
+    }
 
-        this.currentMinutesOnes = Math.abs(minutes);
-        this.currentSecondsTens = Math.abs(Math.floor(seconds / 10));
-        this.currentSecondsOnes = Math.abs(seconds % 10);
+    attachToFrameBuffer(){
+        this.texture.attachToFrameBuffer();
+    }
+
+    detachFromFrameBuffer(){
+        this.texture.detachFromFrameBuffer();
     }
 
     showStats() {

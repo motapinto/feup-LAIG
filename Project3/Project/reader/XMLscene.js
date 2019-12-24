@@ -43,10 +43,10 @@ class XMLscene extends CGFscene {
         this.updatePeriod = 100;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
-        this.securityCamera = new MySecurityCamera(this);
         this.gameMenu = new MyGameMenu(this);
         this.gameStats = new MyGameStats(this, 1, 3);
         this.board = new MyGameBoard(this, this.graph);
+        this.securityCamera = new MySecurityCamera(this);
 
         /* Extras */
         this.waterPlane = new MyRectangle(this, -50, 50, -50, 50, 100, 100);
@@ -156,7 +156,6 @@ class XMLscene extends CGFscene {
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
         this.interface.CamerasFolder(this.graph.views);
-        this.interface.SecurityCamerasFolder(this.graph.views);
 
         this.setCamera(this.graph.views[this.selectedCamera]);
     }
@@ -182,8 +181,8 @@ class XMLscene extends CGFscene {
     
             this.checkKeys(t);
             this.graph.updateAnimations(instant); //t is in miliseconds
-    
-            this.securityCamera.update(t);
+
+            this.gameStats.update(instant);
     
             // this.sequence.update(t);  
             
@@ -210,7 +209,7 @@ class XMLscene extends CGFscene {
             if (this.lightsInterface.hasOwnProperty(key)) {
                 if (this.lightsInterface[key]) {
                     this.lights[i].enable();
-                    this.lights[i].setVisible(false);
+                    this.lights[i].setVisible(true);
                 }
                 else {
                     this.lights[i].disable();
