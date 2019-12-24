@@ -74,7 +74,12 @@ class MyGameOrchestrator{
     }
 
     display() {
-        this.gameBoard.display();
+        this.scene.pushMatrix();
+            this.scene.translate(4, 1.1, -11);
+            this.scene.scale(0.1, 0.1, 0.1);
+            this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
+            this.gameBoard.display();
+        this.scene.popMatrix();
         this.gameSequence.display();
         this.scorePlayer1.display();
         this.scorePlayer2.display();

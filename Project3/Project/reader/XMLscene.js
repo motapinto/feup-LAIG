@@ -43,7 +43,7 @@ class XMLscene extends CGFscene {
         this.updatePeriod = 100;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
-        this.scoreCamera = new MySecurityCamera(this);
+        this.scoreCamera = new MyCamera(this);
         this.gameMenu = new MyGameMenu(this);
         this.gameStats = new MyGameStats(this, this.scoreCamera, 1, 3);
 
