@@ -45,8 +45,8 @@ class XMLscene extends CGFscene {
         this.setPickEnabled(true);
         this.securityCamera = new MySecurityCamera(this);
         this.gameMenu = new MyGameMenu(this);
-
         this.gameStats = new MyGameStats(this, 1, 3);
+        this.board = new MyGameBoard(this, this.graph);
 
         /* Extras */
         this.waterPlane = new MyRectangle(this, -100, 100, -100, 100);
@@ -262,6 +262,7 @@ class XMLscene extends CGFscene {
             
             //this.board.display();
             this.gameStats.display();
+            //this.graph.displayComponent('Table'),
             //this.sequence.display();
             //this.gameMenu.display();
             //this.graph.displayScene();
