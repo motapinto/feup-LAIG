@@ -46,7 +46,6 @@ class XMLscene extends CGFscene {
         this.gameMenu = new MyGameMenu(this);
         this.gameStats = new MyGameStats(this, 1, 3);
         this.board = new MyGameBoard(this, this.graph);
-        this.securityCamera = new MySecurityCamera(this);
 
         /* Extras */
         this.waterPlane = new MyRectangle(this, -50, 50, -50, 50, 100, 100);
@@ -227,14 +226,18 @@ class XMLscene extends CGFscene {
         this.clearPickRegistration();
 
         if(this.sceneInited){
-            this.securityCamera.attachToFrameBuffer();
-            this.render(this.graph.views[this.selectedSecurityCamera]);
-            this.securityCamera.detachFromFrameBuffer();
+            // for(let i=0; i<4; i++) {
+            //     this.gameStats.tvs[i].attachToFrameBuffer();
+            //     this.render(this.graph.views[this.selectedSecurityCamera]);
+            //     this.gameStats.tvs[i].detachFromFrameBuffer();
+            // }
     
             this.render(this.graph.views[this.selectedCamera]);
 
             this.gl.disable(this.gl.DEPTH_TEST);
-            this.securityCamera.display();
+            // for(let i=0; i<4; i++) {
+            //     this.gameStats.tvs[i].display();
+            // }
             this.gl.enable(this.gl.DEPTH_TEST);
         }
     }

@@ -91,7 +91,7 @@ class MyGameStats {
 
     display() {
         this.scene.pushMatrix();
-            this.scene.translate(5, 4.9, -12);
+            this.scene.translate(5, 5, -12);
             this.scene.scale(0.5, 0.5, 0.5);
             this.scene.pushMatrix();
                 this.scene.rotate(90 * DEGREE_TO_RAD, 1, 0, 0);

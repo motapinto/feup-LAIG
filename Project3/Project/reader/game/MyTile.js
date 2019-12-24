@@ -3,7 +3,6 @@ class MyTile {
      * @constructor
      * @param {Scene} scene
      * @param {SceneGraph} graph
-     * @param {MyGameBoard} gameboard
      * @param {integer} tileId
      * @param {MyPiece} piece
      */

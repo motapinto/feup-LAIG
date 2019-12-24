@@ -35,7 +35,7 @@ class MyGameBoard{
             let rowVals = [];
             for (let col = 0; col < 12; col++) {
                 if (row % 2 && col == 11) continue;
-                rowVals.push(new MyTile(this.scene, this.graph, this, this.id(col, row), new MyPiece(this.scene, this.graph, 1)));
+                rowVals.push(new MyTile(this.scene, this.graph, this.id(col, row), new MyPiece(this.scene, this.graph, 1)));
             }
             this.board.push(rowVals);
         }
