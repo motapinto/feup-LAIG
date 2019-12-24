@@ -12,7 +12,7 @@ class MyGameStats {
         this.scene = scene;
         this.score1 = score1;
         this.score2 = score2;
-        this.startTime = false;
+        this.startTime = true;
 
         this.init();
     }
@@ -30,6 +30,7 @@ class MyGameStats {
         this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
         this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
         this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
+        this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);
 
         this.scoreBoardStick = new MyCylinder(this.scene, 2.99, 2.99, 4, 4, 1);
 
@@ -59,6 +60,14 @@ class MyGameStats {
             this.currentSecondsTens = Math.abs(Math.floor(seconds / 10));
             this.currentSecondsOnes = Math.abs(seconds % 10);
         }
+    }
+
+    attachToFrameBuffer(){
+        this.texture.attachToFrameBuffer();
+    }
+
+    detachFromFrameBuffer(){
+        this.texture.detachFromFrameBuffer();
     }
 
     showStats() {

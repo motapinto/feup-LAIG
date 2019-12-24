@@ -49,20 +49,6 @@ class MyInterface extends CGFinterface {
       //Dropdown for cameras
       this.gui.add(this.scene, 'selectedCamera', this.scene.viewsList).name('Camera');
     }
-    SecurityCamerasFolder() {
-      //Dropdown for cameras
-      this.gui.add(this.scene, 'selectedSecurityCamera', this.scene.viewsList).name('Security Camera');
-      this.SecurityCamerasOptionsFolder();
-    }
-    SecurityCamerasOptionsFolder() {
-      let securityCameraFolder = this.gui.addFolder("Security Camera Options");
-
-      securityCameraFolder.add(this.scene.securityCamera, 'lineSpeed', 0.1, 10.0).name('Line Speed').onChange(this.scene.securityCamera.updateShader.bind(this.scene.securityCamera));
-      securityCameraFolder.add(this.scene.securityCamera, 'linesNumber', 1, 100.0).name('Number of lines').onChange(this.scene.securityCamera.updateShader.bind(this.scene.securityCamera));
-      securityCameraFolder.add(this.scene.securityCamera, 'lineDiff', 0.0, 2.0).name('Thickness Difference').onChange(this.scene.securityCamera.updateShader.bind(this.scene.securityCamera));
-      securityCameraFolder.add(this.scene.securityCamera, 'radiusVar', 1.0, 2.0).name('Blackout Radius').onChange(this.scene.securityCamera.updateShader.bind(this.scene.securityCamera));
-      securityCameraFolder.add(this.scene.securityCamera, 'brightness', 0.1, 5.0).name('Line Brightness').onChange(this.scene.securityCamera.updateShader.bind(this.scene.securityCamera));
-    }
 
     /**
      * initKeys
