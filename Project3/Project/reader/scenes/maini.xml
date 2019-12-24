@@ -521,13 +521,24 @@
                 <sphere radius="0.15" slices="20" stacks="10" />
             </primitive>
 
-            <!-- PIECE -->
+        <!-- PIECE -->
             <primitive id="cylinder">  
                 <cylinder base="1" top="1" height="1" slices="50" stacks="25" />
             </primitive>
             <primitive id="sphere">  
                 <sphere radius="1" slices="50" stacks="25" />
             </primitive>
+        <!-- PIECE -->
+        <!-- BOARD -->
+            <primitive id="board">  
+                <board />
+            </primitive> 
+        <!-- BOARD -->
+        <!-- MENU -->
+            <primitive id="menu">  
+                <menu />
+            </primitive> 
+        <!-- MENU -->
 
             <primitive id="hexagon">  
                 <hexagon radius="1" />

@@ -933,7 +933,7 @@ class MySceneGraph {
 
             // Validate the primitive type
           if (grandChildren.length != 1)
-            return "There must be exactly 1 primitive type (rectangle, triangle, hexagon, cylinder, sphere, torus, plane, patch, triangle2 or cylinder2)"
+            return "There must be exactly 1 primitive type (rectangle, triangle, hexagon, cylinder, sphere, torus, plane, patch, triangle2, cylinder2, board or menu)"
                 
                 // Retrieves the primitive coordinates.
           switch (primitiveType) {
@@ -1244,9 +1244,17 @@ class MySceneGraph {
                 var cyl2 = new Cylinder2(this.scene, base, top, height, slices, stacks);
                 this.primitives[primitiveID] = cyl2;
                 break;
+
+            case 'board':
+                var board = new MyGameBoard(this.scene, this);
+                this.primitives[primitiveID] = board;
+
+            case 'menu':
+                var menu = new MyGameMenu(this.scene, this);
+                this.primitives[primitiveID] = menu;
             
             default:
-                return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere, torus, plane, patch, triangle2 or cylinder2)"
+                return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere, torus, plane, patch, triangle2, cylinder2, board or menu)"
   
           }
 
