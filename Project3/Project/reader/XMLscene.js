@@ -43,9 +43,9 @@ class XMLscene extends CGFscene {
         this.updatePeriod = 100;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
+        this.scoreCamera = new MySecurityCamera(this);
         this.gameMenu = new MyGameMenu(this);
-        this.gameStats = new MyGameStats(this, 1, 3);
-        this.securityCamera = new MySecurityCamera(this);
+        this.gameStats = new MyGameStats(this, this.scoreCamera, 1, 3);
 
         /* Extras */
         this.waterPlane = new MyRectangle(this, -50, 50, -50, 50, 100, 100);
@@ -229,23 +229,11 @@ class XMLscene extends CGFscene {
         
         if(this.sceneInited){
             this.orchestrator.managePick(this.pickMode, this.pickResults);
-            this.securityCamera.attachToFrameBuffer();
+            this.scoreCamera.attachToFrameBuffer();
             this.render(this.graph.views[this.selectedSecurityCamera]);
-            this.securityCamera.detachFromFrameBuffer();
-            
-            // for(let i=0; i<4; i++) {
-            //     this.gameStats.tvs[i].attachToFrameBuffer();
-            //     this.render(this.graph.views[this.selectedSecurityCamera]);
-            //     this.gameStats.tvs[i].detachFromFrameBuffer();
-            // }
-    
+            this.scoreCamera.detachFromFrameBuffer();
+                
             this.render(this.graph.views[this.selectedCamera]);
-
-            this.gl.disable(this.gl.DEPTH_TEST);
-            // for(let i=0; i<4; i++) {
-            //     this.gameStats.tvs[i].display();
-            // }
-            this.gl.enable(this.gl.DEPTH_TEST);
         }
     }
 

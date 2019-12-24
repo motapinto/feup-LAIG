@@ -8,8 +8,9 @@ class MyGameStats {
      * @param {integer} score1 
      * @param {integer} score2 
      */
-    constructor(scene, score1, score2) {
+    constructor(scene, camera, score1, score2) {
         this.scene = scene;
+        this.camera = camera;
         this.score1 = score1;
         this.score2 = score2;
         this.startTime = true;
@@ -25,11 +26,6 @@ class MyGameStats {
         this.player1Score = new MyRectangle(this.scene, -2, -0.5, -0.5, 1.5);
         this.player2Score = new MyRectangle(this.scene, 4.5, 6, -0.5, 1.5);
 
-        this.tvs = [];
-        this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
-        this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
-        this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
-        this.tvs.push(new MyRectangle(this.scene, -2, 6, 0, 3));
         this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);
 
         this.scoreBoardStick = new MyCylinder(this.scene, 2.99, 2.99, 4, 4, 1);
@@ -56,9 +52,9 @@ class MyGameStats {
             let minutes = Math.floor(t / 60);
             let seconds = t % 60;
     
-            this.currentMinutesOnes = Math.abs(minutes);
-            this.currentSecondsTens = Math.abs(Math.floor(seconds / 10));
-            this.currentSecondsOnes = Math.abs(seconds % 10);
+            this.currentMinutesOnes = minutes;
+            this.currentSecondsTens = Math.floor(seconds / 10);
+            this.currentSecondsOnes = Math.floor(seconds % 10);
         }
     }
 
@@ -71,7 +67,7 @@ class MyGameStats {
     }
 
     showStats() {
-        this.digitTextures[this.currentMinutesOnes].apply();
+        this.digitTextures[this.currentSecondsOnes].apply();
         this.secondsOnes.display();
         this.digitTextures[this.currentSecondsTens].apply();
         this.secondsTens.display();
@@ -107,7 +103,7 @@ class MyGameStats {
                     this.scene.pushMatrix();
                         this.showStats();
                         this.scene.translate(0, 2, 0);
-                        this.tvs[i].display();
+                        this.camera.display();
                     this.scene.popMatrix();
                 }
 
@@ -117,7 +113,7 @@ class MyGameStats {
                         this.scene.translate(2.5, 0, 6.25);
                         this.showStats();
                         this.scene.translate(0, 2, 0);
-                        this.tvs[i].display();
+                        this.camera.display();
                     this.scene.popMatrix();
                 }
 
@@ -127,7 +123,7 @@ class MyGameStats {
                         this.scene.translate(-6.25, 0, 2.25);
                         this.showStats();
                         this.scene.translate(0, 2, 0);
-                        this.tvs[i].display();
+                        this.camera.display();
                     this.scene.popMatrix();
                 }
 
@@ -137,14 +133,14 @@ class MyGameStats {
                         this.scene.translate(-3.8, 0, 8.5);
                         this.showStats();
                         this.scene.translate(0, 2, 0);
-                        this.tvs[i].display();
+                        this.camera.display();
                     this.scene.popMatrix();
                 }
             }
             this.scene.popMatrix();
         this.scene.popMatrix();
 
-        this.scene.graph.displayScene();
+        // this.scene.graph.displayScene();
         //this.removeLaterBoard.display();
     }
 
