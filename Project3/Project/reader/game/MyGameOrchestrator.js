@@ -79,15 +79,15 @@ class MyGameOrchestrator{
             this.scene.scale(0.1, 0.1, 0.1);
             this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
             this.gameBoard.display();
+            this.gameSequence.display();
+            
+            this.scene.pushMatrix();
+            this.scene.scale(1, -1, 1);
+            this.scorePlayer1.display();
+            
+            this.scene.popMatrix();
+            
+            this.scorePlayer2.display();
         this.scene.popMatrix();
-        this.gameSequence.display();
-        
-        this.scene.pushMatrix();
-        this.scene.scale(1, -1, 1);
-        this.scorePlayer1.display();
-        
-        this.scene.popMatrix();
-
-        this.scorePlayer2.display();
     }
 }
