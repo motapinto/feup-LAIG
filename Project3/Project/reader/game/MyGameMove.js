@@ -21,7 +21,10 @@ class MyGameMove {
         this.reversing = false;
         this.startTime = null;
         this.matrix = mat4.create();
+        this.coordsInit = coordsInit;
         this.createAnimation(coordsInit, coordsFin);
+        console.log(coordsInit);
+        console.log(coordsFin);
     }
 
     createAnimation(coordsInit, coordsFin) {
@@ -30,7 +33,7 @@ class MyGameMove {
             y: coordsFin.y - coordsInit.y
         };
         let distOffset = 0.1 * Math.sqrt(this.coordsDiff.x * this.coordsDiff.x + this.coordsDiff.y * this.coordsDiff.y);
-        this.deltaTime = 1 + distOffset;
+        this.deltaTime = 2 + distOffset;
         this.height = 0.5 + distOffset;
         this.animate();
     }
@@ -83,8 +86,13 @@ class MyGameMove {
 
     display() {
         if (this.animating) {
+            this.scene.pushMatrix();
+            
             this.scene.multMatrix(this.matrix);
-            this.piece.display();
+            this.scene.translate(this.coordsInit.x, this.coordsInit.y, 0);
+
+                this.piece.display();
+            this.scene.popMatrix();
         }
     }
 }

@@ -15,19 +15,20 @@ class MyGameBoard{
         this.createInstance();
     }
 
-    id = (x, y) => (y * 10 + x + 1);
+    id = (x, y) => (y * 100 + x + 1);
 
     position(id) { return {x: (id - 1) % 100, y: Math.floor((id - 1) / 100)} }; 
 
-    positionCoords = (id) => this.positionCoords(this.position(id).x, this.position(id).y);
+    positionCoordsId(id) {
+        let pos = this.position(id);
+        return this.positionCoords(pos.x, pos.y);
+    }
 
     positionCoords(x, y) {
-        y = 10 - y + 0.5;
-        x = x + 0.5;
         if (y % 2)
             x += 0.5;
         
-        return { x: x, y: y };
+        return { x: x*1.8, y: (y+0.775)*1.55 };
     }
 
     createInstance() {

@@ -186,7 +186,7 @@ class XMLscene extends CGFscene {
             this.gameStats.update(instant);
     
             // this.sequence.update(t);  
-            this.orchestrator.update(t);
+            this.orchestrator.update(instant);
             
             /* Extras */
             this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });

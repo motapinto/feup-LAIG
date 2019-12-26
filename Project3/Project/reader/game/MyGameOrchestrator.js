@@ -45,7 +45,7 @@ class MyGameOrchestrator{
 
     OnObjectSelected(obj, uniqueId) {
         if (obj instanceof MyPiece) {
-            this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.position(uniqueId), this.getMoveCoords(obj.type))
+            this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoordsId(uniqueId), this.getMoveCoords(obj.type))
         }
         else if (obj instanceof MyTile) {
             // do something with id knowing it is a tile
@@ -76,7 +76,13 @@ class MyGameOrchestrator{
     display() {
         this.gameBoard.display();
         this.gameSequence.display();
+        
+        this.scene.pushMatrix();
+        this.scene.scale(1, -1, 1);
         this.scorePlayer1.display();
+        
+        this.scene.popMatrix();
+
         this.scorePlayer2.display();
     }
 }
