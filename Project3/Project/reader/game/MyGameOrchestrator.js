@@ -20,7 +20,7 @@ class MyGameOrchestrator{
         this.scorePlayer2 = new MyPlayerStash(this.scene);
         // this.prolog = new MyPrologInterface(…);
         this.pickMode = false;
-        this.player = 0;
+        this.player = 1;
         this.AILvl = 0;
     }
 
@@ -82,12 +82,16 @@ class MyGameOrchestrator{
             this.gameSequence.display();
             
             this.scene.pushMatrix();
-            this.scene.scale(1, -1, 1);
-            this.scorePlayer1.display();
-            
+                this.scene.scale(1, -1, 1);
+                this.scorePlayer1.display();
+            this.scene.popMatrix();
+
+            this.scene.pushMatrix();
+                this.scene.translate(0, 21.8, 0);
+                this.scorePlayer2.display();
             this.scene.popMatrix();
             
-            this.scorePlayer2.display();
+            
         this.scene.popMatrix();
     }
 }
