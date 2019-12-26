@@ -35,9 +35,8 @@ valid_moves_with_elements_returned(Board, ListOfMoves):-
   
 %BOT LEVEL 0
 %Simple rand around all possible plays, could be invalid
-choose_move(Board, Cord_X, Cord_Y, Dificulty,_Active_Player,_Score):-
+choose_move(Board, Cord_X, Cord_Y, 0,_Active_Player,_Score):-
 
-  Dificulty==0,
   possible_moves(Board, ListOfMoves),
   listlenght(ListOfMoves,ListSize),
   random(0,ListSize,Rand_Result),
@@ -47,9 +46,8 @@ choose_move(Board, Cord_X, Cord_Y, Dificulty,_Active_Player,_Score):-
 %Choose Between valid moves on a random Scenario.
 
 % Invocar random de acordo com tamanho de ListOfMoves
-choose_move(Board, Cord_X, Cord_Y, Dificulty,_Active_Player,_Score):-
+choose_move(Board, Cord_X, Cord_Y, 1,_Active_Player,_Score):-
 
-  Dificulty==1,
   valid_moves(Board, ListOfMoves),
   listlenght(ListOfMoves,ListSize),
   random(0,ListSize,Rand_Result),
@@ -58,17 +56,17 @@ choose_move(Board, Cord_X, Cord_Y, Dificulty,_Active_Player,_Score):-
 %BOT LEVEL 2
 %Choose Between Valid Moves and choose the one that provides a result board of great value. According with evaluation function.
 
-choose_move(Board,Cord_X,Cord_Y,Dificulty,Active_Player,Scores):-
+choose_move(Board,Cord_X,Cord_Y,2):-
   
-  Dificulty==2,
-  %Greedy aproach, doesnt make sense to sort invalid moves
-  valid_moves_with_elements_returned(Board, ListOfMoves),
-  %Going to iterate List of Moves and simulate that play.
-  %Return a list with the plays and their elements that have maximum value.
-  %Then choose between this move the one that give us the piece we are missing more
-  get_the_move_with_greastest_value(Board,ListOfMoves,List_Of_Great_Moves_Value),
-  get_the_element_the_Player_need_more(Active_Player,Scores,Need),
-  get_move_with_color(List_Of_Great_Moves_Value,Cord_X,Cord_Y,Need).
+    %Greedy aproach, doesnt make sense to sort invalid moves
+    valid_moves_with_elements_returned(Board, ListOfMoves),
+    %Going to iterate List of Moves and simulate that play.
+    %Return a list with the plays and their elements that have maximum value.
+    %Then choose between this move the one that give us the piece we are missing more
+    get_the_move_with_greastest_value(Board,ListOfMoves,List_Of_Great_Moves_Value),
+    get_first(ListOfMoves, [Cord_X, Cord_Y | _]).
+
+get_first([H | Tail], H).
 
 
 

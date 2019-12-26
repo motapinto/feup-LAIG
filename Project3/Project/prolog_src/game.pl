@@ -196,6 +196,11 @@ game_over(Board, Scores, Result):-
   writeScore(Scores, 1),
   writeScore(Scores, 2).
 
+game_over(Board):-
+  valid_moves(Board, ListOfMoves),
+  !,
+  ListOfMoves == [].
+
 % Verifica se algum jogador ganhou com base nos scores, Result = 0 -> Player 0 ganhou; Result = 1 -> Player 1 Ganhou
 verify_win(Scores, Result):-
   verify_win(0, Scores, Result).
