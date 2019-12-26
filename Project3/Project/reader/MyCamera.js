@@ -1,10 +1,10 @@
 /**
-* MySecurityCamera
+* MyCamera
 * @constructor
 * @param {XMLscene} scene
 * @param {CGFtextureRTT} texture
 */
-class MySecurityCamera {
+class MyCamera {
     constructor(scene){
         this.scene = scene;
     

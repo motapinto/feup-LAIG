@@ -36,7 +36,7 @@ serialInclude(['../lib/CGF.js',
                 'Animation.js',
                 'KeyframeAnimation.js',
                 //Render To Texture
-                'MySecurityCamera.js',
+                'MyCamera.js',
                 //Game
                 'game/MyGameMenu.js',
                 'game/MyPlayerStash.js',

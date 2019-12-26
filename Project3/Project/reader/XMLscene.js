@@ -43,7 +43,7 @@ class XMLscene extends CGFscene {
         this.updatePeriod = 100;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
-        this.scoreCamera = new MySecurityCamera(this);
+        this.scoreCamera = new MyCamera(this);
         this.gameMenu = new MyGameMenu(this);
         this.gameStats = new MyGameStats(this, this.scoreCamera, 1, 3);
 
@@ -230,7 +230,7 @@ class XMLscene extends CGFscene {
         if(this.sceneInited){
             this.orchestrator.managePick(this.pickMode, this.pickResults);
             this.scoreCamera.attachToFrameBuffer();
-            this.render(this.graph.views[this.selectedSecurityCamera]);
+            this.render(this.graph.views['gameView']);
             this.scoreCamera.detachFromFrameBuffer();
                 
             this.render(this.graph.views[this.selectedCamera]);
@@ -257,13 +257,13 @@ class XMLscene extends CGFscene {
             this.setDefaultAppearance();    
             this.updateLights();
             
-            //this.board.display();
+            this.orchestrator.display();
             this.gameStats.display();
-            // this.graph.displayComponent('Table'),
+            this.graph.displayScene();
+
             //this.sequence.display();
             //this.gameMenu.display();
             //this.graph.displayScene();
-        this.orchestrator.display();
 
             /* Extras */
             this.pushMatrix();
