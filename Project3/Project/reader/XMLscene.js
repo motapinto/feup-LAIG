@@ -188,8 +188,6 @@ class XMLscene extends CGFscene {
     
             // this.sequence.update(t);  
             this.orchestrator.update(instant);
-
-            console.log(this.camera);
             
             /* Extras */
             this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
@@ -265,8 +263,7 @@ class XMLscene extends CGFscene {
             this.orchestrator.display();
             this.gameStats.display();
             this.gameMenu.display();
-            //this.sequence.display();
-
+    
             /* Extras */
             this.pushMatrix();
                 this.setActiveShader(this.waterShader);
