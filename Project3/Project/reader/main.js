@@ -25,6 +25,7 @@ serialInclude(['../lib/CGF.js',
                 'primitives/MyTriangle.js',
                 'primitives/MyHexagon.js',
                 'primitives/MyCylinder.js',
+                'primitives/MyCylinderTops.js',
                 'primitives/MySphere.js',
                 'primitives/MyTorus.js',
                 //Nurbs Surfaces
@@ -62,7 +63,7 @@ main=function()
 
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
-    let filename=getUrllets()['file'] || "maini.xml";
+    let filename = getUrllets()['file'] || "maini.xml";
 
 	// create and load graph, and associate it to scene. 
 	// Check console for loading errors

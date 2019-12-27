@@ -13,7 +13,7 @@ class MyGameStats {
         this.camera = camera;
         this.score1 = score1;
         this.score2 = score2;
-        this.startTime = true;
+        this.countTime = true;
 
         this.init();
     }
@@ -42,13 +42,17 @@ class MyGameStats {
         this.dividerTex.loadTexture("scenes/numbers/divider.png");
 
         // Current values for game time
-        this.currentMinutesOnes = 0;
+        this.initCounter();
+    }
+
+    initCounter() {
+        this.currentMinutesOnes = 0; 
         this.currentSecondsTens = 0;
         this.currentSecondsOnes = 0;
     }
 
     update(t) {
-        if(this.startTime) {
+        if(this.countTime) {
             let minutes = Math.floor(t / 60);
             let seconds = t % 60;
     
@@ -84,7 +88,7 @@ class MyGameStats {
         this.digitTextures[this.score2 % 10].apply();
         this.player2Score.display();
     }
-
+    // rever este display
     display() {
         this.scene.pushMatrix();
             this.scene.translate(5, 5, -12);

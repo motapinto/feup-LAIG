@@ -91,7 +91,6 @@ class MyGameOrchestrator{
                 this.scorePlayer2.display();
             this.scene.popMatrix();
             
-            
         this.scene.popMatrix();
     }
 }

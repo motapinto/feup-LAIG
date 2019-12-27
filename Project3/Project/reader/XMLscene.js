@@ -44,8 +44,9 @@ class XMLscene extends CGFscene {
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
         this.scoreCamera = new MyCamera(this);
+
         this.gameMenu = new MyGameMenu(this);
-        this.gameStats = new MyGameStats(this, this.scoreCamera, 1, 3);
+        this.gameStats = new MyGameStats(this, this.scoreCamera, 0, 0);
 
         /* Extras */
         this.waterPlane = new MyRectangle(this, -50, 50, -50, 50, 100, 100);
@@ -229,10 +230,11 @@ class XMLscene extends CGFscene {
         
         if(this.sceneInited){
             this.orchestrator.managePick(this.pickMode, this.pickResults);
+            // Game tv's
             this.scoreCamera.attachToFrameBuffer();
             this.render(this.graph.views['gameView']);
             this.scoreCamera.detachFromFrameBuffer();
-                
+            // Game view
             this.render(this.graph.views[this.selectedCamera]);
         }
     }
@@ -257,25 +259,24 @@ class XMLscene extends CGFscene {
             this.setDefaultAppearance();    
             this.updateLights();
             
-            this.orchestrator.display();
-            this.gameStats.display();
             this.graph.displayScene();
+            // this.orchestrator.display();
+            this.gameStats.display();
+            this.gameMenu.display();
 
             //this.sequence.display();
-            //this.gameMenu.display();
             //this.graph.displayScene();
 
             /* Extras */
-            this.pushMatrix();
-                this.setActiveShader(this.waterShader);
-                this.water_map.bind(1);
-                this.waterMat.apply();
-                this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
-                this.translate(0, 0, 1);
-                this.waterPlane.display();
-                this.setActiveShader(this.defaultShader);
-
-            this.popMatrix();
+            // this.pushMatrix();
+            //     this.setActiveShader(this.waterShader);
+            //     this.water_map.bind(1);
+            //     this.waterMat.apply();
+            //     this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+            //     this.translate(0, 0, 1);
+            //     this.waterPlane.display();
+            //     this.setActiveShader(this.defaultShader);
+            // this.popMatrix();
 
         this.popMatrix();
     }
