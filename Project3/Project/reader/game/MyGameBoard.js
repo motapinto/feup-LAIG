@@ -31,15 +31,32 @@ class MyGameBoard{
         return { x: x*1.8, y: (y+0.775)*1.55 };
     }
 
-    createInstance() {
-        for (let y = 0; y < 11; y++) {
-            let yVals = [];
-            for (let x = 0; x < 12; x++) {
-                if (y % 2 && x == 11) continue;
-                yVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, 1)));
+    createInstance(board) {
+        this.board = [];
+        for (let y = 0; y < board.length; y++) {
+            let lineVals = [];
+            for (let x = 0; x < board[y].length; x++) {
+                if (board[y][x] == 4) continue;
+                if (board[y][x] != 0)
+                    lineVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, board[y][x])));
+                else
+                    lineVals.push(new MyTile(this.scene, this.graph, this.id(x, y)));
             }
-            this.board.push(yVals);
+            this.board.push(lineVals);
         }
+    }
+
+    getInstance() {
+        let instance = [];
+        for (let line in this.board) {
+            let instanceLine = [];
+            for (let tile in line) {
+                instanceLine.push(tile.piece ? tile.piece.type : 0);
+            }
+            instance.push(instanceLine);
+        }
+
+        return instance;
     }
 
     getPiece = (y, x) => this.board[y][x].getPiece();
@@ -56,7 +73,7 @@ class MyGameBoard{
     display() {
         this.scene.pushMatrix();
             this.scene.translate(0, 1.2, 0);
-
+ 
             for (let i = 0; i < 11; i++){
                 for (let j = 0; j < 12; j++) {
                     this.scene.pushMatrix();
