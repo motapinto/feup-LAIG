@@ -2,7 +2,7 @@
 
     <scene root="Root" axis_length="5"/>
 
-    <views default="outsidePrespective">
+    <views default="player2">
         <perspective id="topFloor" near="0.1" far="1000" angle="40">
             <from x="5" y="3.6" z="-12.001" />
             <to x="5" y="1" z="-11.9" />
@@ -27,9 +27,18 @@
             <from x="5" y="9" z="-20" />
             <to x="5" y="6" z="5" />
         </perspective>
+
         <perspective id="gameView" near="0.1" far="1000" angle="40">
             <from x="5" y="3.6" z="-12.001" />
             <to x="5" y="1" z="-11.9" />
+        </perspective>
+        <perspective id="player1" near="0.1" far="1000" angle="32">
+            <from x="5" y="5" z="-6" />
+            <to x="5" y="1" z="-13" />
+        </perspective>
+        <perspective id="player2" near="0.1" far="1000" angle="32">
+            <from x="4.8" y="4.5" z="-17" />
+            <to x="4.8" y="0.5" z="-10" />
         </perspective>
     </views>
 

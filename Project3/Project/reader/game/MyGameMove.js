@@ -23,8 +23,6 @@ class MyGameMove {
         this.matrix = mat4.create();
         this.coordsInit = coordsInit;
         this.createAnimation(coordsInit, coordsFin);
-        console.log(coordsInit);
-        console.log(coordsFin);
     }
 
     createAnimation(coordsInit, coordsFin) {

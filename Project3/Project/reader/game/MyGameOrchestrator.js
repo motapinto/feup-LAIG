@@ -16,8 +16,8 @@ class MyGameOrchestrator{
         this.gameSequence = new MyGameSequence(this.scene, this.theme);
         this.gameBoard = new MyGameBoard(this.scene, this.theme);
         this.gameBoard.createInstance();
-        this.scorePlayer1 = new MyPlayerStash(this.scene);
-        this.scorePlayer2 = new MyPlayerStash(this.scene);
+        this.scorePlayer1 = new MyPlayerStash(this.scene, 1);
+        this.scorePlayer2 = new MyPlayerStash(this.scene,);
         // this.prolog = new MyPrologInterface(…);
         this.pickMode = false;
         this.player = 1;

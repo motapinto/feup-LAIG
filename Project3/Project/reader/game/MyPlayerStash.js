@@ -9,7 +9,7 @@ class MyPlayerStash {
      */
     constructor(scene, player) {
         this.scene = scene;
-
+        this.player = player;
         this.createInstance();
     }
 
@@ -39,7 +39,21 @@ class MyPlayerStash {
         return this.pieces[type - 1].pop();
     }
 
-    getPiecePos(number, type) { return { x: number % 3 + 0.2 + type*3.8, y: Math.floor(number / 3) + 0.2 }; }
+    getPiecePos(number, type) { 
+        if(this.player == 1) {
+            return { 
+                x: (number % 3 + 0.2 + type*3.8) + 21, 
+                y: (Math.floor(number / 3) + 0.2) - 6 
+            }; 
+        }
+        else {
+            return { 
+                x: (number % 3 + 0.2 + 3.8*type) - 20, 
+                y: (Math.floor(number / 3) + 0.2) - 6
+            };
+        }
+    }
+         
 
     display() {
         this.scene.pushMatrix();

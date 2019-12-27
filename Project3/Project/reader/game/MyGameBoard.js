@@ -36,7 +36,12 @@ class MyGameBoard{
             let yVals = [];
             for (let x = 0; x < 12; x++) {
                 if (y % 2 && x == 11) continue;
-                yVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, 1)));
+                if(y < 5)
+                    yVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, 3)));
+                else if(y < 8)
+                    yVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, 2)));
+                else
+                    yVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, 1)));
             }
             this.board.push(yVals);
         }

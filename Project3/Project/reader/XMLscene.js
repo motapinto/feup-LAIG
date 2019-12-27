@@ -188,6 +188,8 @@ class XMLscene extends CGFscene {
     
             // this.sequence.update(t);  
             this.orchestrator.update(instant);
+
+            console.log(this.camera);
             
             /* Extras */
             this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
@@ -260,23 +262,21 @@ class XMLscene extends CGFscene {
             this.updateLights();
             
             this.graph.displayScene();
-            // this.orchestrator.display();
+            this.orchestrator.display();
             this.gameStats.display();
             this.gameMenu.display();
-
             //this.sequence.display();
-            //this.graph.displayScene();
 
             /* Extras */
-            // this.pushMatrix();
-            //     this.setActiveShader(this.waterShader);
-            //     this.water_map.bind(1);
-            //     this.waterMat.apply();
-            //     this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
-            //     this.translate(0, 0, 1);
-            //     this.waterPlane.display();
-            //     this.setActiveShader(this.defaultShader);
-            // this.popMatrix();
+            this.pushMatrix();
+                this.setActiveShader(this.waterShader);
+                this.water_map.bind(1);
+                this.waterMat.apply();
+                this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                this.translate(0, 0, 1);
+                this.waterPlane.display();
+                this.setActiveShader(this.defaultShader);
+            this.popMatrix();
 
         this.popMatrix();
     }
