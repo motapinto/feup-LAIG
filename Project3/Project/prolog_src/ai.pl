@@ -64,9 +64,9 @@ choose_move(Board,Cord_X,Cord_Y,2):-
     %Return a list with the plays and their elements that have maximum value.
     %Then choose between this move the one that give us the piece we are missing more
     get_the_move_with_greastest_value(Board,ListOfMoves,List_Of_Great_Moves_Value),
-    get_first(ListOfMoves, [Cord_X, Cord_Y | _]).
+    get_first(List_Of_Great_Moves_Value, [Cord_X, Cord_Y | _]).
 
-get_first([H | Tail], H).
+get_first([H | _Tail], H).
 
 
 

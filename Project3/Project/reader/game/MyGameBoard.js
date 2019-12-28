@@ -12,7 +12,7 @@ class MyGameBoard{
         this.graph = graph;
         this.board = [];
 
-        this.createInstance();
+        this.createInstance([]);
     }
 
     id = (x, y) => (y * 100 + x + 1);

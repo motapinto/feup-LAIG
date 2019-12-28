@@ -108,7 +108,6 @@ print_header_line(_).
 :-[utilities].
 :-[game].
 :-[rules].
-:-[write].
 :-[ai].
 :- use_module(library(random)).
 :- use_module(library(system)).
@@ -137,12 +136,12 @@ parse_input(aiMove(Board, 0), [Response, X, Y]):-
 % Get AI Lvl 1 Move
 parse_input(aiMove(Board, 1), [valid, X, Y]):-
     choose_move(Board, X, Y, 1).
-parse_input(aiMove(Board, 1), [invalid]).
+parse_input(aiMove(_Board, 1), [invalid]).
 
 % Get AI Lvl 2 Move
 parse_input(aiMove(Board, 2), [valid, X, Y]):-
     choose_move(Board, X, Y, 2),
-parse_input(aiMove(Board, 2), [invalid]).
+parse_input(aiMove(_Board, 2), [invalid]).
 
 % Verify if game is over
 parse_input(verify(Board), over):-
