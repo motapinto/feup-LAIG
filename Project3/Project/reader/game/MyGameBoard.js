@@ -10,9 +10,19 @@ class MyGameBoard{
     constructor(scene, graph) {
         this.scene = scene;
         this.graph = graph;
-        this.board = [];
-
-        this.createInstance([]);
+        this.createInstance([
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ]);
     }
 
     id = (x, y) => (y * 100 + x + 1);
@@ -53,6 +63,7 @@ class MyGameBoard{
             for (let tile in line) {
                 instanceLine.push(tile.piece ? tile.piece.type : 0);
             }
+            if (instanceLine.length == 11) instanceLine.push(4);
             instance.push(instanceLine);
         }
 
@@ -74,8 +85,8 @@ class MyGameBoard{
         this.scene.pushMatrix();
             this.scene.translate(0, 1.2, 0);
  
-            for (let i = 0; i < 11; i++){
-                for (let j = 0; j < 12; j++) {
+            for (let i = 0; i < this.board.length; i++){
+                for (let j = 0; j < this.board[i].length; j++) {
                     this.scene.pushMatrix();
                     
                     if (i % 2) {

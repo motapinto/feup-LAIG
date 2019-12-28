@@ -64,7 +64,7 @@ class MyGameMove {
     }
 
     update(t) {
-        if (!this.animating) return;
+        if (!this.animating) return false;
 
         if (this.startTime == null) this.startTime = t;
 
@@ -74,12 +74,14 @@ class MyGameMove {
         
         if (this.delta > this.deltaTime) {
             this.endAnimation();
-            return;
+            return false;
         }
 
         let percent = this.delta / this.deltaTime;
 
         mat4.translate(this.matrix, this.matrix, [this.coordsDiff.x * percent, this.coordsDiff.y * percent, this.quadratic(percent)]);
+
+        return true;
     }
 
     display() {

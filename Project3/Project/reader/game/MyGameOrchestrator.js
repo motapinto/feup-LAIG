@@ -13,34 +13,37 @@ class MyGameOrchestrator{
         // this.animator = new MyAnimator(…);
         
         // this.theme = new MyScenegraph('main.xml', this.scene);
-        this.gameSequence = new MyGameSequence(this.scene, this.theme);
+        this.gameSequence = new MyGameSequence(this.scene, this, this.theme);
         this.gameBoard = new MyGameBoard(this.scene, this.theme);
-        this.gameBoard.createInstance([
-            [1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 2, 2, 1, 2, 1, 0, 0, 4],
-            [0, 0, 3, 1, 2, 1, 1, 3, 3, 1, 0, 0],
-            [3, 0, 0, 0, 0, 0, 3, 2, 1, 3, 0, 4],
-            [0, 0, 0, 3, 1, 3, 3, 1, 1, 3, 0, 0],
-            [0, 0, 3, 3, 1, 1, 2, 2, 2, 0, 0, 4],
-            [0, 0, 0, 1, 1, 2, 3, 1, 1, 2, 3, 0],
-            [0, 0, 0, 3, 1, 1, 1, 2, 3, 0, 0, 4],
-            [0, 0, 0, 2, 1, 3, 2, 1, 2, 3, 0, 0],
-            [0, 0, 3, 1, 2, 3, 2, 3, 2, 2, 0, 4],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        ]);
+        this.prolog = new MyPrologInterface();
         this.scorePlayer1 = new MyPlayerStash(this.scene, 1);
         this.scorePlayer2 = new MyPlayerStash(this.scene,);
-        // this.prolog = new MyPrologInterface(…);
-        this.pickMode = false;
+        this.picking = true;
         this.player = 1;
         this.AILvl = 0;
+        this.gameMode = 0;
+        this.start();
+    }
+
+    start() {
+        let board = this.prolog.getBoard();
+        if (board != null)
+            this.gameBoard.createInstance(board);
+    }
+
+    /**
+     * 
+     * @param {{x, y}} position 
+     */
+    validateMove(position) {
+        return (this.prolog.validMove(this.gameBoard.getInstance(), position.x, position.y) == 'valid');
     }
 
     /**
     * logs picking results in console
     */
     managePick(mode, results) {
-        if (mode == false) {
+        if (!mode && this.picking) {
             if (results != null && results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
                     var obj = results[i][0];
@@ -57,7 +60,10 @@ class MyGameOrchestrator{
 
     OnObjectSelected(obj, uniqueId) {
         if (obj instanceof MyPiece) {
-            this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoordsId(uniqueId), this.getMoveCoords(obj.type))
+            if (this.validateMove(this.gameBoard.position(uniqueId))) {
+                this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoordsId(uniqueId), this.getMoveCoords(obj.type))
+                this.picking = false;
+            }
         }
         else if (obj instanceof MyTile) {
             // do something with id knowing it is a tile
@@ -81,7 +87,7 @@ class MyGameOrchestrator{
     }
 
     update(t) {
-        this.gameSequence.update(t);
+        this.picking = !this.gameSequence.update(t);
         // this.animator.update(t);
     }
 
