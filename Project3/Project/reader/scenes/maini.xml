@@ -2,7 +2,7 @@
 
     <scene root="Root" axis_length="5"/>
 
-    <views default="topFloor">
+    <views default="player2">
         <perspective id="topFloor" near="0.1" far="1000" angle="40">
             <from x="5" y="3.6" z="-12.001" />
             <to x="5" y="1" z="-11.9" />
@@ -27,9 +27,18 @@
             <from x="5" y="9" z="-20" />
             <to x="5" y="6" z="5" />
         </perspective>
+
         <perspective id="gameView" near="0.1" far="1000" angle="40">
             <from x="5" y="3.6" z="-12.001" />
             <to x="5" y="1" z="-11.9" />
+        </perspective>
+        <perspective id="player1" near="0.1" far="1000" angle="32">
+            <from x="5" y="5" z="-6" />
+            <to x="5" y="1" z="-13" />
+        </perspective>
+        <perspective id="player2" near="0.1" far="1000" angle="32">
+            <from x="4.8" y="4.5" z="-17" />
+            <to x="4.8" y="0.5" z="-10" />
         </perspective>
     </views>
 
@@ -63,8 +72,8 @@
             <specular r="0.2" g="0.2" b="0.2" a="1.0" />
             <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
         </spot>
-        <omni id="CelestialBody" enabled="1" >
-            <location x="-5" y="30" z="-50" w="1" />
+        <omni id="ScoreBoard" enabled="1" >
+            <location x="1" y="3.5" z="-10" w="1"/>
             <ambient r="0.1" g="0.1" b="0.1" a="1" />
             <diffuse r="0.3" g="0.3" b="0.3" a="1" />
             <specular r="0.3" g="0.3" b="0.3" a="1" />
@@ -79,7 +88,6 @@
         <!-- TABLE -->
         <texture id="darkCement" file="scenes/images/dark-cement.jpg" />
         <texture id="aluminium" file="scenes/images/aluminium.jpg" />
-        <texture id="table" file="scenes/images/table.png" />
         
         <!-- CHAIR -->
         <texture id="woodChair" file="scenes/images/wood-chair.jpg" />
@@ -369,7 +377,7 @@
                 <cylinder base="0.8" top="0.8" height="0.1" slices="4" stacks="1" />
             </primitive>
             <primitive id="TableCover">
-                <rectangle x1="0" y1="0" x2="1.13" y2="1.13" />
+                <rectangle x1="0" y1="0" x2="1.135" y2="1.135" />
             </primitive>
             <primitive id="Plate">
                 <sphere radius="0.2" slices="40" stacks="40" />
@@ -392,7 +400,7 @@
                 <cylinder base="0.45" top="0.45" height="0.07" slices="4" stacks="1" />
             </primitive>
             <primitive id="ChairBackSupportCover">
-                <rectangle x1="0" y1="0" x2="0.64" y2="0.64" />
+                <rectangle x1="0" y1="0" x2="0.635" y2="0.635" />
             </primitive>
             <primitive id="ChairBase">
                 <cylinder base="0.4" top="0.4" height="0.2" slices="4" stacks="1" />
@@ -519,16 +527,7 @@
                 <sphere radius="1" slices="50" stacks="25" />
             </primitive>
         <!-- PIECE -->
-        <!-- BOARD -->
-            <!-- <primitive id="board">  
-                <board />
-            </primitive>  -->
-        <!-- BOARD -->
-        <!-- MENU -->
-            <!-- <primitive id="menu">  
-                <menu />
-            </primitive>  -->
-        <!-- MENU -->
+
 
             <primitive id="hexagon">  
                 <hexagon radius="1" />
@@ -670,7 +669,7 @@
                 <materials>
                     <material id="tableTop" />
                 </materials>
-                <texture id="table" length_s="1.13" length_t="1.13"/>
+                <texture id="none" length_s="0" length_t="0"/>
                 <children>
                     <primitiveref id="TableCover" />
                 </children>
@@ -2334,16 +2333,19 @@
                     <componentref id='Building' />
                     <!-- GAME -->
                     <componentref id='GameTable' />
-
+                    <componentref id='SupportTable1' />
+                    <componentref id='SupportTable2' />
+                    <componentref id='ChairPlayer1' />
+                    <componentref id='ChairPlayer2' />
                 </children>
             </component>    
         <!-- ROOT -->
         <!-- GAME TABLE -->
             <component id="GameTable">
                 <transformation>
-                    <scale x="2.5" y="2.5" z="1" />
+                    <translate x="5" y="11.85" z="0" />
                     <rotate angle='45' axis='z' />
-                    <translate x="4.8" y="2" z="0" />
+                    <scale x="2" y="2" z="1" />
                 </transformation>
                 <materials>
                     <material id="inherit" />
@@ -2354,6 +2356,58 @@
                     <componentref id="TableSupport" />
                     <componentref id="TableTop" />
                     <componentref id="TableCover" />
+                </children>
+            </component>
+            <component id="SupportTable1">
+                <transformation>
+                    <translate x="6.8" y="10.6" z="0" />
+                    <rotate axis="z" angle="45" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="inherit"/>
+                <children>
+                    <componentref id="Table" />
+                </children>
+            </component>
+            <component id="SupportTable2">
+                <transformation>
+                    <translate x="3.2" y="11.7" z="0" />
+                    <rotate axis="z" angle="45" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="inherit"/>
+                <children>
+                    <componentref id="Table" />
+                </children>
+            </component>
+            <component id="ChairPlayer1">
+                <transformation>
+                    <translate x="5" y="10.5" z="0" />
+                    <rotate axis="z" angle="45" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="inherit"/>
+                <children>
+                    <componentref id="Chair1" />
+                </children>
+            </component>
+            <component id="ChairPlayer2">
+                <transformation>
+                    <translate x="5" y="13.6" z="0" />
+                    <rotate axis="z" angle="225" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="inherit"/>
+                <children>
+                    <componentref id="Chair1" />
                 </children>
             </component>
         <!-- GAME TABLE -->

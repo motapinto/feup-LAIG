@@ -933,7 +933,7 @@ class MySceneGraph {
 
             // Validate the primitive type
           if (grandChildren.length != 1)
-            return "There must be exactly 1 primitive type (rectangle, triangle, hexagon, cylinder, sphere, torus, plane, patch, triangle2, cylinder2, board or menu)"
+            return "There must be exactly 1 primitive type (rectangle, triangle, hexagon, cylinder, cylinderT,sphere, torus, plane, patch, triangle2, cylinder2)"
                 
                 // Retrieves the primitive coordinates.
           switch (primitiveType) {
@@ -1051,6 +1051,36 @@ class MySceneGraph {
                 var cyl = new MyCylinder(this.scene, base, top, height, slices, stacks);
                 this.primitives[primitiveID] = cyl;
                 break;
+
+                case 'cylinderT':
+                    // base
+                    var base = this.reader.getFloat(grandChildren[0], 'base');
+                    if (!(base != null && !isNaN(base) && base>=0))
+                        return "unable to parse base of the primitive coordinates with ID = " + primitiveID;
+    
+                    // top
+                    var top = this.reader.getFloat(grandChildren[0], 'top');
+                    if (!(top != null && !isNaN(top)  && top>=0))
+                        return "unable to parse top of the primitive coordinates with ID = " + primitiveID;
+    
+                    // height
+                    var height = this.reader.getFloat(grandChildren[0], 'height');
+                    if (!(height != null && !isNaN(height) && height>=0))
+                        return "unable to parse height of the primitive coordinates with ID = " + primitiveID;
+    
+                    // slices
+                    var slices = this.reader.getInteger(grandChildren[0], 'slices');
+                    if (!(slices != null && !isNaN(slices) && slices>0))
+                        return "unable to parse slices of the primitive coordinates with ID = " + primitiveID;
+                    
+                    // stacks
+                    var stacks = this.reader.getInteger(grandChildren[0], 'stacks');
+                    if (!(stacks != null && !isNaN(stacks) && stacks>0))
+                        return "unable to parse stacks of the primitive coordinates with ID = " + primitiveID;
+    
+                    var cyl = new MyCylinderTops(this.scene, base, top, height, slices, stacks);
+                    this.primitives[primitiveID] = cyl;
+                    break;
 
             case 'sphere':
                 // radius
@@ -1244,17 +1274,9 @@ class MySceneGraph {
                 var cyl2 = new Cylinder2(this.scene, base, top, height, slices, stacks);
                 this.primitives[primitiveID] = cyl2;
                 break;
-
-            case 'board':
-                var board = new MyGameBoard(this.scene, this);
-                this.primitives[primitiveID] = board;
-
-            case 'menu':
-                var menu = new MyGameMenu(this.scene);
-                this.primitives[primitiveID] = menu;
             
             default:
-                return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, sphere, torus, plane, patch, triangle2, cylinder2, board or menu)"
+                return "There must be exactly 1 primitive type (rectangle, triangle, cylinder, cylçinderT, sphere, torus, plane, patch, triangle2, cylinder2)"
   
           }
 
