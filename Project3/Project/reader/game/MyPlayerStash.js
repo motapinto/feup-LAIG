@@ -42,14 +42,14 @@ class MyPlayerStash {
     getPiecePos(number, type) { 
         if(this.player == 1) {
             return { 
-                x: (number % 3 + 0.2 + type*3.8) + 21, 
-                y: (Math.floor(number / 3) + 0.2) - 6 
+                x: (number % 3 + 0.2 + type*3.8) + 19, 
+                y: (Math.floor(number / 3) + 0.2) - 8 
             }; 
         }
         else {
             return { 
-                x: (number % 3 + 0.2 + 3.8*type) - 20, 
-                y: (Math.floor(number / 3) + 0.2) - 6
+                x: (number % 3 + 0.2 + 3.8*type) - 17, 
+                y: (Math.floor(number / 3) + 0.2) - 10
             };
         }
     }

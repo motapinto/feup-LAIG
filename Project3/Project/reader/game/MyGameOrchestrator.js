@@ -32,7 +32,7 @@ class MyGameOrchestrator{
         this.scorePlayer2 = new MyPlayerStash(this.scene,);
         // this.prolog = new MyPrologInterface(…);
         this.pickMode = false;
-        this.player = 1;
+        this.player = 0;
         this.AILvl = 0;
     }
 
