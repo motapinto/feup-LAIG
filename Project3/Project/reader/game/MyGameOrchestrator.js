@@ -19,16 +19,14 @@ class MyGameOrchestrator{
         this.scorePlayer1 = new MyPlayerStash(this.scene, 1);
         this.scorePlayer2 = new MyPlayerStash(this.scene,);
         this.picking = true;
-        this.player = 1;
+        this.player = 0;
         this.AILvl = 0;
         this.gameMode = 0;
         this.start();
     }
 
     start() {
-        let board = this.prolog.getBoard();
-        if (board != null)
-            this.gameBoard.createInstance(board);
+        this.prolog.getBoard();
     }
 
     /**

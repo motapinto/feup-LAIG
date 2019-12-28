@@ -34,6 +34,10 @@ class MyGameStats {
         this.digitTextures = [];
         for (let i = 0; i < 10; ++i) {
             let digitTex = new CGFappearance(this.scene);
+            digitTex.setAmbient(0.4, 0.4, 0.4, 1);
+            digitTex.setDiffuse(0.4, 0.4, 0.4, 1);
+            digitTex.setSpecular(0.0, 0.0, 0.0, 1);
+            digitTex.setShininess(120);
             digitTex.loadTexture("scenes/numbers/" + i + ".png");
             this.digitTextures.push(digitTex);
         }
