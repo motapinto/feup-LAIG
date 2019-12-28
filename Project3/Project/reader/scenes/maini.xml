@@ -37,8 +37,8 @@
             <to x="5" y="1" z="-13" />
         </perspective>
         <perspective id="player2" near="0.1" far="1000" angle="32">
-            <from x="5" y="5" z="-19" />
-            <to x="5" y="1.5" z="-12" />
+            <from x="5" y="5" z="-18" />
+            <to x="5" y="1" z="-11" />
         </perspective>
     </views>
 
@@ -48,36 +48,30 @@
     </globals>
 
     <lights>
-        <spot id="LampTables" enabled="1" angle="30.0" exponent="1.0">
-            <location x="5" y="3.5" z="-3.5" w="1"/>
-            <target x="5" y="-10" z="-3.5" />
-            <ambient r="0" g="0" b="0" a="1" />
-            <diffuse r="1" g="0.6" b="0" a="1" />
-            <specular r="0.8" g="0.5" b="0" a="1.0" />
-            <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
-        </spot>
-        <spot id="LampCounter" enabled="1" angle="30.0" exponent="1.0">
+        <!-- <spot id="LampCounter" enabled="1" angle="30.0" exponent="1.0">
             <location x="5" y="3.5" z="-18" w="1" />
             <target x="5" y="-10" z="-18" />
             <ambient r="0" g="0" b="0" a="1" />
-            <diffuse r="1" g="0.6" b="0" a="1" />
+            <diffuse r="1" g="0.4" b="0" a="1" />
+            <specular r="0.8" g="0.5" b="0" a="1.0" />
+            <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
+        </spot> -->
+        <spot id="Player1" enabled="1" angle="5.0" exponent="1.0">
+            <location x="5" y="2.5" z="-9" w="1" />
+            <target x="5" y="0" z="-9" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1" />
+            <diffuse r="1" g="0.6" b="0.5" a="1" />
             <specular r="0.8" g="0.5" b="0" a="1.0" />
             <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
         </spot>
-        <spot id="ScoreBoardBehind" enabled="1" angle="30.0" exponent="1.0">
-            <location x="5" y="3.5" z="-18" w="1" />
-            <target x="5" y="-10" z="-18" />
-            <ambient r="0" g="0" b="0" a="1" />
-            <diffuse r="1" g="0.6" b="0" a="1" />
-            <specular r="0.8" g="0.5" b="0" a="1.0" />
+        <spot id="Player2" enabled="1" angle="5.0" exponent="1.0">
+            <location x="5" y="2.5" z="-15" w="1" />
+            <target x="5" y="0" z="-15" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1" />
+            <diffuse r="1" g="0.6" b="0.5" a="1" />
+            <specular r="0.0" g="0.0" b="0" a="1.0" />
             <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
-        </spot>
-        <omni id="ScoreBoard" enabled="1" >
-            <location x="5" y="3.5" z="-12" w="1"/>
-            <ambient r="0.5" g="0.5" b="0.5" a="1" />
-            <diffuse r="0.5" g="0.5" b="0.5" a="1" />
-            <specular r="0.5" g="0.5" b="0.5" a="1" />
-        </omni>         
+        </spot>      
     </lights>
 
     <textures>
@@ -2398,7 +2392,7 @@
             </component>
             <component id="ChairPlayer2">
                 <transformation>
-                    <translate x="5" y="13.6" z="0" />
+                    <translate x="5" y="13.2" z="0" />
                     <rotate axis="z" angle="225" />
                 </transformation>
                 <materials>
