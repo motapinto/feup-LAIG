@@ -15,7 +15,7 @@ class MyGameOrchestrator{
         // this.theme = new MyScenegraph('main.xml', this.scene);
         this.gameSequence = new MyGameSequence(this.scene, this, this.theme);
         this.gameBoard = new MyGameBoard(this.scene, this.theme);
-        this.prolog = new MyPrologInterface();
+        this.prolog = new MyPrologInterface(this);
         this.scorePlayer1 = new MyPlayerStash(this.scene, 1);
         this.scorePlayer2 = new MyPlayerStash(this.scene,);
         this.picking = true;
@@ -36,7 +36,7 @@ class MyGameOrchestrator{
      * @param {{x, y}} position 
      */
     validateMove(position) {
-        return (this.prolog.validMove(this.gameBoard.getInstance(), position.x, position.y) == 'valid');
+        return true;
     }
 
     /**

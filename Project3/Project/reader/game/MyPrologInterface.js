@@ -3,31 +3,38 @@
  */
 class MyPrologInterface {
 
-    constructor() {
-        this.response = null;
+    /**
+     * 
+     * @param {MyGameOrchestrator} orchestrator 
+     */
+    constructor(orchestrator) {
+        this.orchestrator = orchestrator;
     }
 
-    getPrologRequest(requestString) {
-        var requestPort = 8081;
-        var request = new XMLHttpRequest();
+    getPrologRequest(requestString, onSuccess, onError) {
+        let requestPort = 8081;
+        let request = new XMLHttpRequest();
+        // Added prolog variable to be able to change MyPrologInterface class
         request.open('GET', 'http://localhost:' + requestPort + '/' + requestString, true);
 
-        request.onload = function (data) { this.response = String(data.target.response); };
-        request.onerror = function () { this.response = null };
+        request.onload = onSuccess.bind(this);
+        request.onerror = onError.bind(this);
 
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         request.send();
+    }
+
+    getResponse(data) {
+        this.response = data.target.response;
+    }
+
+    getError() {
     }
 
     makeRequest(requestString, handleReply) {
         // Make Request
         getPrologRequest(requestString, handleReply);
     }
-
-    //Handle the Reply
-    getSingleData = () => this.response;
-
-    getMultiData = () => this.getStringToArray(this.response);
 
     getArrayToString(array) {
         let string = '';
@@ -46,30 +53,38 @@ class MyPrologInterface {
 
     getStringToArray = (string) => JSON.parse(string);
 
-    getBoard() {
-        this.getPrologRequest('initial_board');
-
-        return this.getMultiData();
+    changeBoard(data) {
+        let board = this.getStringToArray(data.target.response);
+        this.orchestrator.gameBoard.createInstance(board);
     }
 
-    validMove(board, x, y) {
-        let request = 'validMove(' + this.getArrayToString(board) + ',' + x + ',' + y + ')';
-        this.getPrologRequest(request);
+    getBoard() {
+        this.getPrologRequest('initial_board', this.changeBoard, this.getError);
+    }
+
+    changeValidMoves(data) {
+        this.orchestrator.validMoves = this.getStringToArray(data.target.response);
+    }
+
+    getValidMoves(board) {
+        let request = 'validMove(' + this.getArrayToString(board) + ')';
+        this.getPrologRequest(request, this.changeValidMoves, this.getError);
 
         return this.getSingleData();
+    }
+
+    startAIMove(data) {
+        let move = this.getStringToArray(data.target.response);
+        if (move[0] == 'valid')
+            this.orchestrator.startAIMove(move[1], move[2]);
+        else if (move[0] == 'invalid')
+            this.orchestrator.invalidMove(move[1], move[2]);
     }
 
     aiMove(board, dificulty) {
         let request = 'aiMove(' + this.getArrayToString(board) + ',' + dificulty + ')';
-        his.getPrologRequest(request);
+        this.getPrologRequest(request, this.startAIMove, this.getError);
 
         return this.getMultiData();
-    }
-
-    verify(board) {
-        let request = 'verify(' + this.getArrayToString(board) + ')';
-        this.getPrologRequest(request);
-
-        return this.getSingleData();
     }
 }
