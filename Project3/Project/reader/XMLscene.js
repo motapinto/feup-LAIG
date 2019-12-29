@@ -80,6 +80,18 @@ class XMLscene extends CGFscene {
             if(this.floor > this.floorMax)
                 this.floor = this.floorMax - 1;
         }
+
+        //sound
+        let audio;
+        switch(this.selectedScene) {
+            case 0:
+                break;
+            case 1:
+                audio = new Audio('scenes/sounds/ocean.mp3');
+                break;
+
+        }
+        audio.play();
     }
 
     /**
@@ -278,6 +290,7 @@ class XMLscene extends CGFscene {
                     this.waterPlane.display();
                     // default shader
                     this.setActiveShader(this.defaultShader);
+                    
                 }
             this.popMatrix();
         this.popMatrix();

@@ -1,5 +1,4 @@
 <lxs>
-
     <scene root="Root" axis_length="5"/>
 
     <views default="player2"> 
