@@ -49,13 +49,15 @@ class XMLscene extends CGFscene {
         this.gameStats = new MyGameStats(this, this.scoreCamera, 0, 0);
 
         /* Extras */
+        this.selectedScene = 1;
+        // Water shader
         this.waterPlane = new MyRectangle(this, -50, 50, -50, 50, 100, 100);
         this.waterPlane.updateTexCoords(10, 10);
         this.waterMat = new CGFappearance(this);
-		this.waterMat.setAmbient(0.3, 0.3, 0.3, 1);
-		this.waterMat.setDiffuse(0.7, 0.7, 0.7, 1);
-		this.waterMat.setSpecular(0.0, 0.0, 0.0, 1);
-		this.waterMat.setShininess(120);
+        this.waterMat.setAmbient(0.3, 0.3, 0.3, 1);
+        this.waterMat.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.waterMat.setSpecular(0.0, 0.0, 0.0, 1);
+        this.waterMat.setShininess(120);
         this.water_tex = new CGFtexture(this, "scenes/images/waterTex.jpg");
         this.water_map = new CGFtexture(this, "scenes/images/waterMap.jpg");
         this.water_map.bind(1);
@@ -266,15 +268,18 @@ class XMLscene extends CGFscene {
     
             /* Extras */
             this.pushMatrix();
-                this.setActiveShader(this.waterShader);
-                this.water_map.bind(1);
-                this.waterMat.apply();
-                this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
-                this.translate(0, 0, 1);
-                this.waterPlane.display();
-                this.setActiveShader(this.defaultShader);
+                if(this.selectedScene == 1) {
+                    // water shader
+                    this.setActiveShader(this.waterShader);
+                    this.water_map.bind(1);
+                    this.waterMat.apply();
+                    this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                    this.translate(0, 0, 2);
+                    this.waterPlane.display();
+                    // default shader
+                    this.setActiveShader(this.defaultShader);
+                }
             this.popMatrix();
-
         this.popMatrix();
     }
 }

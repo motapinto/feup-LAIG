@@ -359,7 +359,7 @@
     </animations>
 
     <primitives>
-            <!-- TABLE -->
+        <!-- TABLE -->
             <primitive id="TableLeg">
                 <cylinder base="0.1" top="0.1" height="1" slices="20" stacks="1" />
             </primitive>
@@ -382,7 +382,7 @@
                 />  
             </primitive>
 
-            <!-- CHAIR -->
+        <!-- CHAIR -->
             <primitive id="ChairLeg1">
                 <cylinder base="0.05" top="0.05" height="0.5" slices="4" stacks="1" />
             </primitive>
@@ -401,8 +401,7 @@
             <primitive id="ChairBaseCover">
                 <rectangle x1="0" y1="0" x2="0.57" y2="0.57" />
             </primitive>
-
-            <!-- BAR -->
+        <!-- BAR -->
             <primitive id="BarCounterTop">
                 <cylinder base="1" top="1" height="0.3" slices="4" stacks="1" />
             </primitive>
@@ -415,8 +414,7 @@
             <primitive id="BarChairLeg">
                 <cylinder base="0.1" top="0.1" height="1.2" slices="20" stacks="5" />
             </primitive>
-            
-            <!-- RESTAURANT ACCESSORIES-->
+        <!-- RESTAURANT ACCESSORIES-->
             <primitive id="Door">
                 <rectangle x1="0" y1="0" x2="3" y2="1.5" />
             </primitive>
@@ -444,8 +442,7 @@
             <primitive id="StairPlatform">
                 <rectangle x1="0" y1="0" x2="1" y2="1" />
             </primitive>
-
-            <!-- BUILDING -->
+        <!-- BUILDING -->
             <primitive id="RestaurantFloor">
                 <rectangle x1="-1" y1="-1" x2="12" y2="20" />
             </primitive>
@@ -470,8 +467,7 @@
             <primitive id="Donut">
                 <torus inner="0.025" outer="0.05" slices="40" loops="40" />
             </primitive>
-
-            <!-- EXTERIOR -->
+        <!-- EXTERIOR -->
             <primitive id="SphereMap">
                 <sphere radius="80" slices="40" stacks="40" />
             </primitive>
@@ -511,7 +507,6 @@
             <primitive id="LightBulb">
                 <sphere radius="0.15" slices="20" stacks="10" />
             </primitive>
-
         <!-- PIECE -->
             <primitive id="cylinder">  
                 <cylinder base="1" top="1" height="1" slices="50" stacks="25" />
@@ -520,8 +515,6 @@
                 <sphere radius="1" slices="50" stacks="25" />
             </primitive>
         <!-- PIECE -->
-
-
             <primitive id="hexagon">  
                 <hexagon radius="1" />
             </primitive> 
