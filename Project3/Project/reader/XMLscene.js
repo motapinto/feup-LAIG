@@ -33,12 +33,12 @@ class XMLscene extends CGFscene {
 
         this.axis = new CGFaxis(this);
         this.displayAxis = true;
+        this.audioEnable = true;
         this.scaleFactor = 1;
         this.floor = 0;
         this.floorMax = 0;
         this.viewsList = [];
         this.selectedCamera = null;
-        this.selectedSecurityCamera = null;
         this.tInit = null;
         this.updatePeriod = 100;
         this.setUpdatePeriod(this.updatePeriod);
@@ -47,31 +47,6 @@ class XMLscene extends CGFscene {
 
         this.gameMenu = new MyGameMenu(this);
         this.gameStats = new MyGameStats(this, this.scoreCamera, 0, 0);
-
-        /* Extras */
-        this.selectedScene = 2;
-        // Terrain
-        this.terrainMaterial = new CGFappearance(this);
-        this.terrainMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.terrainMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
-        this.terrainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
-        this.terrainMaterial.setShininess(120);
-        // Water shader
-        this.waterPlane = new MyRectangle(this, -50, 50, -50, 50, 100, 100);
-        this.waterPlane.updateTexCoords(10, 10);
-        this.water_tex = new CGFtexture(this, "scenes/images/waterTex.jpg");
-        this.water_map = new CGFtexture(this, "scenes/images/waterMap.jpg");
-        this.waterShader = new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag");
-        this.waterShader.setUniformsValues({ timeFactor: 1 });
-        this.waterShader.setUniformsValues({ uSampler2: 1 });
-        // Montain shader
-        this.montainPlane = new MyRectangle(this, -20, 20, -20, 20, 40, 40);
-        this.montain_tex = new CGFtexture(this, "scenes/images/montainTex.jpg");
-        this.montain_map = new CGFtexture(this, "scenes/images/montainMap.png");
-        this.montain_altimetry = new CGFtexture(this, "scenes/images/montainAlt.png");
-        this.montainShader = new CGFshader(this.gl, "shaders/montain.vert", "shaders/montain.frag");
-        this.montainShader.setUniformsValues({ uSampler2: 1 , uSampler3: 2, normScale: 1});
-    
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -98,7 +73,7 @@ class XMLscene extends CGFscene {
                 break;
             case 2:
                 audio = new Audio('scenes/sounds/birds.mp3');
-                audio.play();
+                //audio.play();
                 break;
         }
     }
@@ -175,12 +150,12 @@ class XMLscene extends CGFscene {
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
-        this.selectedSecurityCamera = this.graph.idView;
+
+        this.gameEnvironment = new MyGameEnvironment(this);
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
         this.interface.CamerasFolder(this.graph.views);
-
 
         this.setCamera(this.graph.views[this.selectedCamera]);
     }
@@ -206,14 +181,13 @@ class XMLscene extends CGFscene {
     
             this.checkKeys(t);
             this.graph.updateAnimations(instant); //t is in miliseconds
-
             this.gameStats.update(instant);
+
+            this.gameEnvironment.update(t);
     
             // this.sequence.update(t);  
             this.orchestrator.update(instant);
             
-            /* Extras */
-            this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
         }
     }
 
@@ -286,38 +260,8 @@ class XMLscene extends CGFscene {
             this.orchestrator.display();
             this.gameStats.display();
             this.gameMenu.display();
-    
-            /* Extras */
-            this.pushMatrix();
-                if(this.selectedScene == 1) {
-                    // water shader
-                    this.setActiveShader(this.waterShader);
-                    this.water_map.bind(1);
-                    this.terrainMaterial.setTexture(this.water_tex);
-                    this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
-                    this.terrainMaterial.apply();
-                    this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
-                    this.translate(0, 0, 2);
-                    this.waterPlane.display();
-                    // default shader
-                    this.setActiveShader(this.defaultShader);
-                }
-                else if(this.selectedScene == 2) {
-                    // water shader
-                    this.setActiveShader(this.montainShader);
-                    this.montain_map.bind(1);
-		            this.montain_altimetry.bind(2);
-                    this.terrainMaterial.setTexture(this.montain_tex);
-                    this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
-                    this.terrainMaterial.apply();
-                    this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
-                    this.translate(5, -6, 2);
-                    this.montainPlane.display();
-                    // default shader
-                    this.setActiveShader(this.defaultShader);
-                    
-                }
-            this.popMatrix();
+            this.gameEnvironment.display();
+            
         this.popMatrix();
     }
 }
