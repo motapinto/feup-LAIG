@@ -49,23 +49,29 @@ class XMLscene extends CGFscene {
         this.gameStats = new MyGameStats(this, this.scoreCamera, 0, 0);
 
         /* Extras */
-        this.selectedScene = 1;
+        this.selectedScene = 2;
+        // Terrain
+        this.terrainMaterial = new CGFappearance(this);
+        this.terrainMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.terrainMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
+        this.terrainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
+        this.terrainMaterial.setShininess(120);
         // Water shader
         this.waterPlane = new MyRectangle(this, -50, 50, -50, 50, 100, 100);
         this.waterPlane.updateTexCoords(10, 10);
-        this.waterMat = new CGFappearance(this);
-        this.waterMat.setAmbient(0.3, 0.3, 0.3, 1);
-        this.waterMat.setDiffuse(0.7, 0.7, 0.7, 1);
-        this.waterMat.setSpecular(0.0, 0.0, 0.0, 1);
-        this.waterMat.setShininess(120);
         this.water_tex = new CGFtexture(this, "scenes/images/waterTex.jpg");
         this.water_map = new CGFtexture(this, "scenes/images/waterMap.jpg");
-        this.water_map.bind(1);
-        this.waterMat.setTexture(this.water_tex);
-        this.waterMat.setTextureWrap('REPEAT', 'REPEAT');
         this.waterShader = new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag");
         this.waterShader.setUniformsValues({ timeFactor: 1 });
         this.waterShader.setUniformsValues({ uSampler2: 1 });
+        // Montain shader
+        this.montainPlane = new MyRectangle(this, -20, 20, -20, 20, 40, 40);
+        this.montain_tex = new CGFtexture(this, "scenes/images/montainTex.jpg");
+        this.montain_map = new CGFtexture(this, "scenes/images/montainMap.png");
+        this.montain_altimetry = new CGFtexture(this, "scenes/images/montainAlt.png");
+        this.montainShader = new CGFshader(this.gl, "shaders/montain.vert", "shaders/montain.frag");
+        this.montainShader.setUniformsValues({ uSampler2: 1 , uSampler3: 2, normScale: 1});
+    
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -88,10 +94,13 @@ class XMLscene extends CGFscene {
                 break;
             case 1:
                 audio = new Audio('scenes/sounds/ocean.mp3');
+                //audio.play();
                 break;
-
+            case 2:
+                audio = new Audio('scenes/sounds/birds.mp3');
+                audio.play();
+                break;
         }
-        audio.play();
     }
 
     /**
@@ -284,10 +293,26 @@ class XMLscene extends CGFscene {
                     // water shader
                     this.setActiveShader(this.waterShader);
                     this.water_map.bind(1);
-                    this.waterMat.apply();
+                    this.terrainMaterial.setTexture(this.water_tex);
+                    this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
+                    this.terrainMaterial.apply();
                     this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
                     this.translate(0, 0, 2);
                     this.waterPlane.display();
+                    // default shader
+                    this.setActiveShader(this.defaultShader);
+                }
+                else if(this.selectedScene == 2) {
+                    // water shader
+                    this.setActiveShader(this.montainShader);
+                    this.montain_map.bind(1);
+		            this.montain_altimetry.bind(2);
+                    this.terrainMaterial.setTexture(this.montain_tex);
+                    this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
+                    this.terrainMaterial.apply();
+                    this.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                    this.translate(5, -6, 2);
+                    this.montainPlane.display();
                     // default shader
                     this.setActiveShader(this.defaultShader);
                     

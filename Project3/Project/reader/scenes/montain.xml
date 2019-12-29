@@ -64,8 +64,6 @@
         <!-- CHAIR -->
             <texture id="woodChair" file="scenes/images/wood-chair.jpg" />
             <texture id="greyFabric" file="scenes/images/grey-fabric.jpg" />
-        <!-- ENVIRONMENT-->
-            <texture id="beach" file="scenes/images/beachTex.jpg" />
     </textures>
 
     <materials>
@@ -198,10 +196,6 @@
     </animations>
 
     <primitives>
-        <!-- BEACH -->
-            <primitive id="beach">
-                <cylinderT base="8" top="3" height="2" slices="20" stacks="1" />
-            </primitive>
         <!-- TABLE -->
             <primitive id="TableLeg">
                 <cylinder base="0.1" top="0.1" height="1" slices="20" stacks="1" />
@@ -271,22 +265,6 @@
     </primitives>
 
     <components>
-        <!-- BEACH -->
-            <component id="beach">
-                <transformation>
-                    <translate x="5" y="12" z="-2" />
-                    <rotate axis="x" angle="0"  />
-                    <scale x="1" y="1" z="1" />
-                </transformation>
-                <materials>
-                    <material id="defaultMaterial" />
-                </materials>
-                <texture id="beach"/>
-                <children>
-                    <primitiveref id="beach" />
-                </children>
-            </component>
-        <!-- BEACH -->
         <!-- TABLE -->
             <component id="TableLeg">
                 <transformation>
@@ -502,8 +480,6 @@
                 </materials>
                 <texture id='none'/>
                 <children>
-                    <!-- ENVIRONMENT -->
-                    <componentref id='beach' />
                     <!-- GAME -->
                     <componentref id='Game' />
                 </children>
