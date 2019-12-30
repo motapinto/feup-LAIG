@@ -22,6 +22,8 @@ class MyGameEnvironment extends CGFscene {
         this.waterShader = new CGFshader(scene.gl, "shaders/water.vert", "shaders/water.frag");
         this.waterShader.setUniformsValues({ uSampler2: 1, timeFactor: 1 });
         // Montain shader
+        this.miniWaterPlane = new MyRectangle(scene, -15, 15, -22, 15, 10, 10);
+        this.miniWaterPlane.updateTexCoords(5, 5);
         this.montainPlane = new MyRectangle(scene, -20, 20, -20, 20, 40, 40);
         this.montain_tex = new CGFtexture(scene, "scenes/images/montainTex.jpg");
         this.montain_map = new CGFtexture(scene, "scenes/images/montainMap.png");
@@ -46,7 +48,7 @@ class MyGameEnvironment extends CGFscene {
     }
 
     update(t) {
-        if(this.selectedScene == 1)
+        if(this.selectedScene == 1 || this.selectedScene == 2)
             this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
     }
 
@@ -65,6 +67,17 @@ class MyGameEnvironment extends CGFscene {
             }
             else if(this.selectedScene == 2) {
                 // water shader
+                this.scene.pushMatrix();
+                    this.scene.setActiveShader(this.waterShader);
+                    this.water_map.bind(1);
+                    this.terrainMaterial.setTexture(this.water_tex);
+                    this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
+                    this.terrainMaterial.apply();
+                    this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                    this.scene.translate(0, 0, 1.5);
+                    this.miniWaterPlane.display();
+                this.scene.popMatrix();
+                //montain
                 this.scene.setActiveShader(this.montainShader);
                 this.montain_map.bind(1);
                 this.montain_altimetry.bind(2);
