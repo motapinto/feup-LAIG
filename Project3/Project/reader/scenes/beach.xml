@@ -529,7 +529,7 @@
         <!-- GAME TABLE -->
             <component id="GameTable">
                 <transformation>
-                    <translate x="5" y="11.85" z="0" />
+                    <translate x="0" y="0" z="0" />
                     <rotate angle='45' axis='z' />
                     <scale x="2" y="2" z="1" />
                 </transformation>
@@ -546,7 +546,7 @@
             </component>
             <component id="SupportTable1">
                 <transformation>
-                    <translate x="6.8" y="10.6" z="0" />
+                    <translate x="1.8" y="-0.15" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
@@ -559,7 +559,7 @@
             </component>
             <component id="SupportTable2">
                 <transformation>
-                    <translate x="3.2" y="11.7" z="0" />
+                    <translate x="-1.8" y="-1.25" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
@@ -572,7 +572,7 @@
             </component>
             <component id="ChairPlayer1">
                 <transformation>
-                    <translate x="5" y="10.5" z="0" />
+                    <translate x="0" y="-1.5" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
@@ -585,7 +585,7 @@
             </component>
             <component id="ChairPlayer2">
                 <transformation>
-                    <translate x="5" y="13.2" z="0" />
+                    <translate x="0" y="1.2" z="0" />
                     <rotate axis="z" angle="225" />
                 </transformation>
                 <materials>

@@ -61,21 +61,6 @@ class XMLscene extends CGFscene {
             if(this.floor > this.floorMax)
                 this.floor = this.floorMax - 1;
         }
-
-        //sound
-        let audio;
-        switch(this.selectedScene) {
-            case 0:
-                break;
-            case 1:
-                audio = new Audio('scenes/sounds/ocean.mp3');
-                //audio.play();
-                break;
-            case 2:
-                audio = new Audio('scenes/sounds/birds.mp3');
-                //audio.play();
-                break;
-        }
     }
 
     /**
