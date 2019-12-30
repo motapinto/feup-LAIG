@@ -3,24 +3,24 @@
 
     <views default="player2"> 
         <perspective id="above" near="0.1" far="1000" angle="20">
-            <from x="5" y="32" z="50" />
-            <to x="5" y="8" z="-5" />
+            <from x="0" y="32" z="50" />
+            <to x="0" y="8" z="-5" />
         </perspective>
         <perspective id="side" near="0.1" far="1000" angle="30 ">
-            <from x="5" y="3" z="15" />
-            <to x="5" y="3" z="-5" />
+            <from x="0" y="3" z="15" />
+            <to x="0" y="3" z="-5" />
         </perspective>
         <perspective id="gameView" near="0.1" far="1000" angle="40">
-            <from x="5" y="3.6" z="-12.001" />
-            <to x="5" y="1" z="-11.9" />
+            <from x="0" y="3.6" z="0.1" />
+            <to x="0" y="1" z="0.03" />
         </perspective>
         <perspective id="player1" near="0.1" far="1000" angle="32">
-            <from x="5" y="5" z="-6" />
-            <to x="5" y="1" z="-13" />
+            <from x="0" y="5" z="6" />
+            <to x="0" y="1" z="-1" />
         </perspective>
         <perspective id="player2" near="0.1" far="1000" angle="32">
-            <from x="5" y="5" z="-18" />
-            <to x="5" y="1" z="-11" />
+            <from x="0" y="5" z="-6" />
+            <to x="0" y="1" z="1" />
         </perspective>
     </views>
 
@@ -274,7 +274,7 @@
         <!-- BEACH -->
             <component id="beach">
                 <transformation>
-                    <translate x="5" y="12" z="-2" />
+                    <translate x="0" y="0" z="-2" />
                     <rotate axis="x" angle="0"  />
                     <scale x="1" y="1" z="1" />
                 </transformation>
