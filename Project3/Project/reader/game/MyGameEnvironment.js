@@ -1,12 +1,11 @@
-class MyGameEnvironment extends CGFscene {
+class MyGameEnvironment {
     /**
      * @constructor
      * @param {Scene} scene 
      */
     constructor(scene) {
-        super();
         this.scene = scene;
-        this.selectedScene = 2;
+        this.selectedScene = 1;
 
         // Material
         this.terrainMaterial = new CGFappearance(scene);

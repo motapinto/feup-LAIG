@@ -91,7 +91,7 @@ class MyGameOrchestrator{
 
     display() {
         this.scene.pushMatrix();
-            this.scene.translate(4, 1.1, -11);
+            this.scene.translate(-1, 1.1, 0.9);
             this.scene.scale(0.1, 0.1, 0.1);
             this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
             this.gameBoard.display();
