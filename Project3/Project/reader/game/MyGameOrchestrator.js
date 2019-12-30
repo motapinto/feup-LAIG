@@ -64,6 +64,7 @@ class MyGameOrchestrator{
             if (this.validateMove(this.gameBoard.position(uniqueId))) {
                 this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoordsId(uniqueId), this.getMoveCoords(obj.type))
                 this.picking = false;
+                this.changePlayer();
             }
         }
         else if (obj instanceof MyTile) {
@@ -113,7 +114,7 @@ class MyGameOrchestrator{
                 return;
             }
 
-            this.cameraDegrees += 90 * delta * DEGREE_TO_RAD;
+            this.cameraDegrees = 90 * delta * DEGREE_TO_RAD;
         }
     }
 
