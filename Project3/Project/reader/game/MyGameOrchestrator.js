@@ -19,6 +19,9 @@ class MyGameOrchestrator{
         this.scorePlayer1 = new MyPlayerStash(this.scene, 1);
         this.scorePlayer2 = new MyPlayerStash(this.scene,);
         this.picking = true;
+        this.changingPlayer = false;
+        this.changingStart = null;
+        this.cameraDegrees = 0;
         this.player = 0;
         this.AILvl = 0;
         this.gameMode = 0;
@@ -84,9 +87,34 @@ class MyGameOrchestrator{
         }
     }
 
+    changePlayer() {
+        this.picking = false;
+        this.changingPlayer = true;
+        this.changingStart = null;
+        this.player = (this.player + 1) % 2;
+    }
+
+    endChangePlayer() {
+        this.picking = true;
+        this.changingPlayer = false;
+        this.changingStart = null;
+        if (this.player) this.cameraDegrees = 180 * DEGREE_TO_RAD;
+        else this.cameraDegrees = 0;
+    }
+
     update(t) {
         this.picking = !this.gameSequence.update(t);
         // this.animator.update(t);
+        if (this.changingPlayer) {
+            if (this.changingStart == null) this.changingStart = t;
+            let delta = t - this.changingStart;
+            if (delta > 2) {
+                this.endChangePlayer();
+                return;
+            }
+
+            this.cameraDegrees += 90 * delta * DEGREE_TO_RAD;
+        }
     }
 
     display() {
