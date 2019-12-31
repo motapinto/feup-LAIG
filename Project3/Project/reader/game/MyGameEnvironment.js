@@ -5,7 +5,7 @@ class MyGameEnvironment {
      */
     constructor(scene) {
         this.scene = scene;
-        this.selectedScene = 1;
+        this.selectedScene = 3;
 
         // Material
         this.terrainMaterial = new CGFappearance(scene);
@@ -41,6 +41,10 @@ class MyGameEnvironment {
                 break;
             case 2:
                 audio = new Audio('scenes/sounds/birds.mp3');
+                //audio.play();
+                break;
+            case 3:
+                audio = new Audio('scenes/sounds/people.mp3');
                 //audio.play();
                 break;
         }

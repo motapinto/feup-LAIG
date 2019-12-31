@@ -546,7 +546,7 @@
             </component>
             <component id="SupportTable1">
                 <transformation>
-                    <translate x="1.8" y="-0.15" z="0" />
+                    <translate x="1.8" y="-1.27" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
@@ -559,7 +559,7 @@
             </component>
             <component id="SupportTable2">
                 <transformation>
-                    <translate x="-1.8" y="-1.25" z="0" />
+                    <translate x="-1.8" y="-0.15" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
