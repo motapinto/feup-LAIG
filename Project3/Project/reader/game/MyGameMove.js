@@ -7,15 +7,15 @@ class MyGameMove {
      * @param {Scene} scene
      * @param {SceneGraph} graph
      * @param {MyTile} tile
-     * @param {MyScoreBoard} score
+     * @param {MyplayerStashBoard} playerStash
      * @param {vec2} coordsInit
      * @param {vec2} coordsFin
      */
-    constructor(scene, graph, tileInit, score, coordsInit, coordsFin) {
+    constructor(scene, graph, tileInit, playerStash, coordsInit, coordsFin) {
         this.scene = scene;
         this.graph = graph;
         this.tileInit = tileInit;
-        this.score = score;
+        this.playerStash = playerStash;
         this.piece = tileInit.getPiece();
         this.animating = false;
         this.reversing = false;
@@ -23,6 +23,8 @@ class MyGameMove {
         this.matrix = mat4.create();
         this.coordsInit = coordsInit;
         this.createAnimation(coordsInit, coordsFin);
+
+        this.animation = new KeyframeAnimation(scene, 60);
     }
 
     createAnimation(coordsInit, coordsFin) {
@@ -30,9 +32,8 @@ class MyGameMove {
             x: coordsFin.x - coordsInit.x,
             y: coordsFin.y - coordsInit.y
         };
-        let distOffset = 0.1 * Math.sqrt(this.coordsDiff.x * this.coordsDiff.x + this.coordsDiff.y * this.coordsDiff.y);
-        this.deltaTime = 2 + distOffset;
-        this.height = 0.5 + distOffset;
+        this.transitionTime = 1.5 ;
+        this.height = 5 ;
         this.animate();
     }
 
@@ -40,7 +41,7 @@ class MyGameMove {
         this.animating = true;
         this.startTime = null;
         if (this.reversing)
-            this.score.removePiece();
+            this.playerStash.removePiece();
         else
             this.tileInit.setPiece();
     }
@@ -53,33 +54,43 @@ class MyGameMove {
         if (this.reversing)
             this.tileInit.setPiece(this.piece);
         else
-            this.score.addPiece(this.piece);
+            this.playerStash.addPiece(this.piece);
     }
 
     reverse() {
         this.reversing = true;
         this.coordsDiff.x = -this.coordsDiff.x;
         this.coordsDiff.y = -this.coordsDiff.y;
-        if (this.animating) this.startTime -= this.deltaTime - this.delta;
+        if (this.animating) this.startTime -= this.transitionTime - this.delta;
+    }
+
+    pushKeyframe(percentage) {
+        let translation = [], rotation=[], scale=[];
+        let x = this.coordsDiff.x * percentage, y = this.coordsDiff.y * percentage, z = this.quadratic(percentage);
+        let angle_x = percentage*10, angle_y = percentage*10, angle_z = 0;
+
+        translation.push(...[x, y, z]);
+        rotation.push(...[angle_x, angle_y, angle_z]);
+        scale.push(...[1, 1, 1]);
+
+        let instant = percentage*1.5;
+
+        this.animation.addKeyframe(instant, translation, rotation, scale);
     }
 
     update(t) {
         if (!this.animating) return false;
-
         if (this.startTime == null) this.startTime = t;
 
-        this.matrix = mat4.create();
-
         this.delta = t - this.startTime;
-        
-        if (this.delta > this.deltaTime) {
+
+        this.animation.update(t);
+        this.pushKeyframe(this.delta / this.transitionTime);
+
+        if (this.delta > this.transitionTime) {
             this.endAnimation();
             return false;
         }
-
-        let percent = this.delta / this.deltaTime;
-
-        mat4.translate(this.matrix, this.matrix, [this.coordsDiff.x * percent, this.coordsDiff.y * percent, this.quadratic(percent)]);
 
         return true;
     }
@@ -87,10 +98,8 @@ class MyGameMove {
     display() {
         if (this.animating) {
             this.scene.pushMatrix();
-            
-            this.scene.multMatrix(this.matrix);
-            this.scene.translate(this.coordsInit.x, this.coordsInit.y, 0);
-
+                this.scene.multMatrix(this.matrix);
+                this.scene.translate(this.coordsInit.x, this.coordsInit.y, 0);
                 this.piece.display();
             this.scene.popMatrix();
         }
