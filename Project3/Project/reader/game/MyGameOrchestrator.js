@@ -12,12 +12,19 @@ class MyGameOrchestrator{
         this.theme = theme;
         // this.animator = new MyAnimator(…);
         
-        // this.theme = new MyScenegraph('main.xml', this.scene);
+        // let filename = getUrllets()['file'] || "questioning.xml";
+        // this.scene.graph = new MySceneGraph(filename, this.scene);
         this.gameSequence = new MyGameSequence(this.scene, this, this.theme);
+        //board of the game
         this.gameBoard = new MyGameBoard(this.scene, this.theme);
+        //prolog connection
         this.prolog = new MyPrologInterface(this);
-        this.scorePlayer1 = new MyPlayerStash(this.scene, 1);
-        this.scorePlayer2 = new MyPlayerStash(this.scene,);
+        //pices collected by players during game
+        this.stashPlayer1 = new MyPlayerStash(this.scene, 1);
+        this.stashPlayer2 = new MyPlayerStash(this.scene,);
+        //game time and scores
+        this.gameStats = new MyGameStats(this.scene, 0, 0);
+        
         this.picking = true;
         this.changingPlayer = false;
         this.changingStart = null;
@@ -69,12 +76,12 @@ class MyGameOrchestrator{
 
     getMoveCoords(type) {
         if (this.player) {
-            let pos = this.scorePlayer2.getNewPiecePos(type);
+            let pos = this.stashPlayer2.getNewPiecePos(type);
             pos.y += 2 * 11;
             return pos;
         }
         else {
-            let pos = this.scorePlayer1.getNewPiecePos(type);
+            let pos = this.stashPlayer1.getNewPiecePos(type);
             pos.y = -pos.y;
             return pos;
         }
@@ -89,7 +96,7 @@ class MyGameOrchestrator{
         let tile = this.gameBoard.getTile(x, y);
         tile.setColor(1);
         this.moves.push({ tile: tile, timeToLive: 2, startTime: null });
-        this.gameSequence.addMove(tile, this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
+        this.gameSequence.addMove(tile, this.player ? this.stashPlayer2 : this.stashPlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
     }
 
     /**
@@ -121,6 +128,8 @@ class MyGameOrchestrator{
 
     update(t) {
         this.gameSequence.update(t);
+        this.gameStats.update(t);
+
         // this.animator.update(t);
         if (this.changingPlayer) {
             if (this.changingStart == null) this.changingStart = t;
@@ -145,6 +154,10 @@ class MyGameOrchestrator{
 
     display() {
         this.scene.pushMatrix();
+            this.gameStats.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
             this.scene.translate(-1, 1.1, 0.9);
             this.scene.scale(0.1, 0.1, 0.1);
             this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
@@ -153,14 +166,13 @@ class MyGameOrchestrator{
             
             this.scene.pushMatrix();
                 this.scene.scale(1, -1, 1);
-                this.scorePlayer1.display();
+                this.stashPlayer1.display();
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
                 this.scene.translate(0, 21.8, 0);
-                this.scorePlayer2.display();
+                this.stashPlayer2.display();
             this.scene.popMatrix();
-            
         this.scene.popMatrix();
     }
 }

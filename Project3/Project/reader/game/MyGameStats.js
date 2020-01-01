@@ -8,9 +8,8 @@ class MyGameStats {
      * @param {integer} score1 
      * @param {integer} score2 
      */
-    constructor(scene, camera, score1, score2) {
+    constructor(scene, score1, score2) {
         this.scene = scene;
-        this.camera = camera;
         this.score1 = score1;
         this.score2 = score2;
         this.countTime = true;
@@ -28,7 +27,12 @@ class MyGameStats {
 
         this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);
 
-        this.scoreBoardStick = new MyCylinder(this.scene, 2.99, 2.99, 4, 4, 1);
+        this.scoreBoard = new MyCylinder(this.scene, 0.2, 0.2, 1, 3, 1);
+        this.scoreBoardMat = new CGFappearance(this.scene);
+        this.scoreBoardMat.setDiffuse(0.0, 0.0, 0.0, 1.0);
+        this.scoreBoardMat.setAmbient(0.0, 0.0, 0.0, 1.0);
+        this.scoreBoardMat.setSpecular(0.5, 0.5, 0.5, 1.0);
+        this.scoreBoardMat.setShininess(10.0);
 
         // Stores all numbers textures
         this.digitTextures = [];
@@ -66,13 +70,6 @@ class MyGameStats {
         }
     }
 
-    attachToFrameBuffer(){
-        this.texture.attachToFrameBuffer();
-    }
-
-    detachFromFrameBuffer(){
-        this.texture.detachFromFrameBuffer();
-    }
 
     showStats() {
         this.digitTextures[this.currentSecondsOnes].apply();
@@ -95,56 +92,37 @@ class MyGameStats {
     // rever este display
     display() {
         this.scene.pushMatrix();
-            this.scene.translate(0, 5, 0);
-            this.scene.scale(0.5, 0.5, 0.5);
+            this.scene.translate(1.3, 1.2, 0.2);
             this.scene.pushMatrix();
-                this.scene.rotate(90 * DEGREE_TO_RAD, 1, 0, 0);
-                this.scene.rotate(45 * DEGREE_TO_RAD, 0, 0, 1);
-                this.scoreBoardStick.display();
+                this.scene.rotate(90 * DEGREE_TO_RAD, 0, 1, 0);
+                this.scene.rotate(90 * DEGREE_TO_RAD, 0, 0, 1);
+                this.scoreBoardMat.apply();
+                this.scoreBoard.display();
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
-                this.scene.scale(0.5, 0.7, 0.5);
-                this.scene.translate(-2, -5, 4.25); // y = -5
-            for(let i = 0; i < 4; i++) {
-                if(i == 0) {
-                    this.scene.pushMatrix();
-                        this.showStats();
-                        this.scene.translate(0, 2, 0);
-                        this.camera.display();
-                    this.scene.popMatrix();
-                }
+                this.scene.translate(0.3, 0, 0.12); 
+                this.scene.scale(0.1, 0.1, 0.1);
+                this.scene.rotate(-DEGREE_TO_RAD*30, 1, 0, 0);
+                this.showStats();
+            this.scene.popMatrix();
+        this.scene.popMatrix();
 
-                if(i == 1) {
-                    this.scene.pushMatrix();
-                        this.scene.rotate(90 * DEGREE_TO_RAD, 0, 1, 0);
-                        this.scene.translate(2.5, 0, 6.25);
-                        this.showStats();
-                        this.scene.translate(0, 2, 0);
-                        this.camera.display();
-                    this.scene.popMatrix();
-                }
+        this.scene.pushMatrix();
+            this.scene.translate(-1.3, 1.2, -0.2);
+            this.scene.rotate(-DEGREE_TO_RAD*180, 0, 1, 0);
+            this.scene.pushMatrix();
+                this.scene.rotate(90 * DEGREE_TO_RAD, 0, 1, 0);
+                this.scene.rotate(90 * DEGREE_TO_RAD, 0, 0, 1);
+                this.scoreBoardMat.apply();
+                this.scoreBoard.display();
+            this.scene.popMatrix();
 
-                if(i == 2) {
-                    this.scene.pushMatrix();
-                        this.scene.rotate(-90 * DEGREE_TO_RAD, 0, 1, 0);
-                        this.scene.translate(-6.25, 0, 2.25);
-                        this.showStats();
-                        this.scene.translate(0, 2, 0);
-                        this.camera.display();
-                    this.scene.popMatrix();
-                }
-
-                if(i == 3) {
-                    this.scene.pushMatrix();
-                        this.scene.rotate(180 * DEGREE_TO_RAD, 0, 1, 0);
-                        this.scene.translate(-3.8, 0, 8.5);
-                        this.showStats();
-                        this.scene.translate(0, 2, 0);
-                        this.camera.display();
-                    this.scene.popMatrix();
-                }
-            }
+            this.scene.pushMatrix();
+                this.scene.translate(0.3, 0, 0.12); 
+                this.scene.scale(0.1, 0.1, 0.1);
+                this.scene.rotate(-DEGREE_TO_RAD*30, 1, 0, 0);
+                this.showStats();
             this.scene.popMatrix();
         this.scene.popMatrix();
     }

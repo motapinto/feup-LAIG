@@ -46,7 +46,6 @@ class XMLscene extends CGFscene {
         //this.scoreCamera = new MyCamera(this);
 
         this.gameMenu = new MyGameMenu(this);
-        //this.gameStats = new MyGameStats(this, this.scoreCamera, 0, 0);
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -168,7 +167,6 @@ class XMLscene extends CGFscene {
     
             this.checkKeys(t);
             this.graph.updateAnimations(instant); //t is in miliseconds
-            //this.gameStats.update(instant);
             //this.gameEnvironment.update(t);
     
             // this.sequence.update(t);  
@@ -233,10 +231,6 @@ class XMLscene extends CGFscene {
                 default:
                     break;
             }
-            // this.scoreCamera.attachToFrameBuffer();
-            // this.render(this.graph.views['gameView']);
-            // this.scoreCamera.detachFromFrameBuffer();
-            // Game view
             this.render(this.graph.views[this.selectedCamera]);
         }
         this.pickResults.splice(0, this.pickResults.length);
@@ -265,7 +259,6 @@ class XMLscene extends CGFscene {
             this.rotate(this.orchestrator.cameraDegrees, 0, 1, 0);
             this.graph.displayScene();
             this.orchestrator.display();
-            // this.gameStats.display();
             this.gameMenu.display();
             //this.gameEnvironment.display();
             
