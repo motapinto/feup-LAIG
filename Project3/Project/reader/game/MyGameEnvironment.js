@@ -3,9 +3,10 @@ class MyGameEnvironment {
      * @constructor
      * @param {Scene} scene 
      */
-    constructor(scene) {
+    constructor(scene, selectedScene) {
         this.scene = scene;
-        this.selectedScene = 3;
+        this.selectedScene = selectedScene;
+        this.initEnvironment(selectedScene);
 
         // Material
         this.terrainMaterial = new CGFappearance(scene);
@@ -29,10 +30,11 @@ class MyGameEnvironment {
         this.montain_altimetry = new CGFtexture(scene, "scenes/images/montainAlt.png");
         this.montainShader = new CGFshader(scene.gl, "shaders/montain.vert", "shaders/montain.frag");
         this.montainShader.setUniformsValues({ uSampler2: 1 , uSampler3: 2, normScale: 1});
+    }
 
-        //sound
+    initEnvironment(selectedScene) {
         let audio;
-        switch(this.selectedScene) {
+        switch(selectedScene) {
             case 0:
                 break;
             case 1:
@@ -43,11 +45,21 @@ class MyGameEnvironment {
                 audio = new Audio('scenes/sounds/birds.mp3');
                 //audio.play();
                 break;
+            //restaurant
             case 3:
                 audio = new Audio('scenes/sounds/people.mp3');
                 //audio.play();
                 break;
+            //questioning
+            case 4:
+                this.questioning();
+                break;
         }
+    }
+
+    questioning() {
+        this.mirror1 = new MyCamera(this.scene, 'questioning', 1);
+        this.mirror2 = new MyCamera(this.scene, 'questioning', 2);
     }
 
     update(t) {
@@ -94,17 +106,4 @@ class MyGameEnvironment {
             this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
     }
-}
-
-function getUrllets() {
-    let lets = {};
-    let parts = window.location.href.replace
-    (
-        /[?&]+([^=&]+)=([^&]*)/gi,    
-        function(m,key,value) {
-        lets[decodeURIComponent(key)] = decodeURIComponent(value);
-        }
-    );
-
-    return lets;
 }

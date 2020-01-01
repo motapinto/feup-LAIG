@@ -5,11 +5,15 @@
 * @param {CGFtextureRTT} texture
 */
 class MyCamera {
-    constructor(scene){
+    constructor(scene, environment=null, number=null){
         this.scene = scene;
+
+        if(environment == 'questioning') {
+            this.rectangle = scene.graph.components['mirror' + number];
+        }
     
-        this.texture = new CGFtextureRTT(this.scene, this.scene.gl.canvas.width, this.scene.gl.canvas.height);;
-        this.rectangle = new MyRectangle(this.scene, -2, 6, 0, 3)
+        this.texture = new CGFtextureRTT(scene, scene.gl.canvas.width, scene.gl.canvas.height);
+        //this.rectangle = new MyRectangle(this.scene, -2, 6, 0, 3)
         
         this.textureMaterial = new CGFappearance(this.scene);
         this.textureMaterial.setShininess(1);
@@ -18,8 +22,6 @@ class MyCamera {
         this.textureMaterial.setSpecular(1, 1, 1, 1);
         this.textureMaterial.setEmission(1, 1, 1, 1);
         this.textureMaterial.setTextureWrap('REPEAT', 'REPEAT');
-        
-        this.rectangle.updateTexCoords(8, -3);
     }
   
     attachToFrameBuffer(){
