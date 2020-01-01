@@ -33,9 +33,9 @@ class MyGameSequence {
     update(t) {
         if (this.moves.length > 0 && this.animating) {
             this.animating = this.moves[this.moves.length - 1].update(t);  
-            return true;
+            if (!this.animating)
+                this.orchestrator.prolog.verifyBoard();
         }
-        return false;
     }
 
     display() {

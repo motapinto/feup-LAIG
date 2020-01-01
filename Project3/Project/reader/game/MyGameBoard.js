@@ -58,9 +58,9 @@ class MyGameBoard{
 
     getInstance() {
         let instance = [];
-        for (let line in this.board) {
+        for (let line of this.board) {
             let instanceLine = [];
-            for (let tile in line) {
+            for (let tile of line) {
                 instanceLine.push(tile.piece ? tile.piece.type : 0);
             }
             if (instanceLine.length == 11) instanceLine.push(4);
@@ -70,12 +70,21 @@ class MyGameBoard{
         return instance;
     }
 
-    getPiece = (y, x) => this.board[y][x].getPiece();
+    /**
+    * @returns {MyPiece}
+    * @param {Int} x
+    * @param {Int} y
+    */
+    getPiece = (x, y) => this.board[y][x].getPiece();
 
-    setPiece(y, x, piece = null) {
+    setPiece(x, y, piece = null) {
         this.board[y][x].setPiece(piece);
     }
 
+    /**
+     * @returns {MyTile}
+     * @param {String} id 
+     */
     getTile(id) {
         let position = this.position(id);
         return this.board[position.y][position.x];

@@ -25,19 +25,12 @@ class MyGameOrchestrator{
         this.player = 0;
         this.AILvl = 0;
         this.gameMode = 0;
+        this.moves = [];
         this.start();
     }
 
     start() {
         this.prolog.getBoard();
-    }
-
-    /**
-     * 
-     * @param {{x, y}} position 
-     */
-    validateMove(position) {
-        return true;
     }
 
     /**
@@ -61,14 +54,11 @@ class MyGameOrchestrator{
 
     OnObjectSelected(obj, uniqueId) {
         if (obj instanceof MyPiece) {
-            if (this.validateMove(this.gameBoard.position(uniqueId))) {
-                this.gameSequence.addMove(this.gameBoard.getTile(uniqueId), this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoordsId(uniqueId), this.getMoveCoords(obj.type))
-                this.picking = false;
-                this.changePlayer();
-            }
+            this.picking = false;
+            this.prolog.validateMove(this.gameBoard.getInstance(),this.gameBoard.position(uniqueId));
         }
         else if (obj instanceof MyTile) {
-            // do something with id knowing it is a tile
+            this.failledMove(this.gameBoard.position(uniqueId));
         }
         else {
             // error ?
@@ -88,6 +78,30 @@ class MyGameOrchestrator{
         }
     }
 
+    /**
+     * 
+     * @param {Int} x 
+     * @param {Int} y 
+     */
+    move(x, y) {
+        let tile = this.gameBoard.getTile(this.gameBoard.id(x, y));
+        tile.setColor(1);
+        this.moves.push({ tile: tile, timeToLive: 2, startTime: null });
+        this.gameSequence.addMove(tile, this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
+    }
+
+    /**
+     *
+     * @param {Int} x
+     * @param {Int} y
+     */
+    failledMove(x, y) {
+        let tile = this.gameBoard.getTile(this.gameBoard.id(x, y));
+        tile.setColor(2);
+        this.moves.push({ tile: tile, timeToLive: 2, startTime: null });
+        this.changePlayer();
+    }
+
     changePlayer() {
         this.picking = false;
         this.changingPlayer = true;
@@ -104,7 +118,7 @@ class MyGameOrchestrator{
     }
 
     update(t) {
-        this.picking = !this.gameSequence.update(t);
+        this.gameSequence.update(t);
         // this.animator.update(t);
         if (this.changingPlayer) {
             if (this.changingStart == null) this.changingStart = t;
@@ -115,6 +129,15 @@ class MyGameOrchestrator{
             }
 
             this.cameraDegrees = 90 * delta * DEGREE_TO_RAD;
+        }
+
+        for (let move of this.moves) {
+            if (move.startTime == null) move.startTime = t;
+            let delta = t - move.startTime;
+            if (delta > move.timeToLive) {
+                move.tile.setColor(0);
+                this.moves.splice(this.moves.indexOf(move), 1);
+            }
         }
     }
 

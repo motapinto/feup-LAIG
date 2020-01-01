@@ -29,6 +29,7 @@ class MyPrologInterface {
     }
 
     getError() {
+        console.log('Error: server connection lost!');
     }
 
     makeRequest(requestString, handleReply) {
@@ -62,29 +63,37 @@ class MyPrologInterface {
         this.getPrologRequest('initial_board', this.changeBoard, this.getError);
     }
 
-    changeValidMoves(data) {
-        this.orchestrator.validMoves = this.getStringToArray(data.target.response);
+    move(data) {
+        let response = this.getStringToArray(data.target.response);
+        let x = response[1];
+        let y = response[2];
+        if (response[0] == 'valid') {
+            this.orchestrator.move(x, y);
+        }
+        else {
+            this.orchestrator.failledMove(x, y);
+        }
     }
 
-    getValidMoves(board) {
-        let request = 'validMove(' + this.getArrayToString(board) + ')';
-        this.getPrologRequest(request, this.changeValidMoves, this.getError);
-
-        return this.getSingleData();
+    validateMove(board, coords) {
+        let request = 'validMove(' + this.getArrayToString(board) + ',' + coords.x + ',' + coords.y + ')';
+        this.getPrologRequest(request, this.move, this.getError);
     }
-
-    startAIMove(data) {
-        let move = this.getStringToArray(data.target.response);
-        if (move[0] == 'valid')
-            this.orchestrator.startAIMove(move[1], move[2]);
-        else if (move[0] == 'invalid')
-            this.orchestrator.invalidMove(move[1], move[2]);
-    }
-
+    
     aiMove(board, dificulty) {
         let request = 'aiMove(' + this.getArrayToString(board) + ',' + dificulty + ')';
-        this.getPrologRequest(request, this.startAIMove, this.getError);
+        this.getPrologRequest(request, this.move, this.getError);
+    }
 
-        return this.getMultiData();
+    verify(data) {
+        let response = data.target.response;
+        if (response == 'over') this.orchestrator.gameOver();
+        else this.orchestrator.changePlayer();
+    }
+
+    verifyBoard() {
+        let board = this.orchestrator.gameBoard.getInstance();
+        let request = 'verify(' + this.getArrayToString(board) + ')'; 
+        this.getPrologRequest(request, this.verify, this.getError);
     }
 }

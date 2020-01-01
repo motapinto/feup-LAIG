@@ -125,28 +125,28 @@ parse_input(quit, goodbye).
 parse_input(initial_board, Board):- generate_starting_board(Board).
 
 % Verify Move
-parse_input(validMove(Board, X, Y), Response):-
-    if_then_else_aux(valid_move(Board, X, Y), Response is valid, Response is invalid).
+parse_input(validMove(Board, X, Y), [Response, X, Y]):-
+    if_then_else_aux(valid_move(Board, X, Y), Response = '\"valid\"', Response = '\"invalid\"').
 
 % Get AI Lvl 0 Move
 parse_input(aiMove(Board, 0), [Response, X, Y]):-
     choose_move(Board, X, Y, 0),
-    if_then_else_aux(valid_move(Board, X, Y), Response is valid, Response is invalid).
+    if_then_else_aux(valid_move(Board, X, Y), Response is '\"valid\"', Response is '\"invalid\"').
 
 % Get AI Lvl 1 Move
-parse_input(aiMove(Board, 1), [valid, X, Y]):-
+parse_input(aiMove(Board, 1), ['\"valid\"', X, Y]):-
     choose_move(Board, X, Y, 1).
-parse_input(aiMove(_Board, 1), [invalid]).
+parse_input(aiMove(_Board, 1), ['\"invalid\"']).
 
 % Get AI Lvl 2 Move
-parse_input(aiMove(Board, 2), [valid, X, Y]):-
+parse_input(aiMove(Board, 2), ['\"valid\"', X, Y]):-
     choose_move(Board, X, Y, 2),
-parse_input(aiMove(_Board, 2), [invalid]).
+parse_input(aiMove(_Board, 2), ['\"invalid\"']).
 
 % Verify if game is over
-parse_input(verify(Board), over):-
+parse_input(verify(Board), '\"over\"'):-
     game_over(Board).
-parse_input(verify(_), ok).
+parse_input(verify(_), '\"ok\"').
 
 
 % Game End
