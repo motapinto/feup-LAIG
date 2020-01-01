@@ -10,14 +10,22 @@ class MyGameOrchestrator{
     constructor(scene, theme) {
         this.scene = scene;
         this.theme = theme;
-        // this.animator = new MyAnimator(…);
-        
-        // this.theme = new MyScenegraph('main.xml', this.scene);
+
+        //environment
+        this.selectedScene = 4;
+        this.gameEnvironment = new MyGameEnvironment(this.scene, this.selectedScene);
+        //game sequence
         this.gameSequence = new MyGameSequence(this.scene, this, this.theme);
+        //board of the game
         this.gameBoard = new MyGameBoard(this.scene, this.theme);
+        //prolog connection
         this.prolog = new MyPrologInterface(this);
-        this.scorePlayer1 = new MyPlayerStash(this.scene, 1);
-        this.scorePlayer2 = new MyPlayerStash(this.scene,);
+        //pices collected by players during game
+        this.stashPlayer1 = new MyPlayerStash(this.scene, 1);
+        this.stashPlayer2 = new MyPlayerStash(this.scene,);
+        //game time and scores
+        this.gameStats = new MyGameStats(this.scene, 0, 0);
+        
         this.picking = true;
         this.changingPlayer = false;
         this.changingStart = null;
@@ -71,34 +79,24 @@ class MyGameOrchestrator{
 
     getMoveCoords(type) {
         if (this.player) {
-            let pos = this.scorePlayer2.getNewPiecePos(type);
+            let pos = this.stashPlayer2.getNewPiecePos(type);
             pos.y += 2 * 11;
             return pos;
         }
         else {
-            let pos = this.scorePlayer1.getNewPiecePos(type);
+            let pos = this.stashPlayer1.getNewPiecePos(type);
             pos.y = -pos.y;
             return pos;
         }
     }
 
-    /**
-     * 
-     * @param {Int} x 
-     * @param {Int} y 
-     */
     move(x, y) {
         let tile = this.gameBoard.getTile(x, y);
         tile.setColor(1);
         this.moves.push({ tile: tile, timeToLive: 2, startTime: null });
-        this.gameSequence.addMove(tile, this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
+        this.gameSequence.addMove(tile, this.player ? this.stashPlayer2 : this.stashPlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
     }
 
-    /**
-     *
-     * @param {Int} x
-     * @param {Int} y
-     */
     failledMove(x, y) {
         let tile = this.gameBoard.getTile(x, y);
         tile.setColor(2);
@@ -128,6 +126,9 @@ class MyGameOrchestrator{
 
     update(t) {
         this.gameSequence.update(t);
+        this.gameStats.update(t);
+        this.gameEnvironment.update(t)
+
         // this.animator.update(t);
         if (this.changingPlayer) {
             if (this.changingStart == null) this.changingStart = t;
@@ -152,7 +153,34 @@ class MyGameOrchestrator{
         }
     }
 
+    displayCameras() {
+        switch(this.selectedScene) {
+            case 4:
+                this.gameEnvironment.mirror1.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['player1']);
+                this.gameEnvironment.mirror1.detachFromFrameBuffer();
+                this.gameEnvironment.mirror2.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['player2']);
+                this.gameEnvironment.mirror2.detachFromFrameBuffer();
+
+                this.gameEnvironment.gameview1.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['gameView']);
+                this.gameEnvironment.gameview1.detachFromFrameBuffer();
+                this.gameEnvironment.gameview2.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['gameView']);
+                this.gameEnvironment.gameview2.detachFromFrameBuffer();
+                break;
+            default:
+                break;
+        }
+    }
+
     display() {
+        this.scene.pushMatrix();
+            this.gameStats.display();
+            this.gameEnvironment.display();
+        this.scene.popMatrix();
+
         this.scene.pushMatrix();
             this.scene.translate(-1, 1.1, 0.9);
             this.scene.scale(0.1, 0.1, 0.1);
@@ -162,14 +190,13 @@ class MyGameOrchestrator{
             
             this.scene.pushMatrix();
                 this.scene.scale(1, -1, 1);
-                this.scorePlayer1.display();
+                this.stashPlayer1.display();
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
                 this.scene.translate(0, 21.8, 0);
-                this.scorePlayer2.display();
+                this.stashPlayer2.display();
             this.scene.popMatrix();
-            
         this.scene.popMatrix();
     }
 }

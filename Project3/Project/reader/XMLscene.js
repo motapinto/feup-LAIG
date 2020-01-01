@@ -43,10 +43,9 @@ class XMLscene extends CGFscene {
         this.updatePeriod = 100;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
-        this.scoreCamera = new MyCamera(this);
+        //this.scoreCamera = new MyCamera(this);
 
         this.gameMenu = new MyGameMenu(this);
-        this.gameStats = new MyGameStats(this, this.scoreCamera, 0, 0);
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -135,8 +134,6 @@ class XMLscene extends CGFscene {
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
-
-        this.gameEnvironment = new MyGameEnvironment(this);
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
@@ -169,9 +166,6 @@ class XMLscene extends CGFscene {
     
             this.checkKeys(t);
             this.graph.updateAnimations(instant); //t is in miliseconds
-            this.gameStats.update(instant);
-
-            this.gameEnvironment.update(t);
     
             // this.sequence.update(t);  
             this.orchestrator.update(instant);
@@ -215,11 +209,7 @@ class XMLscene extends CGFscene {
         
         if(this.sceneInited){
             this.orchestrator.managePick(this.pickMode, this.pickResults);
-            // Game tv's
-            this.scoreCamera.attachToFrameBuffer();
-            this.render(this.graph.views['gameView']);
-            this.scoreCamera.detachFromFrameBuffer();
-            // Game view
+            this.orchestrator.displayCameras();
             this.render(this.graph.views[this.selectedCamera]);
         }
     }
@@ -247,9 +237,7 @@ class XMLscene extends CGFscene {
             this.rotate(this.orchestrator.cameraDegrees, 0, 1, 0);
             this.graph.displayScene();
             this.orchestrator.display();
-            // this.gameStats.display();
             this.gameMenu.display();
-            this.gameEnvironment.display();
             
         this.popMatrix();
     }
