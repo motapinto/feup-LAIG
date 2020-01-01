@@ -82,6 +82,12 @@
             <diffuse r="1.0" g="0.5" b="0.5" a="1.0" />
             <specular r="1.0" g="0.5" b="0.5" a="1.0" />
         </material>
+        <material id="Green" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient g="1.0" r="0.5" b="0.5" a="1.0" />
+            <diffuse g="1.0" r="0.5" b="0.5" a="1.0" />
+            <specular g="1.0" r="0.5" b="0.5" a="1.0" />
+        </material>
         <material id="Yellow" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.5" g="1.0" b="1.0" a="1.0" />
@@ -2393,6 +2399,8 @@
                 </transformation>
                 <materials>
                     <material id="defaultMaterial" />
+                    <material id="Green" />
+                    <material id="Red" />
                 </materials>
                 <texture id="none"/>
                 <children>
@@ -2406,7 +2414,7 @@
                     <scale x="1" y="1" z="0.1"/>
                 </transformation>
                 <materials>
-                    <material id="defaultMaterial" />
+                    <material id="inherit" />
                 </materials>
                 <texture id="none"/>
                 <children>
@@ -2417,7 +2425,7 @@
                 <transformation>
                 </transformation>
                 <materials>
-                    <material id="defaultMaterial" />
+                    <material id="inherit" />
                 </materials>
                 <texture id="none"/>
                 <children>

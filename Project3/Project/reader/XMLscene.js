@@ -232,6 +232,7 @@ class XMLscene extends CGFscene {
             // Game view
             this.render(this.graph.views[this.selectedCamera]);
         }
+        this.pickResults.splice(0, this.pickResults.length);
     }
 
     /**

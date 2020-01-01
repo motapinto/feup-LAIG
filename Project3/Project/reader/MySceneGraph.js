@@ -1753,6 +1753,76 @@ class MySceneGraph {
     }
 
     /**
+     * Processes Nodes Recursively Starting with a given material number
+     * @param {int} id
+     * @param {mat4} matrix
+     * @param {material} material
+     * @param {texture} texture
+     * @param {float} length_s
+     * @param {float} length_t
+     * @param {integer} length_t
+     */
+    processComponentNodeMatRot(id, matrix, material, texture, length_s, length_t, materialRotate) {
+        if (this.components[id] == null) {
+            this.onXMLError(id + " not found in components");
+            return;
+        }
+
+        let node = this.components[id];
+
+        if (node.floor > this.scene.floor)
+            return;
+
+        //get material
+        if (node.materials[materialRotate % node.materials.length] != "inherit")
+            material = node.materials[materialRotate % node.materials.length];
+
+        //get texture
+        if (node.texture.id != "inherit") {
+            texture = node.texture.id;
+            length_s = node.texture.length_s;
+            length_t = node.texture.length_t;
+        }
+
+        //Compute transformation matrix
+        mat4.mul(matrix, matrix, node.transfMatrix);
+        //Compute animation matrix
+        if (node.animation != null)
+            mat4.mul(matrix, matrix, this.animations[node.animation].matrix);
+
+        //process all children components
+        for (let i = 0; i < node.childComponents.length; i++) {
+            this.processComponentNode(node.childComponents[i], mat4.clone(matrix), material, texture, length_s, length_t);
+        }
+
+        //process all children primitives
+        for (let i = 0; i < node.childPrimitives.length; i++) {
+            this.scene.pushMatrix();
+
+            //change texture
+            if (texture != "none") {
+                this.materials[material].setTexture(this.textures[texture]);
+                this.primitives[node.childPrimitives[i]].updateTexCoords(length_s, length_t);
+            }
+            else {
+                this.materials[material].setTexture(null);
+            }
+
+            //apply material
+            this.materials[material].apply();
+
+            //apply transformation matrix
+            this.scene.multMatrix(matrix);
+
+            //draw primitive
+            this.primitives[node.childPrimitives[i]].display();
+
+            this.scene.popMatrix();
+        }
+    }
+
+
+    /**
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
@@ -1761,5 +1831,9 @@ class MySceneGraph {
 
     displayComponent(component) {
         this.processComponentNode(component, mat4.create(), "defaultMaterial", "none", 1, 1);
+    }
+
+    displayComponentMatRot(component, materialRotate) {
+        this.processComponentNodeMatRot(component, mat4.create(), "defaultMaterial", "none", 1, 1, materialRotate);
     }
 }
