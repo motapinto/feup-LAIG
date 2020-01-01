@@ -70,7 +70,6 @@ class MyGameStats {
         }
     }
 
-
     showStats() {
         this.digitTextures[this.currentSecondsOnes].apply();
         this.secondsOnes.display();
@@ -89,7 +88,7 @@ class MyGameStats {
         this.digitTextures[this.score2 % 10].apply();
         this.player2Score.display();
     }
-    // rever este display
+
     display() {
         this.scene.pushMatrix();
             this.scene.translate(1.3, 1.2, 0.2);

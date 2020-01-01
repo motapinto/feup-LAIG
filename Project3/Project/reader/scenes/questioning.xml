@@ -80,21 +80,21 @@
         <!-- PIECE -->
             <material id="Red" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="1.0" g="0.5" b="0.5" a="1.0" />
-                <diffuse r="1.0" g="0.5" b="0.5" a="1.0" />
-                <specular r="1.0" g="0.5" b="0.5" a="1.0" />
+                <ambient r="0.86" g="0.2" b="0.2" a="1.0" />
+                <diffuse r="0.86" g="0.2" b="0.2" a="1.0" />
+                <specular r="0.86" g="0.2" b="0.2" a="1.0" />
             </material>
             <material id="Yellow" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.5" g="1.0" b="1.0" a="1.0" />
-                <diffuse r="0.5" g="1.0" b="1.0" a="1.0" />
-                <specular r="0.5" g="1.0" b="1.0" a="1.0" />
+                <ambient r="0.86" g="0.86" b="0.2" a="1.0" />
+                <diffuse r="0.86" g="0.86" b="0.2" a="1.0" />
+                <specular r="0.86" g="0.86" b="0.2" a="1.0" />
             </material>
             <material id="Blue" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.5" g="0.5" b="1" a="1.0" />
-                <diffuse r="0.5" g="0.5" b="1" a="1.0" />
-                <specular r="0.5" g="0.5" b="1" a="1.0" />
+                <ambient r="0.2" g="0.2" b="0.86" a="1.0" />
+                <diffuse r="0.2" g="0.2" b="0.86" a="1.0" />
+                <specular r="0.2" g="0.2" b="0.86" a="1.0" />
             </material>
         <!-- ROOM -->
             <material id="grey" shininess="10">
