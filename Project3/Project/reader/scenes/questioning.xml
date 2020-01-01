@@ -94,6 +94,12 @@
                 <diffuse r="0.7" g="0.7" b="0.7" a="0.7" />
                 <specular r="0.7" g="0.7" b="0.7" a="0.7" />
             </material>
+            <material id="mirror" shininess="10">
+                <emission r="0" g="0" b="0" a="0" />
+                <ambient r="0.9" g="0.9" b="0.9" a="0.9" />
+                <diffuse r="0.9" g="0.9" b="0.9" a="0.9" />
+                <specular r="1" g="1" b="1" a="1" />
+            </material>
         <!-- TABLE -->
             <material id="plate" shininess="100">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -247,6 +253,9 @@
             <primitive id="cylinder">  
                 <cylinder base="1" top="1" height="1" slices="50" stacks="25" />
             </primitive>
+            <primitive id="cylinderRect">  
+                <cylinder base="1" top="1" height="1" slices="4" stacks="25" />
+            </primitive>
             <primitive id="sphere">
                 <sphere radius="1" slices="50" stacks="25" />
             </primitive>
@@ -274,8 +283,8 @@
         <!-- FLOOR -->
             <component id="floor">
                 <transformation>
-                    <translate x="-7.5" y="-7.5" z="0" />
-                    <scale x="15" y="15" z="1" />
+                    <translate x="-10" y="-10" z="0" />
+                    <scale x="20" y="20" z="1" />
                     <rotate axis="z" angle="0"  />
                 </transformation>
                 <materials>
@@ -290,9 +299,9 @@
         <!-- WALL -->
             <component id='wall1'>
                 <transformation>
-                    <translate x="-7.5" y="-7.5" z="0" />
+                    <translate x="-10" y="-10" z="0" />
                     <rotate axis="x" angle="90"  />
-                    <scale x="15" y="5" z="1" />
+                    <scale x="20" y="5" z="1" />
                 </transformation>
                 <materials>
                     <material id='defaultMaterial' />
@@ -304,7 +313,7 @@
             </component>  
             <component id='wall2'>
                 <transformation>
-                    <translate x="0" y="15" z="0" />
+                    <translate x="0" y="20" z="0" />
                 </transformation>
                 <materials>
                     <material id='defaultMaterial' />
@@ -329,7 +338,7 @@
             </component>
             <component id='wall4'>
                 <transformation>
-                    <translate x="-15" y="0" z="0" />
+                    <translate x="-20" y="0" z="0" />
                 </transformation>
                 <materials>
                     <material id='defaultMaterial' />
@@ -637,7 +646,7 @@
             </component>
             <component id="door">
                 <transformation>
-                    <translate x="-7.49" y="5" z="0" />
+                    <translate x="-9.9" y="5" z="0" />
                 </transformation>
                 <animationref id="door"/>
                 <materials>
@@ -707,15 +716,15 @@
                 </children>
             </component>
         <!-- LAMP -->
-        <!-- MIRROR -->
+        <!-- MIRROR + GAMEVIEW -->
             <component id='mirror1'>
                 <transformation>
-                    <translate x="-4" y="-7.45" z="1" />
+                    <translate x="-4" y="-9.95" z="1" />
                     <rotate axis="x" angle="90"  />
                     <scale x="8" y="3" z="1" />
                 </transformation>
                 <materials>
-                    <material id='Red' />
+                    <material id='inherit' />
                 </materials>
                 <texture id='none'/>
                 <children>
@@ -724,17 +733,67 @@
             </component>  
             <component id='mirror2'>
                 <transformation>
-                    <translate x="0" y="14.9" z="0" />
+                    <translate x="0" y="19.9" z="0" />
                 </transformation>
                 <materials>
-                    <material id='Red' />
+                    <material id='inherit' />
                 </materials>
                 <texture id='none'/>
                 <children>
                     <componentref id='mirror1' />
                 </children>
             </component> 
+            <component id='gameview1'>
+                <transformation>
+                    <rotate axis="z" angle="90"  />
+                </transformation>
+                <materials>
+                    <material id='inherit' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='mirror1' />
+                </children>
+            </component>
+            <component id='gameview2'>
+                <transformation>
+                    <translate x="-19.9" y="0" z="0" />
+                </transformation>
+                <materials>
+                    <material id='inherit' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='gameview1' />
+                </children>
+            </component>
             <component id='mirror'>
+                <transformation>
+                </transformation>
+                <materials>
+                    <material id='mirror' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='mirror1' />
+                    <componentref id='mirror2' />
+                </children>
+            </component>
+            <component id='gameview'>
+                <transformation>
+                </transformation>
+                <materials>
+                    <material id='mirror' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='gameview1' />
+                    <componentref id='gameview2' />
+                </children>
+            </component>      
+        <!-- MIRROR -->
+        <!-- CAMERA -->
+            <component id='camera'>
                 <transformation>
                 </transformation>
                 <materials>
@@ -742,11 +801,118 @@
                 </materials>
                 <texture id='none'/>
                 <children>
-                    <componentref id='mirror1' />
-                    <componentref id='mirror2' />
+                    <componentref id='camera1' />
+                    <componentref id='camera2' />
+                    <componentref id='camera3' />
+                    <componentref id='camera4' />
                 </children>
-            </component>      
-        <!-- MIRROR -->
+            </component>
+            <component id='camera1'>
+                <transformation>
+                    <translate x="-9" y="-9" z="3.5" />
+                    <rotate axis="z" angle="135"/>
+                    <scale x="1.5" y="1.5" z="1.5" />
+                </transformation>
+                <materials>
+                    <material id='defaultMaterial' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='stick1' />
+                    <componentref id='stick2' />
+                    <componentref id='cameraRect' />
+                </children>
+            </component>
+            <component id='camera2'>
+                <transformation>
+                    <translate x="-9" y="9" z="3.5" />
+                    <rotate axis="z" angle="45"/>
+                    <scale x="1.5" y="1.5" z="1.5" />
+                </transformation>
+                <materials>
+                    <material id='defaultMaterial' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='stick1' />
+                    <componentref id='stick2' />
+                    <componentref id='cameraRect' />
+                </children>
+            </component>
+            <component id='camera3'>
+                <transformation>
+                    <translate x="9" y="9" z="3.5" />
+                    <rotate axis="z" angle="-45"/>
+                    <scale x="1.5" y="1.5" z="1.5" />
+                </transformation>
+                <materials>
+                    <material id='defaultMaterial' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='stick1' />
+                    <componentref id='stick2' />
+                    <componentref id='cameraRect' />
+                </children>
+            </component>
+            <component id='camera4'>
+                <transformation>
+                    <translate x="9" y="-9" z="3.5" />
+                    <rotate axis="z" angle="-135"/>
+                    <scale x="1.5" y="1.5" z="1.5" />
+                </transformation>
+                <materials>
+                    <material id='defaultMaterial' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='stick1' />
+                    <componentref id='stick2' />
+                    <componentref id='cameraRect' />
+                </children>
+            </component>
+            <component id='stick1'>
+                <transformation>
+                    <rotate axis="z" angle="45"  />
+                    <scale x="0.05" y="0.05" z="1" />
+                </transformation>
+                <materials>
+                    <material id='Red' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <primitiveref id='cylinderRect' />
+                </children>
+            </component>
+            <component id='stick2'>
+                <transformation>
+                    <translate x="0" y="0.05" z="-0.035" />
+                    <rotate axis="x" angle="90"  />
+                    <scale x="1" y="1" z="0.4" />
+                </transformation>
+                <materials>
+                    <material id='Red' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <componentref id='stick1' />
+                </children>
+            </component>
+            <component id='cameraRect'>
+                <transformation>
+                    <translate x="-0.25" y="-0.35" z="-0.25" />
+                    <rotate axis="x" angle="90"  />
+                    <scale x="0.5" y="0.5" z="0.5" />
+                </transformation>
+                <materials>
+                    <material id='Red' />
+                </materials>
+                <texture id='none'/>
+                <children>
+                    <primitiveref id='rectangle' />
+                </children>
+            </component>
+        <!-- CAMERA -->
         <!-- ROOT -->
             <component id='Root'>
                 <transformation>
@@ -762,7 +928,9 @@
                     <componentref id='wall' />
                     <componentref id='lamp' />
                     <componentref id='mirror' />
+                    <componentref id='gameview' />
                     <componentref id='door' />
+                    <componentref id='camera' />
                     <!-- GAME -->
                     <componentref id='Game' />
                 </children>
