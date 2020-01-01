@@ -83,11 +83,11 @@ class MyGameBoard{
 
     /**
      * @returns {MyTile}
-     * @param {String} id 
+     * @param {Int} x
+     * @param {Int} y
      */
-    getTile(id) {
-        let position = this.position(id);
-        return this.board[position.y][position.x];
+    getTile(x, y) {
+        return this.board[y][x];
     }
 
     display() {

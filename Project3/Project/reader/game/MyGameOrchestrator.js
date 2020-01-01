@@ -58,7 +58,9 @@ class MyGameOrchestrator{
             this.prolog.validateMove(this.gameBoard.getInstance(),this.gameBoard.position(uniqueId));
         }
         else if (obj instanceof MyTile) {
-            this.failledMove(this.gameBoard.position(uniqueId));
+            this.picking = false;
+            let position = this.gameBoard.position(uniqueId);
+            this.failledMove(position.x, position.y);
         }
         else {
             // error ?
@@ -84,7 +86,7 @@ class MyGameOrchestrator{
      * @param {Int} y 
      */
     move(x, y) {
-        let tile = this.gameBoard.getTile(this.gameBoard.id(x, y));
+        let tile = this.gameBoard.getTile(x, y);
         tile.setColor(1);
         this.moves.push({ tile: tile, timeToLive: 2, startTime: null });
         this.gameSequence.addMove(tile, this.player ? this.scorePlayer2 : this.scorePlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
@@ -96,7 +98,7 @@ class MyGameOrchestrator{
      * @param {Int} y
      */
     failledMove(x, y) {
-        let tile = this.gameBoard.getTile(this.gameBoard.id(x, y));
+        let tile = this.gameBoard.getTile(x, y);
         tile.setColor(2);
         this.moves.push({ tile: tile, timeToLive: 2, startTime: null });
         this.changePlayer();
