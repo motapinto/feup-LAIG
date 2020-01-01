@@ -9,7 +9,12 @@ class MyCamera {
         this.scene = scene;
 
         if(environment == 'questioning') {
-            this.rectangle = scene.graph.components['mirror' + number];
+            if(number <= 2)
+                this.rectangle = scene.graph.components['mirror' + number];
+            else  if(number <=4)
+                this.rectangle = scene.graph.components['gameview' + number];
+            else 
+                this.rectangle = scene.graph.components['camera' + number-4];
         }
     
         this.texture = new CGFtextureRTT(scene, scene.gl.canvas.width, scene.gl.canvas.height);

@@ -1,14 +1,23 @@
 <lxs>
     <scene root="Root" axis_length="5"/>
 
-    <views default="player2"> 
-        <perspective id="above" near="0.1" far="1000" angle="20">
-            <from x="0" y="32" z="50" />
-            <to x="0" y="8" z="-5" />
+    <views default="player1"> 
+    
+        <perspective id="camera1" near="0.1" far="1000" angle="30 ">
+            <from x="8.5" y="4" z="8.5" />
+            <to x="0" y="0" z="0" />
         </perspective>
-        <perspective id="side" near="0.1" far="1000" angle="30 ">
-            <from x="0" y="3" z="15" />
-            <to x="0" y="3" z="-5" />
+        <perspective id="camera2" near="0.1" far="1000" angle="30 ">
+            <from x="-8.5" y="4" z="-8.5" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+        <perspective id="camera3" near="0.1" far="1000" angle="30 ">
+            <from x="-8.5" y="4" z="8.5" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+        <perspective id="camera4" near="0.1" far="1000" angle="30 ">
+            <from x="8.5" y="4" z="-8.5" />
+            <to x="0" y="0" z="0" />
         </perspective>
         <perspective id="gameView" near="0.1" far="1000" angle="40">
             <from x="0" y="3.6" z="0.1" />

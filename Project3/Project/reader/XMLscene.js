@@ -222,6 +222,13 @@ class XMLscene extends CGFscene {
                     this.gameEnvironment.mirror2.attachToFrameBuffer();
                     this.render(this.graph.views['player2']);
                     this.gameEnvironment.mirror2.detachFromFrameBuffer();
+
+                    this.gameEnvironment.gameview1.attachToFrameBuffer();
+                    this.render(this.graph.views['gameView']);
+                    this.gameEnvironment.gameview1.detachFromFrameBuffer();
+                    this.gameEnvironment.gameview2.attachToFrameBuffer();
+                    this.render(this.graph.views['gameView']);
+                    this.gameEnvironment.gameview2.detachFromFrameBuffer();
                     break;
                 default:
                     break;
