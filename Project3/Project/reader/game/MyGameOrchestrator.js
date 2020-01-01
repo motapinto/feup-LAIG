@@ -10,10 +10,11 @@ class MyGameOrchestrator{
     constructor(scene, theme) {
         this.scene = scene;
         this.theme = theme;
-        // this.animator = new MyAnimator(…);
-        
-        // let filename = getUrllets()['file'] || "questioning.xml";
-        // this.scene.graph = new MySceneGraph(filename, this.scene);
+
+        //environment
+        this.selectedScene = 4;
+        this.gameEnvironment = new MyGameEnvironment(this.scene, this.selectedScene);
+        //game sequence
         this.gameSequence = new MyGameSequence(this.scene, this, this.theme);
         //board of the game
         this.gameBoard = new MyGameBoard(this.scene, this.theme);
@@ -87,11 +88,6 @@ class MyGameOrchestrator{
         }
     }
 
-    /**
-     * 
-     * @param {Int} x 
-     * @param {Int} y 
-     */
     move(x, y) {
         let tile = this.gameBoard.getTile(x, y);
         tile.setColor(1);
@@ -99,11 +95,6 @@ class MyGameOrchestrator{
         this.gameSequence.addMove(tile, this.player ? this.stashPlayer2 : this.stashPlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
     }
 
-    /**
-     *
-     * @param {Int} x
-     * @param {Int} y
-     */
     failledMove(x, y) {
         let tile = this.gameBoard.getTile(x, y);
         tile.setColor(2);
@@ -129,6 +120,7 @@ class MyGameOrchestrator{
     update(t) {
         this.gameSequence.update(t);
         this.gameStats.update(t);
+        this.gameEnvironment.update(t)
 
         // this.animator.update(t);
         if (this.changingPlayer) {
@@ -152,9 +144,32 @@ class MyGameOrchestrator{
         }
     }
 
+    displayCameras() {
+        switch(this.selectedScene) {
+            case 4:
+                this.gameEnvironment.mirror1.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['player1']);
+                this.gameEnvironment.mirror1.detachFromFrameBuffer();
+                this.gameEnvironment.mirror2.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['player2']);
+                this.gameEnvironment.mirror2.detachFromFrameBuffer();
+
+                this.gameEnvironment.gameview1.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['gameView']);
+                this.gameEnvironment.gameview1.detachFromFrameBuffer();
+                this.gameEnvironment.gameview2.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['gameView']);
+                this.gameEnvironment.gameview2.detachFromFrameBuffer();
+                break;
+            default:
+                break;
+        }
+    }
+
     display() {
         this.scene.pushMatrix();
             this.gameStats.display();
+            this.gameEnvironment.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();

@@ -33,7 +33,7 @@ class MyGameEnvironment {
     }
 
     initEnvironment(selectedScene) {
-        let audio;
+        let audio, filename;
         switch(selectedScene) {
             case 0:
                 break;
@@ -50,8 +50,9 @@ class MyGameEnvironment {
                 audio = new Audio('scenes/sounds/people.mp3');
                 //audio.play();
                 break;
-            //questioning
             case 4:
+                // filename = getUrllets()['file'] || "questioning.xml";
+                // this.scene.graph = new MySceneGraph(filename, this.scene)
                 this.questioning();
                 break;
         }

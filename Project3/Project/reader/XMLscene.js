@@ -134,10 +134,6 @@ class XMLscene extends CGFscene {
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
-
-        //Environment
-        this.selectedScene = 4;
-        this.gameEnvironment = new MyGameEnvironment(this, this.selectedScene);
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.interface.LightsFolder(this.graph.lights);
@@ -167,7 +163,6 @@ class XMLscene extends CGFscene {
     
             this.checkKeys(t);
             this.graph.updateAnimations(instant); //t is in miliseconds
-            //this.gameEnvironment.update(t);
     
             // this.sequence.update(t);  
             this.orchestrator.update(instant);
@@ -211,26 +206,7 @@ class XMLscene extends CGFscene {
         
         if(this.sceneInited){
             this.orchestrator.managePick(this.pickMode, this.pickResults);
-            // Cameras
-            switch(this.selectedScene) {
-                case 4:
-                    this.gameEnvironment.mirror1.attachToFrameBuffer();
-                    this.render(this.graph.views['player1']);
-                    this.gameEnvironment.mirror1.detachFromFrameBuffer();
-                    this.gameEnvironment.mirror2.attachToFrameBuffer();
-                    this.render(this.graph.views['player2']);
-                    this.gameEnvironment.mirror2.detachFromFrameBuffer();
-
-                    this.gameEnvironment.gameview1.attachToFrameBuffer();
-                    this.render(this.graph.views['gameView']);
-                    this.gameEnvironment.gameview1.detachFromFrameBuffer();
-                    this.gameEnvironment.gameview2.attachToFrameBuffer();
-                    this.render(this.graph.views['gameView']);
-                    this.gameEnvironment.gameview2.detachFromFrameBuffer();
-                    break;
-                default:
-                    break;
-            }
+            this.orchestrator.displayCameras();
             this.render(this.graph.views[this.selectedCamera]);
         }
         this.pickResults.splice(0, this.pickResults.length);
@@ -260,7 +236,6 @@ class XMLscene extends CGFscene {
             this.graph.displayScene();
             this.orchestrator.display();
             this.gameMenu.display();
-            //this.gameEnvironment.display();
             
         this.popMatrix();
     }
