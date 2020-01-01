@@ -33,8 +33,14 @@ class MyGameSequence {
     update(t) {
         if (this.moves.length > 0 && this.animating) {
             this.animating = this.moves[this.moves.length - 1].update(t);  
-            if (!this.animating)
-                this.orchestrator.prolog.verifyBoard();
+            if (!this.animating) {
+                if (!this.moves[this.moves.length - 1].reversing)
+                    this.orchestrator.prolog.verifyBoard();
+                else {
+                    this.moves.pop();
+                    this.orchestrator.changePlayer();
+                }
+            }
         }
     }
 

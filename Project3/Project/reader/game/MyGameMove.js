@@ -58,9 +58,17 @@ class MyGameMove {
 
     reverse() {
         this.reversing = true;
+        this.coordsInit = {
+            x: this.coordsInit.x + this.coordsDiff.x,
+            y: this.coordsInit.y + this.coordsDiff.y
+        };
         this.coordsDiff.x = -this.coordsDiff.x;
         this.coordsDiff.y = -this.coordsDiff.y;
         if (this.animating) this.startTime -= this.deltaTime - this.delta;
+        else {
+            this.animating = true;
+            this.score.removePiece(this.piece.type);
+        }
     }
 
     update(t) {

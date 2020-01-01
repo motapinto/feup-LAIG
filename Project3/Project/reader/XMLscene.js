@@ -152,6 +152,9 @@ class XMLscene extends CGFscene {
         if (this.gui.isKeyPressed("KeyM")) {
             this.graph.materialRotate++;
         }
+        if (this.gui.isKeyPressed("KeyZ")) {
+            this.orchestrator.undo();
+        }
     }
 
     /**
@@ -219,7 +222,6 @@ class XMLscene extends CGFscene {
             // Game view
             this.render(this.graph.views[this.selectedCamera]);
         }
-        this.pickResults.splice(0, this.pickResults.length);
     }
 
     /**

@@ -50,6 +50,8 @@ class MyGameOrchestrator{
                 results.splice(0, results.length);
             }
         }
+        if(!this.picking)
+            results.splice(0, results.length);
     }
 
     OnObjectSelected(obj, uniqueId) {
@@ -119,6 +121,11 @@ class MyGameOrchestrator{
         else this.cameraDegrees = 0;
     }
 
+    undo() {
+        if (this.gameSequence.undo())
+            this.picking = false;
+    }
+
     update(t) {
         this.gameSequence.update(t);
         // this.animator.update(t);
@@ -130,7 +137,9 @@ class MyGameOrchestrator{
                 return;
             }
 
-            this.cameraDegrees = 90 * delta * DEGREE_TO_RAD;
+            this.cameraDegrees = 90 * delta;
+            if (this.cameraDegrees > 180) this.cameraDegrees = 180 * DEGREE_TO_RAD + (this.player ? 180 : 0);
+            else this.cameraDegrees = this.cameraDegrees * DEGREE_TO_RAD + (this.player ? 180 : 0);
         }
 
         for (let move of this.moves) {
