@@ -294,7 +294,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="aluminium" length_s="0" length_t="0"/>
+                <texture id="aluminium" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableLeg" />
                 </children>
@@ -305,7 +305,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="aluminium" length_s="0" length_t="0"/>
+                <texture id="aluminium" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableSupport" />
                 </children>
@@ -441,7 +441,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <componentref id="ChairBackSupport" />
                     <componentref id="ChairBackSupportCover" />
@@ -454,7 +454,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="ChairBase" />
                 </children>
@@ -467,7 +467,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="ChairBaseCover" />
                 </children>
@@ -484,7 +484,7 @@
                 <children>
                     <componentref id="ChairLeg1.1" />
                     <componentref id="ChairLeg1.2" />
-                    <componentref id="ChairLeg2.1" />´
+                    <componentref id="ChairLeg2.1" />
                     <componentref id="ChairLeg2.2" />
                     <componentref id="ChairBack" />
                     <componentref id="ChairBase" />

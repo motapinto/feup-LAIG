@@ -12,8 +12,10 @@ class MyGameOrchestrator{
         this.theme = theme;
 
         //environment
-        this.selectedScene = 4;
+        this.selectedScene = 1;
         this.gameEnvironment = new MyGameEnvironment(this.scene, this.selectedScene);
+        //menu
+        this.gameMenu = new MyGameMenu(this.scene);
         //game sequence
         this.gameSequence = new MyGameSequence(this.scene, this, this.theme);
         //board of the game
@@ -257,9 +259,13 @@ class MyGameOrchestrator{
     }
 
     display() {
-        this.scene.pushMatrix();
+        this.scene.pushMatrix(); 
             this.gameStats.display();
             this.gameEnvironment.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+            this.gameMenu.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();

@@ -24,6 +24,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
         this.gui.add(this.scene, 'audioEnable').name("Enable sound"); //checkbox
         this.gui.add(this.scene, 'displayLights').name("Display lights"); //checkbox
+        this.gui.add(this.scene, 'gameType', { PVP: 0, PVM: 1, MVM: 2 } ).name("Game Type");
         //LightsFolder called in onGraphLoaded() function
         //CamerasFolder called in onGraphLoaded() function
         

@@ -39,12 +39,6 @@
     </globals>
 
     <lights>
-        <!-- <omni id="CelestialBody" enabled="1" >
-            <location x="0" y="10" z="-10" w="1" />
-            <ambient r="0.4" g="0.4" b="0.4" a="1" />
-            <diffuse r="0.4" g="0.4" b="0.4" a="1" />
-            <specular r="0.4" g="0.4" b="0.4" a="1" />
-        </omni> -->
         <spot id="game" enabled="1" angle="30.0" exponent="2.0">
             <location x="0" y="3.5" z="0" w="1" />
             <target x="0" y="-1" z="0" />

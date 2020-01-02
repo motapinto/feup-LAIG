@@ -31,7 +31,7 @@ class MyGameMenu {
     display() {
         this.scene.pushMatrix();
         this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
-        this.scene.translate(6.8, 11, 1.1);
+        this.scene.translate(0, 0, 1.1);
         this.scene.scale(0.4, 0.4, 0.4);
             this.scene.pushMatrix();
                 this.scene.scale(3, 1, 1);

@@ -7,43 +7,23 @@ class MyGameEnvironment {
         this.scene = scene;
         this.selectedScene = selectedScene;
         this.initEnvironment(selectedScene);
-
-        // Material
-        this.terrainMaterial = new CGFappearance(scene);
-        this.terrainMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.terrainMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
-        this.terrainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
-        this.terrainMaterial.setShininess(120);
-        // Water shader
-        this.waterPlane = new MyRectangle(scene, -50, 50, -50, 50, 100, 100);
-        this.waterPlane.updateTexCoords(10, 10);
-        this.water_tex = new CGFtexture(scene, "scenes/images/waterTex.jpg");
-        this.water_map = new CGFtexture(scene, "scenes/images/waterMap.jpg");
-        this.waterShader = new CGFshader(scene.gl, "shaders/water.vert", "shaders/water.frag");
-        this.waterShader.setUniformsValues({ uSampler2: 1, timeFactor: 1 });
-        // Montain shader
-        this.miniWaterPlane = new MyRectangle(scene, -15, 15, -22, 15, 10, 10);
-        this.miniWaterPlane.updateTexCoords(5, 5);
-        this.montainPlane = new MyRectangle(scene, -20, 20, -20, 20, 40, 40);
-        this.montain_tex = new CGFtexture(scene, "scenes/images/montainTex.jpg");
-        this.montain_map = new CGFtexture(scene, "scenes/images/montainMap.png");
-        this.montain_altimetry = new CGFtexture(scene, "scenes/images/montainAlt.png");
-        this.montainShader = new CGFshader(scene.gl, "shaders/montain.vert", "shaders/montain.frag");
-        this.montainShader.setUniformsValues({ uSampler2: 1 , uSampler3: 2, normScale: 1});
     }
 
     initEnvironment(selectedScene) {
         let audio, filename;
         switch(selectedScene) {
-            case 0:
-                break;
             case 1:
                 audio = new Audio('scenes/sounds/ocean.mp3');
                 //audio.play();
+                this.waterShader();
+                this.initMaterial();
                 break;
             case 2:
                 audio = new Audio('scenes/sounds/birds.mp3');
                 //audio.play();
+                this.montainShader();
+                this.waterShader();
+                this.initMaterial();
                 break;
             //restaurant
             case 3:
@@ -55,7 +35,40 @@ class MyGameEnvironment {
                 // this.scene.graph = new MySceneGraph(filename, this.scene)
                 this.questioning();
                 break;
+            default:
+                break;
         }
+    }
+
+    initMaterial() {
+        // Material
+        this.terrainMaterial = new CGFappearance(this.scene);
+        this.terrainMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.terrainMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
+        this.terrainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
+        this.terrainMaterial.setShininess(120);
+    }
+
+    waterShader() {
+        // Water shader
+        this.waterPlane = new MyRectangle(this.scene, -50, 50, -50, 50, 100, 100);
+        this.waterPlane.updateTexCoords(10, 10);
+        this.water_tex = new CGFtexture(this.scene, "scenes/images/waterTex.jpg");
+        this.water_map = new CGFtexture(this.scene, "scenes/images/waterMap.jpg");
+        this.waterShader = new CGFshader(this.scene.gl, "shaders/water.vert", "shaders/water.frag");
+        this.waterShader.setUniformsValues({ uSampler2: 1, timeFactor: 1 });
+    }
+
+    montainShader() {
+        // Montain shader
+        this.miniWaterPlane = new MyRectangle(this.scene, -15, 15, -22, 15, 10, 10);
+        this.miniWaterPlane.updateTexCoords(5, 5);
+        this.montainPlane = new MyRectangle(this.scene, -20, 20, -20, 20, 40, 40);
+        this.montain_tex = new CGFtexture(this.scene, "scenes/images/montainTex.jpg");
+        this.montain_map = new CGFtexture(this.scene, "scenes/images/montainMap.png");
+        this.montain_altimetry = new CGFtexture(this.scene, "scenes/images/montainAlt.png");
+        this.montainShader = new CGFshader(this.scene.gl, "shaders/montain.vert", "shaders/montain.frag");
+        this.montainShader.setUniformsValues({ uSampler2: 1 , uSampler3: 2, normScale: 1});
     }
 
     questioning() {
@@ -83,7 +96,7 @@ class MyGameEnvironment {
 
     update(t) {
         if(this.selectedScene == 1 || this.selectedScene == 2)
-            this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
+            this.waterShader.setUniformsValues({ timeFactor: t/10 });
     }
 
     display() {

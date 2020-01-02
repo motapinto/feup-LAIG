@@ -65,7 +65,7 @@ main=function()
     myInterface.setActiveCamera(myScene.camera);
 
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
-    let filename = getUrllets()['file'] || "questioning.xml";
+    let filename = getUrllets()['file'] || "beach.xml";
  
 	// create and load graph, and associate it to scene. 
 	// Check console for loading errors

@@ -43,9 +43,7 @@ class XMLscene extends CGFscene {
         this.updatePeriod = 50;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
-        //this.scoreCamera = new MyCamera(this);
-
-        this.gameMenu = new MyGameMenu(this);
+        this.gameType = 0;
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)
@@ -240,7 +238,6 @@ class XMLscene extends CGFscene {
             this.rotate(this.orchestrator.cameraDegrees, 0, 1, 0);
             this.graph.displayScene();
             this.orchestrator.display();
-            this.gameMenu.display();
             
         this.popMatrix();
     }
