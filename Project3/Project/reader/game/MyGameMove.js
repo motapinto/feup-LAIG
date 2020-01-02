@@ -7,7 +7,7 @@ class MyGameMove {
      * @param {Scene} scene
      * @param {SceneGraph} graph
      * @param {MyTile} tile
-     * @param {MyplayerStashBoard} playerStash
+     * @param {MyPlayerStash} playerStash
      * @param {vec2} coordsInit
      * @param {vec2} coordsFin
      */
@@ -23,8 +23,6 @@ class MyGameMove {
         this.matrix = mat4.create();
         this.coordsInit = coordsInit;
         this.createAnimation(coordsInit, coordsFin);
-
-        this.animation = new KeyframeAnimation(scene, 60);
     }
 
     createAnimation(coordsInit, coordsFin) {
@@ -32,8 +30,9 @@ class MyGameMove {
             x: coordsFin.x - coordsInit.x,
             y: coordsFin.y - coordsInit.y
         };
-        this.transitionTime = 1.5 ;
-        this.height = 5 ;
+        let distOffset = 0.1 * Math.sqrt(this.coordsDiff.x * this.coordsDiff.x + this.coordsDiff.y * this.coordsDiff.y);
+        this.deltaTime = 2 + distOffset;
+        this.height = 0.5 + distOffset;
         this.animate();
     }
 
@@ -79,37 +78,26 @@ class MyGameMove {
         else {
             this.startTime = null;
             this.animating = true;
-            this.score.removePiece(this.piece.type);
+            this.playerStash.removePiece(this.piece.type);
         }
-    }
-
-    pushKeyframe(percentage) {
-        let translation = [], rotation=[], scale=[];
-        let x = this.coordsDiff.x * percentage, y = this.coordsDiff.y * percentage, z = this.quadratic(percentage);
-        let angle_x = percentage*10, angle_y = percentage*10, angle_z = 0;
-
-        translation.push(...[x, y, z]);
-        rotation.push(...[angle_x, angle_y, angle_z]);
-        scale.push(...[1, 1, 1]);
-
-        let instant = percentage*1.5;
-
-        this.animation.addKeyframe(instant, translation, rotation, scale);
     }
 
     update(t) {
         if (!this.animating) return false;
         if (this.startTime == null) this.startTime = t;
 
+        this.matrix = mat4.create();
+
         this.delta = t - this.startTime;
 
-        this.animation.update(t);
-        this.pushKeyframe(this.delta / this.transitionTime);
-
-        if (this.delta > this.transitionTime) {
+        if (this.delta > this.deltaTime) {
             this.endAnimation();
             return false;
         }
+
+        let percent = this.delta / this.deltaTime;
+
+        mat4.translate(this.matrix, this.matrix, [this.coordsDiff.x * percent, this.coordsDiff.y * percent, this.quadratic(percent)]);
 
         this.tileInit.setColor((this.delta % 1) < 0.5 ? 1 : 0);
 

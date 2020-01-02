@@ -40,7 +40,7 @@ class XMLscene extends CGFscene {
         this.viewsList = [];
         this.selectedCamera = null;
         this.tInit = null;
-        this.updatePeriod = 100;
+        this.updatePeriod = 50;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
         //this.scoreCamera = new MyCamera(this);
@@ -151,6 +151,9 @@ class XMLscene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyZ")) {
             this.orchestrator.undo();
+        }
+        if (this.gui.isKeyPressed("KeyC")) {
+            this.orchestrator.changePlayer();
         }
     }
 

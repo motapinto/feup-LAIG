@@ -23,11 +23,6 @@ class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
         this.gui.add(this.scene, 'audioEnable').name("Enable sound"); //checkbox
-        this.gui.add(this.scene, 'displayAxis').name("Display axis"); //checkbox
-
-        //Sims still floor
-        this.gui.add(this.scene, 'floorUp').name("Floor Up"); 
-        this.gui.add(this.scene, 'floorDown').name("Floor Down"); 
 
         //LightsFolder called in onGraphLoaded() function
         //CamerasFolder called in onGraphLoaded() function
