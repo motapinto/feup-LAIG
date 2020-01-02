@@ -31,8 +31,8 @@ class MyPlayerStash {
 
     addPiece(piece) {
         this.pieces[piece.type - 1].push(piece);
-        // if(hasWon())
-        //     alert('Player ' + this.player + ' has won!');
+        if(this.hasWon())
+            alert('Player ' + this.player + ' has won!');
     }
 
     removePiece(type) {
@@ -42,14 +42,16 @@ class MyPlayerStash {
     getPiecePos(number, type) { 
         if(this.player == 1) {
             return { 
-                x: (number % 3 + 0.2 + type*3.8) + 19, 
-                y: (Math.floor(number / 3) + 0.2) 
+                x: type + 26, 
+                y: 1, 
+                z: Math.floor(number / 3) + 0.5
             }; 
         }
         else {
             return { 
-                x: (number % 3 + 0.2 + 3.8*type) - 17, 
-                y: (Math.floor(number / 3) + 0.2) - 4
+                x: type - 10, 
+                y: -3, 
+                z: Math.floor(number / 3) + 0.5
             };
         }
     }
@@ -62,7 +64,7 @@ class MyPlayerStash {
                 for (let nPiece = 0; nPiece < this.pieces[type].length; nPiece++) {
                     this.scene.pushMatrix();
                         let pos = this.getPiecePos(nPiece, type+1);
-                        this.scene.translate(pos.x, pos.y, 0);
+                        this.scene.translate(pos.x, pos.y, pos.z);
                         this.pieces[type][nPiece].display();
                     this.scene.popMatrix();
                 }
