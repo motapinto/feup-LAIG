@@ -57,7 +57,7 @@ class MyPrologInterface {
     changeBoard(data) {
         let response = this.getStringToArray(data.target.response);
         this.orchestrator.startGame(response[0], response[1]);
-        console.log(response[0]);
+        console.log(response[1]);
         
     }
 

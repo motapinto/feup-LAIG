@@ -14,13 +14,13 @@ class MyCamera {
 
         if(environment == 'questioning') {
             this.scene.graph.textures['white'] = this.texture;
-            if(number <= 2) {
-                this.rectangle = scene.graph.components['mirror' + number];
-            }
-            else if(number <=4)
-                this.rectangle = scene.graph.components['gameview' + (number-2)];
-            else 
-                this.rectangle = scene.graph.components['camera' + (number-4)];
+            // if(number <= 2) {
+            //     this.rectangle = scene.graph.components['mirror' + number];
+            // }
+            // else if(number <=4)
+            //     this.rectangle = scene.graph.components['gameview' + (number-2)];
+            // else 
+            //     this.rectangle = scene.graph.components['camera' + (number-4)];
         }
     }
   

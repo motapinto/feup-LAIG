@@ -746,9 +746,9 @@
                     <scale x="8" y="3" z="1" />
                 </transformation>
                 <materials>
-                    <material id='inherit' />
+                    <material id='defaultMaterial' />
                 </materials>
-                <texture id='inherit'/>
+                <texture id='white'/>
                 <children>
                     <primitiveref id='rectangle' />
                 </children>
@@ -758,9 +758,9 @@
                     <translate x="0" y="19.9" z="0" />
                 </transformation>
                 <materials>
-                    <material id='inherit' />
+                    <material id='defaultMaterial' />
                 </materials>
-                <texture id='inherit'/>
+                <texture id='white'/>
                 <children>
                     <componentref id='mirror1' />
                 </children>
@@ -770,9 +770,9 @@
                     <rotate axis="z" angle="90"  />
                 </transformation>
                 <materials>
-                    <material id='inherit' />
+                    <material id='defaultMaterial' />
                 </materials>
-                <texture id='inherit'/>
+                <texture id='white'/>
                 <children>
                     <componentref id='mirror1' />
                 </children>
@@ -782,9 +782,9 @@
                     <translate x="-19.9" y="0" z="0" />
                 </transformation>
                 <materials>
-                    <material id='inherit' />
+                    <material id='defaultMaterial' />
                 </materials>
-                <texture id='inherit'/>
+                <texture id='white'/>
                 <children>
                     <componentref id='gameview1' />
                 </children>
@@ -821,7 +821,7 @@
                 <materials>
                     <material id='defaultMaterial' />
                 </materials>
-                <texture id='none'/>
+                <texture id='white'/>
                 <children>
                     <componentref id='camera1' />
                     <componentref id='camera2' />
@@ -836,9 +836,9 @@
                     <scale x="1.5" y="1.5" z="1.5" />
                 </transformation>
                 <materials>
-                    <material id='inherit' />
+                    <material id='defaultMaterial' />
                 </materials>
-                <texture id='none'/>
+                <texture id='white'/>
                 <children>
                     <componentref id='stick1' />
                     <componentref id='stick2' />
@@ -852,9 +852,9 @@
                     <scale x="1.5" y="1.5" z="1.5" />
                 </transformation>
                 <materials>
-                    <material id='inherit' />
+                    <material id='defaultMaterial' />
                 </materials>
-                <texture id='none'/>
+                <texture id='white'/>
                 <children>
                     <componentref id='stick1' />
                     <componentref id='stick2' />
@@ -868,9 +868,9 @@
                     <scale x="1.5" y="1.5" z="1.5" />
                 </transformation>
                 <materials>
-                    <material id='inherit' />
+                    <material id='defaultMaterial' />
                 </materials>
-                <texture id='none'/>
+                <texture id='white'/>
                 <children>
                     <componentref id='stick1' />
                     <componentref id='stick2' />
@@ -884,9 +884,9 @@
                     <scale x="1.5" y="1.5" z="1.5" />
                 </transformation>
                 <materials>
-                    <material id='inherit' />
+                    <material id='defaultMaterial' />
                 </materials>
-                <texture id='none'/>
+                <texture id='white'/>
                 <children>
                     <componentref id='stick1' />
                     <componentref id='stick2' />

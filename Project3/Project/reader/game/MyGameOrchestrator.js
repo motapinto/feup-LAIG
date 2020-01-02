@@ -47,7 +47,7 @@ class MyGameOrchestrator{
     startGame(board, scores) {
         this.gameBoard.createInstance(board);
         for (let player = 0; player < scores.length; player++) {
-            for (let type = 0; type < player.length; type++) {
+            for (let type = 0; type < scores[player].length; type++) {
                 const score = scores[player][type];
                 for (let i = 0; i < score; i++) {
                     if (player == 0) {
@@ -230,29 +230,29 @@ class MyGameOrchestrator{
                 this.gameEnvironment.mirror1.attachToFrameBuffer();
                 this.scene.render(this.scene.graph.views['player1']);
                 this.gameEnvironment.mirror1.detachFromFrameBuffer();
-                this.gameEnvironment.mirror2.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['player2']);
-                this.gameEnvironment.mirror2.detachFromFrameBuffer();
+                // this.gameEnvironment.mirror2.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['player2']);
+                // this.gameEnvironment.mirror2.detachFromFrameBuffer();
 
-                this.gameEnvironment.gameview1.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['gameView']);
-                this.gameEnvironment.gameview1.detachFromFrameBuffer();
-                this.gameEnvironment.gameview2.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['gameView']);
-                this.gameEnvironment.gameview2.detachFromFrameBuffer();
+                // this.gameEnvironment.gameview1.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['gameView']);
+                // this.gameEnvironment.gameview1.detachFromFrameBuffer();
+                // this.gameEnvironment.gameview2.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['gameView']);
+                // this.gameEnvironment.gameview2.detachFromFrameBuffer();
 
-                this.gameEnvironment.security1.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['camera1']);
-                this.gameEnvironment.security1.detachFromFrameBuffer();
-                this.gameEnvironment.security1.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['camera2']);
-                this.gameEnvironment.security1.detachFromFrameBuffer();
-                this.gameEnvironment.security3.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['camera3']);
-                this.gameEnvironment.security3.detachFromFrameBuffer();
-                this.gameEnvironment.security4.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['camera4']);
-                this.gameEnvironment.security4.detachFromFrameBuffer();
+                // this.gameEnvironment.security1.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['camera1']);
+                // this.gameEnvironment.security1.detachFromFrameBuffer();
+                // this.gameEnvironment.security1.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['camera2']);
+                // this.gameEnvironment.security1.detachFromFrameBuffer();
+                // this.gameEnvironment.security3.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['camera3']);
+                // this.gameEnvironment.security3.detachFromFrameBuffer();
+                // this.gameEnvironment.security4.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['camera4']);
+                // this.gameEnvironment.security4.detachFromFrameBuffer();
                 break;
             default:
                 break;
