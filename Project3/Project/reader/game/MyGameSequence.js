@@ -16,6 +16,8 @@ class MyGameSequence {
         this.animating = false;
     }
 
+    getMoves = () => this.moves;
+
     addMove(tile, score, coordsInit, coordsFin) {
         this.moves.push(new MyGameMove(this.scene, this.graph, tile, score, coordsInit, coordsFin));
         this.animating = true;

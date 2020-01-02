@@ -39,22 +39,30 @@ class MyGameMove {
 
     animate() {
         this.animating = true;
+        if (this.reversing) {
+            this.coordsInit = {
+                x: this.coordsInit.x + this.coordsDiff.x,
+                y: this.coordsInit.y + this.coordsDiff.y
+            };
+            this.coordsDiff.x = -this.coordsDiff.x;
+            this.coordsDiff.y = -this.coordsDiff.y;
+            this.reversing = false;
+        }
         this.startTime = null;
-        if (this.reversing)
-            this.playerStash.removePiece();
-        else
-            this.tileInit.setPiece();
+        this.tileInit.setPiece();
     }
 
     quadratic = (percent) => -4 * (percent - 0.5) * (percent - 0.5) + this.height;
     
     endAnimation() {
+        if (this.animating) {
+            if (this.reversing)
+                this.tileInit.setPiece(this.piece);
+            else
+                this.playerStash.addPiece(this.piece);            
+        }
         this.animating = false;
         this.startTime = null;
-        if (this.reversing)
-            this.tileInit.setPiece(this.piece);
-        else
-            this.playerStash.addPiece(this.piece);
     }
 
     reverse() {
@@ -67,6 +75,7 @@ class MyGameMove {
         this.coordsDiff.y = -this.coordsDiff.y;
         if (this.animating) this.startTime -= this.transitionTime - this.delta;
         else {
+            this.startTime = null;
             this.animating = true;
             this.score.removePiece(this.piece.type);
         }

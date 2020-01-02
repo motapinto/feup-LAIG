@@ -25,6 +25,8 @@ class MyGameOrchestrator{
         this.stashPlayer2 = new MyPlayerStash(this.scene,);
         //game time and scores
         this.gameStats = new MyGameStats(this.scene, 0, 0);
+        //animator for movie
+        this.animator = new MyAnimator(this);
         
         this.picking = true;
         this.changingPlayer = false;
@@ -122,6 +124,11 @@ class MyGameOrchestrator{
     undo() {
         if (this.gameSequence.undo())
             this.picking = false;
+    }
+
+    startMovie() {
+        this.picking = false;
+        this.animator.start();
     }
 
     update(t) {
