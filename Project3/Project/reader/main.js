@@ -40,6 +40,7 @@ serialInclude(['../lib/CGF.js',
                 'MyCamera.js',
                 //Game
                 'game/MyGameMenu.js',
+                'game/MyAnimator.js',
                 'game/MyGameEnvironment.js',
                 'game/MyPlayerStash.js',
                 'game/MyGameStats.js',

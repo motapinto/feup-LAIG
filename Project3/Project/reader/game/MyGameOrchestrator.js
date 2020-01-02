@@ -94,8 +94,6 @@ class MyGameOrchestrator{
 
     move(x, y) {
         let tile = this.gameBoard.getTile(x, y);
-        tile.setColor(1);
-        this.moves.push({ tile: tile, timeToLive: 2, startTime: null });
         this.gameSequence.addMove(tile, this.player ? this.stashPlayer2 : this.stashPlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
     }
 

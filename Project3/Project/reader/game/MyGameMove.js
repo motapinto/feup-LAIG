@@ -50,6 +50,7 @@ class MyGameMove {
         }
         this.startTime = null;
         this.tileInit.setPiece();
+        this.tileInit.setColor(0);
     }
 
     quadratic = (percent) => -4 * (percent - 0.5) * (percent - 0.5) + this.height;
@@ -61,6 +62,7 @@ class MyGameMove {
             else
                 this.playerStash.addPiece(this.piece);            
         }
+        this.tileInit.setColor(0);
         this.animating = false;
         this.startTime = null;
     }
@@ -108,6 +110,8 @@ class MyGameMove {
             this.endAnimation();
             return false;
         }
+
+        this.tileInit.setColor((this.delta % 1) < 0.5 ? 1 : 0);
 
         return true;
     }
