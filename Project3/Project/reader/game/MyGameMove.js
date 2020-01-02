@@ -88,9 +88,9 @@ class MyGameMove {
         let x = this.coordsDiff.x * percentage, y = this.coordsDiff.y * percentage, z = this.quadratic(percentage);
         let angle_x = percentage*10, angle_y = percentage*10, angle_z = 0;
 
-        translation.push(...[x, y, z]);
-        rotation.push(...[angle_x, angle_y, angle_z]);
-        scale.push(...[1, 1, 1]);
+        translation.push([x, y, z]);
+        rotation.push([angle_x, angle_y, angle_z]);
+        scale.push([1, 1, 1]);
 
         let instant = percentage*1.5;
 
