@@ -24,32 +24,17 @@
     <!-- VER MAIS TARDE-->
     <lights>
         <omni id="CelestialBody" enabled="1" >
-            <location x="5" y="10" z="-10" w="1" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1" />
-            <diffuse r="0.2" g="0.2" b="0.2" a="1" />
-            <specular r="0.2" g="0.2" b="0.2" a="1" />
-        </omni>
-        <spot id="Player1" enabled="1" angle="5.0" exponent="1.0">
-            <location x="5" y="2.5" z="-9" w="1" />
-            <target x="5" y="0" z="-9" />
-            <ambient r="0.3" g="0.3" b="0.3" a="1" />
-            <diffuse r="1" g="0.6" b="0.5" a="1" />
-            <specular r="0.8" g="0.5" b="0" a="1.0" />
-            <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
-        </spot>
-        <spot id="Player2" enabled="1" angle="5.0" exponent="1.0">
-            <location x="5" y="2.5" z="-15" w="1" />
-            <target x="5" y="0" z="-15" />
-            <ambient r="0.3" g="0.3" b="0.3" a="1" />
-            <diffuse r="1" g="0.6" b="0.5" a="1" />
-            <specular r="0.0" g="0.0" b="0" a="1.0" />
-            <attenuation constant="1.0" linear="0.0" quadratic="0.0" />
-        </spot>      
+            <location x="5" y="40" z="3" w="1" />
+            <ambient r="0.6" g="0.6" b="0.6" a="1" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1" />
+            <specular r="0.3" g="0.3" b="0.3" a="1" />
+        </omni>  
     </lights>
 
     <textures>
         <texture id="woodTile" file="scenes/images/wood-tile.jpg" />
         <texture id="woodOak" file="scenes/images/wood-oak.jpg" />
+        <texture id="moon" file="scenes/images/moon.jpg" />
         <!-- TABLE -->
             <texture id="darkCement" file="scenes/images/dark-cement.jpg" />
             <texture id="aluminium" file="scenes/images/aluminium.jpg" />
@@ -152,24 +137,6 @@
                 <ambient r="0.8" g="0.8" b="0.8" a="1.0" />
                 <diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
                 <specular r="0.6" g="0.6" b="0.6" a="1.0" />
-            </material>
-            <material id="terrain" shininess="10">
-                <emission r="0" g="0" b="0" a="1.0" />
-                <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
-                <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
-                <specular r="0.4" g="0.4" b="0.4" a="1.0" />
-            </material>
-            <material id="terrain1" shininess="10">
-                <emission r="0" g="0" b="0" a="1.0" />
-                <ambient r="0.4" g="0.7" b="0.5" a="1.0" />
-                <diffuse r="0.1" g="0.3" b="0.1" a="1.0" />
-                <specular r="0.4" g="0.6" b="0.4" a="1.0" />
-            </material>
-            <material id="stone-path" shininess="10">
-                <emission r="0" g="0" b="0" a="1.0" />
-                <ambient r="0.6" g="0.6" b="0.6" a="1.0" />
-                <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
-                <specular r="0.1" g="0.1" b="0.1" a="1.0" />
             </material>
     </materials>
 
@@ -474,6 +441,21 @@
                 </children>
             </component>
         <!-- CHAIR -->
+        <!-- MOON -->
+            <component id="moon">
+                <transformation>
+                    <translate x="5" y="40" z="6" />
+                    <scale x="2" y="2" z="2" />
+                </transformation>
+                <materials>
+                    <material id="celestial" />
+                </materials>
+                <texture id="moon"/>
+                <children>
+                    <primitiveref id="sphere" />
+                </children>
+            </component>
+        <!-- MOON -->
         <!-- ROOT -->
             <component id='Root'>
                 <transformation>
@@ -484,6 +466,7 @@
                 </materials>
                 <texture id='none'/>
                 <children>
+                    <componentref id='moon' />
                     <!-- GAME -->
                     <componentref id='Game' />
                 </children>
