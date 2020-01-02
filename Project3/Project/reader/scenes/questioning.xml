@@ -109,6 +109,12 @@
                 <diffuse r="0.94" g="0.5" b="0.5" a="1.0" />
                 <specular r="0.94" g="0.5" b="0.5" a="1.0" />
             </material>
+            <material id="White" shininess="10">
+                <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+                <ambient r="0.9" g="0.9" b="0.9" a="1.0" />
+                <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />
+                <specular r="0.9" g="0.9" b="0.9" a="1.0" />
+            </material>
         <!-- ROOM -->
             <material id="grey" shininess="10">
                 <emission r="0" g="0" b="0" a="0" />
@@ -317,6 +323,22 @@
                 </children>
             </component>
         <!-- FLOOR -->
+        <!-- ROOF -->
+            <component id="roof">
+                <transformation>
+                    <translate x="-10" y="-10" z="5" />
+                    <scale x="20" y="20" z="1" />
+                    <rotate axis="z" angle="0"  />
+                </transformation>
+                <materials>
+                    <material id="defaultMaterial" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <primitiveref id="rectangle" />
+                </children>
+            </component>
+        <!-- ROOF -->
         <!-- WALL -->
             <component id='wall1'>
                 <transformation>
@@ -737,88 +759,13 @@
                 </children>
             </component>
         <!-- LAMP -->
-        <!-- MIRROR + GAMEVIEW -->
-            <component id='mirror1'>
-                <transformation>
-                    <translate x="-4" y="-9.95" z="1" />
-                    <rotate axis="x" angle="90"  />
-                    <scale x="8" y="3" z="1" />
-                </transformation>
-                <materials>
-                    <material id='defaultMaterial' />
-                </materials>
-                <texture id='white'/>
-                <children>
-                    <primitiveref id='rectangle' />
-                </children>
-            </component>  
-            <component id='mirror2'>
-                <transformation>
-                    <translate x="0" y="19.9" z="0" />
-                </transformation>
-                <materials>
-                    <material id='defaultMaterial' />
-                </materials>
-                <texture id='white'/>
-                <children>
-                    <componentref id='mirror1' />
-                </children>
-            </component> 
-            <component id='gameview1'>
-                <transformation>
-                    <rotate axis="z" angle="90"  />
-                </transformation>
-                <materials>
-                    <material id='defaultMaterial' />
-                </materials>
-                <texture id='white'/>
-                <children>
-                    <componentref id='mirror1' />
-                </children>
-            </component>
-            <component id='gameview2'>
-                <transformation>
-                    <translate x="-19.9" y="0" z="0" />
-                </transformation>
-                <materials>
-                    <material id='defaultMaterial' />
-                </materials>
-                <texture id='white'/>
-                <children>
-                    <componentref id='gameview1' />
-                </children>
-            </component>
-            <component id='mirror'>
-                <transformation>
-                </transformation>
-                <materials>
-                    <material id='mirror' />
-                </materials>
-                <texture id='white'/>
-                <children>
-                    <componentref id='mirror1' />
-                    <componentref id='mirror2' />
-                </children>
-            </component>
-            <component id='gameview'>
-                <transformation>
-                </transformation>
-                <materials>
-                    <material id='mirror' />
-                </materials>
-                <texture id='white'/>
-                <children>
-                    <componentref id='gameview1' />
-                    <componentref id='gameview2' />
-                </children>
-            </component>      
-        <!--  MIRROR + GAMEVIEW -->
+
         <!-- CAMERA -->
             <component id='camera'>
                 <transformation>
                 </transformation>
                 <materials>
-                    <material id='defaultMaterial' />
+                    <material id='White' />
                 </materials>
                 <texture id='white'/>
                 <children>
@@ -835,29 +782,27 @@
                     <scale x="1.5" y="1.5" z="1.5" />
                 </transformation>
                 <materials>
-                    <material id='defaultMaterial' />
+                    <material id='inherit' />
                 </materials>
                 <texture id='white'/>
                 <children>
                     <componentref id='stick1' />
                     <componentref id='stick2' />
-                    <componentref id='cameraRect' />
                 </children>
             </component>
             <component id='camera2'>
                 <transformation>
-                    <translate x="-9" y="9" z="3.5" />
+                    <translate x="-9.2" y="9.2" z="3.5" />
                     <rotate axis="z" angle="45"/>
                     <scale x="1.5" y="1.5" z="1.5" />
                 </transformation>
                 <materials>
-                    <material id='defaultMaterial' />
+                    <material id='inherit' />
                 </materials>
                 <texture id='white'/>
                 <children>
                     <componentref id='stick1' />
                     <componentref id='stick2' />
-                    <componentref id='cameraRect' />
                 </children>
             </component>
             <component id='camera3'>
@@ -867,29 +812,27 @@
                     <scale x="1.5" y="1.5" z="1.5" />
                 </transformation>
                 <materials>
-                    <material id='defaultMaterial' />
+                    <material id='inherit' />
                 </materials>
                 <texture id='white'/>
                 <children>
                     <componentref id='stick1' />
                     <componentref id='stick2' />
-                    <componentref id='cameraRect' />
                 </children>
             </component>
             <component id='camera4'>
                 <transformation>
-                    <translate x="9" y="-9" z="3.5" />
+                    <translate x="9.2" y="-9.2" z="3.5" />
                     <rotate axis="z" angle="-135"/>
                     <scale x="1.5" y="1.5" z="1.5" />
                 </transformation>
                 <materials>
-                    <material id='defaultMaterial' />
+                    <material id='inherit' />
                 </materials>
                 <texture id='white'/>
                 <children>
                     <componentref id='stick1' />
                     <componentref id='stick2' />
-                    <componentref id='cameraRect' />
                 </children>
             </component>
             <component id='stick1'>
@@ -919,20 +862,6 @@
                     <componentref id='stick1' />
                 </children>
             </component>
-            <component id='cameraRect'>
-                <transformation>
-                    <translate x="-0.25" y="-0.35" z="-0.25" />
-                    <rotate axis="x" angle="90"  />
-                    <scale x="0.5" y="0.5" z="0.5" />
-                </transformation>
-                <materials>
-                    <material id='inherit' />
-                </materials>
-                <texture id='none'/>
-                <children>
-                    <primitiveref id='rectangle' />
-                </children>
-            </component>
         <!-- CAMERA -->
         <!-- ROOT -->
             <component id='Root'>
@@ -946,12 +875,11 @@
                 <children>
                     <!-- ENVIRONMENT -->
                     <componentref id='floor' />
+                    <componentref id='roof' />
                     <componentref id='wall' />
                     <componentref id='lamp' />
-                    <!-- <componentref id='mirror' />
-                    <componentref id='camera' />
-                    <componentref id='gameview' /> -->
                     <componentref id='door' />
+                    <componentref id='camera' />
                     <!-- GAME -->
                     <componentref id='Game' />
                 </children>

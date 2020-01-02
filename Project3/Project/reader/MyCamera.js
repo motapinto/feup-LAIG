@@ -18,9 +18,9 @@ class MyCamera {
 
         this.textureMaterial = new CGFappearance(this.scene);
         this.textureMaterial.setShininess(1);
-        this.textureMaterial.setAmbient(1, 1, 1, 1);
-        this.textureMaterial.setDiffuse(1, 1, 1, 1);
-        this.textureMaterial.setSpecular(1, 1, 1, 1);
+        this.textureMaterial.setAmbient(1 , 1 , 1 , 1 );
+        this.textureMaterial.setDiffuse(1 , 1 , 1 , 1 );
+        this.textureMaterial.setSpecular(1 , 1 , 1 , 1 );
         this.textureMaterial.setEmission(1, 1, 1, 1);
         this.textureMaterial.setTextureWrap('REPEAT', 'REPEAT');
     }
@@ -66,12 +66,37 @@ class MyCamera {
                         this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
                         this.scene.scale(8, 3, 1);
                         this.rectangle.display();
+                        break;           
+                    case 5:
+                        this.scene.translate(-8.1, -8.6, 3.85);
+                        this.scene.rotate(DEGREE_TO_RAD*135, 0, 0, 1);
+                        this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
+                        this.scene.scale(0.75, 0.75, 0.75);
+                        this.rectangle.display();
                         break;
-                        
-                    // case 5:
-                    // case 6:
-                    // case 7:
-                    // case 8:
+                    case 6:
+                        this.scene.translate(-9, 8.5, 3.85);
+                        this.scene.rotate(DEGREE_TO_RAD*45, 0, 0, 1);
+                        this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
+                        this.scene.scale(0.75, 0.75, 0.75);
+                        this.rectangle.display();
+                        break;
+                    case 7:
+                        this.scene.translate(8.1, 8.6, 3.85);
+                        this.scene.translate(0, 0, 0);
+                        this.scene.rotate(-DEGREE_TO_RAD*45, 0, 0, 1);
+                        this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
+                        this.scene.scale(0.75, 0.75, 0.75);
+                        this.rectangle.display();
+                        break;
+                    case 8:
+                        this.scene.translate(9, -8.5, 3.85);
+                        this.scene.translate(0, 0, 0);
+                        this.scene.rotate(-DEGREE_TO_RAD*135, 0, 0, 1);
+                        this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
+                        this.scene.scale(0.75, 0.75, 0.75);
+                        this.rectangle.display();
+                        break;
                 }
             }
         this.scene.popMatrix();

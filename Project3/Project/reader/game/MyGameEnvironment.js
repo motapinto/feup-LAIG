@@ -64,10 +64,10 @@ class MyGameEnvironment {
         this.gameview1 = new MyCamera(this.scene, 'questioning', 3);
         this.gameview2 = new MyCamera(this.scene, 'questioning', 4);
 
-        // this.security1 = new MyCamera(this.scene, 'questioning', 5);
-        // this.security2 = new MyCamera(this.scene, 'questioning', 6);
-        // this.security3 = new MyCamera(this.scene, 'questioning', 7);
-        // this.security4 = new MyCamera(this.scene, 'questioning', 8);
+        this.security1 = new MyCamera(this.scene, 'questioning', 5);
+        this.security2 = new MyCamera(this.scene, 'questioning', 6);
+        this.security3 = new MyCamera(this.scene, 'questioning', 7);
+        this.security4 = new MyCamera(this.scene, 'questioning', 8);
     }
 
     displayQuestioning() {
@@ -75,6 +75,10 @@ class MyGameEnvironment {
         this.mirror2.display();
         this.gameview1.display();
         this.gameview2.display();
+        this.security1.display();
+        this.security2.display();
+        this.security3.display();
+        this.security4.display();
     }
 
     update(t) {
