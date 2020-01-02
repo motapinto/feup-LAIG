@@ -211,7 +211,7 @@ class XMLscene extends CGFscene {
         this.clearPickRegistration();
         
         if(this.sceneInited){
-            this.orchestrator.managePick(this.pickMode, this.pickResults);
+            this.orchestrator.orchestrate(this.pickMode, this.pickResults);
             this.orchestrator.displayCameras();
             this.render(this.graph.views[this.selectedCamera]);
         }
