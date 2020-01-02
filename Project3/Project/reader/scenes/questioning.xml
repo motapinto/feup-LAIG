@@ -81,7 +81,7 @@
         <!-- PIECE -->
             <material id="Red" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.86" g="0.2" b="0.2" a="1.0" />
+                <ambient r="0.86" g="0.s" b="0.2" a="1.0" />
                 <diffuse r="0.86" g="0.2" b="0.2" a="1.0" />
                 <specular r="0.86" g="0.2" b="0.2" a="1.0" />
             </material>
@@ -392,7 +392,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="aluminium" length_s="0" length_t="0"/>
+                <texture id="aluminium" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableLeg" />
                 </children>
@@ -403,7 +403,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="aluminium" length_s="0" length_t="0"/>
+                <texture id="aluminium" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableSupport" />
                 </children>
@@ -539,7 +539,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <componentref id="ChairBackSupport" />
                     <componentref id="ChairBackSupportCover" />
@@ -552,7 +552,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="ChairBase" />
                 </children>
@@ -565,7 +565,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="ChairBaseCover" />
                 </children>
@@ -582,7 +582,7 @@
                 <children>
                     <componentref id="ChairLeg1.1" />
                     <componentref id="ChairLeg1.2" />
-                    <componentref id="ChairLeg2.1" />´
+                    <componentref id="ChairLeg2.1" />
                     <componentref id="ChairLeg2.2" />
                     <componentref id="ChairBack" />
                     <componentref id="ChairBase" />
