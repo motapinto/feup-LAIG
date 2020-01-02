@@ -175,6 +175,19 @@ class MyGameOrchestrator{
                 this.gameEnvironment.gameview2.attachToFrameBuffer();
                 this.scene.render(this.scene.graph.views['gameView']);
                 this.gameEnvironment.gameview2.detachFromFrameBuffer();
+
+                this.gameEnvironment.security1.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['camera1']);
+                this.gameEnvironment.security1.detachFromFrameBuffer();
+                this.gameEnvironment.security1.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['camera2']);
+                this.gameEnvironment.security1.detachFromFrameBuffer();
+                this.gameEnvironment.security3.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['camera3']);
+                this.gameEnvironment.security3.detachFromFrameBuffer();
+                this.gameEnvironment.security4.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['camera4']);
+                this.gameEnvironment.security4.detachFromFrameBuffer();
                 break;
             default:
                 break;

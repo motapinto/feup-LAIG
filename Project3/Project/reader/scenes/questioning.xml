@@ -813,7 +813,7 @@
                     <componentref id='gameview2' />
                 </children>
             </component>      
-        <!-- MIRROR -->
+        <!--  MIRROR + GAMEVIEW -->
         <!-- CAMERA -->
             <component id='camera'>
                 <transformation>
@@ -950,6 +950,7 @@
                     <componentref id='wall' />
                     <componentref id='lamp' />
                     <componentref id='mirror' />
+                    <componentref id='camera' />
                     <componentref id='gameview' />
                     <componentref id='door' />
                     <!-- GAME -->
@@ -1067,7 +1068,7 @@
                     <scale x="1" y="1" z="0.1"/>
                 </transformation>
                 <materials>
-                    <material id="defaultMaterial" />
+                    <material id="inherit" />
                 </materials>
                 <texture id="none"/>
                 <children>
@@ -1078,7 +1079,7 @@
                 <transformation>
                 </transformation>
                 <materials>
-                    <material id="defaultMaterial" />
+                    <material id="inherit" />
                 </materials>
                 <texture id="none"/>
                 <children>
