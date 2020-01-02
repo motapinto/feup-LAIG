@@ -29,6 +29,9 @@ class MyGameOrchestrator{
         this.gameStats = new MyGameStats(this.scene, 0, 0);
         //animator for movie
         this.animator = new MyAnimator(this);
+
+        //load theme not working
+        //this.loadTheme(2);
         
         this.picking = true;
         this.boardPicking = false;
@@ -256,6 +259,11 @@ class MyGameOrchestrator{
             default:
                 break;
         }
+    }
+
+    loadTheme(theme) {
+        this.gameEnvironment.changeTheme(theme);
+        this.gameEnvironment.initEnvironment(theme);
     }
 
     display() {

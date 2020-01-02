@@ -10,17 +10,17 @@ class MyGameEnvironment {
     }
 
     initEnvironment(selectedScene) {
-        let audio, filename;
+        let audio;
         switch(selectedScene) {
             case 1:
-                audio = new Audio('scenes/sounds/ocean.mp3');
-                //audio.play();
+                // audio = new Audio('scenes/sounds/ocean.mp3');
+                // audio.play();
                 this.waterShader();
                 this.initMaterial();
                 break;
             case 2:
-                audio = new Audio('scenes/sounds/birds.mp3');
-                //audio.play();
+                // audio = new Audio('scenes/sounds/birds.mp3');
+                // audio.play();
                 this.montainShader();
                 this.waterShader();
                 this.initMaterial();
@@ -31,8 +31,6 @@ class MyGameEnvironment {
                 //audio.play();
                 break;
             case 4:
-                // filename = getUrllets()['file'] || "questioning.xml";
-                // this.scene.graph = new MySceneGraph(filename, this.scene)
                 this.questioning();
                 break;
             default:
@@ -47,6 +45,35 @@ class MyGameEnvironment {
         this.terrainMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
         this.terrainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
         this.terrainMaterial.setShininess(120);
+    }
+
+    changeTheme(theme) {
+        let filename;
+        switch(theme) {
+            case 1:
+                this.scene.lights = [];
+                filename = getUrllets()['file'] || "beach.xml";
+                this.scene.graph = new MySceneGraph(filename, this.scene)
+                break;
+            case 2:
+                this.scene.lights = [];
+                filename = getUrllets()['file'] || "montain.xml";
+                this.scene.graph = new MySceneGraph(filename, this.scene)
+                break;
+            //restaurant
+            case 3:
+                this.scene.lights = [];
+                filename = getUrllets()['file'] || "restaurant.xml";
+                this.scene.graph = new MySceneGraph(filename, this.scene)
+                break;
+            case 4:
+                this.scene.lights = [];
+                filename = getUrllets()['file'] || "questioning.xml";
+                this.scene.graph = new MySceneGraph(filename, this.scene)
+                break;
+            default:
+                break;
+        }
     }
 
     waterShader() {
