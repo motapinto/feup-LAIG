@@ -13,14 +13,7 @@ class MyCamera {
         this.texture = new CGFtextureRTT(scene, scene.gl.canvas.width, scene.gl.canvas.height);
 
         if(environment == 'questioning') {
-            this.scene.graph.textures['white'] = this.texture;
-            if(number <= 2) {
-                this.rectangle = scene.graph.components['mirror' + number];
-            }
-            else if(number <=4)
-                this.rectangle = scene.graph.components['gameview' + (number-2)];
-            else 
-                this.rectangle = scene.graph.components['camera' + (number-4)];
+            this.rectangle = new MyRectangle(scene, 0, 0, 1, 1, 10, 10);
         }
     }
   
@@ -30,5 +23,46 @@ class MyCamera {
 
     detachFromFrameBuffer(){
         this.texture.detachFromFrameBuffer();
+    }
+
+    display() {
+        this.scene.pushMatrix();
+            if(this.environment == 'questioning') {
+                switch(this.number) {
+                    // case 1:  
+                    //     this.scene.translate(-4, -9.95, 1);
+                    //     this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                    //     this.scene.scale(8, 3, 1); 
+                    //     this.rectangle.display();
+                    //     break;
+                    // case 2:
+                    //     this.scene.translate(-4, 9.95, 1);
+                    //     this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                    //     this.scene.scale(8, 3, 1);
+                    //     this.rectangle.display();
+                    //     break;
+                    // case 3:
+                    //     this.scene.rotate(DEGREE_TO_RAD*90, 0, 0, 1);
+                    //     this.scene.translate(-4, -9.95, 1);
+                    //     this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                    //     this.scene.scale(8, 3, 1);
+                    //     this.rectangle.display();
+                    //     break;
+                    // case 4:
+                    //     this.scene.translate(-4, -9.95, 1);
+                    //     this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                    //     this.scene.scale(8, 3, 1);
+                    //     this.rectangle.display();
+                    //     break; 
+                    // case 5:
+                    // case 6:
+                    // case 7:
+                    // case 8:
+                }
+            }
+            this.scene.translate();
+            this.scene.rotate();
+            this.scene.scale(); 
+        this.scene.popMatrix();
     }
 }

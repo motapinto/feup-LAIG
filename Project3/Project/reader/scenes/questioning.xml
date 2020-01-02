@@ -281,7 +281,7 @@
             <primitive id="sphere">
                 <sphere radius="1" slices="50" stacks="25" />
             </primitive>
-        <!-- PIECE -->
+        <!-- PRIMITIVES -->
             <primitive id="hexagon">  
                 <hexagon radius="1" />
             </primitive> 
@@ -298,7 +298,6 @@
             <primitive id="rectangle">
                 <rectangle x1="0" y1="0" x2="1" y2="1" />
             </primitive>
-        <!-- PRIMITIVES -->
     </primitives>
 
     <components>
@@ -949,9 +948,9 @@
                     <componentref id='floor' />
                     <componentref id='wall' />
                     <componentref id='lamp' />
-                    <componentref id='mirror' />
+                    <!-- <componentref id='mirror' />
                     <componentref id='camera' />
-                    <componentref id='gameview' />
+                    <componentref id='gameview' /> -->
                     <componentref id='door' />
                     <!-- GAME -->
                     <componentref id='Game' />
