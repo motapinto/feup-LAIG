@@ -44,6 +44,10 @@ class MyGameOrchestrator{
         this.prolog.getBoard();
     }
 
+    startGame(board, scores) {
+        this.gameBoard.createInstance(board);
+    }
+
     /**
     * logs picking results in console
     */
@@ -130,6 +134,51 @@ class MyGameOrchestrator{
         this.animator.start();
     }
 
+    gameOver() {
+        this.gameEnded = true;
+        this.boardPicking = false;
+    }
+
+    orchestrate(mode, results) {
+        if (!this.gameEnded) {
+            switch (this.gameMode) {
+                case 0:
+                    this.boardPicking = true;
+                    break;
+    
+                case 1:
+                    if (this.player) {
+                        this.boardPicking = false;
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl1);
+                    }
+                    else {
+                        this.boardPicking = true;
+                    }
+                    break;
+    
+                case 2:
+                    if (this.player) {
+                        this.boardPicking = true;
+                    }
+                    else {
+                        this.boardPicking = false;
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl2);
+                    }
+                    break;
+    
+                case 3:
+    
+                    this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.AILvl2 : this.AILvl1);
+                    break;
+    
+                default:
+                    this.boardPicking = false;
+                    break;
+            }            
+        }
+        this.managePick(mode, results);
+    }
+
     update(t) {
         this.gameSequence.update(t);
         this.gameStats.update(t);
@@ -179,44 +228,6 @@ class MyGameOrchestrator{
             default:
                 break;
         }
-    }
-
-    orchestrate(mode, results) {
-        switch (this.gameMode) {
-            case 0:
-                this.boardPicking = true;
-                break;
-            
-            case 1:
-                if (this.player) {
-                    this.boardPicking = false;
-                    this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl1);
-                }
-                else {
-                    this.boardPicking = true;
-                }
-                break;
-            
-            case 2:
-                if (this.player) {
-                    this.boardPicking = true;
-                }
-                else {
-                    this.boardPicking = false;
-                    this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl2);
-                }
-                break;
-            
-            case 3:
-
-                this.prolog.aiMove(this.gameBoard.getInstance(), this.player?this.AILvl2:this.AILvl1);
-                break;
-            
-            default:
-                this.boardPicking = false;
-                break;
-        }
-        this.managePick(mode, results);
     }
 
     display() {

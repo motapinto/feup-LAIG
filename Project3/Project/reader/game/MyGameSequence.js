@@ -16,6 +16,11 @@ class MyGameSequence {
         this.animating = false;
     }
 
+    reset() {
+        this.moves = [];
+        this.animating = false;
+    }
+
     getMoves = () => this.moves;
 
     addMove(tile, score, coordsInit, coordsFin) {
