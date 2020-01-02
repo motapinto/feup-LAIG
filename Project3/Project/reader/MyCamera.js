@@ -41,18 +41,19 @@ class MyCamera {
 
     display(){
         this.scene.pushMatrix();
+            this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
             this.textureMaterial.apply();
             this.scene.graph.textures['white'] = this.texture;
             if(this.environment == 'questioning') {
                 if(this.number <= 2) {
                     this.scene.graph.displayComponent('mirror' + this.number);
                 }
-                else  if(this.number <=4) {
-                    this.scene.graph.displayComponent('gameview' + (this.number-2));
-                }
-                else {
-                    this.scene.graph.displayComponent('camera' + (this.number-4));
-                }
+            //     else  if(this.number <=4) {
+            //         this.scene.graph.displayComponent('gameview' + (this.number-2));
+            //     }
+            //     else {
+            //         this.scene.graph.displayComponent('camera' + (this.number-4));
+            //     }
             }
         this.scene.popMatrix();
     }
