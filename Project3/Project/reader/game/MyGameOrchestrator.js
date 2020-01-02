@@ -64,9 +64,6 @@ class MyGameOrchestrator{
         this.gameSequence.reset();
     }
 
-    /**
-    * logs picking results in console
-    */
     managePick(mode, results) {
         if (!mode && this.picking) {
             if (results != null && results.length > 0) {
@@ -224,22 +221,22 @@ class MyGameOrchestrator{
         }
     }
 
-    displayCameras() {
+    attachCameras() {
         switch(this.selectedScene) {
             case 4:
                 this.gameEnvironment.mirror1.attachToFrameBuffer();
                 this.scene.render(this.scene.graph.views['player1']);
                 this.gameEnvironment.mirror1.detachFromFrameBuffer();
-                // this.gameEnvironment.mirror2.attachToFrameBuffer();
-                // this.scene.render(this.scene.graph.views['player2']);
-                // this.gameEnvironment.mirror2.detachFromFrameBuffer();
+                this.gameEnvironment.mirror2.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['player2']);
+                this.gameEnvironment.mirror2.detachFromFrameBuffer();
 
-                // this.gameEnvironment.gameview1.attachToFrameBuffer();
-                // this.scene.render(this.scene.graph.views['gameView']);
-                // this.gameEnvironment.gameview1.detachFromFrameBuffer();
-                // this.gameEnvironment.gameview2.attachToFrameBuffer();
-                // this.scene.render(this.scene.graph.views['gameView']);
-                // this.gameEnvironment.gameview2.detachFromFrameBuffer();
+                this.gameEnvironment.gameview1.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['gameView']);
+                this.gameEnvironment.gameview1.detachFromFrameBuffer();
+                this.gameEnvironment.gameview2.attachToFrameBuffer();
+                this.scene.render(this.scene.graph.views['gameView']);
+                this.gameEnvironment.gameview2.detachFromFrameBuffer();
 
                 // this.gameEnvironment.security1.attachToFrameBuffer();
                 // this.scene.render(this.scene.graph.views['camera1']);

@@ -60,14 +60,21 @@ class MyGameEnvironment {
 
     questioning() {
         this.mirror1 = new MyCamera(this.scene, 'questioning', 1);
-        // this.mirror2 = new MyCamera(this.scene, 'questioning', 2);
-        // this.gameview1 = new MyCamera(this.scene, 'questioning', 3);
-        // this.gameview2 = new MyCamera(this.scene, 'questioning', 4);
+        this.mirror2 = new MyCamera(this.scene, 'questioning', 2);
+        this.gameview1 = new MyCamera(this.scene, 'questioning', 3);
+        this.gameview2 = new MyCamera(this.scene, 'questioning', 4);
 
         // this.security1 = new MyCamera(this.scene, 'questioning', 5);
         // this.security2 = new MyCamera(this.scene, 'questioning', 6);
         // this.security3 = new MyCamera(this.scene, 'questioning', 7);
         // this.security4 = new MyCamera(this.scene, 'questioning', 8);
+    }
+
+    displayQuestioning() {
+        this.mirror1.display();
+        this.mirror2.display();
+        this.gameview1.display();
+        this.gameview2.display();
     }
 
     update(t) {
@@ -110,6 +117,9 @@ class MyGameEnvironment {
                 this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
                 this.scene.translate(5, -6, 2);
                 this.montainPlane.display();
+            }
+            else if(this.selectedScene == 4) {
+                this.displayQuestioning();
             }
 
             this.scene.setActiveShader(this.scene.defaultShader);

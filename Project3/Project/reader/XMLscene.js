@@ -32,7 +32,7 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.displayAxis = true;
+        this.displayLights = true;
         this.audioEnable = true;
         this.scaleFactor = 1;
         this.floor = 0;
@@ -194,7 +194,7 @@ class XMLscene extends CGFscene {
             if (this.lightsInterface.hasOwnProperty(key)) {
                 if (this.lightsInterface[key]) {
                     this.lights[i].enable();
-                    this.lights[i].setVisible(true);
+                    this.lights[i].setVisible(this.displayLights);
                 }
                 else {
                     this.lights[i].disable();
@@ -212,7 +212,7 @@ class XMLscene extends CGFscene {
         
         if(this.sceneInited){
             this.orchestrator.orchestrate(this.pickMode, this.pickResults);
-            this.orchestrator.displayCameras();
+            this.orchestrator.attachCameras();
             this.render(this.graph.views[this.selectedCamera]);
         }
     }
