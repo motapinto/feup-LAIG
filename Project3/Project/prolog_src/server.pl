@@ -122,7 +122,7 @@ parse_input(quit, goodbye).
 % Game Begin
 
 % Start board
-parse_input(initial_board, Board):- generate_starting_board(Board).
+parse_input(initial_board, [Board, Scores]):- generate_start(Board, Scores).
 
 % Verify Move
 parse_input(validMove(Board, X, Y), [Response, X, Y]):-

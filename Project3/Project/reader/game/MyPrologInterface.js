@@ -55,8 +55,10 @@ class MyPrologInterface {
     getStringToArray = (string) => JSON.parse(string);
 
     changeBoard(data) {
-        let board = this.getStringToArray(data.target.response);
-        this.orchestrator.gameBoard.createInstance(board);
+        let response = this.getStringToArray(data.target.response);
+        this.orchestrator.startGame(response[0], response[1]);
+        console.log(response[1]);
+        
     }
 
     getBoard() {

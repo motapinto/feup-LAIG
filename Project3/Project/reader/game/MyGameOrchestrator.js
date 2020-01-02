@@ -44,6 +44,26 @@ class MyGameOrchestrator{
         this.prolog.getBoard();
     }
 
+    startGame(board, scores) {
+        this.gameBoard.createInstance(board);
+        for (let player = 0; player < scores.length; player++) {
+            for (let type = 0; type < scores[player].length; type++) {
+                const score = scores[player][type];
+                for (let i = 0; i < score; i++) {
+                    if (player == 0) {
+                        this.stashPlayer1.addPiece(new MyPiece(this.scene, this.scene.graph, type + 1));
+                    }
+                    else if (player == 1) {
+                        this.stashPlayer2.addPiece(new MyPiece(this.scene, this.scene.graph, type + 1));
+                    }
+                    
+                }                
+            }
+        }
+        this.gameEnded = false;
+        this.gameSequence.reset();
+    }
+
     /**
     * logs picking results in console
     */
@@ -76,7 +96,7 @@ class MyGameOrchestrator{
             this.failledMove(position.x, position.y);
         }
         else {
-            // error ?
+            // gameboard
         }
     }
 
@@ -130,6 +150,51 @@ class MyGameOrchestrator{
         this.animator.start();
     }
 
+    gameOver() {
+        this.gameEnded = true;
+        this.boardPicking = false;
+    }
+
+    orchestrate(mode, results) {
+        if (!this.gameEnded) {
+            switch (this.gameMode) {
+                case 0:
+                    this.boardPicking = true;
+                    break;
+    
+                case 1:
+                    if (this.player) {
+                        this.boardPicking = false;
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl1);
+                    }
+                    else {
+                        this.boardPicking = true;
+                    }
+                    break;
+    
+                case 2:
+                    if (this.player) {
+                        this.boardPicking = true;
+                    }
+                    else {
+                        this.boardPicking = false;
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl2);
+                    }
+                    break;
+    
+                case 3:
+    
+                    this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.AILvl2 : this.AILvl1);
+                    break;
+    
+                default:
+                    this.boardPicking = false;
+                    break;
+            }            
+        }
+        this.managePick(mode, results);
+    }
+
     update(t) {
         this.gameSequence.update(t);
         this.gameStats.update(t);
@@ -165,71 +230,33 @@ class MyGameOrchestrator{
                 this.gameEnvironment.mirror1.attachToFrameBuffer();
                 this.scene.render(this.scene.graph.views['player1']);
                 this.gameEnvironment.mirror1.detachFromFrameBuffer();
-                this.gameEnvironment.mirror2.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['player2']);
-                this.gameEnvironment.mirror2.detachFromFrameBuffer();
+                // this.gameEnvironment.mirror2.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['player2']);
+                // this.gameEnvironment.mirror2.detachFromFrameBuffer();
 
-                this.gameEnvironment.gameview1.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['gameView']);
-                this.gameEnvironment.gameview1.detachFromFrameBuffer();
-                this.gameEnvironment.gameview2.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['gameView']);
-                this.gameEnvironment.gameview2.detachFromFrameBuffer();
+                // this.gameEnvironment.gameview1.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['gameView']);
+                // this.gameEnvironment.gameview1.detachFromFrameBuffer();
+                // this.gameEnvironment.gameview2.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['gameView']);
+                // this.gameEnvironment.gameview2.detachFromFrameBuffer();
 
-                this.gameEnvironment.security1.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['camera1']);
-                this.gameEnvironment.security1.detachFromFrameBuffer();
-                this.gameEnvironment.security1.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['camera2']);
-                this.gameEnvironment.security1.detachFromFrameBuffer();
-                this.gameEnvironment.security3.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['camera3']);
-                this.gameEnvironment.security3.detachFromFrameBuffer();
-                this.gameEnvironment.security4.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['camera4']);
-                this.gameEnvironment.security4.detachFromFrameBuffer();
+                // this.gameEnvironment.security1.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['camera1']);
+                // this.gameEnvironment.security1.detachFromFrameBuffer();
+                // this.gameEnvironment.security1.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['camera2']);
+                // this.gameEnvironment.security1.detachFromFrameBuffer();
+                // this.gameEnvironment.security3.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['camera3']);
+                // this.gameEnvironment.security3.detachFromFrameBuffer();
+                // this.gameEnvironment.security4.attachToFrameBuffer();
+                // this.scene.render(this.scene.graph.views['camera4']);
+                // this.gameEnvironment.security4.detachFromFrameBuffer();
                 break;
             default:
                 break;
         }
-    }
-
-    orchestrate(mode, results) {
-        switch (this.gameMode) {
-            case 0:
-                this.boardPicking = true;
-                break;
-            
-            case 1:
-                if (this.player) {
-                    this.boardPicking = false;
-                    this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl1);
-                }
-                else {
-                    this.boardPicking = true;
-                }
-                break;
-            
-            case 2:
-                if (this.player) {
-                    this.boardPicking = true;
-                }
-                else {
-                    this.boardPicking = false;
-                    this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl2);
-                }
-                break;
-            
-            case 3:
-
-                this.prolog.aiMove(this.gameBoard.getInstance(), this.player?this.AILvl2:this.AILvl1);
-                break;
-            
-            default:
-                this.boardPicking = false;
-                break;
-        }
-        this.managePick(mode, results);
     }
 
     display() {

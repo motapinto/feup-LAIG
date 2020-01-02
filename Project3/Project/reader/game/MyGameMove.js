@@ -19,6 +19,7 @@ class MyGameMove {
         this.piece = tileInit.getPiece();
         this.animating = false;
         this.reversing = false;
+        this.ended = false;
         this.startTime = null;
         this.matrix = mat4.create();
         this.coordsInit = coordsInit;
@@ -37,6 +38,7 @@ class MyGameMove {
     }
 
     animate() {
+        this.ended = false;
         this.animating = true;
         if (this.reversing) {
             this.coordsInit = {
@@ -64,6 +66,7 @@ class MyGameMove {
         this.tileInit.setColor(0);
         this.animating = false;
         this.startTime = null;
+        this.ended = true;
     }
 
     reverse() {

@@ -16,6 +16,11 @@ class MyGameSequence {
         this.animating = false;
     }
 
+    reset() {
+        this.moves = [];
+        this.animating = false;
+    }
+
     getMoves = () => this.moves;
 
     addMove(tile, score, coordsInit, coordsFin) {
@@ -39,8 +44,12 @@ class MyGameSequence {
                 if (!this.moves[this.moves.length - 1].reversing)
                     this.orchestrator.prolog.verifyBoard();
                 else {
-                    this.moves.pop();
-                    this.orchestrator.changePlayer();
+                    let lastMove = this.moves.pop();
+                    if (lastMove.ended)
+                        this.orchestrator.changePlayer();
+                    else {
+                        this.orchestrator.endChangePlayer();
+                    }
                 }
             }
         }

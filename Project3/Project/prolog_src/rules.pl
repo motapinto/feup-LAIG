@@ -189,7 +189,7 @@ have_2_Pieces_Same_Color(BoardIN,Coord_X,Coord_Y,Color):-
                                                             Coord_Y_aux_baixo is Coord_Y - 1, 
                                                                                                                     
                                                             %N_pecas_da_mesma_cor%
-                                                            Same_Color_Counter is 1, 
+                                                            Same_Color_Counter is 2, 
                                                             
                                                             %Get peca esq%
                                                             get_board(BoardIN,Coord_X_aux_esq,Coord_Y,Element),
