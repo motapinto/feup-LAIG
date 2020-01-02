@@ -1,26 +1,18 @@
 <lxs>
     <scene root="Root" axis_length="5"/>
 
-    <views default="player2"> 
-        <perspective id="above" near="0.1" far="1000" angle="20">
-            <from x="5" y="32" z="50" />
-            <to x="5" y="8" z="-5" />
-        </perspective>
-        <perspective id="side" near="0.1" far="1000" angle="30 ">
-            <from x="5" y="3" z="15" />
-            <to x="5" y="3" z="-5" />
-        </perspective>
+    <views default="player1"> 
         <perspective id="gameView" near="0.1" far="1000" angle="40">
-            <from x="5" y="3.6" z="-12.001" />
-            <to x="5" y="1" z="-11.9" />
+            <from x="0" y="3.6" z="0.1" />
+            <to x="0" y="1" z="0.03" />
         </perspective>
         <perspective id="player1" near="0.1" far="1000" angle="32">
-            <from x="5" y="5" z="-6" />
-            <to x="5" y="1" z="-13" />
+            <from x="0" y="5" z="6" />
+            <to x="0" y="1" z="-1" />
         </perspective>
         <perspective id="player2" near="0.1" far="1000" angle="32">
-            <from x="5" y="5" z="-18" />
-            <to x="5" y="1" z="-11" />
+            <from x="0" y="5" z="-6" />
+            <to x="0" y="1" z="1" />
         </perspective>
     </views>
 
@@ -76,21 +68,33 @@
         <!-- PIECE -->
             <material id="Red" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="1.0" g="0.5" b="0.5" a="1.0" />
-                <diffuse r="1.0" g="0.5" b="0.5" a="1.0" />
-                <specular r="1.0" g="0.5" b="0.5" a="1.0" />
+                <ambient r="0.86" g="0.s" b="0.2" a="1.0" />
+                <diffuse r="0.86" g="0.2" b="0.2" a="1.0" />
+                <specular r="0.86" g="0.2" b="0.2" a="1.0" />
             </material>
             <material id="Yellow" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.5" g="1.0" b="1.0" a="1.0" />
-                <diffuse r="0.5" g="1.0" b="1.0" a="1.0" />
-                <specular r="0.5" g="1.0" b="1.0" a="1.0" />
+                <ambient r="0.86" g="0.86" b="0.2" a="1.0" />
+                <diffuse r="0.86" g="0.86" b="0.2" a="1.0" />
+                <specular r="0.86" g="0.86" b="0.2" a="1.0" />
             </material>
             <material id="Blue" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.5" g="0.5" b="1" a="1.0" />
-                <diffuse r="0.5" g="0.5" b="1" a="1.0" />
-                <specular r="0.5" g="0.5" b="1" a="1.0" />
+                <ambient r="0.2" g="0.2" b="0.86" a="1.0" />
+                <diffuse r="0.2" g="0.2" b="0.86" a="1.0" />
+                <specular r="0.2" g="0.2" b="0.86" a="1.0" />
+            </material>
+            <material id="GreenMove" shininess="10">
+                <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+                <ambient r="0" g="0.95" b="0.6" a="1.0" />
+                <diffuse r="0" g="0.95" b="0.6" a="1.0" />
+                <specular r="0" g="0.95" b="0.6" a="1.0" />
+            </material>
+            <material id="RedMove" shininess="10">
+                <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+                <ambient r="0.94" g="0.5" b="0.5" a="1.0" />
+                <diffuse r="0.94" g="0.5" b="0.5" a="1.0" />
+                <specular r="0.94" g="0.5" b="0.5" a="1.0" />
             </material>
         <!-- TABLE -->
             <material id="plate" shininess="100">
@@ -272,7 +276,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="aluminium" length_s="0" length_t="0"/>
+                <texture id="aluminium" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableLeg" />
                 </children>
@@ -283,7 +287,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="aluminium" length_s="0" length_t="0"/>
+                <texture id="aluminium" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableSupport" />
                 </children>
@@ -419,7 +423,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <componentref id="ChairBackSupport" />
                     <componentref id="ChairBackSupportCover" />
@@ -432,7 +436,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="ChairBase" />
                 </children>
@@ -445,7 +449,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="woodChair" length_s="0" length_t="0"/>
+                <texture id="woodChair" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="ChairBaseCover" />
                 </children>
@@ -462,7 +466,7 @@
                 <children>
                     <componentref id="ChairLeg1.1" />
                     <componentref id="ChairLeg1.2" />
-                    <componentref id="ChairLeg2.1" />´
+                    <componentref id="ChairLeg2.1" />
                     <componentref id="ChairLeg2.2" />
                     <componentref id="ChairBack" />
                     <componentref id="ChairBase" />
@@ -472,7 +476,7 @@
         <!-- CHAIR -->
         <!-- ROOT -->
             <component id='Root'>
-                <transformation>´
+                <transformation>
                     <rotate angle='-90' axis='x' />
                 </transformation>
                 <materials>
@@ -505,7 +509,7 @@
         <!-- GAME TABLE -->
             <component id="GameTable">
                 <transformation>
-                    <translate x="5" y="11.85" z="0" />
+                    <translate x="0" y="0" z="0" />
                     <rotate angle='45' axis='z' />
                     <scale x="2" y="2" z="1" />
                 </transformation>
@@ -522,7 +526,7 @@
             </component>
             <component id="SupportTable1">
                 <transformation>
-                    <translate x="6.8" y="10.6" z="0" />
+                    <translate x="1.8" y="-1.27" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
@@ -535,7 +539,7 @@
             </component>
             <component id="SupportTable2">
                 <transformation>
-                    <translate x="3.2" y="11.7" z="0" />
+                    <translate x="-1.8" y="-0.15" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
@@ -548,7 +552,7 @@
             </component>
             <component id="ChairPlayer1">
                 <transformation>
-                    <translate x="5" y="10.5" z="0" />
+                    <translate x="0" y="-1.5" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
@@ -561,7 +565,7 @@
             </component>
             <component id="ChairPlayer2">
                 <transformation>
-                    <translate x="5" y="13.2" z="0" />
+                    <translate x="0" y="1.2" z="0" />
                     <rotate axis="z" angle="225" />
                 </transformation>
                 <materials>
@@ -580,6 +584,8 @@
                 </transformation>
                 <materials>
                     <material id="defaultMaterial" />
+                    <material id="GreenMove" />
+                    <material id="RedMove" />
                 </materials>
                 <texture id="none"/>
                 <children>
@@ -593,7 +599,7 @@
                     <scale x="1" y="1" z="0.1"/>
                 </transformation>
                 <materials>
-                    <material id="defaultMaterial" />
+                    <material id="inherit" />
                 </materials>
                 <texture id="none"/>
                 <children>
@@ -604,7 +610,7 @@
                 <transformation>
                 </transformation>
                 <materials>
-                    <material id="defaultMaterial" />
+                    <material id="inherit" />
                 </materials>
                 <texture id="none"/>
                 <children>

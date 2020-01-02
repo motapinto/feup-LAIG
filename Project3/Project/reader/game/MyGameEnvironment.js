@@ -86,6 +86,15 @@ class MyGameEnvironment {
         this.waterShader.setUniformsValues({ uSampler2: 1, timeFactor: 1 });
     }
 
+    displayWaterShader() {
+        this.scene.setActiveShader(this.waterShader);
+        this.water_map.bind(1);
+        this.terrainMaterial.setTexture(this.water_tex);
+        this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        this.terrainMaterial.apply();
+        this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+    }
+
     montainShader() {
         // Montain shader
         this.miniWaterPlane = new MyRectangle(this.scene, -15, 15, -22, 15, 10, 10);
@@ -96,6 +105,16 @@ class MyGameEnvironment {
         this.montain_altimetry = new CGFtexture(this.scene, "scenes/images/montainAlt.png");
         this.montainShader = new CGFshader(this.scene.gl, "shaders/montain.vert", "shaders/montain.frag");
         this.montainShader.setUniformsValues({ uSampler2: 1 , uSampler3: 2, normScale: 1});
+    }
+
+    displayMontainShader() {
+        this.scene.setActiveShader(this.montainShader);
+        this.montain_map.bind(1);
+        this.montain_altimetry.bind(2);
+        this.terrainMaterial.setTexture(this.montain_tex);
+        this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        this.terrainMaterial.apply();
+        this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
     }
 
     questioning() {
@@ -130,37 +149,23 @@ class MyGameEnvironment {
         this.scene.pushMatrix();
             if(this.selectedScene == 1) {
                 // water shader
-                this.scene.setActiveShader(this.waterShader);
-                this.water_map.bind(1);
-                this.terrainMaterial.setTexture(this.water_tex);
-                this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
-                this.terrainMaterial.apply();
-                this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
+                this.displayWaterShader();
                 this.scene.translate(0, 0, 2);
                 this.waterPlane.display();
             }
             else if(this.selectedScene == 2) {
                 // water shader
                 this.scene.pushMatrix();
-                    this.scene.setActiveShader(this.waterShader);
-                    this.water_map.bind(1);
-                    this.terrainMaterial.setTexture(this.water_tex);
-                    this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
-                    this.terrainMaterial.apply();
-                    this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
-                    this.scene.translate(0, 0, 1.5);
+                    this.displayWaterShader();
+                    this.scene.translate(0, 7, 1.5);
                     this.miniWaterPlane.display();
                 this.scene.popMatrix();
                 //montain
-                this.scene.setActiveShader(this.montainShader);
-                this.montain_map.bind(1);
-                this.montain_altimetry.bind(2);
-                this.terrainMaterial.setTexture(this.montain_tex);
-                this.terrainMaterial.setTextureWrap('REPEAT', 'REPEAT');
-                this.terrainMaterial.apply();
-                this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
-                this.scene.translate(5, -6, 2);
-                this.montainPlane.display();
+                this.scene.pushMatrix();
+                    this.displayMontainShader();
+                    this.scene.translate(-2, 5, 2);
+                    this.montainPlane.display();
+                this.scene.popMatrix();
             }
             else if(this.selectedScene == 4) {
                 this.displayQuestioning();

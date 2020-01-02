@@ -12,7 +12,7 @@ class MyGameOrchestrator{
         this.theme = theme;
 
         //environment
-        this.selectedScene = 1;
+        this.selectedScene = 2;
         this.gameEnvironment = new MyGameEnvironment(this.scene, this.selectedScene);
         //menu
         this.gameMenu = new MyGameMenu(this.scene);
