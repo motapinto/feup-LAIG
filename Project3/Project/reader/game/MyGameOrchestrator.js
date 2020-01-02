@@ -46,6 +46,22 @@ class MyGameOrchestrator{
 
     startGame(board, scores) {
         this.gameBoard.createInstance(board);
+        for (let player = 0; player < scores.length; player++) {
+            for (let type = 0; type < player.length; type++) {
+                const score = scores[player][type];
+                for (let i = 0; i < score; i++) {
+                    if (player == 0) {
+                        this.stashPlayer1.addPiece(new MyPiece(this.scene, this.scene.graph, type + 1));
+                    }
+                    else if (player == 1) {
+                        this.stashPlayer2.addPiece(new MyPiece(this.scene, this.scene.graph, type + 1));
+                    }
+                    
+                }                
+            }
+        }
+        this.gameEnded = false;
+        this.gameSequence.reset();
     }
 
     /**
@@ -80,7 +96,7 @@ class MyGameOrchestrator{
             this.failledMove(position.x, position.y);
         }
         else {
-            // error ?
+            // gameboard
         }
     }
 
