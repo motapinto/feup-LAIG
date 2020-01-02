@@ -39,13 +39,13 @@
     </globals>
 
     <lights>
-        <omni id="CelestialBody" enabled="1" >
+        <!-- <omni id="CelestialBody" enabled="1" >
             <location x="0" y="10" z="-10" w="1" />
             <ambient r="0.4" g="0.4" b="0.4" a="1" />
             <diffuse r="0.4" g="0.4" b="0.4" a="1" />
             <specular r="0.4" g="0.4" b="0.4" a="1" />
-        </omni>
-        <spot id="game" enabled="1" angle="30.0" exponent="1.0">
+        </omni> -->
+        <spot id="game" enabled="1" angle="30.0" exponent="2.0">
             <location x="0" y="3.5" z="0" w="1" />
             <target x="0" y="-1" z="0" />
             <ambient r="0" g="0" b="0" a="1" />
@@ -96,6 +96,18 @@
                 <ambient r="0.2" g="0.2" b="0.86" a="1.0" />
                 <diffuse r="0.2" g="0.2" b="0.86" a="1.0" />
                 <specular r="0.2" g="0.2" b="0.86" a="1.0" />
+            </material>
+            <material id="GreenMove" shininess="10">
+                <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+                <ambient r="0" g="0.95" b="0.6" a="1.0" />
+                <diffuse r="0" g="0.95" b="0.6" a="1.0" />
+                <specular r="0" g="0.95" b="0.6" a="1.0" />
+            </material>
+            <material id="RedMove" shininess="10">
+                <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+                <ambient r="0.94" g="0.5" b="0.5" a="1.0" />
+                <diffuse r="0.94" g="0.5" b="0.5" a="1.0" />
+                <specular r="0.94" g="0.5" b="0.5" a="1.0" />
             </material>
         <!-- ROOM -->
             <material id="grey" shininess="10">
@@ -801,7 +813,7 @@
                     <componentref id='gameview2' />
                 </children>
             </component>      
-        <!-- MIRROR -->
+        <!--  MIRROR + GAMEVIEW -->
         <!-- CAMERA -->
             <component id='camera'>
                 <transformation>
@@ -938,9 +950,9 @@
                     <componentref id='wall' />
                     <componentref id='lamp' />
                     <componentref id='mirror' />
+                    <componentref id='camera' />
                     <componentref id='gameview' />
                     <componentref id='door' />
-                    <componentref id='camera' />
                     <!-- GAME -->
                     <componentref id='Game' />
                 </children>
@@ -1041,6 +1053,8 @@
                 </transformation>
                 <materials>
                     <material id="defaultMaterial" />
+                    <material id="GreenMove" />
+                    <material id="RedMove" />
                 </materials>
                 <texture id="none"/>
                 <children>
@@ -1054,7 +1068,7 @@
                     <scale x="1" y="1" z="0.1"/>
                 </transformation>
                 <materials>
-                    <material id="defaultMaterial" />
+                    <material id="inherit" />
                 </materials>
                 <texture id="none"/>
                 <children>
@@ -1065,7 +1079,7 @@
                 <transformation>
                 </transformation>
                 <materials>
-                    <material id="defaultMaterial" />
+                    <material id="inherit" />
                 </materials>
                 <texture id="none"/>
                 <children>

@@ -70,17 +70,6 @@ class MyGameEnvironment {
         this.security4 = new MyCamera(this.scene, 'questioning', 8);
     }
 
-    displayQuestioning() {
-        this.mirror1.display();
-        this.mirror2.display();
-        this.gameview1.display();
-        this.gameview2.display();
-        this.security1.display();
-        this.security2.display();
-        this.security3.display();
-        this.security4.display();
-    }
-
     update(t) {
         if(this.selectedScene == 1 || this.selectedScene == 2)
             this.waterShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
@@ -122,9 +111,7 @@ class MyGameEnvironment {
                 this.scene.translate(5, -6, 2);
                 this.montainPlane.display();
             }
-            else if(this.selectedScene == 4) {
-                this.displayQuestioning();
-            }
+
             this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
     }
