@@ -43,13 +43,13 @@ class MyPlayerStash {
         if(this.player == 1) {
             return { 
                 x: (number % 3 + 0.2 + type*3.8) + 19, 
-                y: (Math.floor(number / 3) + 0.2) - 6 
+                y: (Math.floor(number / 3) + 0.2) 
             }; 
         }
         else {
             return { 
                 x: (number % 3 + 0.2 + 3.8*type) - 17, 
-                y: (Math.floor(number / 3) + 0.2) - 10
+                y: (Math.floor(number / 3) + 0.2) - 4
             };
         }
     }
@@ -71,5 +71,4 @@ class MyPlayerStash {
             
         this.scene.popMatrix();
     }
-
 }

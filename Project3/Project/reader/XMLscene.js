@@ -234,7 +234,7 @@ class XMLscene extends CGFscene {
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
             this.setDefaultAppearance();    
             this.updateLights();
-        
+            
             this.rotate(this.orchestrator.cameraDegrees, 0, 1, 0);
             this.graph.displayScene();
             this.orchestrator.display();

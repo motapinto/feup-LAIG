@@ -50,7 +50,6 @@
     </lights>
 
     <textures>
-        <texture id="white" file="scenes/images/white.png" />
         <texture id="woodTile" file="scenes/images/wood-tile.jpg" />
         <texture id="woodOak" file="scenes/images/wood-oak.jpg" />
         <!-- TABLE -->
