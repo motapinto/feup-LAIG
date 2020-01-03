@@ -38,6 +38,7 @@ class MyGameMenu {
 
     display() {
         this.scene.pushMatrix();
+        this.scene.registerForPick(10003, 'menu');
         this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
         this.scene.translate(1.8, -0.6, 1.1);
         this.scene.scale(0.4, 0.4, 0.4);
@@ -102,7 +103,7 @@ class MyGameMenu {
                 this.scene.clearPickRegistration();
             this.scene.popMatrix();
 
-            //undo
+            //exit
             this.scene.pushMatrix();
                 this.scene.registerForPick(10002, 'exit');
                 this.scene.translate(0.2, 0.15, 0.051);
@@ -111,6 +112,7 @@ class MyGameMenu {
                 this.extraRect.display();
                 this.scene.clearPickRegistration();
             this.scene.popMatrix();
+            this.scene.clearPickRegistration();
         this.scene.popMatrix();
     }
 
