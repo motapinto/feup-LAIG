@@ -115,5 +115,4 @@ class MyGameMenu {
             this.scene.clearPickRegistration();
         this.scene.popMatrix();
     }
-
 }

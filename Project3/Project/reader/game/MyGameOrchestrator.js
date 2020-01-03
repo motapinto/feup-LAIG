@@ -103,6 +103,13 @@ class MyGameOrchestrator{
         else if (obj == 'movie') {
             this.startMovie();
         }
+        else if (obj == 'exit'){
+            this.player == 0 ? this.changeCamera('player1') : this.changeCamera('player2')
+            this.undo();
+        }
+        else if (obj == 'menu'){
+            this.changeCamera('camera1');
+        }
         else {
 
         }
@@ -263,6 +270,11 @@ class MyGameOrchestrator{
             default:
                 break;
         }
+    }
+
+    changeCamera(cameraName) {
+        console.log(cameraName);
+        this.scene.selectedCamera = cameraName;
     }
 
     loadTheme(theme) {
