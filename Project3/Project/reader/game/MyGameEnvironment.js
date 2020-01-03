@@ -52,22 +52,25 @@ class MyGameEnvironment {
         switch(theme) {
             case 1:
                 this.scene.lights = [];
+                this.scene.sceneInited = false;
                 filename = getUrllets()['file'] || "beach.xml";
                 this.scene.graph = new MySceneGraph(filename, this.scene)
                 break;
             case 2:
                 this.scene.lights = [];
+                this.scene.sceneInited = false;
                 filename = getUrllets()['file'] || "montain.xml";
                 this.scene.graph = new MySceneGraph(filename, this.scene)
                 break;
-            //restaurant
             case 3:
                 this.scene.lights = [];
+                this.scene.sceneInited = false;
                 filename = getUrllets()['file'] || "restaurant.xml";
                 this.scene.graph = new MySceneGraph(filename, this.scene)
                 break;
             case 4:
                 this.scene.lights = [];
+                this.scene.sceneInited = false;
                 filename = getUrllets()['file'] || "questioning.xml";
                 this.scene.graph = new MySceneGraph(filename, this.scene)
                 break;
