@@ -60,13 +60,14 @@ class MyGameMove {
         if (this.animating) {
             if (this.reversing)
                 this.tileInit.setPiece(this.piece);
-            else
+            else {
+                this.ended = true;
                 this.playerStash.addPiece(this.piece);            
+            }
         }
         this.tileInit.setColor(0);
         this.animating = false;
         this.startTime = null;
-        this.ended = true;
     }
 
     reverse() {
@@ -77,7 +78,7 @@ class MyGameMove {
         };
         this.coordsDiff.x = -this.coordsDiff.x;
         this.coordsDiff.y = -this.coordsDiff.y;
-        if (this.animating) this.startTime -= this.transitionTime - this.delta;
+        if (this.animating) this.startTime -= this.deltaTime/2 - this.delta;
         else {
             this.startTime = null;
             this.animating = true;

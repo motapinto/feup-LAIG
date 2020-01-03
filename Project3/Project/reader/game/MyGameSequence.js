@@ -48,7 +48,7 @@ class MyGameSequence {
                     if (lastMove.ended)
                         this.orchestrator.changePlayer();
                     else {
-                        this.orchestrator.endChangePlayer();
+                        this.orchestrator.picking = true;
                     }
                 }
             }

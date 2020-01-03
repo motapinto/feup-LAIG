@@ -31,7 +31,7 @@ class MyGameOrchestrator{
         this.animator = new MyAnimator(this);
 
         //load theme not working
-        //this.loadTheme(2);
+        // this.loadTheme(2);
         
         this.picking = true;
         this.boardPicking = false;
