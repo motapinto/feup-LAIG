@@ -107,10 +107,9 @@ class MyGameOrchestrator{
         }
         else if (obj == 'exit'){
             this.player == 0 ? this.scene.selectedCamera = 'player1' : this.scene.selectedCamera = 'player2';
-            this.undo();
         }
         else if (obj == 'menu'){
-            this.scene.selectedCamera = 'camera1';
+            this.player == 0 ? this.scene.selectedCamera = 'camera1' : this.scene.selectedCamera = 'camera2';
         }
         else {
 

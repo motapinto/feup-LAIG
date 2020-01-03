@@ -19,9 +19,21 @@
             <from x="8.5" y="4" z="-8.5" />
             <to x="0" y="0" z="0" />
         </perspective>
+        <perspective id="default" near="0.1" far="1000" angle="32">
+            <from x="0" y="5" z="6" />
+            <to x="0" y="1" z="-1" />
+        </perspective>
         <perspective id="gameView" near="0.1" far="1000" angle="40">
             <from x="0" y="3.6" z="0.1" />
             <to x="0" y="1" z="0.03" />
+        </perspective>
+        <perspective id="cameraPlayer1" near="0.1" far="1000" angle="20">
+            <from x="1.8" y="2.5" z="3" />
+            <to x="1.8" y="1" z="0.4" />
+        </perspective>
+        <perspective id="cameraPlayer2" near="0.1" far="1000" angle="20">
+            <from x="-1.8" y="2.5" z="-3" />
+            <to x="-1.8" y="1" z="-0.4" />
         </perspective>
         <perspective id="player1" near="0.1" far="1000" angle="32">
             <from x="0" y="5" z="6" />
