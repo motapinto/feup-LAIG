@@ -97,8 +97,14 @@ class MyGameOrchestrator{
             let position = this.gameBoard.position(uniqueId);
             this.failledMove(position.x, position.y);
         }
+        else if (obj == 'undo'){
+            this.undo();
+        }
+        else if (obj == 'movie') {
+            this.startMovie();
+        }
         else {
-            // gameboard
+
         }
     }
 
@@ -146,8 +152,8 @@ class MyGameOrchestrator{
     }
 
     startMovie() {
-        this.picking = false;
-        this.animator.start();
+        this.boardPicking = false;
+        this.animator.startMovie(this.gameSequence.getMoves());
     }
 
     gameOver() {
@@ -199,8 +205,8 @@ class MyGameOrchestrator{
         this.gameSequence.update(t);
         this.gameStats.update(t);
         this.gameEnvironment.update(t)
+        this.animator.update(t);
 
-        // this.animator.update(t);
         if (this.changingPlayer) {
             if (this.changingStart == null) this.changingStart = t;
             let delta = t - this.changingStart;
@@ -280,7 +286,8 @@ class MyGameOrchestrator{
             this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
             this.gameBoard.display();
             this.gameSequence.display();
-            
+            this.animator.display();
+        
             this.scene.pushMatrix();
                 this.scene.scale(1, -1, 1);
                 this.stashPlayer1.display();

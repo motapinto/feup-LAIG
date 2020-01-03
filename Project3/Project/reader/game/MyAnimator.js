@@ -24,7 +24,9 @@ class MyAnimator {
         this.started = false;
         this.animating = true;
         this.currentMove = 0;
-        for (let move of this.moves) {
+        for (let move of moves) {
+            move.reversing = false;
+            move.endAnimation();
             move.reverse();
         }
 
@@ -33,6 +35,7 @@ class MyAnimator {
     
     endMovie() {
         this.moves.forEach(move => {
+            move.reversing = false;
             move.endAnimation();
         });
         this.animating = false;
@@ -75,7 +78,7 @@ class MyAnimator {
                 else {
                     this.currentMove++;
                     // Reached the end of the moves
-                    if (this.moves.length < this.currentMove) {
+                    if (this.moves.length <= this.currentMove) {
                         this.endMovie();
                     }
                     else {
@@ -86,5 +89,10 @@ class MyAnimator {
 
         }
         
+    }
+    display() {
+        for (const move of this.moves) {
+            move.display();
+        }
     }
 }
