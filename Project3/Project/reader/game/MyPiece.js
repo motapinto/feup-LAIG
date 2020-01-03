@@ -1,14 +1,16 @@
 class MyPiece {
     /**
      * @constructor
-     * @param {Scene} scene
      * @param {SceneGraph} graph
      * @param {integer} type
      */
-    constructor(scene, graph, type) {
-        this.scene = scene;
+    constructor(graph, type) {
         this.graph = graph;
         this.type = type;
+    }
+
+    updateGraph(graph) {
+        this.graph = graph;
     }
 
     display() { this.graph.displayComponent('Piece' + this.type); }

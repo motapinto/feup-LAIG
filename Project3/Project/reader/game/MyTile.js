@@ -14,6 +14,12 @@ class MyTile {
         this.color = 0;
     }
 
+    updateGraph(graph) {
+        this.graph = graph;
+        if (this.piece != null)
+            this.piece.updateGraph(graph);
+    }
+
     setPiece = (piece = null) => this.piece = piece; 
 
     getPiece = () => this.piece; 

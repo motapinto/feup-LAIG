@@ -25,6 +25,15 @@ class MyGameBoard{
         ]);
     }
 
+    updateGraph(graph) {
+        this.graph = graph;
+        for (let line of this.board) {
+            for (let tile of line) {
+                tile.updateGraph(graph);
+            }
+        }
+    }
+
     id = (x, y) => (y * 100 + x + 1);
 
     position(id) { return {x: (id - 1) % 100, y: Math.floor((id - 1) / 100)} }; 
@@ -48,7 +57,7 @@ class MyGameBoard{
             for (let x = 0; x < board[y].length; x++) {
                 if (board[y][x] == 4) continue;
                 if (board[y][x] != 0)
-                    lineVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.scene, this.graph, board[y][x])));
+                    lineVals.push(new MyTile(this.scene, this.graph, this.id(x, y), new MyPiece(this.graph, board[y][x])));
                 else
                     lineVals.push(new MyTile(this.scene, this.graph, this.id(x, y)));
             }

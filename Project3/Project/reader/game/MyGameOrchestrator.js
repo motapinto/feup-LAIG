@@ -7,9 +7,9 @@ class MyGameOrchestrator{
      * @param {Scene} scene
      * @param {SceneGraph} graph
      */
-    constructor(scene, theme) {
+    constructor(scene, graph) {
         this.scene = scene;
-        this.theme = theme;
+        this.graph = graph;
 
         //environment
         this.selectedScene = 2;
@@ -17,9 +17,9 @@ class MyGameOrchestrator{
         //menu
         this.gameMenu = new MyGameMenu(this.scene);
         //game sequence
-        this.gameSequence = new MyGameSequence(this.scene, this, this.theme);
-        //board of the game
-        this.gameBoard = new MyGameBoard(this.scene, this.theme);
+        this.gameSequence = new MyGameSequence(this.scene, this);
+        //board of the game 
+        this.gameBoard = new MyGameBoard(this.scene, this.graph);
         //prolog connection
         this.prolog = new MyPrologInterface(this);
         //pices collected by players during game
@@ -30,7 +30,7 @@ class MyGameOrchestrator{
         //animator for movie
         this.animator = new MyAnimator(this);
 
-        //load theme not working
+        //load graph not working
         // this.loadTheme(2);
         
         this.picking = true;
@@ -45,6 +45,11 @@ class MyGameOrchestrator{
         this.start();
     }
 
+    updateGraph(graph) {
+        this.graph = graph
+        this.gameBoard.updateGraph(graph);
+    }
+
     start() {
         this.prolog.getBoard();
     }
@@ -56,10 +61,10 @@ class MyGameOrchestrator{
                 const score = scores[player][type];
                 for (let i = 0; i < score; i++) {
                     if (player == 0) {
-                        this.stashPlayer1.addPiece(new MyPiece(this.scene, this.scene.graph, type + 1));
+                        this.stashPlayer1.addPiece(new MyPiece(this.graph, type + 1));
                     }
                     else if (player == 1) {
-                        this.stashPlayer2.addPiece(new MyPiece(this.scene, this.scene.graph, type + 1));
+                        this.stashPlayer2.addPiece(new MyPiece(this.graph, type + 1));
                     }
                     
                 }                
@@ -277,9 +282,9 @@ class MyGameOrchestrator{
         this.scene.selectedCamera = cameraName;
     }
 
-    loadTheme(theme) {
-        this.gameEnvironment.changeTheme(theme);
-        this.gameEnvironment.initEnvironment(theme);
+    loadTheme(graph) {
+        this.gameEnvironment.changeTheme(graph);
+        this.gameEnvironment.initEnvironment(graph);
     }
 
     display() {
