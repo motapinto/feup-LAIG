@@ -43,7 +43,9 @@ class XMLscene extends CGFscene {
         this.updatePeriod = 50;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
+
         this.gameType = 0;
+        this.difficulty = 0;
         this.theme = 1;
 
         this.floorUp = function(){

@@ -12,7 +12,7 @@ class MyGameOrchestrator{
         this.graph = graph;
 
         //environment
-        this.selectedScene = 2;
+        this.selectedScene = 4;
         this.gameEnvironment = new MyGameEnvironment(this.scene, this.selectedScene);
         //menu
         this.gameMenu = new MyGameMenu(this.scene);
@@ -103,17 +103,18 @@ class MyGameOrchestrator{
             this.failledMove(position.x, position.y);
         }
         else if (obj == 'undo'){
+            this.player == 0 ? this.scene.selectedCamera = 'player1' : this.scene.selectedCamera = 'player2';
             this.undo();
         }
         else if (obj == 'movie') {
+            this.player == 0 ? this.scene.selectedCamera = 'player1' : this.scene.selectedCamera = 'player2';
             this.startMovie();
         }
         else if (obj == 'exit'){
-            this.player == 0 ? this.changeCamera('player1') : this.changeCamera('player2')
-            this.undo();
+            this.player == 0 ? this.scene.selectedCamera = 'player1' : this.scene.selectedCamera = 'player2';
         }
         else if (obj == 'menu'){
-            this.changeCamera('camera1');
+            this.player == 0 ? this.scene.selectedCamera = 'camera1' : this.scene.selectedCamera = 'camera2';
         }
         else {
 
@@ -277,14 +278,13 @@ class MyGameOrchestrator{
         }
     }
 
-    changeCamera(cameraName) {
-        console.log(cameraName);
-        this.scene.selectedCamera = cameraName;
+    onGraphLoaded() {
+        
     }
 
-    loadTheme(graph) {
-        this.gameEnvironment.changeTheme(graph);
-        this.gameEnvironment.initEnvironment(graph);
+    loadTheme(theme) {
+        this.gameEnvironment.changeTheme(theme);
+        this.gameEnvironment.initEnvironment(theme);
     }
 
     display() {
@@ -294,6 +294,11 @@ class MyGameOrchestrator{
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+            this.gameMenu.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+            this.scene.rotate(DEGREE_TO_RAD*180, 0, 1, 0);
             this.gameMenu.display();
         this.scene.popMatrix();
 
