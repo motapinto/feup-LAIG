@@ -156,7 +156,7 @@ class XMLscene extends CGFscene {
         if (this.gui.isKeyPressed("KeyX")) {
             this.orchestrator.startMovie();
         }
-        if (this.gui.isKeyPressed("KeyEscape")) {
+        if (this.gui.isKeyPressed("Escape")) {
             this.orchestrator.startMovie();
         }
     }

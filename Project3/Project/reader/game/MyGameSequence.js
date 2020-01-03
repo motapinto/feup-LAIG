@@ -37,6 +37,8 @@ class MyGameSequence {
         if (this.moves.length < 1 || this.moves[this.moves.length - 1].reversing)
             return false;
         
+        if (this.moves[this.moves.length - 1].ended)
+            this.orchestrator.changePlayer();
         this.moves[this.moves.length - 1].reverse();
         this.animating = true;
         return true;
@@ -49,12 +51,8 @@ class MyGameSequence {
                 if (!this.moves[this.moves.length - 1].reversing)
                     this.orchestrator.prolog.verifyBoard();
                 else {
-                    let lastMove = this.moves.pop();
-                    if (lastMove.ended)
-                        this.orchestrator.changePlayer();
-                    else {
-                        this.orchestrator.picking = true;
-                    }
+                    this.moves.pop();
+                    this.orchestrator.picking = true;
                 }
             }
         }

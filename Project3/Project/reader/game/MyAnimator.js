@@ -19,8 +19,11 @@ class MyAnimator {
      * @param {Array<MyGameMove>} moves 
      */
     startMovie(moves) {
-        if (moves.length == 0) return false;
         this.moves = moves;
+        if (moves.length == 0) {
+            this.endMovie();
+            return false;
+        }
         this.started = false;
         this.animating = true;
         this.currentMove = 0;
@@ -78,7 +81,7 @@ class MyAnimator {
                 else {
                     this.currentMove++;
                     // Reached the end of the moves
-                    if (this.moves.length <= this.currentMove) {
+                    if (this.currentMove >= this.moves.length) {
                         this.endMovie();
                     }
                     else {
