@@ -5,15 +5,13 @@ class MyGameMove {
     /**
      * @constructor
      * @param {Scene} scene
-     * @param {SceneGraph} graph
      * @param {MyTile} tile
      * @param {MyPlayerStash} playerStash
      * @param {vec2} coordsInit
      * @param {vec2} coordsFin
      */
-    constructor(scene, graph, tileInit, playerStash, coordsInit, coordsFin) {
+    constructor(scene, tileInit, playerStash, coordsInit, coordsFin) {
         this.scene = scene;
-        this.graph = graph;
         this.tileInit = tileInit;
         this.playerStash = playerStash;
         this.piece = tileInit.getPiece();
