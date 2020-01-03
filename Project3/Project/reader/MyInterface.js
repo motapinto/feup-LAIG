@@ -59,6 +59,7 @@ class MyInterface extends CGFinterface {
     }
     
     processKeyDown(event) {
+        console.log(event.code);
         this.activeKeys[event.code]=true;
     };
     

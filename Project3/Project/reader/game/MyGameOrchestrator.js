@@ -11,7 +11,6 @@ class MyGameOrchestrator{
         this.scene = scene;
         this.graph = graph;
 
-        //environment
         this.selectedScene = 4;
         this.gameEnvironment = new MyGameEnvironment(this.scene, this.selectedScene);
         //menu
@@ -137,7 +136,12 @@ class MyGameOrchestrator{
 
     move(x, y) {
         let tile = this.gameBoard.getTile(x, y);
-        this.gameSequence.addMove(tile, this.player ? this.stashPlayer2 : this.stashPlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
+        this.gameSequence.addMove(
+            tile,
+            this.player ? this.stashPlayer2 : this.stashPlayer1,
+            this.gameBoard.positionCoords(x, y),
+            this.getMoveCoords(tile.piece.type)
+        );
     }
 
     failledMove(x, y) {
@@ -279,13 +283,19 @@ class MyGameOrchestrator{
         }
     }
 
-    onGraphLoaded() {
-        
-    }
-
     loadTheme(theme) {
+        this.selectedScene = theme;
         this.gameEnvironment.changeTheme(theme);
         this.gameEnvironment.initEnvironment(theme);
+    }
+
+    onGraphChanged(graph) {
+        this.gameEnvironment.selectedScene = this.selectedScene;
+        this.updateGraph(graph);
+    }
+
+    onGraphLoaded(graph) {
+        this.updateGraph(graph);
     }
 
     display() {
