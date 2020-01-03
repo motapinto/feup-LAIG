@@ -52,20 +52,6 @@ class MyCamera {
                         this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
                         this.scene.scale(8, 3, 1);
                         this.rectangle.display();
-                        break; 
-                    case 3:
-                        this.scene.rotate(DEGREE_TO_RAD*90, 0, 0, 1);
-                        this.scene.translate(-4, 9.95, 4);
-                        this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
-                        this.scene.scale(8, 3, 1);
-                        this.rectangle.display();
-                        break;
-                    case 4:
-                        this.scene.rotate(DEGREE_TO_RAD*90, 0, 0, 1);
-                        this.scene.translate(-4, -9.95, 4);
-                        this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
-                        this.scene.scale(8, 3, 1);
-                        this.rectangle.display();
                         break;           
                     case 5:
                         this.scene.translate(-8.1, -8.6, 3.85);

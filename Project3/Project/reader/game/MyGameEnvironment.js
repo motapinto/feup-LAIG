@@ -123,9 +123,6 @@ class MyGameEnvironment {
     questioning() {
         this.mirror1 = new MyCamera(this.scene, 'questioning', 1);
         this.mirror2 = new MyCamera(this.scene, 'questioning', 2);
-        this.gameview1 = new MyCamera(this.scene, 'questioning', 3);
-        this.gameview2 = new MyCamera(this.scene, 'questioning', 4);
-
         this.security1 = new MyCamera(this.scene, 'questioning', 5);
         this.security2 = new MyCamera(this.scene, 'questioning', 6);
         this.security3 = new MyCamera(this.scene, 'questioning', 7);
@@ -135,8 +132,6 @@ class MyGameEnvironment {
     displayQuestioning() {
         this.mirror1.display();
         this.mirror2.display();
-        this.gameview1.display();
-        this.gameview2.display();
         this.security1.display();
         this.security2.display();
         this.security3.display();

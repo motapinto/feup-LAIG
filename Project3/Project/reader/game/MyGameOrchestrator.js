@@ -109,7 +109,7 @@ class MyGameOrchestrator{
             this.player == 0 ? this.scene.selectedCamera = 'player1' : this.scene.selectedCamera = 'player2';
         }
         else if (obj == 'menu'){
-            this.player == 0 ? this.scene.selectedCamera = 'camera1' : this.scene.selectedCamera = 'camera2';
+            this.player == 0 ? this.scene.selectedCamera = 'cameraPlayer1' : this.scene.selectedCamera = 'cameraPlayer2';
         }
         else {
 
@@ -247,13 +247,6 @@ class MyGameOrchestrator{
                 this.gameEnvironment.mirror2.attachToFrameBuffer();
                 this.scene.render(this.scene.graph.views['player2']);
                 this.gameEnvironment.mirror2.detachFromFrameBuffer();
-
-                this.gameEnvironment.gameview1.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['gameView']);
-                this.gameEnvironment.gameview1.detachFromFrameBuffer();
-                this.gameEnvironment.gameview2.attachToFrameBuffer();
-                this.scene.render(this.scene.graph.views['gameView']);
-                this.gameEnvironment.gameview2.detachFromFrameBuffer();
 
                 this.gameEnvironment.security1.attachToFrameBuffer();
                 this.scene.render(this.scene.graph.views['camera1']);
