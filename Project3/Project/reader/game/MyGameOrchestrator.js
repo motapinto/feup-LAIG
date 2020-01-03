@@ -39,7 +39,8 @@ class MyGameOrchestrator{
         this.changingStart = null;
         this.cameraDegrees = 0;
         this.player = 0;
-        this.AILvl = 0;
+        this.AILvl1 = 0;
+        this.AILvl2 = 0;
         this.gameMode = 0;
         this.moves = [];
         this.start();
@@ -202,7 +203,7 @@ class MyGameOrchestrator{
                     break;
     
                 case 3:
-    
+                    this.boardPicking = false;
                     this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.AILvl2 : this.AILvl1);
                     break;
     

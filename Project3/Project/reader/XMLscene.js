@@ -44,6 +44,8 @@ class XMLscene extends CGFscene {
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
 
+        this.orchestrator = new MyGameOrchestrator(this, this.graph);
+
         this.gameType = 0;
         this.difficulty = 0;
         this.theme = 1;
@@ -130,7 +132,7 @@ class XMLscene extends CGFscene {
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
         
-        this.orchestrator = new MyGameOrchestrator(this, this.graph);
+        this.orchestrator.updateGraph(this.graph);
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
@@ -159,7 +161,7 @@ class XMLscene extends CGFscene {
             this.orchestrator.startMovie();
         }
         if (this.gui.isKeyPressed("Escape")) {
-            this.orchestrator.startMovie();
+            this.orchestrator.endMovie();
         }
     }
 
