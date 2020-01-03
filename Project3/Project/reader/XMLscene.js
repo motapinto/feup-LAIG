@@ -143,7 +143,8 @@ class XMLscene extends CGFscene {
         this.viewsList = this.graph.viewsList;
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
-        this.interface.LightsFolder(this.graph.lights);
+        this.addLights(this.graph.lights);
+        // this.interface.LightsFolder(this.graph.lights);
         this.interface.CamerasFolder(this.graph.views);
 
         this.setCamera(this.graph.views[this.selectedCamera]);
@@ -227,6 +228,15 @@ class XMLscene extends CGFscene {
                 this.lights[i++].update();
             }
         }
+    }
+
+    addLights(lights) {
+        for (let key in lights) { //key = light name 
+            if (lights.hasOwnProperty(key)) {
+                this.lightsInterface[key] = lights[key][0];
+            }
+        }
+
     }
 
     /**
