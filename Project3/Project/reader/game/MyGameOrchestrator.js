@@ -31,7 +31,7 @@ class MyGameOrchestrator{
         this.animator = new MyAnimator(this);
 
         //load theme not working
-        //this.loadTheme(2);
+        // this.loadTheme(2);
         
         this.picking = true;
         this.boardPicking = false;
@@ -122,9 +122,7 @@ class MyGameOrchestrator{
 
     failledMove(x, y) {
         let tile = this.gameBoard.getTile(x, y);
-        tile.setColor(2);
-        this.moves.push({ tile: tile, timeToLive: 2, startTime: null });
-        this.changePlayer();
+        this.gameSequence.addInvalidMove(tile);
     }
 
     changePlayer() {

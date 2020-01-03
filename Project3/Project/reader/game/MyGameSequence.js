@@ -24,7 +24,12 @@ class MyGameSequence {
     getMoves = () => this.moves;
 
     addMove(tile, score, coordsInit, coordsFin) {
-        this.moves.push(new MyGameMove(this.scene, this.graph, tile, score, coordsInit, coordsFin));
+        this.moves.push(new MyGameMove(this.scene, tile, score, coordsInit, coordsFin));
+        this.animating = true;
+    }
+
+    addInvalidMove(tile) {
+        this.moves.push(new MyGameMoveInvalid(tile));
         this.animating = true;
     }
 
@@ -48,7 +53,7 @@ class MyGameSequence {
                     if (lastMove.ended)
                         this.orchestrator.changePlayer();
                     else {
-                        this.orchestrator.endChangePlayer();
+                        this.orchestrator.picking = true;
                     }
                 }
             }
