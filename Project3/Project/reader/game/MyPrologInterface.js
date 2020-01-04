@@ -75,6 +75,19 @@ class MyPrologInterface {
         }
     }
 
+    AImove(data) {
+        let response = this.getStringToArray(data.target.response);
+        let x = response[1];
+        let y = response[2];
+        this.orchestrator.moveRequested = false;
+        if (response[0] == 'valid') {
+            this.orchestrator.move(x, y);
+        }
+        else {
+            this.orchestrator.failledMove(x, y);
+        }
+    }
+
     validateMove(board, coords) {
         let request = 'validMove(' + this.getArrayToString(board) + ',' + coords.x + ',' + coords.y + ')';
         this.getPrologRequest(request, this.move, this.getError);
@@ -82,7 +95,7 @@ class MyPrologInterface {
     
     aiMove(board, dificulty) {
         let request = 'aiMove(' + this.getArrayToString(board) + ',' + dificulty + ')';
-        this.getPrologRequest(request, this.move, this.getError);
+        this.getPrologRequest(request, this.AImove, this.getError);
     }
 
     verify(data) {
