@@ -2,14 +2,14 @@
 
     <scene root="Root" axis_length="5"/>
 
-    <views default="player2"> 
-        <perspective id="side" near="0.1" far="1000" angle="30 ">
-            <from x="0" y="3" z="15" />
-            <to x="0" y="3" z="-5" />
-        </perspective>
+    <views default="default"> 
         <perspective id="default" near="0.1" far="1000" angle="32">
             <from x="0" y="5" z="6" />
             <to x="0" y="1" z="-1" />
+        </perspective>
+        <perspective id="side" near="0.1" far="1000" angle="30 ">
+            <from x="0" y="3" z="15" />
+            <to x="0" y="3" z="-5" />
         </perspective>
         <perspective id="gameView" near="0.1" far="1000" angle="40">
             <from x="0" y="3.6" z="0.1" />
@@ -731,6 +731,28 @@
                     <componentref id="ChairBaseCover" />
                 </children>
             </component>
+            <component id='Chair2'>
+            <transformation>
+                <translate x='1' y='1' z='0' />
+                <rotate axis='z' angle='180' />
+                 <translate x='0' y='0' z='0.5' />
+            </transformation>
+            <materials>
+                <material id='chair' />
+                <material id='chair1' />
+                <material id='chair2' />
+            </materials>
+            <texture id='inherit'/>
+            <children>
+                <componentref id='ChairLeg1.1' />
+                <componentref id='ChairLeg1.2' />
+                <componentref id='ChairLeg2.1' />´
+                <componentref id='ChairLeg2.2' />
+                <componentref id='ChairBack' />
+                <componentref id='ChairBase' />
+                <componentref id='ChairBaseCover' />
+            </children>
+        </component>
         <!-- CHAIR -->
         <!-- TABLE SET-->
             <component id="TableSet">
