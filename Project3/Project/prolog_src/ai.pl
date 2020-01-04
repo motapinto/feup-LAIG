@@ -37,9 +37,7 @@ valid_moves_with_elements_returned(Board, ListOfMoves):-
 %Simple rand around all possible plays, could be invalid
 choose_move(Board, Cord_X, Cord_Y, 0):-
 
-  write('ok1'),
   possible_moves(Board, ListOfMoves),
-  write('ok2'),
   listlenght(ListOfMoves,ListSize),
   random(0,ListSize,Rand_Result),
   get_move(Rand_Result,ListOfMoves,Cord_X,Cord_Y).

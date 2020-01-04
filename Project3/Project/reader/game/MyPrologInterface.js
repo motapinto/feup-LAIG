@@ -73,10 +73,9 @@ class MyPrologInterface {
         if (response[0] == 'valid') {
             this.orchestrator.move(x, y);
         }
-        else if (response[1] == 'invalid') {
+        else if (response[0] == 'invalid') {
             this.orchestrator.failledMove(x, y);
         }
-        this.orchestrator.moveRequested = false;
     }
 
     validateMove(board, coords) {

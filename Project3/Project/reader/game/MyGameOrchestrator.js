@@ -241,7 +241,10 @@ class MyGameOrchestrator{
                 case '3':
                 case 3:
                     this.boardPicking = false;
-                    this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.scene.AI2 : this.scene.AI1);
+                    if (!this.moveRequested && !this.changingPlayer) {
+                        this.moveRequested = true;
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.scene.AI2 : this.scene.AI1);
+                    }
                     break;
     
                 default:

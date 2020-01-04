@@ -131,23 +131,20 @@ parse_input(validMove(Board, X, Y), [Response, X, Y]):-
 % Get AI Lvl 0 Move
 parse_input(aiMove(Board, Dificulty), [Response, X, Y]):-
     (Dificulty == 0; Dificulty == '0'),
-    write('Entered Dificulty 0\n'),
     choose_move(Board, X, Y, 0),
-    write('Got move '), write(X), write(' '), write(Y),nl,
-    if_then_else_aux(valid_move(Board, X, Y), (write('OK'),Response = '\"valid\"'), Response = '\"invalid\"').
+    if_then_else_aux(valid_move(Board, X, Y), Response = '\"valid\"', Response = '\"invalid\"').
 
-% Get AI Lvl 1 or 2 Move
+% Get AI Lvl 1 Move
 parse_input(aiMove(Board, Dificulty), ['\"valid\"', X, Y]):-
-    (Dificulty \= 0; Dificulty \= '0'),
-    if_then_else_aux(
-        Dificulty == '1', 
-        choose_move(Board, X, Y, 1),
-        if_then_else_aux(
-            Dificulty == '2',
-            choose_move(Board, X, Y, 2),
-            fail
-        )
-    ).
+    (Dificulty == 1; Dificulty == '1'),
+    choose_move(Board, X, Y, 1).
+
+% Get AI Lvl 1 Move
+parse_input(aiMove(Board, Dificulty), ['\"valid\"', X, Y]):-
+    (Dificulty == 2; Dificulty == '2'),
+    choose_move(Board, X, Y, 2).
+
+% Default case
 parse_input(aiMove(_Board, _Dificulty), ['\"error\"']).
 
 % Verify if game is over
