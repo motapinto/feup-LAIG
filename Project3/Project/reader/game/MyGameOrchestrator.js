@@ -40,7 +40,6 @@ class MyGameOrchestrator{
         this.cameraDegrees = 0;
         this.player = 0;
         this.AILvl = 0;
-        this.gameMode = 0;
         this.moves = [];
         this.start();
     }
@@ -171,7 +170,7 @@ class MyGameOrchestrator{
 
     orchestrate(mode, results) {
         if (!this.gameEnded) {
-            switch (this.gameMode) {
+            switch (this.scene.gameType) {
                 case 0:
                     this.boardPicking = true;
                     break;
@@ -179,7 +178,7 @@ class MyGameOrchestrator{
                 case 1:
                     if (this.player) {
                         this.boardPicking = false;
-                        this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl1);
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.difficulty[2]);
                     }
                     else {
                         this.boardPicking = true;
@@ -192,13 +191,13 @@ class MyGameOrchestrator{
                     }
                     else {
                         this.boardPicking = false;
-                        this.prolog.aiMove(this.gameBoard.getInstance(), this.AILvl2);
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.difficulty[2]);
                     }
                     break;
     
                 case 3:
     
-                    this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.AILvl2 : this.AILvl1);
+                    this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.scene.difficulty[2] : this.scene.difficulty[0]);
                     break;
     
                 default:
