@@ -33,6 +33,7 @@ class MyGameOrchestrator{
         this.boardPicking = false;
         this.changingPlayer = false;
         this.changingStart = null;
+        this.moveRequested = false;
         this.cameraDegrees = 0;
         this.player = 0;
         this.moves = [];
@@ -187,36 +188,44 @@ class MyGameOrchestrator{
     }
 
     orchestrate(mode, results) {
-        if (!this.gameEnded) {
+        if (!this.gameEnded && this.picking) {
             if (this.stashPlayer1.hasWon()) this.gameOver(0);
-                
             else if (this.stashPlayer2.hasWon()) this.gameOver(1);
-                
             else switch (this.scene.gameType) {
+                case '0':
                 case 0:
                     this.boardPicking = true;
                     break;
     
+                case '1':
                 case 1:
                     if (this.player === 1) {
                         this.boardPicking = false;
-                        this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.AI2);
+                        if (!this.moveRequested && !this.changingPlayer) {
+                            this.moveRequested = true;
+                            this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.AI2);                            
+                        }
                     }
                     else {
                         this.boardPicking = true;
                     }
                     break;
     
+                case '2':
                 case 2:
                     if (this.player === 1) {
                         this.boardPicking = true;
                     }
                     else {
                         this.boardPicking = false;
-                        this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.AI1);
+                        if (!this.moveRequested && !this.changingPlayer) {
+                            this.moveRequested = true;
+                            this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.AI2);
+                        }
                     }
                     break;
     
+                case '3':
                 case 3:
     
                     this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.scene.AI2 : this.scene.AI1);

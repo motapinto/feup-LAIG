@@ -129,19 +129,17 @@ parse_input(validMove(Board, X, Y), [Response, X, Y]):-
     if_then_else_aux(valid_move(Board, X, Y), Response = '\"valid\"', Response = '\"invalid\"').
 
 % Get AI Lvl 0 Move
-parse_input(aiMove(Board, 0), [Response, X, Y]):-
-    choose_move(Board, X, Y, 0),
+parse_input(aiMove(Board, Dificulty), [Response, X, Y]):-
+    (Dificulty == 0; Dificulty == '0'),
+    write('AI0'),
+    choose_move(Board, X, Y, Dificulty),
     if_then_else_aux(valid_move(Board, X, Y), Response is '\"valid\"', Response is '\"invalid\"').
 
-% Get AI Lvl 1 Move
-parse_input(aiMove(Board, 1), ['\"valid\"', X, Y]):-
-    choose_move(Board, X, Y, 1).
-parse_input(aiMove(_Board, 1), ['\"invalid\"']).
-
-% Get AI Lvl 2 Move
-parse_input(aiMove(Board, 2), ['\"valid\"', X, Y]):-
-    choose_move(Board, X, Y, 2),
-parse_input(aiMove(_Board, 2), ['\"invalid\"']).
+% Get AI Lvl 1 or 2 Move
+parse_input(aiMove(Board, Dificulty), ['\"valid\"', X, Y]):-
+    (Dificulty \= 0; Dificulty \= '0'),
+    choose_move(Board, X, Y, Dificulty).
+parse_input(aiMove(_Board, _Dificulty), ['\"invalid\"']).
 
 % Verify if game is over
 parse_input(verify(Board), '\"over\"'):-
