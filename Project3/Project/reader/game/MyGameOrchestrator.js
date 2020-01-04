@@ -160,6 +160,10 @@ class MyGameOrchestrator{
 
     move(x, y) {
         let tile = this.gameBoard.getTile(x, y);
+        
+        this.scene.graph.views['default'] = this.resetCamera(this.player);
+        this.scene.selectedCamera = 'default';
+
         this.gameSequence.addMove(
             tile,
             this.player ? this.stashPlayer2 : this.stashPlayer1,
@@ -170,6 +174,10 @@ class MyGameOrchestrator{
 
     failledMove(x, y) {
         let tile = this.gameBoard.getTile(x, y);
+
+        this.scene.graph.views['default'] = this.resetCamera(this.player);
+        this.scene.selectedCamera = 'default';
+
         this.gameSequence.addInvalidMove(tile);
     }
 

@@ -58,6 +58,7 @@ class MyPrologInterface {
         let response = this.getStringToArray(data.target.response);
         let x = response[1];
         let y = response[2];
+        
         if (response[0] == 'valid') {
             this.orchestrator.move(x, y);
         }
