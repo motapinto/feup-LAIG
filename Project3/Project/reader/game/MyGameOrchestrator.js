@@ -66,7 +66,9 @@ class MyGameOrchestrator{
             }
         }
         this.scene.gameEnded = false;
+        this.picking = true;
         this.gameSequence.reset();
+        this.gameStats.initCounter();
     }
 
     managePick(mode, results) {
@@ -197,13 +199,19 @@ class MyGameOrchestrator{
         this.animator.startMovie(this.gameSequence.getMoves());
     }
 
+    endMovie() {
+        this.picking = true;
+        if (this.scene.gameEnded && confirm('Do you want to start a new game?'))
+            this.start();
+    }
+
     gameOver(player) {
         this.scene.gameEnded = true;
         this.boardPicking = false;
         switch(player) {
             case 0: alert('Both players have lost!'); break;
-            case 1: alert('Player 1 has won!'); break;
-            case 2: alert('Player 2 has won!'); break;
+            case 1: this.gameStats.score1++; alert('Player 1 has won!'); break;
+            case 2: this.gameStats.score2++; alert('Player 2 has won!'); break;
         }
         if(confirm('Do you want to see the review of the game that you just played?'))
             this.startMovie();

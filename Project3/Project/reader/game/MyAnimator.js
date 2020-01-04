@@ -46,7 +46,7 @@ class MyAnimator {
         this.started = false;
         this.moves = [];
         this.currentMove = 0;
-        this.orchestrator.picking = true;
+        this.orchestrator.endMovie();
     }
 
     checkStart() {
