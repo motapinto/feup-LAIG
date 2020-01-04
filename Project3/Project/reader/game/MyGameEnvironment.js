@@ -12,12 +12,14 @@ class MyGameEnvironment {
     initEnvironment(selectedScene) {
         let audio;
         switch(selectedScene) {
+            //ocean
             case 1:
                 // audio = new Audio('scenes/sounds/ocean.mp3');
                 // audio.play();
                 this.waterShader();
                 this.initMaterial();
                 break;
+            //montain
             case 2:
                 // audio = new Audio('scenes/sounds/birds.mp3');
                 // audio.play();
@@ -27,8 +29,8 @@ class MyGameEnvironment {
                 break;
             //restaurant
             case 3:
-                audio = new Audio('scenes/sounds/people.mp3');
-                //audio.play();
+                // audio = new Audio('scenes/sounds/people.mp3');
+                // audio.play();
                 break;
             case 4:
                 this.questioning();
@@ -150,7 +152,7 @@ class MyGameEnvironment {
                     this.scene.translate(0, 7, 1.5);
                     this.miniWaterPlane.display();
                 this.scene.popMatrix();
-                //montain
+                //montain shader
                 this.scene.pushMatrix();
                     this.displayMontainShader();
                     this.scene.translate(-2, 5, 2);
