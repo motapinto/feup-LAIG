@@ -67,6 +67,12 @@ class MyGameOrchestrator{
         }
         this.scene.gameEnded = false;
         this.picking = true;
+        this.boardPicking = false;
+        this.changingPlayer = false;
+        this.changingStart = null;
+        this.moveRequested = false;
+        this.cameraDegrees = 0;
+        this.player = 0;
         this.gameSequence.reset();
         this.gameStats.initCounter();
     }
@@ -215,6 +221,8 @@ class MyGameOrchestrator{
         }
         if(confirm('Do you want to see the review of the game that you just played?'))
             this.startMovie();
+        else if (confirm('Do you want to start a new game?'))
+            this.start();            
     }
 
     orchestrate(mode, results) {
