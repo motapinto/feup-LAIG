@@ -112,6 +112,11 @@ class XMLscene extends CGFscene {
                 i++;
             }
         }
+        while (i < 8) {
+            this.lights[i].disable();
+            this.lights[i].update();
+            i++;
+        }
     }
 
     /**
@@ -232,7 +237,7 @@ class XMLscene extends CGFscene {
 
     addLights(lights) {
         this.lightsInterface = {};
-        
+
         for (let key in lights) { //key = light name 
             if (lights.hasOwnProperty(key)) {
                 this.lightsInterface[key] = lights[key][0];
