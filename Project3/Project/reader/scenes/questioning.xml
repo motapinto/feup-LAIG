@@ -120,6 +120,12 @@
                 <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />
                 <specular r="0.9" g="0.9" b="0.9" a="1.0" />
             </material>
+            <material id="Black" shininess="10">
+                <emission r="0" g="0.0" b="0.0" a="1.0" />
+                <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+                <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+                <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            </material>
         <!-- ROOM -->
             <material id="grey" shininess="10">
                 <emission r="0" g="0" b="0" a="0" />
@@ -254,6 +260,20 @@
                             x2="0" y2="0.25" z2="0"
                             x3="0" y3="0" z3="0.25" 
                 />  
+            </primitive>
+
+        <!-- PERSON -->
+            <primitive id="FaceCube">
+                <cylinder2 base="0.5" top="0.5" height="0.5" slices="2" stacks="2" />
+            </primitive>
+            <primitive id="FaceCover">
+                <rectangle x1="0" y1="0" x2="0.71" y2="0.71" />
+            </primitive>
+            <primitive id="Body">
+                <cylinder2 base="0.3" top="0.3" height="0.5" slices="2" stacks="2" />
+            </primitive>
+            <primitive id="Arm">
+                <cylinder2 base="0.2" top="0.2" height="0.5" slices="2" stacks="2" />
             </primitive>
 
         <!-- CHAIR -->
@@ -763,6 +783,219 @@
                 </children>
             </component>
         <!-- LAMP -->
+        <!-- PLAYER -->
+            <component id="FaceCube">
+                <transformation>
+                    <rotate axis="z" angle="45" />
+                    <rotate axis="x" angle="45" />
+                    <rotate axis="y" angle="90" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <primitiveref id="FaceCube" />
+                </children>
+            </component>
+            <component id="FaceCover1">
+                <transformation>
+                    <translate x="-0.25" y="0.25" z="-0.355" />
+                    <rotate axis="z" angle="-45" />
+                    <rotate axis="y" angle="45" />
+                    <rotate axis="x" angle="90" />
+                    <rotate axis="z" angle="45" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <primitiveref id="FaceCover" />
+                </children>
+            </component>
+            <component id="FaceCover2">
+                <transformation>
+                    <translate x="0.355" y="0.355" z="0" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="FaceCover1" />
+                </children>
+            </component>
+            <component id="Face">
+                <transformation>
+                    <scale x="0.7" y="0.7" z="0.7" />
+                    <translate x="-0.25" y="-0.25" z="2.5" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="FaceCube" />
+                    <componentref id="FaceCover1" />
+                    <componentref id="FaceCover2" />
+                </children>
+            </component>
+            <component id="Body1">
+                <transformation>
+                    <scale x="0.8" y="0.8" z="1.6" />
+                    <translate x="0" y="0" z="-1.05" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="Face" />
+                </children>
+            </component>
+            <component id="Body2Box">
+                <transformation>
+                    <translate x="-0.25" y="-0.25" z="0" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <primitiveref id="FaceCube" />
+                </children>
+            </component>
+            <component id="Body2Cover1">
+                <transformation>
+                    <translate x="-0.25" y="-0.75" z="0" />
+                    <rotate axis="z" angle="45" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <primitiveref id="FaceCover" />
+                </children>
+            </component>
+            <component id="Body2Cover2">
+                <transformation>
+                    <translate x="0" y="0" z="0.5" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="Body2Cover1" />
+                </children>
+            </component>
+            <component id="Body2">
+                <transformation>
+                    <translate x="0.3" y="0.3" z="0.71" />
+                    <scale x="0.7" y="0.7" z="0.2" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="Body2Cover1" />
+                    <componentref id="Body2Cover2" />
+                    <componentref id="Body2Box" />
+                </children>
+            </component>
+            <component id="LegLeft">
+                <transformation>
+                    <translate x="-0.2" y="0.2" z="0" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="LegRight" />
+                </children>
+            </component>
+            <component id="LegRight">
+                <transformation>
+                    <scale x="0.3" y="0.3" z="1.5" />
+                    <translate x="1.2" y="0.5" z="-1.5" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="Face" />
+                </children>
+            </component>
+            <component id="ArmLeft">
+                <transformation>
+                    <translate x="-0.25" y="0.1" z="1.35" />
+                    <scale x="1.5" y="1.5" z="1" />
+                    <rotate axis="z" angle="45" />
+                    <rotate axis="x" angle="45" />
+                    <rotate axis="y" angle="90" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <primitiveref id="ChairLeg1" />
+                </children>
+            </component>
+            <component id="ArmRight">
+                <transformation>
+                    <translate x="0.3" y="-0.39" z="0" />
+                </transformation>
+                <materials>
+                    <material id="inherit" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="ArmLeft" />
+                </children>
+            </component>
+            <component id="Person1">
+                <transformation>
+                    <translate x="0" y="0" z="0" />
+                </transformation>
+                <materials>
+                    <material id="White" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="Face" />
+                    <componentref id="Body1" />
+                    <componentref id="Body2" />
+                    <componentref id="ArmLeft" />
+                    <componentref id="ArmRight" />
+                    <componentref id="LegLeft" />
+                    <componentref id="LegRight" />
+                </children>
+            </component>
+            <component id="Person2">
+                <transformation>
+                    <translate x="0" y="0" z="0" />
+                </transformation>
+                <materials>
+                    <material id="Black" />
+                </materials>
+                <texture id="none"/>
+                <children>
+                    <componentref id="Face" />
+                    <componentref id="Body1" />
+                    <componentref id="Body2" />
+                    <componentref id="ArmLeft" />
+                    <componentref id="ArmRight" />
+                    <componentref id="LegLeft" />
+                    <componentref id="LegRight" />
+                </children>
+            </component>
+        <!-- PLAYER -->
 
         <!-- CAMERA -->
             <component id='camera'>
@@ -952,7 +1185,7 @@
             </component>
             <component id="ChairPlayer1">
                 <transformation>
-                    <translate x="0" y="-1.5" z="0" />
+                    <translate x="0" y="-2" z="0" />
                     <rotate axis="z" angle="45" />
                 </transformation>
                 <materials>
@@ -961,11 +1194,12 @@
                 <texture id="inherit"/>
                 <children>
                     <componentref id="Chair1" />
+                    <componentref id="Person1" />
                 </children>
             </component>
             <component id="ChairPlayer2">
                 <transformation>
-                    <translate x="0" y="1.2" z="0" />
+                    <translate x="0" y="2" z="0" />
                     <rotate axis="z" angle="225" />
                 </transformation>
                 <materials>
@@ -974,6 +1208,7 @@
                 <texture id="inherit"/>
                 <children>
                     <componentref id="Chair1" />
+                    <componentref id="Person2" />
                 </children>
             </component>
         <!-- GAME TABLE -->

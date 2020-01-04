@@ -23,7 +23,6 @@ class XMLscene extends CGFscene {
         this.initCameras();
         this.enableTextures(true);
 
-        // Interface lights to be changed in display
         this.lightsInterface = {};
 
         this.gl.clearDepth(100.0);
@@ -50,7 +49,8 @@ class XMLscene extends CGFscene {
         this.gameType = 0;
         this.AI1 = 0;
         this.AI2 = 0;
-        this.theme = 1;
+        this.custom1 = 0;
+        this.custom2 = 0;
         this.gameEnded = false;
 
         this.floorUp = function(){

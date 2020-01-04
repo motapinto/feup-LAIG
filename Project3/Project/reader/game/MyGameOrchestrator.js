@@ -338,6 +338,32 @@ class MyGameOrchestrator{
         }
     }
 
+    changeOutfits(player, custom) {
+        let playerName;
+        player == 0 ? playerName = 'Person1' : playerName = 'Person2';
+        switch(custom) {
+            case 0:
+                this.graph.components[playerName].materials[0] = 'Red';
+                break;
+            case 1:
+                this.graph.components[playerName].materials[0] = 'Yellow';
+                break;
+            case 2:
+                console.log(this.graph.components[playerName].materials[0])
+                this.graph.components[playerName].materials[0] = 'Blue';
+                console.log(this.graph.components[playerName].materials[0])
+                break;
+            case 3:
+                this.graph.components[playerName].materials[0] = 'Black';
+                break;
+            case 4:
+                this.graph.components[playerName].materials[0] = 'White';
+                break;
+            default:
+                break;
+        }
+    }
+
     loadTheme(theme) {
         this.newSelectedScene = theme;
         this.gameEnvironment.changeTheme(theme);
@@ -355,6 +381,9 @@ class MyGameOrchestrator{
     }
 
     display() {
+        this.changeOutfits(0, this.scene.custom1)
+        this.changeOutfits(1, this.scene.custom2)
+        
         this.scene.pushMatrix(); 
             this.gameStats.display();
             this.gameEnvironment.display();
