@@ -171,20 +171,24 @@ class MyGameOrchestrator{
         this.animator.startMovie(this.gameSequence.getMoves());
     }
 
-    gameOver() {
+    gameOver(player) {
         this.gameEnded = true;
         this.boardPicking = false;
     }
 
     orchestrate(mode, results) {
         if (!this.gameEnded) {
-            switch (this.scene.gameType) {
+            if (this.stashPlayer1.hasWon()) this.gameOver(0);
+                
+            else if (this.stashPlayer2.hasWon()) this.gameOver(1);
+                
+            else switch (this.scene.gameType) {
                 case 0:
                     this.boardPicking = true;
                     break;
     
                 case 1:
-                    if (this.player) {
+                    if (this.player === 1) {
                         this.boardPicking = false;
                         this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.difficulty[2]);
                     }
@@ -194,7 +198,7 @@ class MyGameOrchestrator{
                     break;
     
                 case 2:
-                    if (this.player) {
+                    if (this.player === 1) {
                         this.boardPicking = true;
                     }
                     else {
