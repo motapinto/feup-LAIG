@@ -116,9 +116,8 @@ class MyGameOrchestrator{
             this.startMovie();
         }
         else if (obj == 'exit'){
-            let player1Camera = this.resetCamera(this.player);
-            this.scene.graph.views['default'] = player1Camera;
-            this.scene.selectedCamera = 'default'
+            this.scene.graph.views['default'] = this.resetCamera('player1');
+            this.scene.selectedCamera = 'default';
         }
         else if (obj == 'menu'){
             this.player == 0 ? this.scene.selectedCamera = 'cameraPlayer1' : this.scene.selectedCamera = 'cameraPlayer2';
@@ -168,9 +167,6 @@ class MyGameOrchestrator{
 
     move(x, y) {
         let tile = this.gameBoard.getTile(x, y);
-        
-        this.scene.graph.views['default'] = this.resetCamera(this.player);
-        this.scene.selectedCamera = 'default';
 
         this.gameSequence.addMove(
             tile,
@@ -182,9 +178,6 @@ class MyGameOrchestrator{
 
     failledMove(x, y) {
         let tile = this.gameBoard.getTile(x, y);
-
-        this.scene.graph.views['default'] = this.resetCamera(this.player);
-        this.scene.selectedCamera = 'default';
 
         this.gameSequence.addInvalidMove(tile);
     }
