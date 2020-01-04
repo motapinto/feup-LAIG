@@ -281,7 +281,7 @@ class MyGameOrchestrator{
         if (this.changingPlayer) {
             if (this.changingStart == null) this.changingStart = t;
             let delta = t - this.changingStart;
-            if (delta > 2) {
+            if (delta > (2 / this.scene.speed)) {
                 this.endChangePlayer();
                 return;
             }
