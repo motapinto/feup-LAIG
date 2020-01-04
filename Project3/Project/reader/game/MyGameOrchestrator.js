@@ -28,9 +28,6 @@ class MyGameOrchestrator{
         this.gameStats = new MyGameStats(this.scene, 0, 0);
         //animator for movie
         this.animator = new MyAnimator(this);
-
-        //load graph not working
-        // this.loadTheme(2);
         
         this.picking = true;
         this.boardPicking = false;
@@ -114,8 +111,20 @@ class MyGameOrchestrator{
         else if (obj == 'menu'){
             this.player == 0 ? this.scene.selectedCamera = 'cameraPlayer1' : this.scene.selectedCamera = 'cameraPlayer2';
         }
+        else if (obj == 'left'){
+            this.loadTheme(1);
+        }
+        else if (obj == 'up'){
+            this.loadTheme(2);        
+        }
+        else if (obj == 'right'){
+            this.loadTheme(3);        
+        }
+        else if (obj == 'down'){
+            this.loadTheme(4);
+        }
         else {
-
+            console.log(obj);
         }
     }
 
