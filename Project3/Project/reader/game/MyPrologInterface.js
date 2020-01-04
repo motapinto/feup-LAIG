@@ -83,7 +83,7 @@ class MyPrologInterface {
         if (response[0] == 'valid') {
             this.orchestrator.move(x, y);
         }
-        else {
+        else if (response[1] == 'invalid') {
             this.orchestrator.failledMove(x, y);
         }
     }
@@ -100,7 +100,7 @@ class MyPrologInterface {
 
     verify(data) {
         let response = data.target.response;
-        if (response == 'over') this.orchestrator.gameOver();
+        if (response == 'over') this.orchestrator.gameOver(0);
         else this.orchestrator.changePlayer();
     }
 
