@@ -133,7 +133,8 @@ parse_input(aiMove(Board, Dificulty), [Response, X, Y]):-
     (Dificulty == 0; Dificulty == '0'),
     write('Entered Dificulty 0\n'),
     choose_move(Board, X, Y, 0),
-    if_then_else_aux(valid_move(Board, X, Y), Response is '\"valid\"', Response is '\"invalid\"').
+    write('Got move '), write(X), write(' '), write(Y),nl,
+    if_then_else_aux(valid_move(Board, X, Y), (write('OK'),Response = '\"valid\"'), Response = '\"invalid\"').
 
 % Get AI Lvl 1 or 2 Move
 parse_input(aiMove(Board, Dificulty), ['\"valid\"', X, Y]):-

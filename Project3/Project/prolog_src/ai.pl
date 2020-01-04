@@ -35,9 +35,11 @@ valid_moves_with_elements_returned(Board, ListOfMoves):-
   
 %BOT LEVEL 0
 %Simple rand around all possible plays, could be invalid
-choose_move(Board, Cord_X, Cord_Y, 0,_Active_Player,_Score):-
+choose_move(Board, Cord_X, Cord_Y, 0):-
 
+  write('ok1'),
   possible_moves(Board, ListOfMoves),
+  write('ok2'),
   listlenght(ListOfMoves,ListSize),
   random(0,ListSize,Rand_Result),
   get_move(Rand_Result,ListOfMoves,Cord_X,Cord_Y).
@@ -46,7 +48,7 @@ choose_move(Board, Cord_X, Cord_Y, 0,_Active_Player,_Score):-
 %Choose Between valid moves on a random Scenario.
 
 % Invocar random de acordo com tamanho de ListOfMoves
-choose_move(Board, Cord_X, Cord_Y, 1,_Active_Player,_Score):-
+choose_move(Board, Cord_X, Cord_Y, 1):-
 
   valid_moves(Board, ListOfMoves),
   listlenght(ListOfMoves,ListSize),

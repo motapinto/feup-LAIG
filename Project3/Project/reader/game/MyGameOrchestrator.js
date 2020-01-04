@@ -200,7 +200,7 @@ class MyGameOrchestrator{
     }
 
     orchestrate(mode, results) {
-        if (!this.gameEnded && this.picking) {
+        if (!this.gameEnded && this.picking && !this.gameSequence.animating) {
             if (this.stashPlayer1.hasWon()) this.gameOver(1);
             else if (this.stashPlayer2.hasWon()) this.gameOver(2);
             else switch (this.scene.gameType) {

@@ -24,17 +24,8 @@ class MyPrologInterface {
         request.send();
     }
 
-    getResponse(data) {
-        this.response = data.target.response;
-    }
-
     getError() {
         console.log('Error: server connection lost!');
-    }
-
-    makeRequest(requestString, handleReply) {
-        // Make Request
-        getPrologRequest(requestString, handleReply);
     }
 
     getArrayToString(array) {
@@ -79,13 +70,13 @@ class MyPrologInterface {
         let response = this.getStringToArray(data.target.response);
         let x = response[1];
         let y = response[2];
-        this.orchestrator.moveRequested = false;
         if (response[0] == 'valid') {
             this.orchestrator.move(x, y);
         }
         else if (response[1] == 'invalid') {
             this.orchestrator.failledMove(x, y);
         }
+        this.orchestrator.moveRequested = false;
     }
 
     validateMove(board, coords) {
