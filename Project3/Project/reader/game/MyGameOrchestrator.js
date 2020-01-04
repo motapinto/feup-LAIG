@@ -278,7 +278,7 @@ class MyGameOrchestrator{
                 return;
             }
 
-            this.cameraDegrees = 90 * delta;
+            this.cameraDegrees = 90 * delta * this.scene.speed;
             if (this.cameraDegrees > 180) this.cameraDegrees = (180 + (this.player ? 0 : 180)) * DEGREE_TO_RAD;
             else this.cameraDegrees = (this.cameraDegrees + (this.player ? 0 : 180)) * DEGREE_TO_RAD;
         }

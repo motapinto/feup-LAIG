@@ -97,12 +97,12 @@ class MyGameMove {
 
         this.delta = t - this.startTime;
 
-        if (this.delta > this.deltaTime) {
+        if (this.delta > (this.deltaTime/this.scene.speed)) {
             this.endAnimation();
             return false;
         }
 
-        let percent = this.delta / this.deltaTime;
+        let percent = this.delta / (this.deltaTime/this.scene.speed);
 
         mat4.translate(this.matrix, this.matrix, [
             this.coordsDiff.x * percent,
