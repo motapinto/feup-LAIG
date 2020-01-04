@@ -106,8 +106,9 @@ class MyGameOrchestrator{
             this.startMovie();
         }
         else if (obj == 'exit'){
-            //this.scene.graph.views['default'] = {...this.scene.graph.views['player1']};
-            //this.scene.selectedCamera = 'default'
+            let player1Camera = this.resetCamera(this.player);
+            this.scene.graph.views['default'] = player1Camera;
+            this.scene.selectedCamera = 'default'
         }
         else if (obj == 'menu'){
             this.player == 0 ? this.scene.selectedCamera = 'cameraPlayer1' : this.scene.selectedCamera = 'cameraPlayer2';
@@ -127,6 +128,17 @@ class MyGameOrchestrator{
         else {
             console.log(obj);
         }
+    }
+
+    resetCamera(player) {
+        let playerName;
+        player == 0 ? playerName = 'player1' : playerName = 'player2';
+        let fov = this.scene.graph.views[playerName].fov;
+        let near = this.scene.graph.views[playerName].near;
+        let far = this.scene.graph.views[playerName].far;
+        let position = this.scene.graph.views[playerName].position;
+        let target = this.scene.graph.views[playerName].target;
+        return new CGFcamera(fov, near, far, position, target);
     }
 
     getMoveCoords(type) {
