@@ -91,8 +91,8 @@ class MyPrologInterface {
 
     verify(data) {
         let response = data.target.response;
-        if (response == 'over') this.orchestrator.gameOver(0);
-        else this.orchestrator.changePlayer();
+        if (response == 'over' && !this.orchestrator.scene.gameEnded) this.orchestrator.gameOver(0);
+        else if(response == 'ok') this.orchestrator.changePlayer();
     }
 
     verifyBoard() {
