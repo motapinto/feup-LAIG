@@ -198,6 +198,9 @@ class MyGameOrchestrator{
     gameOver() {
         this.gameEnded = true;
         this.boardPicking = false;
+        alert('Both players have lost!');
+        if(confirm('Do you want to see the review of the game that you just played?'))
+            this.startMovie();
     }
 
     orchestrate(mode, results) {
