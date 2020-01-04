@@ -47,6 +47,8 @@ class MyGameOrchestrator{
 
     start() {
         this.prolog.getBoard();
+        this.stashPlayer1.createInstance();
+        this.stashPlayer2.createInstance();
     }
 
     startGame(board, scores) {
