@@ -38,10 +38,10 @@ class MyGameMenu {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.registerForPick(10003, 'menu');
-        this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
-        this.scene.translate(1.8, -0.6, 1.1);
-        this.scene.scale(0.4, 0.4, 0.4);
+            this.scene.registerForPick(10003, 'menu');
+            this.scene.rotate(-DEGREE_TO_RAD*90, 1, 0, 0);
+            this.scene.translate(1.8, -0.6, 1.1);
+            this.scene.scale(0.4, 0.4, 0.4);
             this.scene.pushMatrix();
                 this.scene.scale(3, 1, 1);
                 this.scene.rotate(DEGREE_TO_RAD*45, 0, 0, 1);
@@ -50,37 +50,47 @@ class MyGameMenu {
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
+                this.scene.registerForPick(10008, 'right');
                 this.scene.translate(0.8, 0.05, 0.051);
                 this.scene.rotate(-DEGREE_TO_RAD*90, 0, 0, 1);
                 this.arrow.apply();
                 this.arrowRect.display();
+                this.scene.clearPickRegistration();
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
+                this.scene.registerForPick(10009, 'left');
                 this.scene.translate(0.6, -0.05, 0.051);
                 this.scene.rotate(DEGREE_TO_RAD*90, 0, 0, 1);
                 this.arrow.apply();
                 this.arrowRect.display();
+                this.scene.clearPickRegistration();
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
+                this.scene.registerForPick(10010, 'down');
                 this.scene.translate(0.75, -0.15, 0.051);
                 this.scene.rotate(DEGREE_TO_RAD*180, 0, 0, 1);
                 this.arrow.apply();
                 this.arrowRect.display();
+                this.scene.clearPickRegistration();
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
+                this.scene.registerForPick(10011, 'up');
                 this.scene.translate(0.65, 0.15, 0.051);
                 this.arrow.apply();
                 this.arrowRect.display();
+                this.scene.clearPickRegistration();
             this.scene.popMatrix();
 
             //instructions
             this.scene.pushMatrix();
+                this.scene.registerForPick(10003, 'menu');
                 this.scene.translate(-0.9, -0.25, 0.051);
                 this.instruct.apply();
                 this.extraRect.display();
+                this.scene.clearPickRegistration();
             this.scene.popMatrix();
 
             //movie

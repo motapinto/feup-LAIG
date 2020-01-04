@@ -34,22 +34,6 @@ class MyInterface extends CGFinterface {
         return true;
     }
 
-    LightsFolder(lights) {
-        let lightsFolder = this.gui.addFolder("Lights");
-        
-        for (let key in lights) { //key = light name 
-            if (lights.hasOwnProperty(key)) {
-                    this.scene.lightsInterface[key] = lights[key][0]; 
-                    lightsFolder.add(this.scene.lightsInterface, key);
-            }
-        }
-    }
-
-    CamerasFolder() {
-      //Dropdown for cameras
-      this.gui.add(this.scene, 'selectedCamera', this.scene.viewsList).name('Camera');
-    }
-
     /**
      * initKeys
      */
