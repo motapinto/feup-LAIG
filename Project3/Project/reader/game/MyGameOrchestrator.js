@@ -278,12 +278,13 @@ class MyGameOrchestrator{
     }
 
     loadTheme(theme) {
-        this.selectedScene = theme;
+        this.newSelectedScene = theme;
         this.gameEnvironment.changeTheme(theme);
         this.gameEnvironment.initEnvironment(theme);
     }
 
     onGraphChanged(graph) {
+        this.selectedScene = this.newSelectedScene;
         this.gameEnvironment.selectedScene = this.selectedScene;
         this.updateGraph(graph);
     }
