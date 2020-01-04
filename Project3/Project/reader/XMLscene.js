@@ -138,6 +138,7 @@ class XMLscene extends CGFscene {
             this.orchestrator.onGraphChanged(this.graph);
         else
             this.orchestrator.onGraphLoaded(this.graph);
+        
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
@@ -232,6 +233,8 @@ class XMLscene extends CGFscene {
     }
 
     addLights(lights) {
+        this.lightsInterface = {};
+        
         for (let key in lights) { //key = light name 
             if (lights.hasOwnProperty(key)) {
                 this.lightsInterface[key] = lights[key][0];
