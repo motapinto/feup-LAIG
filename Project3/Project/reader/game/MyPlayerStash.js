@@ -44,14 +44,14 @@ class MyPlayerStash {
             return { 
                 x: type + 26, 
                 y: 1, 
-                z: Math.floor(number / 3) + 0.5
+                z: number * 0.2
             }; 
         }
         else {
             return { 
                 x: type - 10, 
                 y: -3, 
-                z: Math.floor(number / 3) + 0.5
+                z: number * 0.2
             };
         }
     }

@@ -148,9 +148,9 @@ parse_input(aiMove(Board, Dificulty), ['\"valid\"', X, Y]):-
 parse_input(aiMove(_Board, _Dificulty), ['\"error\"']).
 
 % Verify if game is over
-parse_input(verify(Board), '\"over\"'):-
+parse_input(verify(Board), 'over'):-
     game_over(Board).
-parse_input(verify(_), '\"ok\"').
+parse_input(verify(_), 'ok').
 
 
 % Game End

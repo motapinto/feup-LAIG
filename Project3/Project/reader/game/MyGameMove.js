@@ -7,8 +7,8 @@ class MyGameMove {
      * @param {Scene} scene
      * @param {MyTile} tile
      * @param {MyPlayerStash} playerStash
-     * @param {vec2} coordsInit
-     * @param {vec2} coordsFin
+     * @param {{x, y, z}} coordsInit
+     * @param {{x, y, z}} coordsFin
      */
     constructor(scene, tileInit, playerStash, coordsInit, coordsFin) {
         this.scene = scene;
@@ -27,7 +27,8 @@ class MyGameMove {
     createAnimation(coordsInit, coordsFin) {
         this.coordsDiff = {
             x: coordsFin.x - coordsInit.x,
-            y: coordsFin.y - coordsInit.y
+            y: coordsFin.y - coordsInit.y,
+            z: coordsFin.z - coordsInit.z
         };
         let distOffset = 0.1 * Math.sqrt(this.coordsDiff.x * this.coordsDiff.x + this.coordsDiff.y * this.coordsDiff.y);
         this.deltaTime = 1 + distOffset;
@@ -41,10 +42,12 @@ class MyGameMove {
         if (this.reversing) {
             this.coordsInit = {
                 x: this.coordsInit.x + this.coordsDiff.x,
-                y: this.coordsInit.y + this.coordsDiff.y
+                y: this.coordsInit.y + this.coordsDiff.y,
+                z: this.coordsInit.z + this.coordsDiff.z
             };
             this.coordsDiff.x = -this.coordsDiff.x;
             this.coordsDiff.y = -this.coordsDiff.y;
+            this.coordsDiff.z = -this.coordsDiff.z;
             this.reversing = false;
         }
         this.startTime = null;
@@ -52,7 +55,7 @@ class MyGameMove {
         this.tileInit.setColor(0);
     }
 
-    quadratic = (percent) => -4 * (percent - 0.5) * (percent - 0.5) + this.height;
+    quadratic = (percent) => (-4 * (percent - 0.5) * (percent - 0.5) + 1) * this.height;
     
     endAnimation() {
         if (this.animating) {
@@ -72,10 +75,12 @@ class MyGameMove {
         this.reversing = true;
         this.coordsInit = {
             x: this.coordsInit.x + this.coordsDiff.x,
-            y: this.coordsInit.y + this.coordsDiff.y
+            y: this.coordsInit.y + this.coordsDiff.y,
+            z: this.coordsInit.z + this.coordsDiff.z
         };
         this.coordsDiff.x = -this.coordsDiff.x;
         this.coordsDiff.y = -this.coordsDiff.y;
+        this.coordsDiff.z = -this.coordsDiff.z;
         if (this.animating) this.startTime -= this.deltaTime/2 - this.delta;
         else {
             this.startTime = null;
@@ -99,7 +104,11 @@ class MyGameMove {
 
         let percent = this.delta / this.deltaTime;
 
-        mat4.translate(this.matrix, this.matrix, [this.coordsDiff.x * percent, this.coordsDiff.y * percent, this.quadratic(percent)]);
+        mat4.translate(this.matrix, this.matrix, [
+            this.coordsDiff.x * percent,
+            this.coordsDiff.y * percent,
+            this.coordsDiff.z * percent + this.quadratic(percent)
+        ]);
 
         this.tileInit.setColor((this.delta % 1) < 0.5 ? 1 : 0);
 
@@ -110,7 +119,7 @@ class MyGameMove {
         if (this.animating) {
             this.scene.pushMatrix();
                 this.scene.multMatrix(this.matrix);
-                this.scene.translate(this.coordsInit.x, this.coordsInit.y, 0);
+                this.scene.translate(this.coordsInit.x, this.coordsInit.y, this.coordsInit.z);
                 this.piece.display();
             this.scene.popMatrix();
         }

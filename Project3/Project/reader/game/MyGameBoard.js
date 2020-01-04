@@ -47,7 +47,7 @@ class MyGameBoard{
         if (y % 2)
             x += 0.5;
         
-        return { x: x*1.8, y: (y+0.775)*1.55 };
+        return { x: x*1.8, y: (y+0.775)*1.55, z: 0 };
     }
 
     createInstance(board) {

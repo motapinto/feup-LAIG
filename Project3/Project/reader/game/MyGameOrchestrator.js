@@ -145,11 +145,13 @@ class MyGameOrchestrator{
         if (this.player) {
             let pos = this.stashPlayer2.getNewPiecePos(type);
             pos.y += 2 * 11;
+            pos.z -= 0.4;
             return pos;
         }
         else {
             let pos = this.stashPlayer1.getNewPiecePos(type);
             pos.y = -pos.y;
+            pos.z -= 0.4;
             return pos;
         }
     }
@@ -195,13 +197,13 @@ class MyGameOrchestrator{
         this.animator.startMovie(this.gameSequence.getMoves());
     }
 
-    gameOver() {
+    gameOver(player) {
         this.gameEnded = true;
         this.boardPicking = false;
     }
 
     orchestrate(mode, results) {
-        if (!this.gameEnded && this.picking && !this.gameSequence.animating) {
+        if (!this.gameEnded && this.picking && !this.gameSequence.animating && !this.animator.animating) {
             if (this.stashPlayer1.hasWon()) this.gameOver(1);
             else if (this.stashPlayer2.hasWon()) this.gameOver(2);
             else switch (this.scene.gameType) {
@@ -315,12 +317,12 @@ class MyGameOrchestrator{
     loadTheme(theme) {
         this.newSelectedScene = theme;
         this.gameEnvironment.changeTheme(theme);
-        this.gameEnvironment.initEnvironment(theme);
     }
-
+    
     onGraphChanged(graph) {
         this.selectedScene = this.newSelectedScene;
         this.gameEnvironment.selectedScene = this.selectedScene;
+        this.gameEnvironment.initEnvironment(this.selectedScene);
         this.updateGraph(graph);
     }
 
@@ -353,11 +355,12 @@ class MyGameOrchestrator{
         
             this.scene.pushMatrix();
                 this.scene.scale(1, -1, 1);
+                this.scene.translate(0, 0, -0.4);
                 this.stashPlayer1.display();
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
-                this.scene.translate(0, 21.8, 0);
+                this.scene.translate(0, 21.8, -0.4);
                 this.stashPlayer2.display();
             this.scene.popMatrix();
         this.scene.popMatrix();
