@@ -270,7 +270,7 @@
                 <materials>
                     <material id="defaultMaterial" />
                 </materials>
-                <texture id="beach"/>
+                <texture id="beach" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="beach" />
                 </children>
@@ -306,7 +306,7 @@
                 <materials>
                     <material id="tableTop" />
                 </materials>
-                <texture id="darkCement"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableTop" />
                 </children>
@@ -318,7 +318,7 @@
                 <materials>
                     <material id="tableTop" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableCover" />
                 </children>
@@ -490,7 +490,7 @@
                 <materials>
                     <material id="celestial" />
                 </materials>
-                <texture id="moon"/>
+                <texture id="moon" length_s="0" length_t="0"/>
                 <children>
                     <primitiveref id="sphere" />
                 </children>

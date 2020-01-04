@@ -194,7 +194,7 @@ class MyGameOrchestrator{
         this.animator.startMovie(this.gameSequence.getMoves());
     }
 
-    gameOver(player) {
+    gameOver() {
         this.gameEnded = true;
         this.boardPicking = false;
     }

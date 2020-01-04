@@ -32,7 +32,6 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.displayLights = true;
         this.audioEnable = true;
         this.scaleFactor = 1;
         this.floor = 0;
@@ -149,7 +148,6 @@ class XMLscene extends CGFscene {
         this.selectedCamera = this.graph.idView;
         this.viewsList = this.graph.viewsList;
         
-        // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
         this.addLights(this.graph.lights);
 
         this.setCamera(this.graph.views[this.selectedCamera]);
@@ -225,7 +223,7 @@ class XMLscene extends CGFscene {
             if (this.lightsInterface.hasOwnProperty(key)) {
                 if (this.lightsInterface[key]) {
                     this.lights[i].enable();
-                    this.lights[i].setVisible(this.displayLights);
+                    this.lights[i].setVisible(false);
                 }
                 else {
                     this.lights[i].disable();
