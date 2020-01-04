@@ -43,7 +43,7 @@ class MyGameEnvironment {
     initMaterial() {
         // Material
         this.terrainMaterial = new CGFappearance(this.scene);
-        this.terrainMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.terrainMaterial.setAmbient(0.2, 0.2, 0.2, 1);
         this.terrainMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
         this.terrainMaterial.setSpecular(0.0, 0.0, 0.0, 1);
         this.terrainMaterial.setShininess(120);

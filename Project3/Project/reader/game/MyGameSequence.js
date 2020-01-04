@@ -27,7 +27,7 @@ class MyGameSequence {
     }
 
     addInvalidMove(tile) {
-        this.moves.push(new MyGameMoveInvalid(tile));
+        this.moves.push(new MyGameMoveInvalid(tile, this.scene));
         this.animating = true;
     }
 

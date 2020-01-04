@@ -47,8 +47,6 @@ class MyGameOrchestrator{
 
     start() {
         this.prolog.getBoard();
-        this.stashPlayer1.createInstance();
-        this.stashPlayer2.createInstance();
     }
 
     startGame(board, scores) {
@@ -116,7 +114,7 @@ class MyGameOrchestrator{
             this.startMovie();
         }
         else if (obj == 'exit'){
-            this.scene.graph.views['default'] = this.resetCamera('player1');
+            this.scene.graph.views['default'] = this.resetCamera(0);
             this.scene.selectedCamera = 'default';
         }
         else if (obj == 'menu'){

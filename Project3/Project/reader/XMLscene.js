@@ -275,9 +275,8 @@ class XMLscene extends CGFscene {
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
 
         if(this.resetCamera) {
-            this.graph.views['default'] = this.orchestrator.resetCamera('player1');
+            this.graph.views['default'] = this.orchestrator.resetCamera(0);
             this.selectedCamera = 'default';
-            console.log(this.interface.gui.__controllers[3]);
         }
 
         this.pushMatrix();

@@ -5,9 +5,11 @@ class MyGameMoveInvalid {
     /**
      * @constructor
      * @param {MyTile} tile
+     * @param {Scene} scene
      */
-    constructor(tile) {
+    constructor(tile, scene) {
         this.tile = tile;
+        this.scene = scene;
         this.animating = false;
         this.reversing = false;
         this.ended = false;
@@ -45,7 +47,7 @@ class MyGameMoveInvalid {
 
         this.delta = t - this.startTime;
 
-        if (this.delta > this.deltaTime) {
+        if (this.delta > this.deltaTime/this.scene.speed) {
             this.endAnimation();
             return false;
         }
