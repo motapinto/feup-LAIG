@@ -441,7 +441,7 @@
                 <materials>
                     <material id="tableTop" />
                 </materials>
-                <texture id="darkCement"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableTop" />
                 </children>
@@ -453,7 +453,7 @@
                 <materials>
                     <material id="tableTop" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableCover" />
                 </children>
@@ -625,7 +625,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="none" length_s="1" length_t="1"/>
+                <texture id="none"/>
                 <children> 
                     <primitiveref id="rectangle" />              
                 </children>
@@ -637,7 +637,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="none" length_s="1" length_t="1"/>
+                <texture id="none"/>
                 <children> 
                     <componentref id="DoorBase1" />              
                 </children>
@@ -696,11 +696,10 @@
                 <transformation>
                     <translate x="-9.9" y="5" z="0" />
                 </transformation>
-                <animationref id="door"/>
                 <materials>
                     <material id="grey" />
                 </materials>
-                <texture id="none" length_s="1" length_t="1"/>
+                <texture id="none"/>
                 <children> 
                     <componentref id="DoorBase1" />     
                     <componentref id="DoorBase2" />     
@@ -756,7 +755,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="lampTex"/>
+                <texture id="lampTex" length_s="1" length_t="1"/>
                 <children>
                     <componentref id="LampLight" />
                     <componentref id="LampStick" />  

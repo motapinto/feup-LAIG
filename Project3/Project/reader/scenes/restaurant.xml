@@ -557,7 +557,7 @@
                 <materials>
                     <material id="tableTop" />
                 </materials>
-                <texture id="darkCement"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableTop" />
                 </children>
@@ -569,7 +569,7 @@
                 <materials>
                     <material id="tableTop" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="TableCover" />
                 </children>
@@ -913,7 +913,7 @@
                     <material id="tableBottom" />
                     <material id="tableBottom1" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <componentref id="TableSetRow1" />
                     <componentref id="TableSetRow" />
@@ -928,7 +928,7 @@
                 <materials>
                     <material id="barCounterTop" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="BarCounterTopCover" />
                 </children>
@@ -942,7 +942,7 @@
                 <materials>
                     <material id="barCounterTop" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="BarCounterTop" />
                     <componentref id="BarCounterTopCover" />
@@ -1084,7 +1084,7 @@
                 <materials>
                     <material id="barChair" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="BarChairLeg" />
                 </children>
@@ -1454,7 +1454,7 @@
                 <materials>
                     <material id="lampStick" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="LampStick" />              
                 </children>
@@ -1467,7 +1467,7 @@
                 <materials>
                     <material id="inherit" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="LampCover" />              
                 </children>
@@ -1609,7 +1609,7 @@
                 <materials>
                     <material id="lamp" />
                 </materials>
-                <texture id="lampTex" length_s="0" length_t="0"/>
+                <texture id="lampTex" length_s="1" length_t="1"/>
                 <children> 
                     <componentref id="Lamp1" /> 
                     <componentref id="Lamp" />              
@@ -1624,7 +1624,7 @@
                 <materials>
                     <material id="stairSupport" />
                 </materials>
-                <texture id="darkCement" length_s="0" length_t="0"/>
+                <texture id="darkCement" length_s="1" length_t="1"/>
                 <children>
                     <primitiveref id="StairSupport" /> 
                 </children>
