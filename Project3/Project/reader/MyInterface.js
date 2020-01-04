@@ -24,8 +24,9 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
         this.gui.add(this.scene, 'audioEnable').name("Enable sound"); //checkbox
         this.gui.add(this.scene, 'displayLights').name("Display lights"); //checkbox
-        this.gui.add(this.scene, 'difficulty', { 'P-0': 0, 'P-1': 1, 'P-2': 2, '0-0': 3, '0-1': 4, '0-2': 5} ).name("Difficulty");
-        this.gui.add(this.scene, 'gameType', { PVP: 0, PVM: 1, MVM: 2 } ).name("Game Type");
+        this.gui.add(this.scene, 'AI1', {'0': 0, '1': 1, '2': 2}).name("AI player 1");
+        this.gui.add(this.scene, 'AI2', {'0': 0, '1': 1, '2': 2}).name("AI player 2");
+        this.gui.add(this.scene, 'gameType', { PVP: 0, PVM: 1, MVP: 2, MVM: 3 } ).name("Game Type");
         this.gui.add(this.scene, 'theme', { Beach: 1, Montain: 2, Restaurant: 3, Questioning: 4 } ).name("Environment");
         //LightsFolder called in onGraphLoaded() function
         //CamerasFolder called in onGraphLoaded() function

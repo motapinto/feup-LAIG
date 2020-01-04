@@ -186,7 +186,7 @@ class MyGameOrchestrator{
                 case 1:
                     if (this.player) {
                         this.boardPicking = false;
-                        this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.difficulty[2]);
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.AI2);
                     }
                     else {
                         this.boardPicking = true;
@@ -199,13 +199,13 @@ class MyGameOrchestrator{
                     }
                     else {
                         this.boardPicking = false;
-                        this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.difficulty[2]);
+                        this.prolog.aiMove(this.gameBoard.getInstance(), this.scene.AI1);
                     }
                     break;
     
                 case 3:
     
-                    this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.scene.difficulty[2] : this.scene.difficulty[0]);
+                    this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.scene.AI2 : this.scene.AI1);
                     break;
     
                 default:
