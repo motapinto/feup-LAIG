@@ -27,12 +27,13 @@ class MySceneGraph {
 
         // Establish bidirectional references between scene and graph.
         this.scene = scene;
-        scene.graph = this;
+        scene.newGraph = this;
 
         this.nodes = [];
 
         this.idRoot = null;                    // The id of the root element.
         this.idView = null;                    // The id of the default view.
+        this.viewsList = [];
 
         this.materialRotate = 0;
 
@@ -319,7 +320,7 @@ class MySceneGraph {
                     if(to == null)
                         return "to value not found in perspective " + viewID;
                         
-                    this.scene.viewsList.push(viewID);
+                    this.viewsList.push(viewID);
                     this.views[viewID] = new CGFcamera((angle/180) * Math.PI, near, far, from, to);
                     break;
                 
@@ -402,7 +403,7 @@ class MySceneGraph {
                     if (!Array.isArray(up))
                         up = [0,1,0];    
             
-                    this.scene.viewsList.push(viewID);
+                    this.viewsList.push(viewID);
                     this.views[viewID] = new CGFcameraOrtho(left, right, bottom, top, near, far, position, target, up);
                     break;
 
@@ -416,8 +417,6 @@ class MySceneGraph {
         if(this.views[this.idView] == null)
             return "default view " + this.idView + " not found in views";
 
-        this.scene.selectedCamera = this.idView;
-        
         return null;
     }
 

@@ -6,12 +6,10 @@ class MyGameSequence {
      * @constructor
      * @param {Scene} scene
      * @param {MyGameOrchestrator} orchestrator
-     * @param {SceneGraph} graph
      */
-    constructor(scene, orchestrator, graph) {
+    constructor(scene, orchestrator) {
         this.scene = scene;
         this.orchestrator = orchestrator;
-        this.graph = graph;
         this.moves = [];
         this.animating = false;
     }

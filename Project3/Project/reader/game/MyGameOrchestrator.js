@@ -7,19 +7,18 @@ class MyGameOrchestrator{
      * @param {Scene} scene
      * @param {SceneGraph} graph
      */
-    constructor(scene, theme) {
+    constructor(scene, graph) {
         this.scene = scene;
-        this.theme = theme;
+        this.graph = graph;
 
-        //environment
         this.selectedScene = 4;
         this.gameEnvironment = new MyGameEnvironment(this.scene, this.selectedScene);
         //menu
         this.gameMenu = new MyGameMenu(this.scene);
         //game sequence
-        this.gameSequence = new MyGameSequence(this.scene, this, this.theme);
-        //board of the game
-        this.gameBoard = new MyGameBoard(this.scene, this.theme);
+        this.gameSequence = new MyGameSequence(this.scene, this);
+        //board of the game 
+        this.gameBoard = new MyGameBoard(this.scene, this.graph);
         //prolog connection
         this.prolog = new MyPrologInterface(this);
         //pices collected by players during game
@@ -30,7 +29,7 @@ class MyGameOrchestrator{
         //animator for movie
         this.animator = new MyAnimator(this);
 
-        //load theme not working
+        //load graph not working
         // this.loadTheme(2);
         
         this.picking = true;
@@ -39,9 +38,13 @@ class MyGameOrchestrator{
         this.changingStart = null;
         this.cameraDegrees = 0;
         this.player = 0;
-        this.AILvl = 0;
         this.moves = [];
         this.start();
+    }
+
+    updateGraph(graph) {
+        this.graph = graph
+        this.gameBoard.updateGraph(graph);
     }
 
     start() {
@@ -55,10 +58,10 @@ class MyGameOrchestrator{
                 const score = scores[player][type];
                 for (let i = 0; i < score; i++) {
                     if (player == 0) {
-                        this.stashPlayer1.addPiece(new MyPiece(this.scene, this.scene.graph, type + 1));
+                        this.stashPlayer1.addPiece(new MyPiece(this.graph, type + 1));
                     }
                     else if (player == 1) {
-                        this.stashPlayer2.addPiece(new MyPiece(this.scene, this.scene.graph, type + 1));
+                        this.stashPlayer2.addPiece(new MyPiece(this.graph, type + 1));
                     }
                     
                 }                
@@ -130,7 +133,12 @@ class MyGameOrchestrator{
 
     move(x, y) {
         let tile = this.gameBoard.getTile(x, y);
-        this.gameSequence.addMove(tile, this.player ? this.stashPlayer2 : this.stashPlayer1, this.gameBoard.positionCoords(x, y), this.getMoveCoords(tile.piece.type))
+        this.gameSequence.addMove(
+            tile,
+            this.player ? this.stashPlayer2 : this.stashPlayer1,
+            this.gameBoard.positionCoords(x, y),
+            this.getMoveCoords(tile.piece.type)
+        );
     }
 
     failledMove(x, y) {
@@ -266,8 +274,18 @@ class MyGameOrchestrator{
     }
 
     loadTheme(theme) {
+        this.selectedScene = theme;
         this.gameEnvironment.changeTheme(theme);
         this.gameEnvironment.initEnvironment(theme);
+    }
+
+    onGraphChanged(graph) {
+        this.gameEnvironment.selectedScene = this.selectedScene;
+        this.updateGraph(graph);
+    }
+
+    onGraphLoaded(graph) {
+        this.updateGraph(graph);
     }
 
     display() {

@@ -19,6 +19,7 @@ class MyAnimator {
      * @param {Array<MyGameMove>} moves 
      */
     startMovie(moves) {
+        if (this.animating) return false;
         this.moves = moves;
         if (moves.length == 0) {
             this.endMovie();

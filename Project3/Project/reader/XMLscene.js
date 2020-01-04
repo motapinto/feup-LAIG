@@ -44,6 +44,8 @@ class XMLscene extends CGFscene {
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
 
+        this.orchestrator = new MyGameOrchestrator(this, this.graph);
+
         this.gameType = 0;
         this.difficulty = 0;
         this.theme = 1;
@@ -126,17 +128,23 @@ class XMLscene extends CGFscene {
      *  As loading is asynchronous, this may be called already after the application has started the run loop
      */
     onGraphLoaded() { 
+        this.graph = this.newGraph;
         this.axis = new CGFaxis(this, this.graph.referenceLength);
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
         this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
         
-        this.orchestrator = new MyGameOrchestrator(this, this.graph);
+        if (this.sceneInited)
+            this.orchestrator.onGraphChanged(this.graph);
+        else
+            this.orchestrator.onGraphLoaded(this.graph);
         this.initLights();
         this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
+        this.viewsList = this.graph.viewsList;
         
         // Adds lights and cameras folder (http://workshop.chromeexperiments.com/examples/gui) 
-        this.interface.LightsFolder(this.graph.lights);
+        this.addLights(this.graph.lights);
+        // this.interface.LightsFolder(this.graph.lights);
         this.interface.CamerasFolder(this.graph.views);
 
         this.setCamera(this.graph.views[this.selectedCamera]);
@@ -159,7 +167,19 @@ class XMLscene extends CGFscene {
             this.orchestrator.startMovie();
         }
         if (this.gui.isKeyPressed("Escape")) {
-            this.orchestrator.startMovie();
+            this.orchestrator.endMovie();
+        }
+        if (this.gui.isKeyPressed("Digit1")) {
+            this.orchestrator.loadTheme(1);
+        }
+        if (this.gui.isKeyPressed("Digit2")) {
+            this.orchestrator.loadTheme(2);
+        }
+        if (this.gui.isKeyPressed("Digit3")) {
+            this.orchestrator.loadTheme(3);
+        }
+        if (this.gui.isKeyPressed("Digit4")) {
+            this.orchestrator.loadTheme(4);
         }
     }
 
@@ -208,6 +228,15 @@ class XMLscene extends CGFscene {
                 this.lights[i++].update();
             }
         }
+    }
+
+    addLights(lights) {
+        for (let key in lights) { //key = light name 
+            if (lights.hasOwnProperty(key)) {
+                this.lightsInterface[key] = lights[key][0];
+            }
+        }
+
     }
 
     /**
