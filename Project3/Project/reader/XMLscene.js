@@ -45,10 +45,12 @@ class XMLscene extends CGFscene {
 
         this.orchestrator = new MyGameOrchestrator(this, this.graph);
 
+        this.speed = 1;
         this.gameType = 0;
         this.AI1 = 0;
         this.AI2 = 0;
         this.theme = 1;
+        this.gameEnded = false;
 
         this.floorUp = function(){
             if(this.floor < this.floorMax)

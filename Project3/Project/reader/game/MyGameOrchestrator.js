@@ -65,7 +65,7 @@ class MyGameOrchestrator{
                 }                
             }
         }
-        this.gameEnded = false;
+        this.scene.gameEnded = false;
         this.gameSequence.reset();
     }
 
@@ -198,15 +198,19 @@ class MyGameOrchestrator{
     }
 
     gameOver(player) {
-        this.gameEnded = true;
+        this.scene.gameEnded = true;
         this.boardPicking = false;
-        alert('Both players have lost!');
+        switch(player) {
+            case 0: alert('Both players have lost!'); break;
+            case 1: alert('Player 1 has won!'); break;
+            case 2: alert('Player 2 has won!'); break;
+        }
         if(confirm('Do you want to see the review of the game that you just played?'))
             this.startMovie();
     }
 
     orchestrate(mode, results) {
-        if (!this.gameEnded && this.picking && !this.gameSequence.animating && !this.animator.animating) {
+        if (!this.scene.gameEnded && this.picking && !this.gameSequence.animating && !this.animator.animating) {
             if (this.stashPlayer1.hasWon()) this.gameOver(1);
             else if (this.stashPlayer2.hasWon()) this.gameOver(2);
             else switch (this.scene.gameType) {
