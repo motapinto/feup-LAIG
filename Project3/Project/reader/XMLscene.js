@@ -80,10 +80,6 @@ class XMLscene extends CGFscene {
         let i = 0;
         // Lights index.
 
-        for (let light of this.lights) {
-            light.disable();
-        }
-
         // Reads the lights from the scene graph.
         for (let key in this.graph.lights) {
             if (i >= 8)
@@ -115,6 +111,11 @@ class XMLscene extends CGFscene {
 
                 i++;
             }
+        }
+        while (i < 8) {
+            this.lights[i].disable();
+            this.lights[i].update();
+            i++;
         }
     }
 
@@ -220,7 +221,6 @@ class XMLscene extends CGFscene {
      * Updates interface selected lights
      */
     updateLights() {
-
         //Updates lights in the display
         let i = 0;
         for (let key in this.lightsInterface) {
