@@ -105,7 +105,8 @@ class MyGameOrchestrator{
             this.startMovie();
         }
         else if (obj == 'exit'){
-            this.player == 0 ? this.scene.selectedCamera = 'player1' : this.scene.selectedCamera = 'player2';
+            //this.scene.graph.views['default'] = {...this.scene.graph.views['player1']};
+            //this.scene.selectedCamera = 'default'
         }
         else if (obj == 'menu'){
             this.player == 0 ? this.scene.selectedCamera = 'cameraPlayer1' : this.scene.selectedCamera = 'cameraPlayer2';
