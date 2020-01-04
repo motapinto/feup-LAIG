@@ -180,6 +180,7 @@ class MyGameOrchestrator{
         this.picking = true;
         this.changingPlayer = false;
         this.changingStart = null;
+        this.moveRequested = false;
         if (this.player) this.cameraDegrees = 180 * DEGREE_TO_RAD;
         else this.cameraDegrees = 0;
     }
@@ -239,7 +240,7 @@ class MyGameOrchestrator{
     
                 case '3':
                 case 3:
-    
+                    this.boardPicking = false;
                     this.prolog.aiMove(this.gameBoard.getInstance(), this.player ? this.scene.AI2 : this.scene.AI1);
                     break;
     
