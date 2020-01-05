@@ -86,19 +86,19 @@
         <!-- PIECE -->
             <material id="Red" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.86" g="0.s" b="0.2" a="1.0" />
+                <ambient r="0.2" g="0.05" b="0.05" a="1.0" />
                 <diffuse r="0.86" g="0.2" b="0.2" a="1.0" />
                 <specular r="0.86" g="0.2" b="0.2" a="1.0" />
             </material>
             <material id="Yellow" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.86" g="0.86" b="0.2" a="1.0" />
+                <ambient r="0.2" g="0.05" b="0.05" a="1.0" />
                 <diffuse r="0.86" g="0.86" b="0.2" a="1.0" />
                 <specular r="0.86" g="0.86" b="0.2" a="1.0" />
             </material>
             <material id="Blue" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.2" g="0.2" b="0.86" a="1.0" />
+                <ambient r="0.05" g="0.05" b="0.2" a="1.0" />
                 <diffuse r="0.2" g="0.2" b="0.86" a="1.0" />
                 <specular r="0.2" g="0.2" b="0.86" a="1.0" />
             </material>
@@ -116,7 +116,7 @@
             </material>
             <material id="White" shininess="10">
                 <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-                <ambient r="0.9" g="0.9" b="0.9" a="1.0" />
+                <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
                 <diffuse r="0.9" g="0.9" b="0.9" a="1.0" />
                 <specular r="0.9" g="0.9" b="0.9" a="1.0" />
             </material>
@@ -125,6 +125,12 @@
                 <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
                 <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
                 <specular r="0.1" g="0.1" b="0.1" a="1.0" />
+            </material>
+            <material id="Green" shininess="10">
+                <emission r="0" g="0.0" b="0.0" a="1.0" />
+                <ambient r="0.05" g="0.2" b="0.05" a="1.0" />
+                <diffuse r="0.2" g="0.9" b="0.2" a="1.0" />
+                <specular r="0.2" g="0.9" b="0.2" a="1.0" />
             </material>
         <!-- ROOM -->
             <material id="grey" shininess="10">

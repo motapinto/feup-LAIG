@@ -16,15 +16,15 @@ class MyGameEnvironment {
             case 1:
                 // audio = new Audio('scenes/sounds/ocean.mp3');
                 // audio.play();
-                this.waterShader();
+                this.setWaterShader();
                 this.initMaterial();
                 break;
             //montain
             case 2:
                 // audio = new Audio('scenes/sounds/birds.mp3');
                 // audio.play();
-                this.montainShader();
-                this.waterShader();
+                this.setMontainShader();
+                this.setWaterShader();
                 this.initMaterial();
                 break;
             //restaurant
@@ -73,7 +73,7 @@ class MyGameEnvironment {
         }
     }
 
-    waterShader() {
+    setWaterShader() {
         // Water shader
         this.waterPlane = new MyRectangle(this.scene, -50, 50, -50, 50, 100, 100);
         this.waterPlane.updateTexCoords(10, 10);
@@ -92,7 +92,7 @@ class MyGameEnvironment {
         this.scene.rotate(DEGREE_TO_RAD*90, 1, 0, 0);
     }
 
-    montainShader() {
+    setMontainShader() {
         // Montain shader
         this.miniWaterPlane = new MyRectangle(this.scene, -15, 15, -22, 15, 10, 10);
         this.miniWaterPlane.updateTexCoords(5, 5);

@@ -341,22 +341,29 @@ class MyGameOrchestrator{
     changeOutfits(player, custom) {
         let playerName;
         player == 0 ? playerName = 'Person1' : playerName = 'Person2';
-        switch(custom) {
+        if (this.player == player)
+            this.graph.components[playerName].materials[0] = 'Green';
+        else switch (custom) {
             case 0:
+            case '0':
                 this.graph.components[playerName].materials[0] = 'Red';
                 break;
             case 1:
+            case '1':
                 this.graph.components[playerName].materials[0] = 'Yellow';
                 break;
             case 2:
+            case '2':
                 console.log(this.graph.components[playerName].materials[0])
                 this.graph.components[playerName].materials[0] = 'Blue';
                 console.log(this.graph.components[playerName].materials[0])
                 break;
             case 3:
+            case '3':
                 this.graph.components[playerName].materials[0] = 'Black';
                 break;
             case 4:
+            case '4':
                 this.graph.components[playerName].materials[0] = 'White';
                 break;
             default:
