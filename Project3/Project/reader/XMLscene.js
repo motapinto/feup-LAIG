@@ -152,13 +152,14 @@ class XMLscene extends CGFscene {
     onGraphLoaded() { 
         this.graph = this.newGraph;
         this.axis = new CGFaxis(this, this.graph.referenceLength);
-        this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
-        this.setGlobalAmbientLight(this.graph.ambient[0], this.graph.ambient[1], this.graph.ambient[2], this.graph.ambient[3]);
         
         if (this.sceneInited)
             this.orchestrator.onGraphChanged(this.graph);
         else
             this.orchestrator.onGraphLoaded(this.graph);
+
+            this.gl.clearColor(0, 0, 0.1, 1.0);
+            this.setGlobalAmbientLight(0.2, 0.2, 0.2, 1.0);
         
         this.initLights();
         this.sceneInited = true;
@@ -167,7 +168,7 @@ class XMLscene extends CGFscene {
         
         this.addLights(this.graph.lights);
 
-        this.setCamera(this.graph.views[this.selectedCamera]);
+        this.setCamera('default');
     }
 
     /**
@@ -285,9 +286,7 @@ class XMLscene extends CGFscene {
         this.updateProjectionMatrix();
         this.loadIdentity();
         this.applyViewMatrix();
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
-
+    
         this.pushMatrix();
 
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
