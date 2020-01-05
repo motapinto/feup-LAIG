@@ -14,6 +14,7 @@ class MyGameOrchestrator{
         this.selectedScene = 4;
         this.gameEnvironment = new MyGameEnvironment(this.scene, this.selectedScene);
         this.audio = new Audio('scenes/sounds/game.mp3');
+        this.audioGame = new Audio('scenes/sounds/picking.mp4');
         this.audio.play();
         this.audio.volume = 0.5
         //menu
@@ -86,9 +87,8 @@ class MyGameOrchestrator{
             if (results != null && results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
                     var obj = results[i][0];
-                    let audio = new Audio('scenes/sounds/picking.mp4');
-                    audio.play();
                     if (obj) {
+                        if(this.scene.audioEnable) this.audioGame.play();
                         var uniqueId = results[i][1];
                         console.log("Picked object: with pick id " + uniqueId);
                         this.OnObjectSelected(obj, uniqueId);
