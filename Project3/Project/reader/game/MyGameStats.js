@@ -12,7 +12,10 @@ class MyGameStats {
         this.scene = scene;
         this.score1 = score1;
         this.score2 = score2;
-        this.countTime = true;
+        this.tInit = null;
+        this.stopped = true;
+        this.lastT = 0;
+        this.time = 0;
 
         this.init();
     }
@@ -53,6 +56,23 @@ class MyGameStats {
         this.initCounter();
     }
 
+    reset() {
+        this.tInit = null;
+        this.stopped = false;
+        this.time = 0;
+        this.currentMinutesOnes = 0;
+        this.currentSecondsTens = 0;
+        this.currentSecondsOnes = 0;
+    }
+
+    stop() {
+        this.stopped = true;
+    }
+
+    continue() {
+        this.stopped = false;
+    }
+
     initCounter() {
         this.currentMinutesOnes = 0; 
         this.currentSecondsTens = 0;
@@ -60,14 +80,23 @@ class MyGameStats {
     }
 
     update(t) {
-        if(this.countTime) {
-            let minutes = Math.floor(t / 60);
-            let seconds = t % 60;
-    
-            this.currentMinutesOnes = minutes;
-            this.currentSecondsTens = Math.floor(seconds / 10);
-            this.currentSecondsOnes = Math.floor(seconds % 10);
+        if (this.tInit == null)
+            this.tInit = t;
+        
+        if (this.stopped)
+            this.tInit += t - this.lastT;
+        else {
+            this.time = t - this.tInit;
         }
+        
+        let minutes = Math.floor(this.time / 60);
+        let seconds = this.time % 60;
+        
+        this.currentMinutesOnes = minutes;
+        this.currentSecondsTens = Math.floor(seconds / 10);
+        this.currentSecondsOnes = Math.floor(seconds % 10);
+        
+        this.lastT = t;
     }
 
     showStats() {

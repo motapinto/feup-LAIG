@@ -27,7 +27,8 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'resetCamera').name("Reset camera");
         this.gui.add(this.scene, 'resetBoard').name("Reset board");
         this.gui.add(this.scene, 'resetScores').name("Reset scores");
-        this.gui.add(this.scene, 'gameEnded').name('Pause'); //checkbox
+        this.gui.add(this.scene.orchestrator, 'pause').name('Pause/Continue');
+        this.gui.add(this.scene.orchestrator, 'maxTime', 10, 300).name('Time of play');
         this.gui.add(this.scene, 'custom1', {'Red': 0, 'Yellow': 1, 'Blue': 2, 'Black': 3, 'White': 4}).name("Player 1");
         this.gui.add(this.scene, 'custom2', {'Red': 0, 'Yellow': 1, 'Blue': 2, 'Black': 3, 'White': 4}).name("Player 2");
         this.gui.add(this.scene, 'AI1', {'0': 0, '1': 1, '2': 2}).name("AI player 1");

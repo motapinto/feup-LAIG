@@ -45,9 +45,7 @@ class MyAnimator {
         this.animating = false;
         this.started = false;
         this.moves = [];
-        this.currentMove = 0;
-        console.log('ok ');
-        
+        this.currentMove = 0;        
         this.orchestrator.endMovie();
     }
 
