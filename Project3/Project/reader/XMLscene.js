@@ -71,6 +71,15 @@ class XMLscene extends CGFscene {
             this.graph.views['default'] = this.orchestrator.resetCamera(0);
             this.selectedCamera = 'default';
         }
+
+        this.resetBoard = function () {
+            this.orchestrator.start();
+        }
+
+        this.resetScores = function () {
+            this.orchestrator.gameStats.score1 = 0;
+            this.orchestrator.gameStats.score2 = 0;
+        }
     }
 
     /**

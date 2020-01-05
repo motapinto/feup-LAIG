@@ -51,6 +51,8 @@ class MyGameOrchestrator{
 
     startGame(board, scores) {
         this.gameBoard.createInstance(board);
+        this.stashPlayer1.createInstance();
+        this.stashPlayer2.createInstance();
         for (let player = 0; player < scores.length; player++) {
             for (let type = 0; type < scores[player].length; type++) {
                 const score = scores[player][type];
@@ -414,8 +416,8 @@ class MyGameOrchestrator{
             this.animator.display();
         
             this.scene.pushMatrix();
-                this.scene.scale(1, -1, 1);
-                this.scene.translate(0, 0, -0.4);
+                // this.scene.scale(1, -1, 1);
+                this.scene.translate(0, -2, -0.4);
                 this.stashPlayer1.display();
             this.scene.popMatrix();
 
