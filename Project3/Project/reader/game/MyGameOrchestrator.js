@@ -259,11 +259,7 @@ class MyGameOrchestrator{
             case 0: alert('Both players have lost!'); break;
             case 1: this.gameStats.score1++; alert('Player 1 has won!'); break;
             case 2: this.gameStats.score2++; alert('Player 2 has won!'); break;
-        }
-        if(confirm('Do you want to see the review of the game that you just played?'))
-            this.startMovie();
-        else if (confirm('Do you want to start a new game?'))
-            this.start();            
+        }          
     }
 
     orchestrate(mode, results) {

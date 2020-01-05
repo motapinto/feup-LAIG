@@ -10,7 +10,6 @@ class MyGameMenu {
         this.scene = scene;
         this.obj = new MyCylinderTops(this.scene, 0.5, 0.5, 0.05, 4, 1);
         this.arrowRect = new MyRectangle(this.scene, 0, 0.1, 0, 0.1);
-        this.arrowCyl = new MyCylinder(this.scene, 0.071, 0.071, 0.05, 4, 1);
         this.extraRect = new MyRectangle(this.scene, 0, 1, 0, 0.5);
 
         this.mat = new CGFappearance(this.scene);
@@ -91,18 +90,9 @@ class MyGameMenu {
 
             this.scene.pushMatrix();
                 this.scene.registerForPick(10011, 'up');
-                this.scene.translate(0.65, 0.15, 0.15);
+                this.scene.translate(0.65, 0.15, 0.1);
                 this.arrow.apply();
                 this.arrowRect.display();
-                this.scene.clearPickRegistration();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-                this.scene.registerForPick(10011, 'up');
-                this.scene.translate(0.7, 0.2, 0.1);
-                this.scene.rotate(DEGREE_TO_RAD*45, 0, 0, 1);
-                this.mat2.apply();
-                this.arrowCyl.display();
                 this.scene.clearPickRegistration();
             this.scene.popMatrix();
 
