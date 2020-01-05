@@ -171,9 +171,6 @@ class XMLscene extends CGFscene {
         if (this.gui.isKeyPressed("KeyZ")) {
             this.orchestrator.undo();
         }
-        if (this.gui.isKeyPressed("KeyC")) {
-            this.orchestrator.changePlayer();
-        }
         if (this.gui.isKeyPressed("KeyX")) {
             this.orchestrator.startMovie();
         }
