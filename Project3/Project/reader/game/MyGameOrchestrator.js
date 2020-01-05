@@ -84,6 +84,8 @@ class MyGameOrchestrator{
             if (results != null && results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
                     var obj = results[i][0];
+                    let audio = new Audio('scenes/sounds/picking.mp4');
+                    audio.play();
                     if (obj) {
                         var uniqueId = results[i][1];
                         console.log("Picked object: with pick id " + uniqueId);
