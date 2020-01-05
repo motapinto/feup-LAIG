@@ -106,7 +106,6 @@ class MyGameOrchestrator{
                     if (obj) {
                         if(this.scene.audioEnable) this.audioGame.play();
                         var uniqueId = results[i][1];
-                        console.log("Picked object: with pick id " + uniqueId);
                         this.OnObjectSelected(obj, uniqueId);
                     }
                 }
