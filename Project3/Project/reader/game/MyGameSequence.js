@@ -12,6 +12,7 @@ class MyGameSequence {
         this.orchestrator = orchestrator;
         this.moves = [];
         this.animating = false;
+        this.auxTile = new MyTile(this.scene, this.orchestrator.graph, 9999999);
     }
 
     reset() {
@@ -31,12 +32,20 @@ class MyGameSequence {
         this.animating = true;
     }
 
+    addOutOfTimeMove(board) {
+        this.animating = true;
+        this.moves.push(new MyGameMoveOutOfTime(board, this.scene));
+    }
+
     undo() {
         if (this.moves.length < 1 || this.moves[this.moves.length - 1].reversing)
             return false;
         
-        if (this.moves[this.moves.length - 1].ended)
+        if (this.moves[this.moves.length - 1].ended) {
             this.orchestrator.changePlayer();
+            this.orchestrator.gameStats.reset();
+            this.orchestrator.gameStats.stop();
+        }
         this.moves[this.moves.length - 1].reverse();
         this.animating = true;
         return true;
@@ -46,12 +55,14 @@ class MyGameSequence {
         if (this.moves.length > 0 && this.animating) {
             this.animating = this.moves[this.moves.length - 1].update(t);  
             if (!this.animating) {
-                if (!this.moves[this.moves.length - 1].reversing)
+                if (!this.moves[this.moves.length - 1].reversing) {
                     this.orchestrator.prolog.verifyBoard();
+                }
                 else {
                     this.moves.pop();
                     this.orchestrator.picking = true;
                     this.orchestrator.moveRequested = false;
+                    this.orchestrator.gameStats.continue();
                 }
             }
         }

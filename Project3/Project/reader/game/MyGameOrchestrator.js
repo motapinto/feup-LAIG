@@ -33,6 +33,8 @@ class MyGameOrchestrator{
         //animator for movie
         this.animator = new MyAnimator(this);
         
+        this.maxTime = 30;
+        this.paused = false;
         this.picking = true;
         this.boardPicking = false;
         this.changingPlayer = false;
@@ -49,6 +51,7 @@ class MyGameOrchestrator{
     }
 
     start() {
+        this.gameStats.stop();
         this.prolog.getBoard();
     }
 
@@ -79,7 +82,20 @@ class MyGameOrchestrator{
         this.cameraDegrees = 0;
         this.player = 0;
         this.gameSequence.reset();
-        this.scene.tInit = null;
+        this.gameStats.reset();
+    }
+
+    pause() {
+        this.paused = !this.paused;
+        if (this.paused) {
+            this.gameStats.stop()
+            this.picking = false;
+        }
+        else {
+            this.gameStats.continue();
+            this.picking = true;
+        }
+            
     }
 
     managePick(mode, results) {
@@ -178,12 +194,22 @@ class MyGameOrchestrator{
             this.gameBoard.positionCoords(x, y),
             this.getMoveCoords(tile.piece.type)
         );
+
+        this.gameStats.stop();
     }
 
     failledMove(x, y) {
         let tile = this.gameBoard.getTile(x, y);
 
         this.gameSequence.addInvalidMove(tile);
+
+        this.gameStats.stop();
+    }
+
+    addOutOfTimeMove() {
+        this.gameSequence.addOutOfTimeMove(this.gameBoard);
+
+        this.gameStats.stop();
     }
 
     changePlayer() {
@@ -191,6 +217,7 @@ class MyGameOrchestrator{
         this.changingPlayer = true;
         this.changingStart = null;
         this.player = (this.player + 1) % 2;
+        this.gameStats.stop();
     }
 
     endChangePlayer() {
@@ -200,27 +227,34 @@ class MyGameOrchestrator{
         this.moveRequested = false;
         if (this.player) this.cameraDegrees = 180 * DEGREE_TO_RAD;
         else this.cameraDegrees = 0;
+        this.gameStats.reset();
     }
 
     undo() {
-        if (this.gameSequence.undo())
+        if (this.gameSequence.undo()) {
             this.picking = false;
+            this.gameStats.stop();
+        }
     }
 
     startMovie() {
         this.boardPicking = false;
         this.animator.startMovie(this.gameSequence.getMoves());
+        this.gameStats.stop();
     }
 
     endMovie() {
         this.picking = true;
         if (this.scene.gameEnded && confirm('Do you want to start a new game?'))
             this.start();
+        else
+            this.gameStats.continue();
     }
 
     gameOver(player) {
         this.scene.gameEnded = true;
         this.boardPicking = false;
+        this.gameStats.stop();
         switch(player) {
             case 0: alert('Both players have lost!'); break;
             case 1: this.gameStats.score1++; alert('Player 1 has won!'); break;
@@ -302,11 +336,13 @@ class MyGameOrchestrator{
                 this.endChangePlayer();
                 return;
             }
-
+            
             this.cameraDegrees = 90 * delta * this.scene.speed;
             if (this.cameraDegrees > 180) this.cameraDegrees = (180 + (this.player ? 0 : 180)) * DEGREE_TO_RAD;
             else this.cameraDegrees = (this.cameraDegrees + (this.player ? 0 : 180)) * DEGREE_TO_RAD;
         }
+        else if (this.gameStats.time >= this.maxTime && !this.gameSequence.animating && !this.prolog.waitingRequest)
+            this.addOutOfTimeMove();
     }
 
     attachCameras() {

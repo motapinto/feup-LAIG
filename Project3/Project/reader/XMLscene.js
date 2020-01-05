@@ -53,20 +53,6 @@ class XMLscene extends CGFscene {
         this.custom2 = 0;
         this.gameEnded = false;
 
-        this.floorUp = function(){
-            if(this.floor < this.floorMax)
-                this.floor++;
-            if(this.floor < 0)
-                this.floor = 1;
-        }
-
-        this.floorDown = function(){
-            if(this.floor > 0)
-                this.floor--;
-            if(this.floor > this.floorMax)
-                this.floor = this.floorMax - 1;
-        }
-
         this.resetCamera = function () {
             this.graph.views['default'] = this.orchestrator.resetCamera(0);
             this.selectedCamera = 'default';
@@ -79,6 +65,10 @@ class XMLscene extends CGFscene {
         this.resetScores = function () {
             this.orchestrator.gameStats.score1 = 0;
             this.orchestrator.gameStats.score2 = 0;
+        }
+
+        this.pause = function () {
+            this.orchestrator.pause();
         }
     }
 
@@ -162,13 +152,13 @@ class XMLscene extends CGFscene {
             this.setGlobalAmbientLight(0.2, 0.2, 0.2, 1.0);
         
         this.initLights();
-        this.sceneInited = true;
         this.selectedCamera = this.graph.idView;
         this.viewsList = this.graph.viewsList;
         
         this.addLights(this.graph.lights);
-
+        
         this.setCamera('default');
+        this.sceneInited = true;
     }
 
     /**
