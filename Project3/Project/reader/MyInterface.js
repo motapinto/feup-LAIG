@@ -23,7 +23,8 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
         this.gui.add(this.scene, 'speed', 0.5, 5.0).name('Speed Factor');
         this.gui.add(this.scene, 'audioEnable').name("Enable sound"); //checkbox
-        this.gui.add(this.scene, 'resetCamera').name("Fixed camera"); //checkbox
+        this.gui.add(this.scene, 'fixedCamera').name("Fixed camera"); //checkbox
+        this.gui.add(this.scene, 'resetCamera').name("Reset camera"); //checkbox
         this.gui.add(this.scene, 'gameEnded').name('Pause'); //checkbox
         this.gui.add(this.scene, 'custom1', {'Red': 0, 'Yellow': 1, 'Blue': 2, 'Black': 3, 'White': 4}).name("Player 1");
         this.gui.add(this.scene, 'custom2', {'Red': 0, 'Yellow': 1, 'Blue': 2, 'Black': 3, 'White': 4}).name("Player 2");

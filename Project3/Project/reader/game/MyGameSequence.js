@@ -51,6 +51,7 @@ class MyGameSequence {
                 else {
                     this.moves.pop();
                     this.orchestrator.picking = true;
+                    this.orchestrator.moveRequested = false;
                 }
             }
         }

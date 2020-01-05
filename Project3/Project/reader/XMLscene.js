@@ -41,7 +41,7 @@ class XMLscene extends CGFscene {
         this.updatePeriod = 50;
         this.setUpdatePeriod(this.updatePeriod);
         this.setPickEnabled(true);
-        this.resetCamera = false;
+        this.fixedCamera = false;
 
         this.orchestrator = new MyGameOrchestrator(this, this.graph);
 
@@ -65,6 +65,11 @@ class XMLscene extends CGFscene {
                 this.floor--;
             if(this.floor > this.floorMax)
                 this.floor = this.floorMax - 1;
+        }
+
+        this.resetCamera = function () {
+            this.graph.views['default'] = this.orchestrator.resetCamera(0);
+            this.selectedCamera = 'default';
         }
     }
 
@@ -212,8 +217,8 @@ class XMLscene extends CGFscene {
      * Selects active camara.
      */
     setCamera(camera){
-      this.camera = camera;
-      this.interface.setActiveCamera(camera);
+        this.camera = camera;
+        this.interface.setActiveCamera(this.fixedCamera?null:camera);
     }
 
     /**
@@ -273,11 +278,6 @@ class XMLscene extends CGFscene {
         this.applyViewMatrix();
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
-
-        if(this.resetCamera) {
-            this.graph.views['default'] = this.orchestrator.resetCamera(0);
-            this.selectedCamera = 'default';
-        }
 
         this.pushMatrix();
 
