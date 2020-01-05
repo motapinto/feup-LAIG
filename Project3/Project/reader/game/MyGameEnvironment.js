@@ -10,27 +10,20 @@ class MyGameEnvironment {
     }
 
     initEnvironment(selectedScene) {
-        let audio;
         switch(selectedScene) {
             //ocean
             case 1:
-                // audio = new Audio('scenes/sounds/ocean.mp3');
-                // audio.play();
                 this.setWaterShader();
                 this.initMaterial();
                 break;
             //montain
             case 2:
-                // audio = new Audio('scenes/sounds/birds.mp3');
-                // audio.play();
                 this.setMontainShader();
                 this.setWaterShader();
                 this.initMaterial();
                 break;
             //restaurant
             case 3:
-                // audio = new Audio('scenes/sounds/people.mp3');
-                // audio.play();
                 break;
             case 4:
                 this.questioning();
