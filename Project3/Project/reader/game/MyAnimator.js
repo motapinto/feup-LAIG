@@ -38,10 +38,10 @@ class MyAnimator {
     }
     
     endMovie() {
-        this.moves.forEach(move => {
+        for (let move of this.moves) {
             move.reversing = false;
             move.endAnimation();
-        });
+        }
         this.animating = false;
         this.started = false;
         this.moves = [];

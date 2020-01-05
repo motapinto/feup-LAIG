@@ -245,9 +245,7 @@ class MyGameOrchestrator{
 
     endMovie() {
         this.picking = true;
-        if (this.scene.gameEnded && confirm('Do you want to start a new game?'))
-            this.start();
-        else
+        if (!this.scene.gameEnded)
             this.gameStats.continue();
     }
 
@@ -262,8 +260,6 @@ class MyGameOrchestrator{
         }
         if(confirm('Do you want to see the review of the game that you just played?'))
             this.startMovie();
-        else if (confirm('Do you want to start a new game?'))
-            this.start();            
     }
 
     orchestrate(mode, results) {

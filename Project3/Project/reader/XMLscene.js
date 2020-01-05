@@ -178,7 +178,7 @@ class XMLscene extends CGFscene {
             this.orchestrator.startMovie();
         }
         if (this.gui.isKeyPressed("Escape")) {
-            this.orchestrator.endMovie();
+            this.orchestrator.animator.endMovie();
         }
         if (this.gui.isKeyPressed("Digit1")) {
             this.orchestrator.loadTheme(1);

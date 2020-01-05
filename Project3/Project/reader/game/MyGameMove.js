@@ -63,6 +63,7 @@ class MyGameMove {
                 this.tileInit.setPiece(this.piece);
             else {
                 this.ended = true;
+                this.tileInit.setPiece();
                 this.playerStash.addPiece(this.piece);            
             }
         }
