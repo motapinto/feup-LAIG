@@ -416,7 +416,6 @@ class MyGameOrchestrator{
             this.animator.display();
         
             this.scene.pushMatrix();
-                // this.scene.scale(1, -1, 1);
                 this.scene.translate(0, -2, -0.4);
                 this.stashPlayer1.display();
             this.scene.popMatrix();
