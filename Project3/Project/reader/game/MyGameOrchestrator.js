@@ -36,7 +36,6 @@ class MyGameOrchestrator{
         this.moveRequested = false;
         this.cameraDegrees = 0;
         this.player = 0;
-        this.moves = [];
         this.start();
     }
 
@@ -76,7 +75,7 @@ class MyGameOrchestrator{
         this.cameraDegrees = 0;
         this.player = 0;
         this.gameSequence.reset();
-        this.gameStats.initCounter();
+        this.scene.tInit = null;
     }
 
     managePick(mode, results) {
@@ -303,15 +302,6 @@ class MyGameOrchestrator{
             if (this.cameraDegrees > 180) this.cameraDegrees = (180 + (this.player ? 0 : 180)) * DEGREE_TO_RAD;
             else this.cameraDegrees = (this.cameraDegrees + (this.player ? 0 : 180)) * DEGREE_TO_RAD;
         }
-
-        for (let move of this.moves) {
-            if (move.startTime == null) move.startTime = t;
-            let delta = t - move.startTime;
-            if (delta > move.timeToLive) {
-                move.tile.setColor(0);
-                this.moves.splice(this.moves.indexOf(move), 1);
-            }
-        }
     }
 
     attachCameras() {
@@ -418,7 +408,6 @@ class MyGameOrchestrator{
             this.animator.display();
         
             this.scene.pushMatrix();
-                // this.scene.scale(1, -1, 1);
                 this.scene.translate(0, -2, -0.4);
                 this.stashPlayer1.display();
             this.scene.popMatrix();
