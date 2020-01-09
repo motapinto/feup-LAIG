@@ -11,8 +11,10 @@
 > **Any problems?**\
 > Start an Issue please.
 
-**Disclaimer** - This repository was created for educational purposes and we do not take any responsibility for anything related to its content. You are free to use any code or algorithm you find, but do so at your own risk.
+## ***Project 1 & 2***
+![Project 1.1](/Project1/Project/doc/img1.JPG)
+![Project 1.2](/Project1/Project/doc/img2.JPG)
+## ***Project 3***
+![Project 3](/Project3/Delivery/images/LAIG3_T6_G06_2.JPG)
 
-<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img1.JPG" width="600"><br><br>
-<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img2.JPG" width="600"><br><br>
-<img src="https://github.com/motapinto/feup-LAIG/blob/master/Project1/Project/doc/img3.JPG" width="600"><br>
+**Disclaimer** - This repository was created for educational purposes and we do not take any responsibility for anything related to its content. You are free to use any code or algorithm you find, but do so at your own risk.
